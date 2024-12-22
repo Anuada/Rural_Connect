@@ -137,7 +137,7 @@ ob_start();
         <div class="hero">
             <div class="text">
                 <h1>Rural Connect</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <p>Ultimately, RURAL CONNECT aims to bridge the healthcare gap between urban and rural areas, ensuring that all residents, irrespective of location, have access to the medical care they require. By addressing logistical, communication, and supply chain issues, this platform will play a pivotal role in enhancing healthcare access for mountain barangays.</p>
                 <a class="more-info" href="../page/signup.php" aria-label="Sign up for Rural Connect">Sign up</a>
             </div>
             <div class="image">
