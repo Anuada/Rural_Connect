@@ -1,0 +1,132 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* Header Section */
+#su {
+    color: #d63384; /* Fuchsia color */
+    text-align: center;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 2px #464646;
+}
+
+/* Form Styles */
+form {
+    width: 100%;
+}
+
+.signup-container {
+    background-color: #ffccf9; /* Bubble gum color */
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #d6d6d6;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: #d63384;
+    box-shadow: 0px 0px 5px #d63384;
+}
+
+/* Button */
+.btn {
+    background-color: #d63384; /* Fuchsia */
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background-color: #c02673;
+}
+
+/* Labels */
+label {
+    color: #d63384; /* Fuchsia */
+    font-weight: bold;
+}
+
+/* Profile Image Upload */
+.ProfileImageLabel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    height: 150px;
+    background-color: #f3f3f3;
+    border: 2px dashed #d6d6d6;
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+}
+
+.ProfileImageLabel:hover {
+    border-color: #d63384;
+}
+
+.ProfileImageLabel img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 50%;
+}
+
+#imagePreview {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#uploadLabel {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 14px;
+    color: #d63384;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .signup-container {
+        margin-bottom: 20px;
+    }
+
+    #su {
+        font-size: 40px;
+    }
+
+    input, select {
+        font-size: 14px;
+    }
+
+    .ProfileImageLabel {
+        width: 120px;
+        height: 120px;
+    }
+}

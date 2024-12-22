@@ -1,0 +1,105 @@
+body,
+        html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            background: #f0f2f5;
+            font-family: Arial, sans-serif;
+        }
+
+        .navbar-container {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .login-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            display: flex;
+            padding: 40px;
+            max-width: 800px;
+            width: 100%;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .login-container img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            width: 50%;
+        }
+
+        .login-form h2 {
+            margin: 0 0 20px;
+            font-size: 24px;
+            color: #333;
+        }
+
+        .login-form input {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 30px;
+            font-size: 16px;
+        }
+
+        .login-form input::placeholder {
+            color: #aaa;
+        }
+
+        .login-form button {
+            padding: 15px;
+            border: none;
+            border-radius: 30px;
+            background: #28a745;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .login-form button:hover {
+            background: #218838;
+        }
+
+        .login-form a {
+            text-align: center;
+            color: #aaa;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .login-form a:hover {
+            text-decoration: underline;
+        }
+
+        .login-form .forgot-password {
+            margin-top: 10px;
+        }
+
+        .login-form .create-account {
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .login-container {
+                flex-direction: column;
+                padding: 20px;
+                margin-top: 4%;
+            }
+
+            .login-form {
+                width: 100%;
+            }
+        }
