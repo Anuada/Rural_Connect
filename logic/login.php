@@ -27,7 +27,7 @@ if (isset($_POST["login"])) {
                         break;
 
                     case 'city_health':
-                        $admin = $db->fetchRecords("city_health", ["accountId" => $account[0]["accountId"]]);
+                        $city_health = $db->fetchRecords("city_health", ["accountId" => $account[0]["accountId"]]);
                         $_SESSION["m"] = "Welcome " . $city_health[0]["fname"] . " " . $city_health[0]["lname"];
                         header("Location: ../city_health/");
                         break;

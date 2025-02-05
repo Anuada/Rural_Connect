@@ -18,7 +18,7 @@ $lname = isset($city_health[0]['lname']) ? $city_health[0]['lname'] : '';
 <nav class="navbar fixed-top" style="background-color: #f8f9fa; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
     <div class="container-fluid m-1 d-flex align-items-center">
         <a class="navbar-brand ml-10" href="#">
-            <img src="../assets/img/misc/med2.JPG" alt="Elevate Her Logo" width="160">
+            <img src="../assets/img/misc/logo1.png" alt="Elevate Her Logo" width="160">
         </a>
 
         <div class="d-none d-md-flex align-items-center" style="margin-right: 10px">
