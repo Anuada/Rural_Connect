@@ -2,5 +2,5 @@
 
 header("Location: ./page/");
 
-echo "test";
+
 ?>
