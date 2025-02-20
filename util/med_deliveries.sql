@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 22, 2024 at 05:00 PM
+-- Generation Time: Feb 20, 2025 at 03:33 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -45,9 +45,9 @@ INSERT INTO `account` (`accountId`, `email`, `username`, `password`, `user_type`
 (18, 'Nat@gmail.com', 'nat123', '$2y$10$AgzkzuGuQAd68rYE2tELjO4ICWWKlJ4tOONQqiMbxce/adG6nKQKW', 'deliveries', 1),
 (19, 'jeremy@gmail.com', 'Jeremy', '$2y$10$AgzkzuGuQAd68rYE2tELjO4ICWWKlJ4tOONQqiMbxce/adG6nKQKW', 'Admin', 1),
 (20, 'dfs@gmail.com', 'wer', '$2y$10$KJq223QQR3MqQn/ZqV/piO.VtC4/Hk.w37cenr7AJyZNIlGuSYvG2', 'deliveries', 0),
-(21, 'bohol@gmail.com', 'Bohol123', '$2y$10$BPfJ5shL4vEXkyQ8GBXprOU7oRWpwPWOxVRAJu/MDRgUp9Qovpw/G', 'barangay_inc', 0),
-(22, 'Shanesy@gmail.com', 'Shane12', '$2y$10$ZUiAKQMneiCICCiPZmHiV.I3B73l75gjP80Gq5HZSZ35Xs6Q4A77a', 'city_health', 0),
-(23, 'ex@gmail.com', 'ex123', '$2y$10$3wPURXiLXynaLwY0wLd.oOkwk/5kgGS93mf94PtvH7yj1c7gyOahW', 'deliveries', 0),
+(21, 'bohol@gmail.com', 'Bohol123', '$2y$10$BPfJ5shL4vEXkyQ8GBXprOU7oRWpwPWOxVRAJu/MDRgUp9Qovpw/G', 'barangay_inc', 1),
+(22, 'Shanesy@gmail.com', 'Shane12', '$2y$10$ZUiAKQMneiCICCiPZmHiV.I3B73l75gjP80Gq5HZSZ35Xs6Q4A77a', 'city_health', 1),
+(23, 'ex@gmail.com', 'ex123', '$2y$10$3wPURXiLXynaLwY0wLd.oOkwk/5kgGS93mf94PtvH7yj1c7gyOahW', 'deliveries', 1),
 (24, 'dsdf@gmail.com', 'ex3', '$2y$10$h163WYAfbYQHSOHWhLljPOpGFJY1zzZ.9ZwlJedhUNCwqRFOo8EFW', 'deliveries', 0),
 (25, 'jhane@gmail.com', 'jhane45', '$2y$10$7ktE3L4DhjUOuyEzNU9wSueeRkl.8h0R6fXbRoXN8D66CpceYJQgC', 'city_health', 0);
 
@@ -147,6 +147,31 @@ INSERT INTO `deliveries` (`accountId`, `fname`, `lname`, `address`, `contactNo`,
 (23, 'Exmple', 'sss', 'dkjkad', '44444', ''),
 (24, 'ex3', 'Lazaros', 'ff', '4564', '');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `med_availabilty`
+--
+
+CREATE TABLE `med_availabilty` (
+  `id` int(11) NOT NULL,
+  `med_name` varchar(100) NOT NULL,
+  `med_description` varchar(100) NOT NULL,
+  `quantity` varchar(100) NOT NULL,
+  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `expiry_date` datetime NOT NULL,
+  `med_image` varchar(250) NOT NULL,
+  `city_health_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `med_availabilty`
+--
+
+INSERT INTO `med_availabilty` (`id`, `med_name`, `med_description`, `quantity`, `date`, `expiry_date`, `med_image`, `city_health_id`) VALUES
+(3, 'er', '', '5', '2025-02-20 09:08:02', '0000-00-00 00:00:00', '../assets/img/med_image/med_image/22.png', 22),
+(4, 'Tambal labad sa olo', '', '80 box medicol', '2025-02-20 09:38:48', '2025-02-10 00:00:00', '../assets/img/med_image/med_image/22.png', 22);
+
 --
 -- Indexes for dumped tables
 --
@@ -182,6 +207,13 @@ ALTER TABLE `deliveries`
   ADD PRIMARY KEY (`accountId`);
 
 --
+-- Indexes for table `med_availabilty`
+--
+ALTER TABLE `med_availabilty`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `city_health_id` (`city_health_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -189,7 +221,7 @@ ALTER TABLE `deliveries`
 -- AUTO_INCREMENT for table `account`
 --
 ALTER TABLE `account`
-  MODIFY `accountId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `accountId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `admin`
@@ -216,6 +248,12 @@ ALTER TABLE `deliveries`
   MODIFY `accountId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
+-- AUTO_INCREMENT for table `med_availabilty`
+--
+ALTER TABLE `med_availabilty`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- Constraints for dumped tables
 --
 
@@ -236,6 +274,12 @@ ALTER TABLE `city_health`
 --
 ALTER TABLE `deliveries`
   ADD CONSTRAINT `deliveries_ibfk_1` FOREIGN KEY (`accountId`) REFERENCES `account` (`accountId`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `med_availabilty`
+--
+ALTER TABLE `med_availabilty`
+  ADD CONSTRAINT `med_availabilty_ibfk_1` FOREIGN KEY (`city_health_id`) REFERENCES `city_health` (`accountId`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
