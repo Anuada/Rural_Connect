@@ -37,8 +37,8 @@
 
     <form action="../logic/signup.php" method="POST" enctype="multipart/form-data">
         <div class="mb-3">
-            <label for="profile_image" class="form-label">Profile Image</label>
-            <input type="file" class="form-control" name="profile_image" id="profile_image">
+            <label for="id_verification" class="form-label">Valid ID</label>
+            <input type="file" class="form-control" name="id_verification" id="id_verification">
         </div>
 
         <div class="row">

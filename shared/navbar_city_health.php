@@ -49,7 +49,7 @@ $lname = isset($city_health[0]['lname']) ? $city_health[0]['lname'] : '';
         <div class="dropdown-menu position-absolute dropdown-menu-right" style="right: 0; top: 100%;" aria-labelledby="allDropdown">
             <a class="dropdown-item" href="#">Dashboard</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="../user/#">View med</a>
+            <a class="dropdown-item" href="view_med.php">View med</a>
             <a class="dropdown-item" href="../user/">Book med</a>
         </div>
         <!-- Drop Down Menu -->
@@ -58,26 +58,37 @@ $lname = isset($city_health[0]['lname']) ? $city_health[0]['lname'] : '';
 
 
 
-                <li class="nav-item dropdown position-relative">
-                    <div class="dropdown">
-                        <a href="#" class="nav-link" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="toggleSideMenu()">
-                            <?php if (!empty($city_health) && !empty($city_health[0]["profileImage"])) : ?>
-                                <img src="<?php echo $dh->city_health. $city_health[0]["profileImage"]; ?>" alt="Profile Image" width="40" height="40" style="border-radius: 50%;">
-                            <?php else : ?>
-                                <img src="<?php echo $dh->city_health; ?>profileicon.jpg" alt="Profile Image" width="40" height="40" style="border-radius: 60%;" onerror="this.src='../assets/img/profile/city_health/profile_icon.jpg'">
-                            <?php endif; ?>
-                            <!-- Drop Down Menu -->
-                            <div class="dropdown-menu position-absolute dropdown-menu-right" style="right: 0; top: 100%;" aria-labelledby="profileDropdown">
-                                <a class="dropdown-item" href="#">
-                                    <?php echo $fname . " " . $lname ?>
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="../user/#">Update Profile</a>
-                                <a class="dropdown-item" href="../logic/logout.php">Logout</a>
-                            </div>
-                            <!-- Drop Down Menu -->
-                    </div>
-                </li>
+<li class="nav-item dropdown position-relative">
+    <div class="dropdown">
+        <a href="#" class="nav-link d-flex align-items-center" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="toggleSideMenu()">
+            <div style="
+                width: 40px; 
+                height: 40px; 
+                background-color: #007bff; 
+                color: white; 
+                font-weight: bold; 
+                display: flex; 
+                align-items: center; 
+                justify-content: center; 
+                border-radius: 50%; 
+                font-size: 14px;">
+                C
+            </div>
+        </a>
+        <!-- Drop Down Menu -->
+        <div class="dropdown-menu position-absolute dropdown-menu-right" style="right: 0; top: 100%;" aria-labelledby="profileDropdown">
+            
+            <a class="dropdown-item" href="#">
+                <?php echo"City Health" ?>
+                <?php echo "<br>";?>
+            </a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="../user/#">Update Profile</a>
+            <a class="dropdown-item" href="../logic/logout.php">Logout</a>
+        </div>
+        <!-- Drop Down Menu -->
+    </div>
+</li>
             </ul>
         </div>
     </div>

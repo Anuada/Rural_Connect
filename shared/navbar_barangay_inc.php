@@ -9,7 +9,7 @@ $barangay_inc = $db->fetchRecords('barangay_inc', ['accountId' => $_SESSION['acc
 
 $fname = isset($barangay_inc[0]['fname']) ? htmlspecialchars($barangay_inc[0]['fname'], ENT_QUOTES, 'UTF-8') : '';
 $lname = isset($barangay_inc[0]['lname']) ? htmlspecialchars($barangay_inc[0]['lname'], ENT_QUOTES, 'UTF-8') : '';
-$profileImage = isset($barangay_inc[0]['profileImage']) ? htmlspecialchars($barangay_inc[0]['profileImage'], ENT_QUOTES, 'UTF-8') : 'profileicon.jpg';
+$profileImage = isset($barangay_inc[0]['id_verification']) ? htmlspecialchars($barangay_inc[0]['id_verification'], ENT_QUOTES, 'UTF-8') : 'profileicon.jpg';
 ?>
 
 <style>
@@ -47,26 +47,38 @@ $profileImage = isset($barangay_inc[0]['profileImage']) ? htmlspecialchars($bara
                     
                 </li>
                 <li class="nav-item dropdown position-relative">
-                    <div class="dropdown">
-                        <a href="#" class="nav-link" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="toggleSideMenu()">
-                            <?php if (!empty($barangay_inc) && !empty($barangay_inc[0]["profileImage"])) : ?>
-                                <img src="<?php echo $dh->barangay_incharge_profile . $barangay_inc[0]["profileImage"]; ?>" alt="Profile Image" width="40" height="40" style="border-radius: 50%;">
-                            <?php else : ?>
-                                <img src="<?php echo $dh->barangay_incharge_profile; ?>profileicon.jpg" alt="Profile Image" width="40" height="40" style="border-radius: 60%;" onerror="this.src='../assets/img/profile/city_health/profile_icon.jpg'">
-                            <?php endif; ?>
-                            <!-- Drop Down Menu -->
-                            <div class="dropdown-menu position-absolute dropdown-menu-right" style="right: 0; top: 100%;" aria-labelledby="profileDropdown">
-                                <a class="dropdown-item" href="#">
-                                    <?php echo $fname . " " . $lname ?>
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="../user/#">Update Profile</a>
-                                <a class="dropdown-item" href="../logic/logout.php">Logout</a>
-                            </div>
-                            <!-- Drop Down Menu -->
-                    </div>
-                </li>
-            </ul>
+    <div class="dropdown">
+        <a href="#" class="nav-link d-flex align-items-center" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="toggleSideMenu()">
+            <div style="
+                width: 40px; 
+                height: 40px; 
+                background-color: #007bff; 
+                color: white; 
+                font-weight: bold; 
+                display: flex; 
+                align-items: center; 
+                justify-content: center; 
+                border-radius: 50%; 
+                font-size: 14px;">
+                B
+            </div>
+        </a>
+        <!-- Drop Down Menu -->
+        <div class="dropdown-menu position-absolute dropdown-menu-right" style="right: 0; top: 100%;" aria-labelledby="profileDropdown">
+            
+            <a class="dropdown-item" href="#">
+                <?php echo"Barangay" ?>
+                <?php echo "<br>";?>
+            </a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="../user/#">Update Profile</a>
+            <a class="dropdown-item" href="../logic/logout.php">Logout</a>
+        </div>
+        <!-- Drop Down Menu -->
+    </div>
+</li>
+
+
         </div>
     </div>
 </nav>

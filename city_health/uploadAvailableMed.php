@@ -35,7 +35,7 @@ ob_start();
                     </div>
                     <div class="form-group mb-3">
                         <label for="med_description">Description</label>
-                        <input type="text" class="form-control" id="med_name" name="med_name" placeholder="Enter type of Description" required>
+                        <input type="text" class="form-control" id="med_description" name="med_description" placeholder="Enter type of Description" required>
                     </div>
 
                     <div class="form-group mb-3">
