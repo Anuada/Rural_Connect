@@ -6,7 +6,7 @@ require_once "../shared/session.city_health.php";
 $dbHelper = new DbHelper();
 $title = "Medicine Availability";
 
-$tableName = "med_availabilty";
+$tableName = "med_availabilty"; 
 $records = $dbHelper->fetchRecords($tableName);
 
 // Capture navbar content
@@ -32,6 +32,7 @@ $navbar = ob_get_clean();
                 <th>Date Added</th>
                 <th>Expiry Date</th>
                 <th>Image</th>
+                <th>Actions</th> <!-- New Column for Actions -->
             </tr>
         </thead>
         <tbody>
@@ -51,6 +52,10 @@ $navbar = ob_get_clean();
                                 No Image
                             <?php endif; ?>
                         </td>
+                        <td>
+                            <a href="uploadMedEdit.php?id=<?php echo $row['id']; ?>" class="btn btn-warning btn-sm">Edit</a>
+                            <button onclick="confirmDelete(<?php echo $row['id']; ?>)" class="btn btn-danger btn-sm">Delete</button>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
             <?php else : ?>
@@ -65,6 +70,13 @@ $navbar = ob_get_clean();
 
 <?php ob_start(); ?>
 <script src="../assets/js/navbar.js"></script>
+<script>
+    function confirmDelete(id) {
+        if (confirm("Are you sure you want to delete this record?")) {
+            window.location.href = "../logic/delete_avail_med.php?id=" + id;
+        }
+    }
+</script>
 <?php $scripts = ob_get_clean(); ?>
 
 <?php require_once "../shared/layout.php"; ?>

@@ -37,6 +37,20 @@ class DbHelper
         return $rows;
     }
 	
+    public function getRecord($table, $args)
+    {
+        $keys = array_keys($args);
+        $values = array_values($args);
+        $condition = [];
+        for ($i = 0; $i < count($keys); $i++) {
+            $condition[] = "`" . $keys[$i] . "` = '" . $values[$i] . "'";
+        }
+        $cond = implode(" AND ", $condition);
+        $sql = "SELECT * FROM `$table` WHERE $cond";
+        $query = $this->conn->query($sql);
+        $row = $query->fetch_assoc();
+        return $row;
+    }
 	
     #Delete record/s
 	
@@ -140,4 +154,4 @@ class DbHelper
 }
 
 
-}
+}   
