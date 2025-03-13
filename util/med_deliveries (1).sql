@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 12, 2025 at 11:45 PM
+-- Generation Time: Mar 13, 2025 at 06:11 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -46,11 +46,11 @@ INSERT INTO `account` (`accountId`, `email`, `username`, `password`, `user_type`
 (19, 'jeremy@gmail.com', 'Jeremy', '$2y$10$AgzkzuGuQAd68rYE2tELjO4ICWWKlJ4tOONQqiMbxce/adG6nKQKW', 'Admin', 1),
 (20, 'dfs@gmail.com', 'wer', '$2y$10$KJq223QQR3MqQn/ZqV/piO.VtC4/Hk.w37cenr7AJyZNIlGuSYvG2', 'deliveries', 0),
 (21, 'bohol@gmail.com', 'Bohol123', '$2y$10$BPfJ5shL4vEXkyQ8GBXprOU7oRWpwPWOxVRAJu/MDRgUp9Qovpw/G', 'barangay_inc', 1),
-(22, 'Shanesy@gmail.com', 'Shane12', '$2y$10$kHrpTJoZSE/njTm2cGa4JOPA74JK18UrSxKHEGAOBcRPVYtk4b7f.', 'city_health', 0),
+(22, 'Shanesy@gmail.com', 'Shane12', '$2y$10$kHrpTJoZSE/njTm2cGa4JOPA74JK18UrSxKHEGAOBcRPVYtk4b7f.', 'city_health', 1),
 (23, 'ex@gmail.com', 'ex123', '$2y$10$3wPURXiLXynaLwY0wLd.oOkwk/5kgGS93mf94PtvH7yj1c7gyOahW', 'deliveries', 1),
 (24, 'dsdf@gmail.com', 'ex3', '$2y$10$h163WYAfbYQHSOHWhLljPOpGFJY1zzZ.9ZwlJedhUNCwqRFOo8EFW', 'deliveries', 0),
 (25, 'jhane@gmail.com', 'jhane45', '$2y$10$7ktE3L4DhjUOuyEzNU9wSueeRkl.8h0R6fXbRoXN8D66CpceYJQgC', 'city_health', 0),
-(31, 'erscds@gmail.com', 'lok123', '$2y$10$leD496WGIaeJISiDpZaEz.442XMHWP/81sgBRjxi8OOBQ2Xc33zbi', 'barangay_inc', 0),
+(31, 'erscds@gmail.com', 'lok123', '$2y$10$leD496WGIaeJISiDpZaEz.442XMHWP/81sgBRjxi8OOBQ2Xc33zbi', 'barangay_inc', 1),
 (32, 'lo@gmail.com', 'lop123', '$2y$10$kHrpTJoZSE/njTm2cGa4JOPA74JK18UrSxKHEGAOBcRPVYtk4b7f.', 'barangay_inc', 0),
 (33, 'hala@gmail.com', 'del12', '$2y$10$nyUFjpcAT76udPPSyCXhceotUMbCIvvJHUqjP0T8WQBraPauRC2vS', 'deliveries', 1);
 
@@ -170,12 +170,30 @@ CREATE TABLE `med_availabilty` (
 --
 
 INSERT INTO `med_availabilty` (`id`, `med_name`, `med_description`, `quantity`, `date`, `expiry_date`, `med_image`, `city_health_id`) VALUES
-(3, 'er', '', '5', '2025-02-20 09:08:02', '0000-00-00 00:00:00', '../assets/img/med_image/med_image/22.png', 22),
-(4, 'Tambal labad sa olo', '', '80 box medicol', '2025-02-20 09:38:48', '2025-02-10 00:00:00', '../assets/img/med_image/med_image/22.png', 22),
-(6, 'labad sa ulo', '', '4 box', '2025-02-20 10:42:52', '2025-02-22 00:00:00', '../assets/img/med_image/22.png', 22),
-(7, 'Medicol para rajud nis labad ulo', '', '20 box', '2025-03-11 00:17:21', '2025-03-26 00:00:00', '../assets/img/med_image/22.png', 22),
-(8, 'para raju nis labad', '', '89', '2025-03-11 00:21:06', '2025-03-14 00:00:00', '../assets/img/med_image/22.png', 22),
-(9, 'medicol', 'para sa hangol', '4 box', '2025-03-11 00:22:59', '2025-03-20 00:00:00', '../assets/img/med_image/22.png', 22);
+(10, 'Biogesic', 'Paracetamol (500 mg per tablet or per dose in liquid form)', '12 Box', '2025-03-13 22:50:47', '2025-03-17 00:00:00', '../assets/img/med_image/22.png', 22),
+(11, 'Bioflu', 'Paracetamol (500mg) â€“ Reduces fever and relieves pain, Phenylephrine HCl (10mg) â€“ A nasal decong', '18', '2025-03-14 00:59:51', '2025-03-28 00:00:00', '../assets/img/med_image/22.png', 22);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `request_med`
+--
+
+CREATE TABLE `request_med` (
+  `id` int(11) NOT NULL,
+  `city_health_id` int(11) NOT NULL,
+  `barangay_inc_id` int(11) NOT NULL,
+  `request_quantity` varchar(100) NOT NULL,
+  `requestStatus` enum('Pending','Accepted','Cancelled','') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `request_med`
+--
+
+INSERT INTO `request_med` (`id`, `city_health_id`, `barangay_inc_id`, `request_quantity`, `requestStatus`) VALUES
+(2, 22, 31, '23', 'Pending'),
+(3, 22, 31, '45', 'Pending');
 
 --
 -- Indexes for dumped tables
@@ -219,6 +237,14 @@ ALTER TABLE `med_availabilty`
   ADD KEY `city_health_id` (`city_health_id`);
 
 --
+-- Indexes for table `request_med`
+--
+ALTER TABLE `request_med`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `city_health_id` (`city_health_id`),
+  ADD KEY `barangay_inc_id` (`barangay_inc_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -256,7 +282,13 @@ ALTER TABLE `deliveries`
 -- AUTO_INCREMENT for table `med_availabilty`
 --
 ALTER TABLE `med_availabilty`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `request_med`
+--
+ALTER TABLE `request_med`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
@@ -291,6 +323,13 @@ ALTER TABLE `deliveries`
 --
 ALTER TABLE `med_availabilty`
   ADD CONSTRAINT `med_availabilty_ibfk_1` FOREIGN KEY (`city_health_id`) REFERENCES `city_health` (`accountId`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `request_med`
+--
+ALTER TABLE `request_med`
+  ADD CONSTRAINT `request_med_ibfk_1` FOREIGN KEY (`city_health_id`) REFERENCES `account` (`accountId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `request_med_ibfk_2` FOREIGN KEY (`barangay_inc_id`) REFERENCES `account` (`accountId`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
