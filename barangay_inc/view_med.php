@@ -16,35 +16,48 @@ $navbar = ob_get_clean();
 
 <?php ob_start(); ?>
 <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="../assets/css/viewAvail_med.css">
 <?php $styles = ob_get_clean(); ?>
 
 <?php ob_start(); ?>
 
 <div class="container mt-4">
-    <h2 class="text-center mb-4">Medicine Availability</h2>
-    
+    <h2 class="text-center mb-4">Available Medicines</h2>
     <div class="row">
         <?php if (!empty($records) && is_array($records)) : ?>
             <?php foreach ($records as $row) : ?>
-                <div class="col-md-4 mb-4">
-    <div class="card shadow-sm" style="margin-top: 30%;">
-        <div class="card-body text-center">
-            <div class="mb-3">
-                <?php if (!empty($row['med_image'])) : ?>
-                    <img src="../uploads/<?php echo htmlspecialchars($row['med_image']); ?>" alt="Medicine Image" class="img-fluid rounded" style="max-height: 150px;">
-                <?php else : ?>
-                    <img src="../assets/img/no-image.png" alt="No Image" class="img-fluid rounded" style="max-height: 150px;">
-                <?php endif; ?>
-            </div>
-            <h5 class="card-title"><?php echo htmlspecialchars($row['med_name'] ?? ''); ?></h5>
-            <p class="card-text"><strong>Description:</strong> <?php echo htmlspecialchars($row['med_description'] ?? ''); ?></p>
-            <p class="card-text"><strong>Quantity:</strong> <?php echo htmlspecialchars($row['quantity'] ?? ''); ?></p>
-            <p class="card-text"><strong>Date Added:</strong> <?php echo htmlspecialchars($row['date'] ?? ''); ?></p>
-            <p class="card-text"><strong>Expiry Date:</strong> <?php echo htmlspecialchars($row['expiry_date'] ?? ''); ?></p>
-        </div>
-    </div>
-</div>
+                <div style="margin-top:10%;" class="col-md-4 mb-4">
+                    <div class="card product-card shadow-sm">
+                        <img src="<?php echo !empty($row['med_image']) ? "../uploads/" . htmlspecialchars($row['med_image']) : "../assets/img/no-image.png"; ?>" 
+                            alt="Medicine Image" class="product-img">
+                        <div class="product-info">
+                            <h5 class="product-title"><?php echo htmlspecialchars($row['med_name'] ?? ''); ?></h5>
+                            <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#medModal<?php echo $row['id']; ?>">View Details</button>
+                            <a href="request_med.php?city_health_id=<?= htmlspecialchars($row['city_health_id']) ?>" class="btn btn-success btn-sm">Request</a>
+                        </div>
+                    </div>
+                </div>
 
+                <!-- Modal -->
+                <div class="modal fade" id="medModal<?php echo $row['id']; ?>" tabindex="-1" aria-labelledby="medModalLabel<?php echo $row['id']; ?>" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="medModalLabel<?php echo $row['id']; ?>">Medicine Details</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p class="product-description"><strong>Description:</strong> <?php echo htmlspecialchars($row['med_description'] ?? ''); ?></p>
+                                <p class="product-quantity"><strong>Quantity:</strong> <?php echo htmlspecialchars($row['quantity'] ?? ''); ?></p>
+                                <p class="product-date"><strong>Added:</strong> <?php echo !empty($row['date']) ? date('F d, Y', strtotime($row['date'])) : ''; ?></p>
+                                <p class="product-date"><strong>Expiry:</strong> <?php echo !empty($row['expiry_date']) ? date('F d, Y', strtotime($row['expiry_date'])) : 'N/A'; ?></p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             <?php endforeach; ?>
         <?php else : ?>
             <div class="col-12 text-center">
@@ -58,5 +71,6 @@ $navbar = ob_get_clean();
 
 <?php ob_start(); ?>
 <script src="../assets/js/navbar.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <?php $scripts = ob_get_clean(); ?>
 <?php require_once "../shared/layout.php"; ?>
