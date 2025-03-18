@@ -19,7 +19,7 @@ $navbar = ob_get_clean();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $title ?></title>
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../assets/css/custom.css"> <!-- Custom styles (if any) -->
+    
 </head>
 <body>
 

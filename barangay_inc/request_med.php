@@ -23,6 +23,8 @@ $navbar = ob_get_clean();
         <form action="../logic/request_med.php" method="post" enctype="multipart/form-data">
             <input type="hidden" name="barangay_inc_id" value="<?= htmlspecialchars($_SESSION['accountId']) ?>">
             <input type="hidden" name="city_health_id" value="<?= htmlspecialchars($_GET['city_health_id']) ?>">
+            <input type="hidden" name="med_avail_id" value="<?= htmlspecialchars($_GET['id']) ?>">
+
 
             <div class="form-group mb-3">
                 <label for="request_category"><i class="fas fa-list"></i> Request Category</label>

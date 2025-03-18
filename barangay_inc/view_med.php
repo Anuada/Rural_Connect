@@ -33,7 +33,7 @@ $navbar = ob_get_clean();
                         <div class="product-info">
                             <h5 class="product-title"><?php echo htmlspecialchars($row['med_name'] ?? ''); ?></h5>
                             <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#medModal<?php echo $row['id']; ?>">View Details</button>
-                            <a href="request_med.php?city_health_id=<?= htmlspecialchars($row['city_health_id']) ?>" class="btn btn-success btn-sm">Request</a>
+<a href="request_med.php?city_health_id=<?= htmlspecialchars($row['city_health_id']) ?>&id=<?= htmlspecialchars($row['id']) ?>" class="btn btn-success btn-sm">Request</a>
                         </div>
                     </div>
                 </div>

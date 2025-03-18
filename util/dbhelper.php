@@ -152,11 +152,11 @@ public function fetchData($id)
     FROM 
         request_med
     LEFT JOIN 
-        med_availabilty ON request_med.id = request_med.id
+        med_availabilty ON request_med.med_avail_Id = med_availabilty.id
     LEFT JOIN 
         barangay_inc ON request_med.barangay_inc_id = barangay_inc.accountId
     WHERE  
-        request_med.city_health_id = ?;
+        request_med.city_health_id = ?
     ";
 
     $stmt = $this->conn->prepare($sql);

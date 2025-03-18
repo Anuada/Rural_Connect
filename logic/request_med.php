@@ -19,6 +19,7 @@ function request_med($db)
 {   $id = $_POST['id'];
     $city_health_id = $_POST['city_health_id'];
     $barangay_inc_id = $_POST['barangay_inc_id'];
+    $med_avail_id = $_POST['med_avail_id'];
     $request_quantity = $_POST['request_quantity'];
     $request_category = $_POST['request_category'];
     $request_DosageForm = $_POST['request_DosageForm'];
@@ -32,6 +33,7 @@ function request_med($db)
         "id" =>$id,
         "city_health_id" => $city_health_id,
         "barangay_inc_id" => $barangay_inc_id,
+        "med_avail_id" => $med_avail_id,
         "request_quantity" => $request_quantity,
         "request_category" => $request_category,
         "request_DosageForm" => $request_DosageForm,
@@ -54,34 +56,28 @@ function request_med($db)
 }
 function handleAcceptRequest(DbHelper $db, string $requestId)
 {
-
-
-    $result = $db->updateRecord("request_med", ['id' => $requestId, 'requestStatus' => 'Accept']);
+    // Update only the specific record where the ID matches
+    $result = $db->updateRecord("request_med", ['requestStatus' => 'Accepted'], "id = ?", [$requestId]);
 
     if ($result > 0) {
         $_SESSION["m"] = "Request accepted";
-        header("Location: ../city_health/view_med.php");
-        exit();
     } else {
-        $_SESSION["m"] = "Error updating Requesting. Please try again!";
-        header("Location: ../city_health/view_med.php");
-        exit();
+        $_SESSION["m"] = "Error updating request. Please try again!";
     }
+    header("Location: ../city_health/request_med.php");
+    exit();
 }
 
 function handleCancelledRequest(DbHelper $db, string $requestId)
 {
-
-
-    $result = $db->updateRecord("request_med", ['id' => $requestId, 'requestStatus' => 'Cancelled']);
+    // Update only the specific record where the ID matches
+    $result = $db->updateRecord("request_med", ['requestStatus' => 'Cancelled'], "id = ?", [$requestId]);
 
     if ($result > 0) {
-        $_SESSION["m"] = "Cancelled Requesting";
-        header("Location: ../city_health/view_med.php");
-        exit();
+        $_SESSION["m"] = "Request Cancelled";
     } else {
-        $_SESSION["m"] = "Error cancelled Requesting. Please try again!";
-        header("Location: ../city_health/view_med.php");
-        exit();
+        $_SESSION["m"] = "Error updating request. Please try again!";
     }
+    header("Location: ../city_health/request_med.php");
+    exit();
 }
