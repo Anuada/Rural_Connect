@@ -57,7 +57,7 @@ function request_med($db)
 function handleAcceptRequest(DbHelper $db, string $requestId)
 {
     // Update only the specific record where the ID matches
-    $result = $db->updateRecord("request_med", ['requestStatus' => 'Accepted'], "id = ?", [$requestId]);
+    $result = $db->updateRecord("request_med", ['id' => $requestId, 'requestStatus' => 'Accepted']);
 
     if ($result > 0) {
         $_SESSION["m"] = "Request accepted";
@@ -71,7 +71,7 @@ function handleAcceptRequest(DbHelper $db, string $requestId)
 function handleCancelledRequest(DbHelper $db, string $requestId)
 {
     // Update only the specific record where the ID matches
-    $result = $db->updateRecord("request_med", ['requestStatus' => 'Cancelled'], "id = ?", [$requestId]);
+    $result = $db->updateRecord("request_med", ['id' => $requestId, 'requestStatus' => 'Cancelled']);
 
     if ($result > 0) {
         $_SESSION["m"] = "Request Cancelled";

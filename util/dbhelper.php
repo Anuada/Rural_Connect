@@ -135,7 +135,6 @@ public function fetchData($id)
         barangay_inc.address,
         barangay_inc.contactNo,
         barangay_inc.id_verification,
-        med_availabilty.id,
         med_availabilty.med_name,
         med_availabilty.med_description,
         med_availabilty.quantity,
@@ -148,6 +147,7 @@ public function fetchData($id)
         request_med.request_category,
         request_med.request_DosageForm,
         request_med.request_DosageStrength,
+        request_med.id,
         request_med.requestStatus
     FROM 
         request_med

@@ -18,12 +18,11 @@ if (isset($_SESSION['accountId'])) {
 
 // Fetch requested medicine data
 $requested = $dbHelper->fetchData($id);
-
 ?>
-
 
 <?php ob_start(); ?>
 <link rel="stylesheet" href="../assets/css/lawyer.sidebar.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 <?php $styles = ob_get_clean(); ?>
 
 <?php ob_start(); ?>
@@ -71,7 +70,7 @@ $requested = $dbHelper->fetchData($id);
           <div class="table-container">
             <table>
               <tr>
-                <th colspan="8" class="bg-fuchsia text-center">Requested Medicine</th>
+                <th colspan="9" class="bg-fuchsia text-center">Requested Medicine</th>
               </tr>
               <tr>
                 <th>First Name</th>
@@ -82,6 +81,7 @@ $requested = $dbHelper->fetchData($id);
                 <th>Quantity</th>
                 <th>Dosage</th>
                 <th>Status</th>
+                <th>Action</th>
               </tr>
               <?php foreach ($requested as $req) : ?>
                 <tr>
@@ -93,7 +93,58 @@ $requested = $dbHelper->fetchData($id);
                   <td><?php echo $req['request_quantity']; ?></td>
                   <td><?php echo $req['request_DosageForm'] . ' - ' . $req['request_DosageStrength']; ?></td>
                   <td><?php echo $req['requestStatus']; ?></td>
+                  <td>
+                    <?php if ($req['requestStatus'] == "Pending") : ?>
+                      <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#acceptModal<?php echo $req['id']; ?>">Accept</button>
+                      <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#cancelModal<?php echo $req['id']; ?>">Cancel</button>
+                    <?php endif; ?>
+                  </td>
                 </tr>
+
+                <!-- Accept Modal -->
+                <div class="modal fade" id="acceptModal<?php echo $req['id']; ?>" tabindex="-1" aria-labelledby="acceptLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="acceptLabel">Accept Request</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        Are you sure you want to accept this request?
+                      </div>
+                      <div class="modal-footer">
+                        <form action="../logic/request_med.php" method="POST">
+                          <input type="hidden" name="requestId" value="<?php echo $req['id']; ?>">
+                          <button type="submit" name="acceptRequest" class="btn btn-success">Yes, Accept</button>
+                        </form>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Cancel Modal -->
+                <div class="modal fade" id="cancelModal<?php echo $req['id']; ?>" tabindex="-1" aria-labelledby="cancelLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="cancelLabel">Cancel Request</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        Are you sure you want to cancel this request?
+                      </div>
+                      <div class="modal-footer">
+                        <form action="../logic/request_med.php" method="POST">
+                          <input type="hidden" name="requestId" value="<?php echo $req['id']; ?>">
+                          <button type="submit" name="cancelledRequest" class="btn btn-danger">Yes, Cancel</button>
+                        </form>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
               <?php endforeach; ?>
             </table>
           </div>
@@ -111,7 +162,8 @@ $requested = $dbHelper->fetchData($id);
 <?php $content = ob_get_clean(); ?>
 
 <?php ob_start(); ?>
-<!-- Additional scripts if needed -->
+<!-- Additional scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="../assets/js/script.js"></script>
 <script src="../assets/js/lawyer.sidebar.js"></script>
 <?php $scripts = ob_get_clean(); ?>
