@@ -1,12 +1,16 @@
-<?php
-session_start();
-ob_start();
-?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rural Connect</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         body {
             margin: 0;
-            font-family: 'Roboto', sans-serif;
-            background-color: #f0f2f5;
+            font-family: 'Poppins', sans-serif;
+            background-color: #eef2f3;
+            color: #333;
         }
 
         .container {
@@ -19,7 +23,9 @@ ob_start();
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 0;
+            padding: 15px 0px;
+            background: linear-gradient(135deg, #007bff, #00d4ff);
+            border-radius: 10px;
         }
 
         .navbar ul {
@@ -32,31 +38,35 @@ ob_start();
 
         .navbar ul li a {
             text-decoration: none;
-            color: #000;
-            font-weight: 500;
+            color: white;
+            font-weight: bold;
+            transition: color 0.3s;
         }
 
         .navbar ul li a:hover {
-            color: #007bff;
+            color: #ffdd57;
         }
 
         .navbar .logo img {
-            width: 70px;
-            height: 70px;
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
             object-fit: cover;
+            border: 3px solid white;
         }
 
         .navbar .get-started {
-            background-color: #007bff;
-            color: #fff;
-            padding: 10px 20px;
-            border-radius: 20px;
+            background-color: #ffdd57;
+            color: #333;
+            padding: 12px 24px;
+            border-radius: 25px;
             text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s;
         }
 
         .navbar .get-started:hover {
-            background-color: #0056b3;
+            background-color: #ffcc00;
         }
 
         .hero {
@@ -68,25 +78,29 @@ ob_start();
 
         .hero .text {
             max-width: 50%;
+            animation: fadeInLeft 1.2s ease;
         }
 
         .hero .text h1 {
-            font-size: 48px;
-            margin-bottom: 20px;
+            font-size: 50px;
+            font-weight: 700;
+            color: #007bff;
         }
 
         .hero .text p {
             font-size: 18px;
             margin-bottom: 20px;
-            color: #666;
+            color: #444;
         }
 
         .hero .text .more-info {
             background-color: #007bff;
-            color: #fff;
-            padding: 10px 20px;
-            border-radius: 20px;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
             text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s;
         }
 
         .hero .text .more-info:hover {
@@ -96,7 +110,9 @@ ob_start();
         .hero .image img {
             width: 100%;
             height: auto;
-            border-radius: 10px;
+            border-radius: 15px;
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
+            animation: fadeInRight 1.2s ease;
         }
 
         @media (max-width: 768px) {
@@ -105,18 +121,22 @@ ob_start();
                 text-align: center;
             }
 
-            .hero .text,
-            .hero .image {
+            .hero .text, .hero .image {
                 max-width: 100%;
             }
+        }
 
-            .hero .image img {
-                margin-top: 20px;
-            }
+        @keyframes fadeInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes fadeInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
         }
     </style>
 </head>
-
 <body>
     <div class="container">
         <!-- Navigation Bar -->
@@ -133,7 +153,7 @@ ob_start();
             <a class="get-started" href="../page/login.php" aria-label="Login">Login</a>
         </nav>
 
-        <!-- Hero Section -->
+        
         <div class="hero">
             <div class="text">
                 <h1>Rural Connect</h1>
@@ -145,7 +165,5 @@ ob_start();
             </div>
         </div>
     </div>
-
-    <?php
-$content = ob_get_clean();
-require_once "../shared/layout.php";
+</body>
+</html>
