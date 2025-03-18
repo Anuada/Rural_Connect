@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 13, 2025 at 06:11 PM
+-- Generation Time: Mar 18, 2025 at 04:03 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -162,6 +162,9 @@ CREATE TABLE `med_availabilty` (
   `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `expiry_date` datetime NOT NULL,
   `med_image` varchar(250) NOT NULL,
+  `DosageForm` varchar(100) NOT NULL,
+  `DosageStrength` varchar(100) NOT NULL,
+  `category` varchar(100) NOT NULL,
   `city_health_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -169,9 +172,9 @@ CREATE TABLE `med_availabilty` (
 -- Dumping data for table `med_availabilty`
 --
 
-INSERT INTO `med_availabilty` (`id`, `med_name`, `med_description`, `quantity`, `date`, `expiry_date`, `med_image`, `city_health_id`) VALUES
-(10, 'Biogesic', 'Paracetamol (500 mg per tablet or per dose in liquid form)', '12 Box', '2025-03-13 22:50:47', '2025-03-17 00:00:00', '../assets/img/med_image/22.png', 22),
-(11, 'Bioflu', 'Paracetamol (500mg) â€“ Reduces fever and relieves pain, Phenylephrine HCl (10mg) â€“ A nasal decong', '18', '2025-03-14 00:59:51', '2025-03-28 00:00:00', '../assets/img/med_image/22.png', 22);
+INSERT INTO `med_availabilty` (`id`, `med_name`, `med_description`, `quantity`, `date`, `expiry_date`, `med_image`, `DosageForm`, `DosageStrength`, `category`, `city_health_id`) VALUES
+(12, 'Paricetamol', 'Used to reduce fever and relieve mild pain', '10 tablets per blister pack, 100ml bottle', '2025-03-14 10:29:08', '2025-03-29 00:00:00', '../assets/img/med_image/22.png', 'Tablet, Capsule, Syrup, Injection', '500mg, 10mg, 250mg/5ml syrup', 'Antibiotic, Pain Reliever, Antihypertensive', 22),
+(13, 'Biogesic', 'Used to reduce fever and relieve mild pain, etc', '11', '2025-03-14 10:33:47', '2025-03-11 00:00:00', '../assets/img/med_image/22.png', 'Tablet, Capsule, Syrup, Injection, etc.', '500mg, 10mg, 250mg/5ml syrup,syrup', 'Antibiotic, Pain Reliever, Antihypertensive,  etc', 22);
 
 -- --------------------------------------------------------
 
@@ -184,6 +187,9 @@ CREATE TABLE `request_med` (
   `city_health_id` int(11) NOT NULL,
   `barangay_inc_id` int(11) NOT NULL,
   `request_quantity` varchar(100) NOT NULL,
+  `request_category` varchar(100) NOT NULL,
+  `request_DosageForm` varchar(100) NOT NULL,
+  `request_DosageStrength` varchar(100) NOT NULL,
   `requestStatus` enum('Pending','Accepted','Cancelled','') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -191,9 +197,9 @@ CREATE TABLE `request_med` (
 -- Dumping data for table `request_med`
 --
 
-INSERT INTO `request_med` (`id`, `city_health_id`, `barangay_inc_id`, `request_quantity`, `requestStatus`) VALUES
-(2, 22, 31, '23', 'Pending'),
-(3, 22, 31, '45', 'Pending');
+INSERT INTO `request_med` (`id`, `city_health_id`, `barangay_inc_id`, `request_quantity`, `request_category`, `request_DosageForm`, `request_DosageStrength`, `requestStatus`) VALUES
+(5, 22, 31, '90', 'Biogesic', 'Syrup', 'ml', 'Pending'),
+(6, 22, 31, '188', 'Parecetamol', 'Tablet', 'mg', 'Pending');
 
 --
 -- Indexes for dumped tables
@@ -282,13 +288,13 @@ ALTER TABLE `deliveries`
 -- AUTO_INCREMENT for table `med_availabilty`
 --
 ALTER TABLE `med_availabilty`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `request_med`
 --
 ALTER TABLE `request_med`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables
