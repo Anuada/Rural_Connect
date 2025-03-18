@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 18, 2025 at 04:03 AM
+-- Generation Time: Mar 18, 2025 at 10:12 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -51,7 +51,7 @@ INSERT INTO `account` (`accountId`, `email`, `username`, `password`, `user_type`
 (24, 'dsdf@gmail.com', 'ex3', '$2y$10$h163WYAfbYQHSOHWhLljPOpGFJY1zzZ.9ZwlJedhUNCwqRFOo8EFW', 'deliveries', 0),
 (25, 'jhane@gmail.com', 'jhane45', '$2y$10$7ktE3L4DhjUOuyEzNU9wSueeRkl.8h0R6fXbRoXN8D66CpceYJQgC', 'city_health', 0),
 (31, 'erscds@gmail.com', 'lok123', '$2y$10$leD496WGIaeJISiDpZaEz.442XMHWP/81sgBRjxi8OOBQ2Xc33zbi', 'barangay_inc', 1),
-(32, 'lo@gmail.com', 'lop123', '$2y$10$kHrpTJoZSE/njTm2cGa4JOPA74JK18UrSxKHEGAOBcRPVYtk4b7f.', 'barangay_inc', 0),
+(32, 'lo@gmail.com', 'lop123', '$2y$10$leD496WGIaeJISiDpZaEz.442XMHWP/81sgBRjxi8OOBQ2Xc33zbi', 'barangay_inc', 0),
 (33, 'hala@gmail.com', 'del12', '$2y$10$nyUFjpcAT76udPPSyCXhceotUMbCIvvJHUqjP0T8WQBraPauRC2vS', 'deliveries', 1);
 
 -- --------------------------------------------------------
@@ -186,6 +186,7 @@ CREATE TABLE `request_med` (
   `id` int(11) NOT NULL,
   `city_health_id` int(11) NOT NULL,
   `barangay_inc_id` int(11) NOT NULL,
+  `med_avail_Id` int(11) NOT NULL,
   `request_quantity` varchar(100) NOT NULL,
   `request_category` varchar(100) NOT NULL,
   `request_DosageForm` varchar(100) NOT NULL,
@@ -197,9 +198,12 @@ CREATE TABLE `request_med` (
 -- Dumping data for table `request_med`
 --
 
-INSERT INTO `request_med` (`id`, `city_health_id`, `barangay_inc_id`, `request_quantity`, `request_category`, `request_DosageForm`, `request_DosageStrength`, `requestStatus`) VALUES
-(5, 22, 31, '90', 'Biogesic', 'Syrup', 'ml', 'Pending'),
-(6, 22, 31, '188', 'Parecetamol', 'Tablet', 'mg', 'Pending');
+INSERT INTO `request_med` (`id`, `city_health_id`, `barangay_inc_id`, `med_avail_Id`, `request_quantity`, `request_category`, `request_DosageForm`, `request_DosageStrength`, `requestStatus`) VALUES
+(11, 22, 31, 13, '09', 'Biogesic', 'tablet', 'mg', 'Pending'),
+(12, 22, 31, 13, '90', 'Flu', 'Tablet', 'ml', 'Pending'),
+(13, 22, 32, 12, '45666', 'Flu', 'Syrup', 'ml', 'Pending'),
+(14, 22, 31, 13, '90', 'Flu', 'Tablet', 'mg', 'Pending'),
+(15, 22, 31, 13, '7878', 'jkkl', 'sz', 'pj', 'Pending');
 
 --
 -- Indexes for dumped tables
@@ -248,7 +252,8 @@ ALTER TABLE `med_availabilty`
 ALTER TABLE `request_med`
   ADD PRIMARY KEY (`id`),
   ADD KEY `city_health_id` (`city_health_id`),
-  ADD KEY `barangay_inc_id` (`barangay_inc_id`);
+  ADD KEY `barangay_inc_id` (`barangay_inc_id`),
+  ADD KEY `med_avail_Id` (`med_avail_Id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -294,7 +299,7 @@ ALTER TABLE `med_availabilty`
 -- AUTO_INCREMENT for table `request_med`
 --
 ALTER TABLE `request_med`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Constraints for dumped tables
@@ -335,7 +340,8 @@ ALTER TABLE `med_availabilty`
 --
 ALTER TABLE `request_med`
   ADD CONSTRAINT `request_med_ibfk_1` FOREIGN KEY (`city_health_id`) REFERENCES `account` (`accountId`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `request_med_ibfk_2` FOREIGN KEY (`barangay_inc_id`) REFERENCES `account` (`accountId`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `request_med_ibfk_2` FOREIGN KEY (`barangay_inc_id`) REFERENCES `account` (`accountId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `request_med_ibfk_3` FOREIGN KEY (`med_avail_Id`) REFERENCES `med_availabilty` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
