@@ -46,6 +46,24 @@ if (!$medicine) {
             </div>
 
             <div class="mb-3">
+                <label for="category" class="form-label">Category</label>
+                <input type="text" id="category" name="category" class="form-control"
+                    value="<?php echo htmlspecialchars($medicine["category"]); ?>" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="DosageForm" class="form-label">Dosage Form</label>
+                <input type="text" id="DosageForm" name="DosageForm" class="form-control"
+                    value="<?php echo htmlspecialchars($medicine["DosageForm"]); ?>" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="DosageStrength" class="form-label">Dosage Strength</label>
+                <input type="text" id="DosageStrength" name="DosageStrength" class="form-control"
+                    value="<?php echo htmlspecialchars($medicine["DosageStrength"]); ?>" required>
+            </div>
+
+            <div class="mb-3">
                 <label for="quantity" class="form-label">Quantity</label>
                 <input type="number" id="quantity" name="quantity" class="form-control"
                     value="<?php echo intval($medicine["quantity"]); ?>" required>

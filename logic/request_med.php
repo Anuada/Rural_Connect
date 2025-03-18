@@ -20,6 +20,9 @@ function request_med($db)
     $city_health_id = $_POST['city_health_id'];
     $barangay_inc_id = $_POST['barangay_inc_id'];
     $request_quantity = $_POST['request_quantity'];
+    $request_category = $_POST['request_category'];
+    $request_DosageForm = $_POST['request_DosageForm'];
+    $request_DosageStrength = $_POST['request_DosageStrength'];
     $requestStatus = $_POST['requestStatus'];
 
 
@@ -30,6 +33,9 @@ function request_med($db)
         "city_health_id" => $city_health_id,
         "barangay_inc_id" => $barangay_inc_id,
         "request_quantity" => $request_quantity,
+        "request_category" => $request_category,
+        "request_DosageForm" => $request_DosageForm,
+        "request_DosageStrength" => $request_DosageStrength,
         "requestStatus" => "Pending"
 
     );

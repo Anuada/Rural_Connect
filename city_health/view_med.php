@@ -25,13 +25,14 @@ $navbar = ob_get_clean();
     <table style="margin-top:10%;" class="table table-bordered table-striped">
         <thead class="thead-dark">
             <tr>
-                <th>ID</th>
                 <th>Medicine Name</th>
                 <th>Description</th>
+                <th>Category</th>
+                <th>Dosage Form</th>
+                <th>Dosage Strength</th>
                 <th>Quantity</th>
                 <th>Date Added</th>
                 <th>Expiry Date</th>
-                <th>Image</th>
                 <th>Actions</th> <!-- New Column for Actions -->
             </tr>
         </thead>
@@ -39,19 +40,14 @@ $navbar = ob_get_clean();
             <?php if (is_array($records) && !empty($records)) : ?>
                 <?php foreach ($records as $row) : ?>
                     <tr>
-                        <td><?php echo htmlspecialchars($row['id']); ?></td>
                         <td><?php echo htmlspecialchars($row['med_name']); ?></td>
                         <td><?php echo htmlspecialchars($row['med_description']); ?></td>
+                        <td><?php echo htmlspecialchars($row['category']); ?></td>
+                        <td><?php echo htmlspecialchars($row['DosageForm']); ?></td>
+                        <td><?php echo htmlspecialchars($row['DosageStrength']); ?></td>
                         <td><?php echo htmlspecialchars($row['quantity']); ?></td>
                         <td><?php echo htmlspecialchars($row['date']); ?></td>
                         <td><?php echo htmlspecialchars($row['expiry_date']); ?></td>
-                        <td>
-                            <?php if (!empty($row['med_image'])) : ?>
-                                <img src="../uploads/<?php echo htmlspecialchars($row['med_image']); ?>" alt="Medicine Image" width="50">
-                            <?php else : ?>
-                                No Image
-                            <?php endif; ?>
-                        </td>
                         <td>
                             <a href="uploadMedEdit.php?id=<?php echo $row['id']; ?>" class="btn btn-warning btn-sm">Edit</a>
                             <button onclick="confirmDelete(<?php echo $row['id']; ?>)" class="btn btn-danger btn-sm">Delete</button>

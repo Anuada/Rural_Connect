@@ -50,7 +50,7 @@ $lname = isset($city_health[0]['lname']) ? $city_health[0]['lname'] : '';
             <a class="dropdown-item" href="#">Dashboard</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="view_med.php">View med</a>
-            <a class="dropdown-item" href="../user/">Book med</a>
+            <a class="dropdown-item" href="request_med.php">View Requested Medicine</a>
         </div>
         <!-- Drop Down Menu -->
     </div>

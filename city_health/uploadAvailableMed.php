@@ -30,7 +30,7 @@ ob_start();
                     <input type="hidden" name="city_health_id" value="<?php echo htmlspecialchars($_SESSION["accountId"]); ?>" required>
 
                     <div class="form-group mb-3">
-                        <label for="TypeofMedicine">Types of Medicine</label>
+                        <label for="TypeofMedicine">Medicine Name</label>
                         <input type="text" class="form-control" id="med_name" name="med_name" placeholder="Enter type of Medicine" required>
                     </div>
                     <div class="form-group mb-3">
@@ -39,9 +39,25 @@ ob_start();
                     </div>
 
                     <div class="form-group mb-3">
+                        <label for="category">Category</label>
+                        <input type="text" class="form-control" id="category" name="category" placeholder="Enter category" required>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="DosageForm">Dosage Form</label>
+                        <input type="text" class="form-control" id="DosageForm" name="DosageForm" placeholder="Enter Dosage Form" required>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="DosageForm">Dosage Strength</label>
+                        <input type="text" class="form-control" id="DosageStrength" name="DosageStrength" placeholder="Enter Dosage Strength" required>
+                    </div>
+
+                    <div class="form-group mb-3">
                         <label for="quantity">Quantity</label>
                         <input type="text" class="form-control" id="quantity" name="quantity" placeholder="Enter Quantity" required>
                     </div>
+                    
 
                     <div class="form-group mb-3">
                         <label for="expiry_date">Expiry Date</label>

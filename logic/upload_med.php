@@ -15,6 +15,9 @@ function uploadMedAvailable($db,$dh) {
     $city_health_id = $_POST['city_health_id'];
     $med_name = $_POST['med_name'];
     $med_description = $_POST['med_description'];
+    $category = $_POST['category'];
+    $DosageForm = $_POST['DosageForm'];
+    $DosageStrength = $_POST['DosageStrength'];
     $quantity = $_POST['quantity'];
     $expiry_date = $_POST['expiry_date'];
     $med_image = $_FILES['med_image'];
@@ -29,6 +32,9 @@ function uploadMedAvailable($db,$dh) {
         "med_name" => $med_name,
         "med_description" => $med_description,
         "quantity" => $quantity,
+        "category" => $category,
+        "DosageForm" => $DosageForm,
+        "DosageStrength" => $DosageStrength,
         "expiry_date" => $expiry_date,
         "med_image" => $img_file,
     );

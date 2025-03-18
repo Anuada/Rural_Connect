@@ -48,8 +48,13 @@ $navbar = ob_get_clean();
                             </div>
                             <div class="modal-body">
                                 <p class="product-description"><strong>Description:</strong> <?php echo htmlspecialchars($row['med_description'] ?? ''); ?></p>
+                                <p class="product-description"><strong>Category:</strong> <?php echo htmlspecialchars($row['category'] ?? ''); ?></p>
+                                <p class="product-description"><strong>Dosage Form:</strong> <?php echo htmlspecialchars($row['DosageForm'] ?? ''); ?></p>
+                                <p class="product-description"><strong>Dosage Strength:</strong> <?php echo htmlspecialchars($row['DosageStrength'] ?? ''); ?></p>
+
+
+
                                 <p class="product-quantity"><strong>Quantity:</strong> <?php echo htmlspecialchars($row['quantity'] ?? ''); ?></p>
-                                <p class="product-date"><strong>Added:</strong> <?php echo !empty($row['date']) ? date('F d, Y', strtotime($row['date'])) : ''; ?></p>
                                 <p class="product-date"><strong>Expiry:</strong> <?php echo !empty($row['expiry_date']) ? date('F d, Y', strtotime($row['expiry_date'])) : 'N/A'; ?></p>
                             </div>
                             <div class="modal-footer">
