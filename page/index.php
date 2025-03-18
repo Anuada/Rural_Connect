@@ -125,10 +125,10 @@ ob_start();
                 <img src="../assets/img/misc/delivery_pic.jpeg" alt="Company Logo">
             </div>
             <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Value</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="index.php">Home</a></li>
+                <li><a href="aboutus.php">About Us</a></li>
+                <li><a href="value.php">Value</a></li>
+                <li><a href="contact.php">Contact</a></li>
             </ul>
             <a class="get-started" href="../page/login.php" aria-label="Login">Login</a>
         </nav>
