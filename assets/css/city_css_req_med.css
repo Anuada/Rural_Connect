@@ -1,0 +1,61 @@
+.table-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5%;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  th, td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+
+  th {
+    background-color: #f2f2f2;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  tr:hover {
+    background-color: #dddddd;
+  }
+
+  .custom-modal .modal-content {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .custom-modal .modal-header {
+    border-bottom: 2px solid #fff;
+  }
+  
+  .medicine-card {
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border-left: 5px solid #007bff;
+  }
+  
+  .medicine-card p {
+    margin: 5px 0;
+    font-size: 16px;
+  }
+  
+  .medicine-card h4 {
+    margin-bottom: 10px;
+  }
+  
+  .bi {
+    margin-right: 5px;
+    color: #007bff;
+  }
+  
