@@ -74,7 +74,7 @@ $requested = $dbHelper->fetchData($id);
     <div class="modal-content custom-modal">
       <div class="modal-header bg-primary text-white">
         <h5 class="modal-title" id="viewLabel">
-          <i class="bi bi-capsule"></i> Medicine Details
+          <i class="bi bi-capsule"></i> Medicine Requested Details
         </h5>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
@@ -82,9 +82,9 @@ $requested = $dbHelper->fetchData($id);
         <div class="medicine-card">
           <h4 class="text-primary"><i class="bi bi-prescription2"></i> <?php echo $req['med_name']; ?></h4>
           <p><i class="bi bi-file-text"></i> <strong>Description:</strong> <?php echo $req['med_description']; ?></p>
-          <p><i class="bi bi-folder"></i> <strong>Request Category:</strong> <?php echo $req['request_category']; ?></p>
-          <p><i class="bi bi-eyedropper"></i> <strong>Dosage:</strong> <?php echo $req['request_DosageForm'] . ' - ' . $req['request_DosageStrength']; ?></p>
-          <p><i class="bi bi-box"></i> <strong>Quantity:</strong> <?php echo $req['request_quantity']; ?></p>
+          <p><i class="bi bi-folder"></i> <strong>Requested Category:</strong> <?php echo $req['request_category']; ?></p>
+          <p><i class="bi bi-eyedropper"></i> <strong>Requested Dosage:</strong> <?php echo $req['request_DosageForm'] . ' - ' . $req['request_DosageStrength']; ?></p>
+          <p><i class="bi bi-box"></i> <strong>Requested Quantity:</strong> <?php echo $req['request_quantity']; ?></p>
         </div>
       </div>
       <div class="modal-footer">
