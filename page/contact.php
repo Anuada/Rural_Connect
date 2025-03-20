@@ -1,6 +1,6 @@
-<?php 
+<?php
 session_start();
-$load = false; 
+$load = false;
 ?>
 
 <?php ob_start() ?>
@@ -9,18 +9,7 @@ $load = false;
 
 <?php ob_start() ?>
 <div class="container">
-    <nav class="navbar">
-        <div class="logo" style="margin-left: 10px">
-            <img src="../assets/img/misc/delivery_pic.jpeg" style="object-fit: cover;" alt="Company Logo">
-        </div>
-        <ul>
-            <li><a href="index.php">Home</a></li>
-            <li><a href="aboutus.php">About Us</a></li>
-            <li><a href="value.php">Value</a></li>
-            <li><a href="contact.php">Contact</a></li>
-        </ul>
-        <a class="get-started" href="../page/login.php" style="margin-right: 10px" aria-label="Login">Login</a>
-    </nav>
+    <?php include "../shared/navbar_landing_page_main.php" ?>
 
     <div class="hero">
         <div class="text">
