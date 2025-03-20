@@ -16,7 +16,7 @@ if (isset($_POST['submit'])) {
 
 
 function request_med($db)
-{   $id = $_POST['id'];
+{   
     $city_health_id = $_POST['city_health_id'];
     $barangay_inc_id = $_POST['barangay_inc_id'];
     $med_avail_id = $_POST['med_avail_id'];
@@ -24,13 +24,10 @@ function request_med($db)
     $request_category = $_POST['request_category'];
     $request_DosageForm = $_POST['request_DosageForm'];
     $request_DosageStrength = $_POST['request_DosageStrength'];
-    $requestStatus = $_POST['requestStatus'];
-
 
 
     $table = "request_med";
     $data = array(
-        "id" =>$id,
         "city_health_id" => $city_health_id,
         "barangay_inc_id" => $barangay_inc_id,
         "med_avail_id" => $med_avail_id,
@@ -38,7 +35,6 @@ function request_med($db)
         "request_category" => $request_category,
         "request_DosageForm" => $request_DosageForm,
         "request_DosageStrength" => $request_DosageStrength,
-        "requestStatus" => "Pending"
 
     );
 

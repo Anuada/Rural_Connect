@@ -136,7 +136,7 @@
 
 
         
-<a class="get-started" href="../page/index.php">
+<a class="get-started" href="../page/">
     <i class="fa fa-arrow-left"></i> Back to Page
 </a>
 

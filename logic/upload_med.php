@@ -4,14 +4,18 @@ session_start();
 
 require_once "../util/DbHelper.php";
 require_once "../util/DirHandler.php";
+require_once "../util/Misc.php";
+
 $db = new DbHelper();
 $dh = new DirHandler();
+$ms = new Misc;
 
 if (isset($_POST['submit'])) {
-    uploadMedAvailable($db,$dh);
-} 
+    uploadMedAvailable($db, $dh, $ms);
+}
 
-function uploadMedAvailable($db,$dh) {
+function uploadMedAvailable($db, $dh, $ms)
+{
     $city_health_id = $_POST['city_health_id'];
     $med_name = $_POST['med_name'];
     $med_description = $_POST['med_description'];
@@ -22,11 +26,10 @@ function uploadMedAvailable($db,$dh) {
     $expiry_date = $_POST['expiry_date'];
     $med_image = $_FILES['med_image'];
 
-    $img_name = $city_health_id . ".png";
-    $img_file = $dh->med_image . $img_name;
-    move_uploaded_file($_FILES["med_image"]["tmp_name"], $img_file);
-	
-    $table = "med_availabilty"; 
+    $img_name = str_replace("-", "", $city_health_id) . "_" . strtolower(str_replace(' ', '', $med_name)) . "_" . date('mdYHis');
+    $img_file = $ms->uploadImage($med_image, $img_name, $dh->med_image);
+
+    $table = "med_availabilty";
     $data = array(
         "city_health_id" => $city_health_id,
         "med_name" => $med_name,

@@ -5,7 +5,7 @@ if (isset($_SESSION['accountId'])) {
     $db = new DbHelper;
     $account = $db->fetchRecords('account', ['accountId' => $_SESSION["accountId"]]);
     if ($account[0]["isVerify"] != 0) {
-        header("Location: ../user/");
+        header("Location: ../barangay_inc/");
         exit();
     }
 } else {
