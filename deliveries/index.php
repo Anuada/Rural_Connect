@@ -7,7 +7,7 @@ $db = new DbHelper();
 $title = "Index City Health";
 
 ob_start();
-include "../shared/session.delivery.php";
+include "../shared/navbar.deliveries.php";
 $navbar = ob_get_clean();
 ?>
 

@@ -7,7 +7,7 @@ if (isset($_SESSION['accountId'])) {
             header("Location: ../barangay_inc/");
             break;
 
-        case 'deliveries':
+        case 'city_health':
             header("Location: ../city_health/");
             break;
         case 'admin':
