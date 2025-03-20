@@ -2,9 +2,16 @@
 session_start();
 require_once "../util/DbHelper.php";
 require_once "../util/DirHandler.php";
+require_once "../util/EmailSender.php";
+require_once "../util/Misc.php";
+require_once "../vendor/autoload.php";
+
+use Ramsey\Uuid\Uuid;
 
 $db = new DbHelper();
 $dh = new DirHandler();
+$es = new EmailSender();
+$ms = new Misc();
 
 if (isset($_POST["signup"])) {
     $fname = $_POST["fname"];
@@ -16,6 +23,7 @@ if (isset($_POST["signup"])) {
     $username = $_POST["username"];
     $password = $_POST["password"];
     $con_password = $_POST["con_password"];
+    $id_verification = $_FILES["id_verification"];
 
     if (!empty(trim($fname)) && !empty(trim($lname)) && !empty(trim($contact)) && !empty(trim($address)) && !empty(trim($email)) && !empty(trim($user_type)) && !empty(trim($username)) && !empty(trim($password)) && !empty(trim($con_password))) {
         if ($user_type != 'Admin' && $user_type != 'admin') {
@@ -25,9 +33,11 @@ if (isset($_POST["signup"])) {
                 if ($check_username == null) {
                     if ($password === $con_password) {
                         $password = password_hash($password, PASSWORD_DEFAULT);
-                        $db->addRecord("account", ["email" => $email, "username" => $username, "password" => $password, "user_type" => $user_type, "isLogin" => "0"]);
+                        $verificationToken = Uuid::uuid4();
+                        $db->addRecord("account", ["email" => $email, "username" => $username, "password" => $password, "user_type" => $user_type, "verify_token" => $verificationToken]);
                         $accountuser = $db->fetchRecords("account", ["email" => $email])[0];
                         $accountId = $accountuser["accountId"];
+                        $es->requestAccountVerification($email, $accountId, $username, $verificationToken);
 
                         if (isset($_FILES["id_verification"]) && $_FILES['id_verification']['size'] > 0) {
                             $img_name = $accountId . ".png";
@@ -35,18 +45,15 @@ if (isset($_POST["signup"])) {
 
                             switch ($user_type) {
                                 case 'barangay_inc':
-                                    $img_file = $dh->barangay_incharge_profile . $img_name;
-                                    move_uploaded_file($_FILES["id_verification"]["tmp_name"], $img_file);
+                                    $info["id_verification"] = $ms->uploadImage($id_verification, $accountId, $dh->barangay_incharge_profile);
                                     $db->addRecord("barangay_inc", $info);
                                     break;
                                 case 'city_health':
-                                    $img_file = $dh->city_health . $img_name;
-                                    move_uploaded_file($_FILES["id_verification"]["tmp_name"], $img_file);
+                                    $info["id_verification"] = $ms->uploadImage($id_verification, $accountId, $dh->city_health);
                                     $db->addRecord("city_health", $info);
                                     break;
                                 case 'deliveries':
-                                    $img_file = $dh->deleviries . $img_name;
-                                    move_uploaded_file($_FILES["id_verification"]["tmp_name"], $img_file);
+                                    $info["id_verification"] = $ms->uploadImage($id_verification, $accountId, $dh->deleviries);
                                     $db->addRecord("deliveries", $info);
                                     break;
                                 default:
@@ -68,7 +75,7 @@ if (isset($_POST["signup"])) {
                                     break;
                             }
                         }
-                        $_SESSION["m"] = "Successful Register";
+                        $_SESSION["m"] = "Registration Complete! Please check your email for verification";
                         header("Location: ../page/");
                         exit();
                     } else {

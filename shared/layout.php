@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="../assets/css/loader.css">
     <?php echo (isset($styles)) ? $styles : "" ?>
     <title>
-        <?php echo (isset($title)) ? "Students Portal | " . $title : "" ?>
+        <?php echo isset($title) ? "Rural Connect | " . $title : "Rural Connect" ?>
     </title>
 </head>
 
@@ -45,12 +45,12 @@
 
     <!-- <script src="../assets/js/prompt.js"></script> -->
 
-    <?php if (isset($_SESSION["m"])) : ?>
+    <?php if (isset($_SESSION["m"])): ?>
         <?php
         $m = $_SESSION["m"];
         $i = strlen($m) - 1;
         ?>
-        <?php if ($m[$i] != "!") : ?>
+        <?php if ($m[$i] != "!"): ?>
             <?php $m = $m . "!" ?>
             <script>
                 Swal.fire({
@@ -60,7 +60,7 @@
                     timer: 2000
                 });
             </script>
-        <?php else : ?>
+        <?php else: ?>
             <script>
                 Swal.fire({
                     icon: 'error',

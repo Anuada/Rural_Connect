@@ -12,19 +12,16 @@ ob_start();
 <div class="navbar-container">
     <?php include "../shared/navbar_landing_page.php"; ?>
 </div>
-<form action="../logic/login.php" method="post" id="loginform">
+<form action="../logic/forgot-password.php" method="post" id="loginform">
     <div class="login-container">
         <img src="../assets/img/misc/delivery_pic.jpeg" alt="Logo" />
         <div class="login-form">
             <center>
-                <h2>Login</h2>
+                <h2>Forgot Password</h2>
             </center>
-            <input placeholder="Username" required aria-label="Username" type="text" id="username" name="username" />
-            <input placeholder="Password" required aria-label="Password" type="password" id="password"
-                name="password" />
-            <button type="submit" name="login">LOGIN</button>
-            <a class="forgot-password" href="../page/forgot-password.php">Forgot Username / Password?</a>
-            <a class="create-account" href="../page/signup.php">Create your Account →</a>
+            <input placeholder="Email" required aria-label="Email" type="text" id="email" name="email" />
+            <button type="submit" name="submit">SUBMIT</button>
+            <a class="create-account" href="../page/login.php">Back To Login →</a>
         </div>
     </div>
 </form>
