@@ -35,26 +35,9 @@ $lname = isset($city_health[0]['lname']) ? $city_health[0]['lname'] : '';
                 <li class="nav-item">
                     <a class="nav-link fuchsia" style="margin-right: 15px" href="./">Dashboard</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link fuchsia" style="margin-right: 15px" href="./uploadAvailableMed.php">Upload Medicine</a>
-                </li>
+                
 
-                <li class="nav-item dropdown position-relative">
-    <div class="dropdown">
-        <!-- Dropdown Trigger -->
-        <a class="nav-link dropdown-toggle" href="#" id="allDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            All
-        </a>
-        <!-- Drop Down Menu -->
-        <div class="dropdown-menu position-absolute dropdown-menu-right" style="right: 0; top: 100%;" aria-labelledby="allDropdown">
-            <a class="dropdown-item" href="#">Dashboard</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="view_med.php">View med</a>
-            <a class="dropdown-item" href="request_med.php">View Requested Medicine</a>
-        </div>
-        <!-- Drop Down Menu -->
-    </div>
-</li>
+                
 
 
 

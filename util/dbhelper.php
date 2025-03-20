@@ -177,5 +177,80 @@ public function fetchData($id)
     return $records;
 }
 
+// count for pending
+
+public function countPending()
+{
+    $sql = "
+    SELECT COUNT(*) AS pending_requests
+    FROM request_med
+    WHERE requestStatus = 'pending';
+    ";
+
+    $stmt = $this->conn->prepare($sql);
+    if (!$stmt) {
+        die("SQL Error: " . $this->conn->error);
+    }
+
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    $row = $result->fetch_assoc(); // Fetch the single row result
+
+    $stmt->close(); // Close the statement after use
+
+    return $row ? $row['pending_requests'] : 0; // Return the count directly
+}
+
+// count for Accempted 
+
+public function countAccempted()
+{
+    $sql = "
+    SELECT COUNT(*) AS Accepted_requests
+    FROM request_med
+    WHERE requestStatus = 'Accepted';
+    ";
+
+    $stmt = $this->conn->prepare($sql);
+    if (!$stmt) {
+        die("SQL Error: " . $this->conn->error);
+    }
+
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    $row = $result->fetch_assoc(); // Fetch the single row result
+
+    $stmt->close(); // Close the statement after use
+
+    return $row ? $row['Accepted_requests'] : 0; // Return the count directly
+}
+
+// Count for cancelled
+
+public function countCancelled()
+{
+    $sql = "
+    SELECT COUNT(*) AS cancelled_requests
+    FROM request_med
+    WHERE requestStatus = 'Cancelled';
+    ";
+
+    $stmt = $this->conn->prepare($sql);
+    if (!$stmt) {
+        die("SQL Error: " . $this->conn->error);
+    }
+
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    $row = $result->fetch_assoc(); // Fetch the single row result
+
+    $stmt->close(); // Close the statement after use
+
+    return $row ? $row['cancelled_requests'] : 0; // Return the count directly
+}
+
 
 }
