@@ -16,7 +16,7 @@
 
 -- Dumping structure for table med_deliveries.account
 CREATE TABLE IF NOT EXISTS `account` (
-  `accountId` int NOT NULL AUTO_INCREMENT,
+  `accountId` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `username` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `password` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
@@ -25,27 +25,19 @@ CREATE TABLE IF NOT EXISTS `account` (
   `verify_token` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `isVerify` tinyint NOT NULL DEFAULT '0',
   `isLogin` tinyint NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`accountId`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dumping data for table med_deliveries.account: ~12 rows (approximately)
-INSERT INTO `account` (`accountId`, `email`, `username`, `password`, `user_type`, `recovery_token`, `verify_token`, `isVerify`, `isLogin`) VALUES
-	(18, 'Nat@gmail.com', 'nat123', '$2y$10$AgzkzuGuQAd68rYE2tELjO4ICWWKlJ4tOONQqiMbxce/adG6nKQKW', 'deliveries', NULL, NULL, 1, 1),
-	(19, 'jeremy@gmail.com', 'Jeremy', '$2y$10$AgzkzuGuQAd68rYE2tELjO4ICWWKlJ4tOONQqiMbxce/adG6nKQKW', 'Admin', NULL, NULL, 1, 1),
-	(20, 'dfs@gmail.com', 'wer', '$2y$10$KJq223QQR3MqQn/ZqV/piO.VtC4/Hk.w37cenr7AJyZNIlGuSYvG2', 'deliveries', NULL, NULL, 1, 0),
-	(21, 'bohol@gmail.com', 'Bohol123', '$2y$10$BPfJ5shL4vEXkyQ8GBXprOU7oRWpwPWOxVRAJu/MDRgUp9Qovpw/G', 'barangay_inc', NULL, NULL, 1, 1),
-	(22, 'Shanesy@gmail.com', 'Shane12', '$2y$10$kHrpTJoZSE/njTm2cGa4JOPA74JK18UrSxKHEGAOBcRPVYtk4b7f.', 'city_health', NULL, NULL, 0, 0),
-	(23, 'ex@gmail.com', 'ex123', '$2y$10$3wPURXiLXynaLwY0wLd.oOkwk/5kgGS93mf94PtvH7yj1c7gyOahW', 'deliveries', NULL, NULL, 1, 1),
-	(24, 'dsdf@gmail.com', 'ex3', '$2y$10$h163WYAfbYQHSOHWhLljPOpGFJY1zzZ.9ZwlJedhUNCwqRFOo8EFW', 'deliveries', NULL, NULL, 1, 0),
-	(25, 'jhane@gmail.com', 'jhane45', '$2y$10$7ktE3L4DhjUOuyEzNU9wSueeRkl.8h0R6fXbRoXN8D66CpceYJQgC', 'city_health', NULL, NULL, 1, 0),
-	(31, 'erscds@gmail.com', 'lok123', '$2y$10$leD496WGIaeJISiDpZaEz.442XMHWP/81sgBRjxi8OOBQ2Xc33zbi', 'barangay_inc', NULL, NULL, 1, 1),
-	(32, 'lo@gmail.com', 'lop123', '$2y$10$leD496WGIaeJISiDpZaEz.442XMHWP/81sgBRjxi8OOBQ2Xc33zbi', 'barangay_inc', NULL, NULL, 1, 0),
-	(33, 'hala@gmail.com', 'del12', '$2y$10$nyUFjpcAT76udPPSyCXhceotUMbCIvvJHUqjP0T8WQBraPauRC2vS', 'deliveries', NULL, NULL, 1, 1),
-	(37, 'ladyglittersmackles@gmail.com', 'anuada_1990', '$2y$12$LHO7P5.qZud12jDHLJJBO.9oXz0XzjO7jYSN2MeJIYqZId80oFX1W', 'barangay_inc', '', '', 1, 0);
+INSERT INTO `account` (`accountId`, `email`, `username`, `password`, `user_type`, `recovery_token`, `verify_token`, `isVerify`, `isLogin`, `created_at`) VALUES
+	('6c0b0a91-03a3-4614-a6a9-1a46133e8a60', 'ladyglittersmackles@gmail.com', 'anuada_1990', '$2y$12$9V6a/pa7KWygvvHmd/A37eM5F0BHbIvCA.zsGI3C9Zl1TpsQTo.xi', 'barangay_inc', '', '', 1, 1, NULL),
+	('7594b921-87ea-437e-bd63-03e2809c3fc2', 'mariah_carey@mailinator.com', 'therealmariah_carey', '$2y$12$qvCWyerLwX34QrtnG6SwIebSrazN.KDGsQrbLagqe6CzJWLKtVvrS', 'deliveries', '', '', 1, 0, NULL),
+	('eb48b13c-9094-4de4-afc2-786b9dc93f96', 'christopher_pareyac@mailinator.com', 'christopher_pareyac', '$2y$12$7W/t1R9Yj5c0EW4IHzVTmOrJCB/8pBfxhrbmAnDM3y6UTy7jz3skW', 'city_health', NULL, '', 1, 1, NULL);
 
 -- Dumping structure for table med_deliveries.admin
 CREATE TABLE IF NOT EXISTS `admin` (
-  `accountId` int NOT NULL AUTO_INCREMENT,
+  `accountId` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `fname` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `lname` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `address` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
@@ -53,117 +45,106 @@ CREATE TABLE IF NOT EXISTS `admin` (
   `contactNo` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `id_verification` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`accountId`),
-  CONSTRAINT `admin_ibfk_1` FOREIGN KEY (`accountId`) REFERENCES `account` (`accountId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  CONSTRAINT `FK_admin_account` FOREIGN KEY (`accountId`) REFERENCES `account` (`accountId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dumping data for table med_deliveries.admin: ~0 rows (approximately)
-INSERT INTO `admin` (`accountId`, `fname`, `lname`, `address`, `DOB`, `contactNo`, `id_verification`) VALUES
-	(19, 'Jeremy', 'Gamboa', 'Emall St. Cebu city', '2024-12-03', '09695327153', '18.png');
 
 -- Dumping structure for table med_deliveries.barangay_inc
 CREATE TABLE IF NOT EXISTS `barangay_inc` (
-  `accountId` int NOT NULL AUTO_INCREMENT,
+  `accountId` varchar(100) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
   `fname` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `lname` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `address` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `contactNo` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `id_verification` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`accountId`),
-  CONSTRAINT `barangay_inc_ibfk_1` FOREIGN KEY (`accountId`) REFERENCES `account` (`accountId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  CONSTRAINT `FK_barangay_inc_account` FOREIGN KEY (`accountId`) REFERENCES `account` (`accountId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dumping data for table med_deliveries.barangay_inc: ~2 rows (approximately)
 INSERT INTO `barangay_inc` (`accountId`, `fname`, `lname`, `address`, `contactNo`, `id_verification`) VALUES
-	(31, 'dsfsf', 'sdfsf', 'sdfsf', '564', ''),
-	(32, 'dsfs', 'sf', 'ldsld', '4353', '32.png'),
-	(37, 'Ericson', 'Anuada', 'Floptropica', '09192939282', '../assets/img/profile/barangay_incharge/37.png');
+	('6c0b0a91-03a3-4614-a6a9-1a46133e8a60', 'Ericson', 'Anuada', 'Floptropica', '09293929394', '../assets/img/profile/barangay_incharge/6c0b0a91-03a3-4614-a6a9-1a46133e8a60.png');
 
 -- Dumping structure for table med_deliveries.city_health
 CREATE TABLE IF NOT EXISTS `city_health` (
-  `accountId` int NOT NULL AUTO_INCREMENT,
+  `accountId` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
   `fname` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `lname` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `address` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `contactNo` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `id_verification` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`accountId`),
-  CONSTRAINT `city_health_ibfk_1` FOREIGN KEY (`accountId`) REFERENCES `account` (`accountId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  CONSTRAINT `FK_city_health_account` FOREIGN KEY (`accountId`) REFERENCES `account` (`accountId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dumping data for table med_deliveries.city_health: ~3 rows (approximately)
 INSERT INTO `city_health` (`accountId`, `fname`, `lname`, `address`, `contactNo`, `id_verification`) VALUES
-	(22, 'Shanesy', 'Gabato', 'Mountain St. Cebu City', '093453243', '22.png'),
-	(25, 'Jhane', 'Heralis', 'Availia St. Cebu City', '90884', '');
+	('eb48b13c-9094-4de4-afc2-786b9dc93f96', 'Christopher', 'Pareyac', 'Floptropica', '09284928392', '../assets/img/profile/city_health/eb48b13c-9094-4de4-afc2-786b9dc93f96.png');
 
 -- Dumping structure for table med_deliveries.deliveries
 CREATE TABLE IF NOT EXISTS `deliveries` (
-  `accountId` int NOT NULL AUTO_INCREMENT,
-  `fname` varchar(100) NOT NULL,
-  `lname` varchar(100) NOT NULL,
-  `address` varchar(100) NOT NULL,
-  `contactNo` varchar(100) NOT NULL,
-  `id_verification` varchar(100) NOT NULL,
+  `accountId` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `fname` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `lname` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `address` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `contactNo` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `id_verification` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`accountId`),
-  CONSTRAINT `deliveries_ibfk_1` FOREIGN KEY (`accountId`) REFERENCES `account` (`accountId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=latin1;
+  CONSTRAINT `FK_deliveries_account` FOREIGN KEY (`accountId`) REFERENCES `account` (`accountId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dumping data for table med_deliveries.deliveries: ~4 rows (approximately)
 INSERT INTO `deliveries` (`accountId`, `fname`, `lname`, `address`, `contactNo`, `id_verification`) VALUES
-	(18, 'Nathaniel', 'Quezon', 'Lorega', '0987888', '18.png'),
-	(20, 'Daniel', 'Anuada', 'zapatera', '4564', '20.png'),
-	(23, 'Exmple', 'sss', 'dkjkad', '44444', ''),
-	(33, 'sdsd', 'sadad', 'dssf', '4353', '33.png');
+	('7594b921-87ea-437e-bd63-03e2809c3fc2', 'Mariah', 'Carey', 'Floptropica', '09284738274', '../assets/img/profile/deleviries/7594b921-87ea-437e-bd63-03e2809c3fc2.png');
 
 -- Dumping structure for table med_deliveries.med_availabilty
 CREATE TABLE IF NOT EXISTS `med_availabilty` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `med_name` varchar(100) NOT NULL,
-  `med_description` varchar(100) NOT NULL,
-  `quantity` varchar(100) NOT NULL,
+  `med_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `med_description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `quantity` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `expiry_date` datetime NOT NULL,
-  `med_image` varchar(250) NOT NULL,
-  `DosageForm` varchar(100) NOT NULL,
-  `DosageStrength` varchar(100) NOT NULL,
-  `category` varchar(100) NOT NULL,
-  `city_health_id` int NOT NULL,
+  `med_image` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `DosageForm` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `DosageStrength` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `category` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `city_health_id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `city_health_id` (`city_health_id`),
-  CONSTRAINT `med_availabilty_ibfk_1` FOREIGN KEY (`city_health_id`) REFERENCES `city_health` (`accountId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+  CONSTRAINT `FK_med_availabilty_city_health` FOREIGN KEY (`city_health_id`) REFERENCES `city_health` (`accountId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table med_deliveries.med_availabilty: ~2 rows (approximately)
+-- Dumping data for table med_deliveries.med_availabilty: ~3 rows (approximately)
 INSERT INTO `med_availabilty` (`id`, `med_name`, `med_description`, `quantity`, `date`, `expiry_date`, `med_image`, `DosageForm`, `DosageStrength`, `category`, `city_health_id`) VALUES
-	(12, 'Paricetamol', 'Used to reduce fever and relieve mild pain', '10 tablets per blister pack, 100ml bottle', '2025-03-14 10:29:08', '2025-03-29 00:00:00', '../assets/img/med_image/22.png', 'Tablet, Capsule, Syrup, Injection', '500mg, 10mg, 250mg/5ml syrup', 'Antibiotic, Pain Reliever, Antihypertensive', 22),
-	(13, 'Biogesic', 'Used to reduce fever and relieve mild pain, etc', '11', '2025-03-14 10:33:47', '2025-03-11 00:00:00', '../assets/img/med_image/22.png', 'Tablet, Capsule, Syrup, Injection, etc.', '500mg, 10mg, 250mg/5ml syrup,syrup', 'Antibiotic, Pain Reliever, Antihypertensive,  etc', 22);
+	(18, 'Friendship', 'The Power of friendship is powerful', '1000', '2025-03-21 06:39:26', '2125-03-21 00:00:00', '../assets/img/med_image/eb48b13c90944de4afc2786b9dc93f96_friendship_03202025223926.png', 'Capsule', 'Super Strength', 'business at front, party at the back', 'eb48b13c-9094-4de4-afc2-786b9dc93f96'),
+	(19, 'Paracetamol', 'It is a common over-the-counter medication used to relieve pain and reduce fever. It is often used for headaches, muscle aches, arthritis, backaches, toothaches, colds, and fevers. Paracetamol is generally considered safe when used as directed, but it can be harmful in excessive doses, leading to liver damage. Always follow dosing instructions and consult a healthcare professional if you have any concerns.', '1000', '2025-03-21 06:43:10', '2026-01-01 00:00:00', '../assets/img/med_image/eb48b13c90944de4afc2786b9dc93f96_paracetamol_03202025224310.png', 'Tablet', '500 mg', 'analgesics and antipyretics', 'eb48b13c-9094-4de4-afc2-786b9dc93f96'),
+	(21, 'Grethers Pastilles', 'Used to soothe throat discomfort and alleviate dry mouth symptoms.', '1000', '2025-03-21 06:52:56', '2026-03-21 00:00:00', '../assets/img/med_image/eb48b13c90944de4afc2786b9dc93f96_gretherspastilles_03202025225256.png', 'Pastille', '110000 mg', 'throat lozenges or cough drops', 'eb48b13c-9094-4de4-afc2-786b9dc93f96');
 
 -- Dumping structure for table med_deliveries.request_med
 CREATE TABLE IF NOT EXISTS `request_med` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `city_health_id` int NOT NULL,
-  `barangay_inc_id` int NOT NULL,
+  `city_health_id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `barangay_inc_id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `med_avail_Id` int NOT NULL,
   `request_quantity` varchar(100) NOT NULL,
   `request_category` varchar(100) NOT NULL,
   `request_DosageForm` varchar(100) NOT NULL,
   `request_DosageStrength` varchar(100) NOT NULL,
-  `requestStatus` enum('Pending','Accepted','Cancelled','') NOT NULL,
+  `requestStatus` enum('Pending','Accepted','Cancelled','') CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT 'Pending',
   PRIMARY KEY (`id`),
   KEY `city_health_id` (`city_health_id`),
   KEY `barangay_inc_id` (`barangay_inc_id`),
   KEY `med_avail_Id` (`med_avail_Id`),
-  CONSTRAINT `request_med_ibfk_1` FOREIGN KEY (`city_health_id`) REFERENCES `account` (`accountId`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `request_med_ibfk_2` FOREIGN KEY (`barangay_inc_id`) REFERENCES `account` (`accountId`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `request_med_ibfk_3` FOREIGN KEY (`med_avail_Id`) REFERENCES `med_availabilty` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+  CONSTRAINT `FK_request_med_barangay_inc` FOREIGN KEY (`barangay_inc_id`) REFERENCES `barangay_inc` (`accountId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_request_med_city_health` FOREIGN KEY (`city_health_id`) REFERENCES `city_health` (`accountId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_request_med_med_availabilty` FOREIGN KEY (`med_avail_Id`) REFERENCES `med_availabilty` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 
--- Dumping data for table med_deliveries.request_med: ~5 rows (approximately)
+-- Dumping data for table med_deliveries.request_med: ~0 rows (approximately)
 INSERT INTO `request_med` (`id`, `city_health_id`, `barangay_inc_id`, `med_avail_Id`, `request_quantity`, `request_category`, `request_DosageForm`, `request_DosageStrength`, `requestStatus`) VALUES
-	(11, 22, 31, 13, '09', 'Biogesic', 'tablet', 'mg', 'Pending'),
-	(12, 22, 31, 13, '90', 'Flu', 'Tablet', 'ml', 'Pending'),
-	(13, 22, 32, 12, '45666', 'Flu', 'Syrup', 'ml', 'Pending'),
-	(14, 22, 31, 13, '90', 'Flu', 'Tablet', 'mg', 'Pending'),
-	(15, 22, 31, 13, '7878', 'jkkl', 'sz', 'pj', 'Pending');
+	(17, 'eb48b13c-9094-4de4-afc2-786b9dc93f96', '6c0b0a91-03a3-4614-a6a9-1a46133e8a60', 18, '100', 'business at front, party at the back', 'Capsule', 'Super Strength mg', 'Pending');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
