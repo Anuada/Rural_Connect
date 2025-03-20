@@ -1,6 +1,6 @@
 <?php
 session_start();
-$title = "Login";
+$title = "Forgot Password";
 ob_start();
 ?>
 
