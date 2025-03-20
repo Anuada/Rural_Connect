@@ -1,7 +1,7 @@
 <?php
 
 require_once "../util/DbHelper.php";
-
+session_start();
 $db = new DbHelper();
 
-echo json_encode($db->fetchRecords("account",["accountId" => 34])[0]);
+echo json_encode($db->barangayRequested_med($_SESSION['accountId']));

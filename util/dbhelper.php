@@ -176,6 +176,58 @@ public function fetchData($id)
     $stmt->close(); // Close the statement after use
     return $records;
 }
+// Display Dashboard for requested in Barangay inc
+public function barangayRequested_med($id)
+{
+    $sql = "
+    SELECT 
+        barangay_inc.accountId,
+        barangay_inc.fname,
+        barangay_inc.lname,
+        barangay_inc.address,
+        barangay_inc.contactNo,
+        barangay_inc.id_verification,
+        med_availabilty.med_name,
+        med_availabilty.med_description,
+        med_availabilty.quantity,
+        med_availabilty.expiry_date,
+        med_availabilty.DosageForm,
+        med_availabilty.DosageStrength,
+        med_availabilty.category,
+        med_availabilty.city_health_id,
+        request_med.request_quantity,
+        request_med.request_category,
+        request_med.request_DosageForm,
+        request_med.request_DosageStrength,
+        request_med.id,
+        request_med.requestStatus
+    FROM 
+        request_med
+    LEFT JOIN 
+        med_availabilty ON request_med.med_avail_Id = med_availabilty.id
+    LEFT JOIN 
+        barangay_inc ON request_med.barangay_inc_id = barangay_inc.accountId
+    WHERE  
+        request_med.barangay_inc_id = ?
+    ";
+
+    $stmt = $this->conn->prepare($sql);
+    if (!$stmt) {
+        die("SQL Error: " . $this->conn->error);
+    }
+
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $records = [];
+
+    while ($row = $result->fetch_assoc()) {
+        $records[] = $row;
+    }
+
+    $stmt->close(); // Close the statement after use
+    return $records;
+}
 
 // count for pending
 
