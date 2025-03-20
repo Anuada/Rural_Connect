@@ -17,16 +17,16 @@
 -- Dumping structure for table med_deliveries.account
 CREATE TABLE IF NOT EXISTS `account` (
   `accountId` int NOT NULL AUTO_INCREMENT,
-  `email` varchar(100) NOT NULL,
-  `username` varchar(100) NOT NULL,
-  `password` varchar(100) NOT NULL,
-  `user_type` varchar(50) NOT NULL,
-  `recovery_token` varchar(100) DEFAULT NULL,
-  `verify_token` varchar(100) DEFAULT NULL,
+  `email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `username` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `password` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `user_type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `recovery_token` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `verify_token` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `isVerify` tinyint NOT NULL DEFAULT '0',
   `isLogin` tinyint NOT NULL DEFAULT '0',
   PRIMARY KEY (`accountId`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dumping data for table med_deliveries.account: ~12 rows (approximately)
 INSERT INTO `account` (`accountId`, `email`, `username`, `password`, `user_type`, `recovery_token`, `verify_token`, `isVerify`, `isLogin`) VALUES
@@ -34,7 +34,7 @@ INSERT INTO `account` (`accountId`, `email`, `username`, `password`, `user_type`
 	(19, 'jeremy@gmail.com', 'Jeremy', '$2y$10$AgzkzuGuQAd68rYE2tELjO4ICWWKlJ4tOONQqiMbxce/adG6nKQKW', 'Admin', NULL, NULL, 1, 1),
 	(20, 'dfs@gmail.com', 'wer', '$2y$10$KJq223QQR3MqQn/ZqV/piO.VtC4/Hk.w37cenr7AJyZNIlGuSYvG2', 'deliveries', NULL, NULL, 1, 0),
 	(21, 'bohol@gmail.com', 'Bohol123', '$2y$10$BPfJ5shL4vEXkyQ8GBXprOU7oRWpwPWOxVRAJu/MDRgUp9Qovpw/G', 'barangay_inc', NULL, NULL, 1, 1),
-	(22, 'Shanesy@gmail.com', 'Shane12', '$2y$10$kHrpTJoZSE/njTm2cGa4JOPA74JK18UrSxKHEGAOBcRPVYtk4b7f.', 'city_health', NULL, NULL, 1, 0),
+	(22, 'Shanesy@gmail.com', 'Shane12', '$2y$10$kHrpTJoZSE/njTm2cGa4JOPA74JK18UrSxKHEGAOBcRPVYtk4b7f.', 'city_health', NULL, NULL, 0, 0),
 	(23, 'ex@gmail.com', 'ex123', '$2y$10$3wPURXiLXynaLwY0wLd.oOkwk/5kgGS93mf94PtvH7yj1c7gyOahW', 'deliveries', NULL, NULL, 1, 1),
 	(24, 'dsdf@gmail.com', 'ex3', '$2y$10$h163WYAfbYQHSOHWhLljPOpGFJY1zzZ.9ZwlJedhUNCwqRFOo8EFW', 'deliveries', NULL, NULL, 1, 0),
 	(25, 'jhane@gmail.com', 'jhane45', '$2y$10$7ktE3L4DhjUOuyEzNU9wSueeRkl.8h0R6fXbRoXN8D66CpceYJQgC', 'city_health', NULL, NULL, 1, 0),
@@ -46,15 +46,15 @@ INSERT INTO `account` (`accountId`, `email`, `username`, `password`, `user_type`
 -- Dumping structure for table med_deliveries.admin
 CREATE TABLE IF NOT EXISTS `admin` (
   `accountId` int NOT NULL AUTO_INCREMENT,
-  `fname` varchar(100) NOT NULL,
-  `lname` varchar(100) NOT NULL,
-  `address` varchar(100) NOT NULL,
+  `fname` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `lname` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `address` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `DOB` date NOT NULL,
-  `contactNo` varchar(11) NOT NULL,
-  `id_verification` varchar(100) NOT NULL,
+  `contactNo` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `id_verification` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`accountId`),
   CONSTRAINT `admin_ibfk_1` FOREIGN KEY (`accountId`) REFERENCES `account` (`accountId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dumping data for table med_deliveries.admin: ~0 rows (approximately)
 INSERT INTO `admin` (`accountId`, `fname`, `lname`, `address`, `DOB`, `contactNo`, `id_verification`) VALUES
@@ -63,14 +63,14 @@ INSERT INTO `admin` (`accountId`, `fname`, `lname`, `address`, `DOB`, `contactNo
 -- Dumping structure for table med_deliveries.barangay_inc
 CREATE TABLE IF NOT EXISTS `barangay_inc` (
   `accountId` int NOT NULL AUTO_INCREMENT,
-  `fname` varchar(100) NOT NULL,
-  `lname` varchar(100) NOT NULL,
-  `address` varchar(100) NOT NULL,
-  `contactNo` varchar(11) NOT NULL,
-  `id_verification` varchar(100) NOT NULL,
+  `fname` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `lname` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `address` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `contactNo` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `id_verification` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`accountId`),
   CONSTRAINT `barangay_inc_ibfk_1` FOREIGN KEY (`accountId`) REFERENCES `account` (`accountId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dumping data for table med_deliveries.barangay_inc: ~2 rows (approximately)
 INSERT INTO `barangay_inc` (`accountId`, `fname`, `lname`, `address`, `contactNo`, `id_verification`) VALUES
@@ -81,11 +81,11 @@ INSERT INTO `barangay_inc` (`accountId`, `fname`, `lname`, `address`, `contactNo
 -- Dumping structure for table med_deliveries.city_health
 CREATE TABLE IF NOT EXISTS `city_health` (
   `accountId` int NOT NULL AUTO_INCREMENT,
-  `fname` varchar(100) NOT NULL,
-  `lname` varchar(100) NOT NULL,
-  `address` varchar(100) NOT NULL,
-  `contactNo` varchar(11) NOT NULL,
-  `id_verification` varchar(100) NOT NULL,
+  `fname` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `lname` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `address` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `contactNo` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `id_verification` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`accountId`),
   CONSTRAINT `city_health_ibfk_1` FOREIGN KEY (`accountId`) REFERENCES `account` (`accountId`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
