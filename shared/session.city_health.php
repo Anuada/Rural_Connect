@@ -18,6 +18,7 @@ if (isset($_SESSION['accountId'])) {
         default:
             break;
     }
+    require_once "../shared/is.user.verified.php";
 } else {
     header("Location: ../page/login.php");
     exit();

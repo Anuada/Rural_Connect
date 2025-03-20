@@ -3,7 +3,6 @@
 if (isset($_SESSION['accountId'])) {
     switch ($_SESSION["user_type"]) {
 
-
         case 'city_health':
             header("Location: ../barangay_inc/");
             break;
@@ -18,6 +17,7 @@ if (isset($_SESSION['accountId'])) {
         default:
             break;
     }
+    require_once "../shared/is.user.verified.php";
 } else {
     header("Location: ../page/login.php");
     exit();

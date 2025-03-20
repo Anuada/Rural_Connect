@@ -15,7 +15,7 @@
     <div class="bg-white shadow-sm rounded"
         style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);-ms-transform:translate(-50%,-50%); padding: 50px">
         <p class="p-6 text-center">
-            <img src="<?php echo $misc->url('assets/img/misc/logo1.png') ?>"
+            <img src="http://i.ibb.co/BVv7CqpG/rural-connect-logo-removebg-preview.png"
                 alt="Elevate Her Logo" width="500">
         <h3 style="padding-top: 15px; text-align: center">Oops! Something went wrong. 🛑</h3>
         <h5 style="padding-bottom: 15px; color:#D3D3D3">We're sorry, but there was an internal server error. Please try
