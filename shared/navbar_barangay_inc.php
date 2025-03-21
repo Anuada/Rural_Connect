@@ -37,12 +37,12 @@ $profileImage = isset($barangay_inc[0]['id_verification']) ? htmlspecialchars($b
 
                 <li class="nav-item">
                    
-                        <a class="nav-link fuchsia" style="margin-right: 15px;" href="view_med.php">Available Medicine</a>
+                        <a class="nav-link fuchsia" style="margin-right: 15px;" href="view_med.php">Get Medicine</a>
                     
                 </li>
                 <li class="nav-item">
                     
-                        <a class="nav-link fuchsia" style="margin-right: 15px;" href="./events.php">Order Medicine</a>
+                        <a class="nav-link fuchsia" style="margin-right: 15px;" href="view_med.php">My Requests</a>
 
                     
                 </li>
