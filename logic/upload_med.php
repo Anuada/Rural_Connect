@@ -14,7 +14,7 @@ if (isset($_POST['submit'])) {
     uploadMedAvailable($db, $dh, $ms);
 }
 
-function uploadMedAvailable($db, $dh, $ms)
+function uploadMedAvailable(DbHelper $db, DirHandler $dh, Misc $ms)
 {
     $city_health_id = $_POST['city_health_id'];
     $med_name = $_POST['med_name'];
