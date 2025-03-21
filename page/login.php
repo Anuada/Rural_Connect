@@ -23,7 +23,7 @@ ob_start();
             <input placeholder="Password" required aria-label="Password" type="password" id="password"
                 name="password" />
             <button type="submit" name="login">LOGIN</button>
-            <a class="forgot-password" href="../page/forgot-password.php">Forgot Username / Password?</a>
+            <a class="forgot-password" href="../page/forgot-password.php">Forgot Password?</a>
             <a class="create-account" href="../page/signup.php">Create your Account →</a>
         </div>
     </div>

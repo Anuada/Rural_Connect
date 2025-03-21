@@ -65,9 +65,15 @@
                                         <div class="text-right"><a href="<?php echo $link ?>" id="resetPassword"
                                                 target="_blank">CHANGE YOUR PASSWORD</a></div>
                                         <p
-                                            style="margin:0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">
-                                            If you have any concerns or need assistance, please contact us at
-                                            frenchcries12@gmail.com.</p>
+                                            style="text-align: center; font-size: 14px; margin-top: 10px; font-family: Arial, sans-serif;">
+                                            If the button is not working, you can copy and paste this link into your
+                                            browser:
+                                            <br>
+                                            <a href="<?php echo $link ?>" target="_blank"
+                                                style="word-break: break-all; color: #354eab;">
+                                                <?php echo $link ?>
+                                            </a>
+                                        </p>
                                         <p style="font-size:16px;margin:40px 0 20px 0;font-family:Arial,sans-serif;">
                                             Best Regards,</p>
                                         <p style="font-size:16px;margin:20px 0 20px 0;font-family:Arial,sans-serif;">

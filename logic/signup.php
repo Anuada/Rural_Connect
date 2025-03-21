@@ -33,12 +33,10 @@ if (isset($_POST["signup"])) {
                 if ($check_username == null) {
                     if ($password === $con_password) {
                         $password = password_hash($password, PASSWORD_DEFAULT);
+                        $accountId = Uuid::uuid4();
                         $verificationToken = Uuid::uuid4();
-                        $db->addRecord("account", ["email" => $email, "username" => $username, "password" => $password, "user_type" => $user_type, "verify_token" => $verificationToken]);
-                        $accountuser = $db->fetchRecords("account", ["email" => $email])[0];
-                        $accountId = $accountuser["accountId"];
                         $es->requestAccountVerification($email, $accountId, $username, $verificationToken);
-
+                        $db->addRecord("account", ["accountId" => $accountId, "email" => $email, "username" => $username, "password" => $password, "user_type" => $user_type, "verify_token" => $verificationToken]);
                         if (isset($_FILES["id_verification"]) && $_FILES['id_verification']['size'] > 0) {
                             $img_name = $accountId . ".png";
                             $info = ["accountId" => $accountId, "fname" => $fname, "lname" => $lname, "address" => $address, "contactNo" => $contact, "id_verification" => $img_name];
