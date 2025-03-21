@@ -13,7 +13,7 @@ if (isset($_POST["submit"])) {
     // Handle profile picture upload
     if (!empty($_FILES["id_verification"]["name"])) {
         $target_dir = "../assets/img/profile/barangay_incharge/";
-        $file_name = $accountId . "_" . basename($_FILES["id_verification"]["name"]);
+        $file_name = $accountId . ".png";
         $target_file = $target_dir . $file_name;
 
         if (move_uploaded_file($_FILES["id_verification"]["tmp_name"], $target_file)) {

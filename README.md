@@ -1,10 +1,10 @@
 # <p align="center"><img src="./assets/img/misc/rural_connect_logo_no_bg.png" alter="Rural Connect" width="300"></p>
 
-## BRIDGE THE GAP BETWEEN CITY HEALTH PROVIDERS AND RURAL BARANGAY
+### BRIDGE THE GAP BETWEEN CITY HEALTH PROVIDERS AND RURAL BARANGAY
 
 ## DESCRIPTION
 
-ElevateHer is a web platform that aims to empower women in Cebu City who have experienced violence. The initiative aims to provide resources and support for positive decision-making, addressing challenges such as depression, limited education access, and inadequate opportunities. Ultimately, "ElevateHer" seeks to help women rebuild their lives and foster a more just and supportive society in Cebu City.
+RURAL CONNECT aims to bridge the healthcare gap between urban and rural areas, ensuring that all residents, irrespective of location, have access to the medical care they require. By addressing logistical, communication, and supply chain issues, this platform will play a pivotal role in enhancing healthcare access for mountain barangays.
 
 ## INSTRUCTION
 
