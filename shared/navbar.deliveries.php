@@ -13,72 +13,106 @@ $profileImage = isset($deliveries[0]['id_verification']) ? htmlspecialchars($del
 ?>
 
 <style>
-    .nav-link.fuchsia {
-        text-decoration: none;
-        border-bottom: 2px solid #B6D0E2;
-        padding-bottom: 2px;
-        font-style: italic;
-    }
+   /* Navbar Custom Styling */
+   .navbar-custom {
+       background: linear-gradient(135deg, #006eff, #0056d2);
+       box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+       border-radius: 20px;
+       padding: 12px 20px;
+       transition: all 0.3s ease-in-out;
+   }
+
+   /* Navbar Links */
+   .nav-link.fuchsia {
+       text-decoration: none;
+       border-bottom: 2px solid transparent;
+       padding-bottom: 2px;
+       font-style: italic;
+       color: white !important;
+       font-weight: 600;
+       transition: all 0.3s ease-in-out;
+   }
+
+   .nav-link.fuchsia:hover {
+       border-bottom: 2px solid #ffffff;
+       transform: translateY(-2px);
+   }
+
+   /* Profile Dropdown */
+   .profile-container {
+       width: 45px;
+       height: 45px;
+       background: white;
+       color: #0056d2;
+       font-weight: bold;
+       display: flex;
+       align-items: center;
+       justify-content: center;
+       border-radius: 50%;
+       font-size: 16px;
+       border: 2px solid white;
+       transition: all 0.3s ease-in-out;
+   }
+
+   .profile-container:hover {
+       background: #f8f9fa;
+       color: #007bff;
+   }
+
+   /* Dropdown Menu Styling */
+   .dropdown-menu {
+       border-radius: 10px;
+       overflow: hidden;
+       box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+       border: none;
+   }
+
+   .dropdown-item {
+       font-weight: 500;
+       transition: all 0.3s ease-in-out;
+   }
+
+   .dropdown-item:hover {
+       background: #007bff;
+       color: white;
+   }
 </style>
 
-<nav class="navbar fixed-top" style="background-color: #f8f9fa; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
-    <div class="container-fluid m-1 d-flex align-items-center">
+<nav class="navbar fixed-top navbar-custom">
+    <div class="container-fluid d-flex align-items-center justify-content-between">
+        <!-- Logo -->
         <a class="navbar-brand ml-10" href="#">
             <img src="../assets/img/misc/med2.JPG" alt="Rural Logo" width="160">
         </a>
 
-        <div class="d-none d-md-flex align-items-center" style="margin-right: 10px;">
+        <div class="d-none d-md-flex align-items-center">
             <ul class="navbar-nav flex-row">
                 <li class="nav-item">
-                    
-                <a class="nav-link fuchsia" style="margin-right: 15px;" href="./">Home</a>
-                    
-                </li>
-
-                <li class="nav-item">
-                   
-                        <a class="nav-link fuchsia" style="margin-right: 15px;" href="view_med.php">Ready for Delivery</a>
-                    
+                    <a class="nav-link fuchsia" style="margin-right: 20px;" href="./">Home</a>
                 </li>
                 <li class="nav-item">
-                    
-                        <a class="nav-link fuchsia" style="margin-right: 15px;" href="./events.php">Order Medicine</a>
-
-                    
+                    <a class="nav-link fuchsia" style="margin-right: 20px;" href="view_med.php">Ready for Delivery</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link fuchsia" style="margin-right: 20px;" href="./events.php">Order Medicine</a>
+                </li>
+                <!-- Profile Dropdown -->
                 <li class="nav-item dropdown position-relative">
-    <div class="dropdown">
-    <a href="#" class="nav-link d-flex align-items-center" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="toggleSideMenu()">
-    <div style="
-                width: 40px; 
-                height: 40px; 
-                background-color: #007bff; 
-                color: white; 
-                font-weight: bold; 
-                display: flex; 
-                align-items: center; 
-                justify-content: center; 
-                border-radius: 50%; 
-                font-size: 14px;">
-                B
-            </div>
-        </a>
-        <!-- Drop Down Menu -->
-        <div class="dropdown-menu position-absolute dropdown-menu-right" style="right: 0; top: 100%;" aria-labelledby="profileDropdown">
-            
-            <a class="dropdown-item" href="#">
-                <?php echo"Barangay" ?>
-                <?php echo "<br>";?>
-            </a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="../user/#">Update Profile</a>
-            <a class="dropdown-item" href="../logic/logout.php">Logout</a>
-        </div>
-        <!-- Drop Down Menu -->
-    </div>
-</li>
-
-
+                    <div class="dropdown">
+                        <a href="#" class="nav-link d-flex align-items-center" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <div class="profile-container">M</div>
+                        </a>
+                        <!-- Drop Down Menu -->
+                        <div class="dropdown-menu position-absolute dropdown-menu-right" style="right: 0; top: 100%;" aria-labelledby="profileDropdown">
+                            <a class="dropdown-item" href="#">Deliveries</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="../user/#">Update Profile</a>
+                            <a class="dropdown-item" href="../logic/logout.php">Logout</a>
+                        </div>
+                        <!-- Drop Down Menu -->
+                    </div>
+                </li>
+            </ul>
         </div>
     </div>
 </nav>
