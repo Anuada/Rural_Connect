@@ -31,6 +31,12 @@
         transform: scale(1.05);
     }
 
+    .navbar-brand {
+        font-size: 20px;
+        font-weight: bold;
+        color: #007bff;
+    }
+
     .btn-primary {
         background: #007bff;
         border: none;
@@ -81,6 +87,20 @@
         background: rgba(255, 255, 255, 1);
     }
 
+    .login-account {
+        display: block;
+        margin-top: 12px;
+        font-size: 14px;
+        color: #007bff;
+        text-decoration: none;
+        transition: 0.3s;
+    }
+
+    .login-account:hover {
+        text-decoration: underline;
+        opacity: 0.8;
+    }
+
     /* Fade-in Animation */
     @keyframes fadeIn {
         from {
@@ -106,7 +126,6 @@
       <li class="nav-item"><a class="nav-link" href="value.php">Value</a></li>
       <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
     </ul>
-    <a class="btn btn-primary" href="../page/login.php">Login</a>
   </div>
 </nav>
 
@@ -153,6 +172,7 @@
             <input type="password" class="form-control" name="con_password" placeholder="Confirm Password" required>
         </div>
         <button type="submit" class="btn btn-primary w-100" name="signup">Sign Up</button>
+        <a class="login-account" href="../page/login.php">Login to your Account →</a>
     </form>
 </div>
 <?php $content = ob_get_clean(); ?>

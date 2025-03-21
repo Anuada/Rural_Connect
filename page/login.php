@@ -105,7 +105,7 @@ ob_start();
         background: rgba(255, 255, 255, 1);
     }
 
-   
+
     .login-form button {
         width: 100%;
         padding: 12px;
@@ -124,8 +124,9 @@ ob_start();
         transform: translateY(-2px);
     }
 
-   
-    .forgot-password, .create-account {
+
+    .forgot-password,
+    .create-account {
         display: block;
         margin-top: 12px;
         font-size: 14px;
@@ -134,7 +135,8 @@ ob_start();
         transition: 0.3s;
     }
 
-    .forgot-password:hover, .create-account:hover {
+    .forgot-password:hover,
+    .create-account:hover {
         text-decoration: underline;
         opacity: 0.8;
     }
@@ -145,6 +147,7 @@ ob_start();
             opacity: 0;
             transform: translateY(-20px);
         }
+
         to {
             opacity: 1;
             transform: translateY(0);
@@ -154,14 +157,17 @@ ob_start();
 <?php $styles = ob_get_clean(); ?>
 
 <?php ob_start(); ?>
-<nav class="navbar">
-    <a class="navbar-brand" href="#">Rural Connect</a>
-    <ul class="navbar-nav">
-        <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="aboutus.php">About Us</a></li>
-        <li class="nav-item"><a class="nav-link" href="value.php">Value</a></li>
-        <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
-    </ul>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container">
+        <a class="navbar-brand" href="index.php">Rural Connect</a>
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="aboutus.php">About Us</a></li>
+            <li class="nav-item"><a class="nav-link" href="value.php">Value</a></li>
+            <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
+        </ul>
+    </div>
 </nav>
 
 <form action="../logic/login.php" method="post" id="loginform">
@@ -170,7 +176,8 @@ ob_start();
         <div class="login-form">
             <h2>Login to Your Account</h2>
             <input placeholder="Username" required aria-label="Username" type="text" id="username" name="username" />
-            <input placeholder="Password" required aria-label="Password" type="password" id="password" name="password" />
+            <input placeholder="Password" required aria-label="Password" type="password" id="password"
+                name="password" />
             <button type="submit" name="login">Login</button>
             <a class="forgot-password" href="../page/forgot-password.php">Forgot Password?</a>
             <a class="create-account" href="../page/signup.php">Create an Account →</a>
