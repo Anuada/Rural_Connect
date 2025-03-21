@@ -4,7 +4,7 @@
 
 ## DESCRIPTION
 
-RURAL CONNECT aims to bridge the healthcare gap between urban and rural areas, ensuring that all residents, irrespective of location, have access to the medical care they require. By addressing logistical, communication, and supply chain issues, this platform will play a pivotal role in enhancing healthcare access for mountain barangays.
+Rural Connect is a student-led initiative from the University of Cebu – Main Campus, dedicated to improving healthcare accessibility in barangays. By optimizing logistics, the project ensures efficient delivery of essential medicines and supplies from CityHealth to local communities. Through technology and innovation, Rural Connect aims to reduce delays, support local health units, and create a healthier, more connected society.
 
 ## INSTRUCTION
 
