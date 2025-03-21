@@ -48,8 +48,8 @@ $profileImage = isset($deliveries[0]['id_verification']) ? htmlspecialchars($del
                 </li>
                 <li class="nav-item dropdown position-relative">
     <div class="dropdown">
-        <a href="#" class="nav-link d-flex align-items-center" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="toggleSideMenu()">
-            <div style="
+    <a href="#" class="nav-link d-flex align-items-center" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="toggleSideMenu()">
+    <div style="
                 width: 40px; 
                 height: 40px; 
                 background-color: #007bff; 
