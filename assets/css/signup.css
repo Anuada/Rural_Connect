@@ -1,132 +1,108 @@
-/* General Styles */
 body {
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f9f9f9;
+    background: linear-gradient(135deg, #D8EFFF, #A1D2FF);
+    font-family: 'Poppins', sans-serif;
+    color: #333;
 }
 
-.container {
-    max-width: 1200px;
-    margin: auto;
+
+.navbar {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 15px;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Header Section */
-#su {
-    color: #d63384; /* Fuchsia color */
-    text-align: center;
-    margin-bottom: 20px;
-    text-shadow: 1px 1px 2px #464646;
-}
-
-/* Form Styles */
-form {
-    width: 100%;
-}
-
-.signup-container {
-    background-color: #ffccf9; /* Bubble gum color */
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-}
-
-input, select {
-    width: 100%;
-    padding: 10px;
-    margin-top: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #d6d6d6;
-    border-radius: 5px;
-    box-sizing: border-box;
+.navbar .nav-link {
+    color: #007bff !important;
     font-size: 16px;
-}
-
-input:focus, select:focus {
-    outline: none;
-    border-color: #d63384;
-    box-shadow: 0px 0px 5px #d63384;
-}
-
-/* Button */
-.btn {
-    background-color: #d63384; /* Fuchsia */
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+    font-weight: 500;
     transition: 0.3s;
 }
 
-.btn:hover {
-    background-color: #c02673;
+.navbar .nav-link:hover {
+    color: #0056b3 !important;
+    transform: scale(1.05);
 }
 
-/* Labels */
-label {
-    color: #d63384; /* Fuchsia */
+.navbar-brand {
+    font-size: 20px;
     font-weight: bold;
+    color: #007bff;
 }
 
-/* Profile Image Upload */
-.ProfileImageLabel {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 150px;
-    height: 150px;
-    background-color: #f3f3f3;
-    border: 2px dashed #d6d6d6;
-    border-radius: 50%;
-    cursor: pointer;
-    position: relative;
+.btn-primary {
+    background: #007bff;
+    border: none;
+    font-weight: 500;
+    transition: 0.3s ease;
 }
 
-.ProfileImageLabel:hover {
-    border-color: #d63384;
+.btn-primary:hover {
+    background: #0056b3;
+    transform: translateY(-2px);
 }
 
-.ProfileImageLabel img {
-    max-width: 100%;
-    max-height: 100%;
-    border-radius: 50%;
-}
-
-#imagePreview {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    object-fit: cover;
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-
-#uploadLabel {
-    margin-top: 10px;
+/* Signup Form Container */
+.signup-container {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(15px);
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.1);
+    width: 450px;
+    margin: 80px auto;
     text-align: center;
-    font-size: 14px;
-    color: #d63384;
+    animation: fadeIn 0.8s ease-in-out;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    .signup-container {
-        margin-bottom: 20px;
-    }
+.signup-container h2 {
+    font-size: 26px;
+    font-weight: 600;
+    color: #007bff;
+}
 
-    #su {
-        font-size: 40px;
-    }
+.signup-container input, .signup-container select {
+    background: rgba(255, 255, 255, 0.9);
+    color: #333;
+    border: 1px solid #ddd;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 8px;
+    transition: 0.3s;
+}
 
-    input, select {
-        font-size: 14px;
-    }
+.signup-container input::placeholder {
+    color: #888;
+}
 
-    .ProfileImageLabel {
-        width: 120px;
-        height: 120px;
+.signup-container input:focus, .signup-container select:focus {
+    border: 1px solid #007bff;
+    background: rgba(255, 255, 255, 1);
+}
+
+.login-account {
+    display: block;
+    margin-top: 12px;
+    font-size: 14px;
+    color: #007bff;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.login-account:hover {
+    text-decoration: underline;
+    opacity: 0.8;
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }

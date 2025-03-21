@@ -1,77 +1,146 @@
-
-body{
-    background-color: rgb(202, 233, 243);
+/* Global Styling */
+body {
+    background: linear-gradient(135deg, #D8EFFF, #A1D2FF);
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    color: #333;
+    flex-direction: column;
 }
 
-.login-container {
-    margin-top: 100px;
+/* Navbar Styling */
+.navbar {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 15px 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.bg-fuchsia:hover{
-    background-color: #fd8ec7;
-    color: #fff;
-}
-
-.pt-40{
-    padding-top:40vh;
-}
-
-.pt-20{
-    padding-top: 25px;
-}
-
-.d-flex img {
-    width: 400px;
-}
-
-.w-form{
-    width:80%;
-}
-
-.forgot-password-link {
-    color: #EC1D87; /* Change color as needed */
+.navbar .nav-link {
+    color: #007bff;
+    font-size: 16px;
+    margin: 0 10px;
     text-decoration: none;
+    transition: 0.3s;
 }
 
+.navbar .nav-link:hover {
+    color: #0056b3;
+    transform: scale(1.05);
+}
 
-.transparent-input {
-    background-color: transparent;
+.navbar-brand {
+    font-size: 20px;
+    font-weight: bold;
+    color: #007bff;
+}
+
+/* Login Box */
+.login-container {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(15px);
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.1);
+    width: 380px;
+    text-align: center;
+    animation: fadeIn 0.8s ease-in-out;
+    margin-top: 80px;
+}
+
+/* Logo */
+.login-container img {
+    width: 80px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+}
+
+/* Form Styling */
+.login-form h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    font-weight: 600;
+    color: #007bff;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
     border: none;
-    border-bottom: 1px solid #EC1D87; /* Optional: Add a border for better visibility */
+    border-radius: 8px;
+    font-size: 16px;
+    background: rgba(255, 255, 255, 0.9);
+    color: #333;
     outline: none;
-    box-shadow: none;
-    color: #ccc; /* Optional: Set text color */
+    transition: 0.3s;
 }
 
-/* #EC1D87 */
+.login-form input::placeholder {
+    color: #888;
+}
+
+.login-form input:focus {
+    border: 1px solid #007bff;
+    background: rgba(255, 255, 255, 1);
+}
 
 
-@media (max-width: 767px){
-    .login-container {
-        margin-top: 30px;
+.login-form button {
+    width: 100%;
+    padding: 12px;
+    background: #007bff;
+    border: none;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.login-form button:hover {
+    background: #0056b3;
+    transform: translateY(-2px);
+}
+
+
+.forgot-password,
+.create-account {
+    display: block;
+    margin-top: 12px;
+    font-size: 14px;
+    color: #007bff;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.forgot-password:hover,
+.create-account:hover {
+    text-decoration: underline;
+    opacity: 0.8;
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
     }
 
-    .pt-40{
-        padding-top: 10vh;
-    }
-
-    .d-flex img{
-        width: 300px;
-    }
-
-    .pt-20{
-        padding-top: 0;
-    }
-
-    .w-form{
-        width: 100%;
-    }
-
-    .mb-20{
-        margin-bottom: 20px;
-    }
-
-    .p-4{
-        padding-bottom: 0.25rem;
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
