@@ -105,7 +105,7 @@ ob_start();
         background: rgba(255, 255, 255, 1);
     }
 
-    /* Login Button */
+   
     .login-form button {
         width: 100%;
         padding: 12px;
@@ -124,7 +124,7 @@ ob_start();
         transform: translateY(-2px);
     }
 
-    /* Links */
+   
     .forgot-password, .create-account {
         display: block;
         margin-top: 12px;

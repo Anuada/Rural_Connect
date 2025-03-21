@@ -3,14 +3,14 @@
 <?php ob_start(); ?>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 <style>
-    /* Global Styling */
+   
     body {
         background: linear-gradient(135deg, #D8EFFF, #A1D2FF);
         font-family: 'Poppins', sans-serif;
         color: #333;
     }
 
-    /* Navbar Styling */
+    
     .navbar {
         background: rgba(255, 255, 255, 0.8);
         backdrop-filter: blur(10px);
