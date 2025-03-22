@@ -60,6 +60,7 @@ class EmailSender
             $this->mail->addAddress($email);
             $this->mail->Subject = $subject;
             $this->mail->Body = $body;
+            $this->mail->addEmbeddedImage("../assets/img/misc/rural_connect_logo_no_bg.png", "RuralConnectLogo");
             $this->mail->send();
         } catch (Exception $e) {
             // Handle exception - Display custom error page for 500 Internal Server Error

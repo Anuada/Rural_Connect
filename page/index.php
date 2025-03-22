@@ -11,7 +11,10 @@ $load = false;
         all residents, irrespective of location, have access to the medical care they require. By addressing
         logistical, communication, and supply chain issues, this platform will play a pivotal role in enhancing
         healthcare access for mountain barangays.</p>
-    <a class="more-info" href="../page/signup.php" aria-label="Sign up for Rural Connect">Sign up</a>
+
+    <?php if (!isset($_SESSION["accountId"])): ?>
+        <a class="more-info" href="../page/signup.php" aria-label="Sign up for Rural Connect">Sign up</a>
+    <?php endif ?>
 </div>
 <div class="image">
     <img src="../assets/img/misc/med2.JPG" alt="Illustration of team collaboration">

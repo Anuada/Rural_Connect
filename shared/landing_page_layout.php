@@ -28,7 +28,11 @@ $ms = new Misc;
                     style="color: <?php echo $ms->url() == strtolower($ms->url("page/contact.php")) ? '#ffdd57' : ''; ?>">Contact</a>
             </li>
         </ul>
-        <a class="get-started" href="../page/login.php" style="margin-right: 20px" aria-label="Login">Login</a>
+        <?php if (isset($_SESSION["accountId"])): ?>
+            <a class="get-started" href="#" style="margin-right: 20px" aria-label="Open" id="openRuralConnect">Open</a>
+        <?php else: ?>
+            <a class="get-started" href="../page/login.php" style="margin-right: 20px" aria-label="Login">Login</a>
+        <?php endif ?>
     </nav>
 
     <div class="hero">
@@ -36,5 +40,13 @@ $ms = new Misc;
     </div>
 </div>
 <?php $content = ob_get_clean() ?>
+
+<?php ob_start() ?>
+<script>
+    document.getElementById("openRuralConnect").addEventListener("click", () => {
+        location.href = "../shared/session.redirect.php";
+    });
+</script>
+<?php $scripts = ob_get_clean() ?>
 
 <?php require_once "../shared/layout.php" ?>

@@ -1,0 +1,27 @@
+<?php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+require_once "../util/DbHelper.php";
+$db = new DbHelper();
+
+if (isset($_SESSION["accountId"])) {
+    $account = $db->getRecord("account", ["accountId" => $_SESSION["accountId"]]);
+
+    switch ($account["user_type"]) {
+        case 'barangay_inc':
+            header("Location: ../barangay_inc/");
+            break;
+
+        case 'deliveries':
+            header("Location: ../deliveries/");
+            break;
+
+        case 'city_health':
+            header("Location: ../city_health/");
+            break;
+
+        default:
+            break;
+    }
+}

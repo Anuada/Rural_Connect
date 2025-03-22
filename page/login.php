@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once "../shared/session.redirect.php";
 $title = "Login";
 ob_start();
 ?>
