@@ -13,69 +13,66 @@ $profileImage = isset($deliveries[0]['id_verification']) ? htmlspecialchars($del
 ?>
 
 <style>
-   /* Navbar Custom Styling */
-   .navbar-custom {
-       background: linear-gradient(135deg, #006eff, #0056d2);
-       box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-       border-radius: 20px;
-       padding: 12px 20px;
-       transition: all 0.3s ease-in-out;
-   }
+    /* Navbar Custom Styling */
+    .navbar-custom {
+        background: linear-gradient(135deg, #006eff, #0056d2);
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        padding: 12px 20px;
+        transition: all 0.3s ease-in-out;
+    }
 
-   /* Navbar Links */
-   .nav-link.fuchsia {
-       text-decoration: none;
-       border-bottom: 2px solid transparent;
-       padding-bottom: 2px;
-       font-style: italic;
-       color: white !important;
-       font-weight: 600;
-       transition: all 0.3s ease-in-out;
-   }
+    /* Navbar Links */
+    .nav-link.fuchsia {
+        text-decoration: none;
+        border-bottom: 2px solid transparent;
+        padding-bottom: 2px;
+        color: white !important;
+        transition: all 0.3s ease-in-out;
+    }
 
-   .nav-link.fuchsia:hover {
-       border-bottom: 2px solid #ffffff;
-       transform: translateY(-2px);
-   }
+    .nav-link.fuchsia:hover {
+        border-bottom: 2px solid #ffffff;
+        transform: translateY(-2px);
+    }
 
-   /* Profile Dropdown */
-   .profile-container {
-       width: 45px;
-       height: 45px;
-       background: white;
-       color: #0056d2;
-       font-weight: bold;
-       display: flex;
-       align-items: center;
-       justify-content: center;
-       border-radius: 50%;
-       font-size: 16px;
-       border: 2px solid white;
-       transition: all 0.3s ease-in-out;
-   }
+    /* Profile Dropdown */
+    .profile-container {
+        width: 45px;
+        height: 45px;
+        background: white;
+        color: #0056d2;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        font-size: 16px;
+        border: 2px solid white;
+        transition: all 0.3s ease-in-out;
+    }
 
-   .profile-container:hover {
-       background: #f8f9fa;
-       color: #007bff;
-   }
+    .profile-container:hover {
+        background: #f8f9fa;
+        color: #007bff;
+    }
 
-   /* Dropdown Menu Styling */
-   .dropdown-menu {
-       border-radius: 10px;
-       overflow: hidden;
-       box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-       border: none;
-   }
+    /* Dropdown Menu Styling */
+    .dropdown-menu {
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        border: none;
+    }
 
-   .dropdown-item {
-       font-weight: 500;
-       transition: all 0.3s ease-in-out;
-   }
+    .dropdown-item {
+        font-weight: 500;
+        transition: all 0.3s ease-in-out;
+    }
 
-   .dropdown-item:hover {
-       background: #007bff;
-       color: white;
-   }
+    .dropdown-item:hover {
+        background: #007bff;
+        color: white;
+    }
 </style>
 
 <nav class="navbar fixed-top navbar-custom">
@@ -99,14 +96,16 @@ $profileImage = isset($deliveries[0]['id_verification']) ? htmlspecialchars($del
                 <!-- Profile Dropdown -->
                 <li class="nav-item dropdown position-relative">
                     <div class="dropdown">
-                        <a href="#" class="nav-link d-flex align-items-center" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a href="#" class="nav-link d-flex align-items-center" id="profileDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <div class="profile-container">M</div>
                         </a>
                         <!-- Drop Down Menu -->
-                        <div class="dropdown-menu position-absolute dropdown-menu-right" style="right: 0; top: 100%;" aria-labelledby="profileDropdown">
+                        <div class="dropdown-menu position-absolute dropdown-menu-right" style="right: 0; top: 100%;"
+                            aria-labelledby="profileDropdown">
                             <a class="dropdown-item" href="#">Deliveries</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="../user/#">Update Profile</a>
+                            <a class="dropdown-item" href="../deliveries/updateProfile.php">Update Profile</a>
                             <a class="dropdown-item" href="../logic/logout.php">Logout</a>
                         </div>
                         <!-- Drop Down Menu -->

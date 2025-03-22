@@ -29,27 +29,27 @@ foreach ($infos as $i) {
 
 if (!empty($errorMessages)) {
     $_SESSION["errorMessages"] = $errorMessages;
-    header("Location: ../barangay_inc/updateProfile.php");
+    header("Location: ../deliveries/updateProfile.php");
     exit();
 }
 
 if (isset($_FILES["id_verification"]) && $_FILES['id_verification']['size'] > 0) {
 
-    if (file_exists($dh->barangay_incharge_profile . $fieldInputs["accountId"])) {
-        unlink($dh->barangay_incharge_profile . $fieldInputs["accountId"]);
+    if (file_exists($dh->deleviries . $fieldInputs["accountId"])) {
+        unlink($dh->deleviries . $fieldInputs["accountId"]);
     }
-    $fieldInputs["id_verification"] = $ms->uploadImage($_FILES["id_verification"], $fieldInputs["accountId"], $dh->barangay_incharge_profile);
+    $fieldInputs["id_verification"] = $ms->uploadImage($_FILES["id_verification"], $fieldInputs["accountId"], $dh->deleviries);
     $isProfileChanges = true;
 }
 
-$updateProfile = $db->updateRecord("barangay_inc", $fieldInputs);
+$updateProfile = $db->updateRecord("deliveries", $fieldInputs);
 
 if ($updateProfile > 0 || $isProfileChanges) {
     $_SESSION["m"] = "Profile updated successfully";
-    header("Location: ../barangay_inc/updateProfile.php");
+    header("Location: ../deliveries/updateProfile.php");
     exit();
 } else {
     $_SESSION["m"] = "No Data Was Updated!";
-    header("Location: ../barangay_inc/updateProfile.php");
+    header("Location: ../deliveries/updateProfile.php");
     exit();
 }

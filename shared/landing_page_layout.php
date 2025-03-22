@@ -16,7 +16,7 @@ $ms = new Misc;
         </div>
         <ul>
             <li><a href="../page/"
-                    style="color: <?php echo $ms->url() == strtolower($ms->url("page/")) ? '#ffdd57' : ''; ?>">Home</a>
+                    style="color: <?php echo $ms->url() == strtolower($ms->url("page/")) || $ms->url() == strtolower($ms->url("page/index.php")) ? '#ffdd57' : ''; ?>">Home</a>
             </li>
             <li><a href="aboutus.php"
                     style="color: <?php echo $ms->url() == strtolower($ms->url("page/aboutus.php")) ? '#ffdd57' : ''; ?>">About
