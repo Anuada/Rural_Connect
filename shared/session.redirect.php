@@ -6,7 +6,7 @@ require_once "../util/DbHelper.php";
 $db = new DbHelper();
 
 if (isset($_SESSION["accountId"])) {
-    $account = $db->getRecord("account", ["accountId" => $_SESSION["accountId"]]);
+    $account = $db->fetchRecords("account", ["accountId" => $_SESSION["accountId"]])[0];
 
     switch ($account["user_type"]) {
         case 'barangay_inc':
