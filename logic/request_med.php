@@ -52,17 +52,21 @@ function request_med($db)
 }
 function handleAcceptRequest(DbHelper $db, string $requestId)
 {
-    // Update only the specific record where the ID matches
+    // Update the request status to 'Accepted'
     $result = $db->updateRecord("request_med", ['id' => $requestId, 'requestStatus' => 'Accepted']);
 
     if ($result > 0) {
         $_SESSION["m"] = "Request accepted";
+        // Redirect to the select delivery date page with the request ID
+        header("Location: ../city_health/select_date_req.php?requestId=" . $requestId);
+        exit();
     } else {
         $_SESSION["m"] = "Error updating request. Please try again!";
+        header("Location: ../city_health/select_date_req.php");
+        exit();
     }
-    header("Location: ../city_health/request_med.php");
-    exit();
 }
+
 
 function handleCancelledRequest(DbHelper $db, string $requestId)
 {

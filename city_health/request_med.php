@@ -43,6 +43,7 @@ $requested = $dbHelper->fetchData($id);
                 <th>Contact No.</th>
                 <th>Status</th>
                 <th>Action</th>
+                <th>Date of Supply</th>
               </tr>
               <?php foreach ($requested as $req): ?>
                 <tr>
@@ -63,6 +64,8 @@ $requested = $dbHelper->fetchData($id);
                         data-bs-target="#cancelModal<?php echo $req['id']; ?>">Cancel</button>
                     <?php endif; ?>
                   </td>
+                  <td><?php echo date('F d, Y', strtotime($req['delivery_date'])); ?></td>
+
                 </tr>
 
                 <!-- View Modal -->
@@ -90,6 +93,7 @@ $requested = $dbHelper->fetchData($id);
                           <p><i class="bi bi-box"></i> <strong>Requested Quantity:</strong>
                             <?php echo $req['request_quantity']; ?></p>
                         </div>
+                       
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i

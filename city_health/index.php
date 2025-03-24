@@ -39,7 +39,7 @@ $navbar = ob_get_clean();
                 <a class="nav-link text-white" href="uploadAvailableMed.php"><i class="fas fa-upload me-2"></i> Upload Medicine</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" href="request_med.php"><i class="fas fa-prescription-bottle me-2"></i> Requested Medicine</a>
+                <a class="nav-link text-white" href="request_med.php"><i class="fas fa-prescription-bottle me-2"></i>Brgy. Med Request</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link text-white" href="#"><i class="fas fa-cogs me-2"></i> Settings</a>
