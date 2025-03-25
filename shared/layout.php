@@ -31,7 +31,7 @@
     <?php $loader = ob_get_clean() ?>
 
     <?php echo (!isset($load)) ? $loader : "" ?>
-    <?php echo (isset($navbar)) ? $navbar : "" ?>
+    <?php echo isset($navbar) ? $navbar : "" ?>
 
     <!-- Content of the page -->
     <?php echo $content ?>
@@ -73,7 +73,7 @@
         <?php unset($_SESSION["m"]) ?>
     <?php endif; ?>
 
-    <?php echo (isset($scripts)) ? $scripts : "" ?>
+    <?php echo isset($scripts) ? $scripts : "" ?>
 </body>
 
 </html>
