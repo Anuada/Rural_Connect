@@ -57,4 +57,9 @@ class Misc
         bin2hex(substr($data, 10, 6))
     );
     }
+
+    public static function displayEnums(array $enums)
+    {
+        return array_column($enums, 'value');
+    }
 }
