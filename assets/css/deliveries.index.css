@@ -1,0 +1,24 @@
+body {
+    background-color: #f8f9fa;
+}
+.card {
+    transition: transform 0.3s ease-in-out;
+    border-radius: 15px;
+    overflow: hidden;
+}
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+.card-header {
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+.card-body {
+    font-size: 1.1rem;
+}
+@media (max-width: 768px) {
+    .card-body h3 {
+        font-size: 2rem;
+    }
+}

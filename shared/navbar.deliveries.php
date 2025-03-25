@@ -2,130 +2,116 @@
 require_once "../util/DbHelper.php";
 require_once "../util/DirHandler.php";
 
-//session_start(); 
-
 $dh = new DirHandler();
 $db = new DbHelper();
 
-// Fetch deliveries based on logged-in user
 $deliveries = $db->fetchRecords('deliveries', ['accountId' => $_SESSION['accountId']]);
 
-// Sanitize user data
 $fname = isset($deliveries[0]['fname']) ? htmlspecialchars($deliveries[0]['fname'], ENT_QUOTES, 'UTF-8') : '';
 $lname = isset($deliveries[0]['lname']) ? htmlspecialchars($deliveries[0]['lname'], ENT_QUOTES, 'UTF-8') : '';
 $profileImage = isset($deliveries[0]['id_verification']) ? htmlspecialchars($deliveries[0]['id_verification'], ENT_QUOTES, 'UTF-8') : 'profileicon.jpg';
 ?>
 
 <style>
-    /* Sidebar Navigation */
-    .sidebar {
-        position: fixed;
-        top: 0;
-        left: -250px; /* Initially hidden */
-        width: 250px;
-        height: 100vh;
-        background-color: #87CEEB;
-        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-        transition: left 0.3s ease-in-out;
-        display: flex;
-        flex-direction: column;
-        padding: 15px;
-        z-index: 1000;
+    /* Navbar Custom Styling */
+    .navbar-custom {
+        background: linear-gradient(135deg, #006eff, #0056d2);
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        padding: 12px 20px;
+        transition: all 0.3s ease-in-out;
     }
 
-    .sidebar.open {
-        left: 0;
-    }
-
-    .sidebar .navbar-brand {
-        margin-bottom: 20px;
-        text-align: center;
-    }
-
-    .sidebar ul {
-        list-style: none;
-        padding: 0;
-    }
-
-    .sidebar ul li {
-        margin: 10px 0;
-    }
-
-    .sidebar ul li a {
+    /* Navbar Links */
+    .nav-link.fuchsia {
         text-decoration: none;
-        color: white;
+        border-bottom: 2px solid transparent;
+        padding-bottom: 2px;
+        color: white !important;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .nav-link.fuchsia:hover {
+        border-bottom: 2px solid #ffffff;
+        transform: translateY(-2px);
+    }
+
+    /* Profile Dropdown */
+    .profile-container {
+        width: 45px;
+        height: 45px;
+        background: white;
+        color: #0056d2;
         font-weight: bold;
-        display: block;
-        padding: 10px;
-        border-radius: 5px;
-        transition: background 0.2s ease-in-out;
-    }
-
-    .sidebar ul li a:hover {
-        background-color: rgba(255, 255, 255, 0.2);
-    }
-
-    /* Burger Menu */
-    .burger-menu {
-        font-size: 24px;
-        background: none;
-        border: none;
-        cursor: pointer;
-        position: fixed;
-        top: 15px;
-        left: 15px;
-        z-index: 1001;
-        color: #333;
-    }
-
-    .profile-circle {
-        width: 40px;
-        height: 40px;
-        background-color: #007bff;
-        color: white;
         display: flex;
         align-items: center;
         justify-content: center;
         border-radius: 50%;
-        font-size: 14px;
-        font-weight: bold;
-        margin: 10px auto;
+        font-size: 16px;
+        border: 2px solid white;
+        transition: all 0.3s ease-in-out;
     }
 
-    .sidebar .logout {
-        position: absolute;
-        bottom: 20px;
-        width: 100%;
-        text-align: center;
+    .profile-container:hover {
+        background: #f8f9fa;
+        color: #007bff;
+    }
+
+    /* Dropdown Menu Styling */
+    .dropdown-menu {
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        border: none;
+    }
+
+    .dropdown-item {
+        font-weight: 500;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .dropdown-item:hover {
+        background: #007bff;
+        color: white;
     }
 </style>
 
-<!-- Burger Menu Button -->
-<button class="burger-menu" onclick="toggleSidebar()">☰</button>
+<nav class="navbar fixed-top navbar-custom">
+    <div class="container-fluid d-flex align-items-center justify-content-between">
+        <!-- Logo -->
+        <a class="navbar-brand ml-10" href="#">
+            <img src="../assets/img/misc/med2.JPG" alt="Rural Logo" width="160">
+        </a>
 
-<!-- Sidebar -->
-<nav class="sidebar" id="sidebar">
-    <a class="navbar-brand" href="#">
-        <img src="../assets/img/misc/med2.JPG" alt="Rural Logo" width="160">
-    </a>
-
-    <ul>
-        <li><a href="./">🏠 Home</a></li>
-        <li><a href="view_med.php">📦 Ready for Delivery</a></li>
-        <li><a href="./events.php">💊 Ordered Medicine</a></li>
-    </ul>
-
-    <div class="profile-circle"><?= strtoupper(substr($fname, 0, 1)) ?></div>
-    
-    <ul>
-        <li><a href="../user/#">⚙️ Update Profile</a></li>
-        <li class="logout"><a href="../logic/logout.php">🚪 Logout</a></li>
-    </ul>
+        <div class="d-none d-md-flex align-items-center">
+            <ul class="navbar-nav flex-row">
+                <li class="nav-item">
+                    <a class="nav-link fuchsia" style="margin-right: 20px;" href="./">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link fuchsia" style="margin-right: 20px;" href="view_med.php">Ready for Delivery</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link fuchsia" style="margin-right: 20px;" href="./events.php">Order Medicine</a>
+                </li>
+                <!-- Profile Dropdown -->
+                <li class="nav-item dropdown position-relative">
+                    <div class="dropdown">
+                        <a href="#" class="nav-link d-flex align-items-center" id="profileDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <div class="profile-container">M</div>
+                        </a>
+                        <!-- Drop Down Menu -->
+                        <div class="dropdown-menu position-absolute dropdown-menu-right" style="right: 0; top: 100%;"
+                            aria-labelledby="profileDropdown">
+                            <a class="dropdown-item" href="#">Deliveries</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="../deliveries/updateProfile.php">Update Profile</a>
+                            <a class="dropdown-item" href="../logic/logout.php">Logout</a>
+                        </div>
+                        <!-- Drop Down Menu -->
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
 </nav>
-
-<script>
-    function toggleSidebar() {
-        let sidebar = document.getElementById("sidebar");
-        sidebar.classList.toggle("open");
-    }
-</script>

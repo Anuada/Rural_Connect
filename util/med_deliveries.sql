@@ -43,7 +43,7 @@ CREATE TABLE `account` (
 
 LOCK TABLES `account` WRITE;
 /*!40000 ALTER TABLE `account` DISABLE KEYS */;
-INSERT INTO `account` VALUES ('6c0b0a91-03a3-4614-a6a9-1a46133e8a60','ladyglittersmackles@gmail.com','anuada_1990','$2y$12$6Av2ygOrLIfQk3X/fpKcW.GE3zX6Y6j3btjUiHJusOKClzwM.JoLq','barangay_inc','','',1,1,NULL),('7594b921-87ea-437e-bd63-03e2809c3fc2','mariah_carey@mailinator.com','therealmariah_carey','$2y$12$qvCWyerLwX34QrtnG6SwIebSrazN.KDGsQrbLagqe6CzJWLKtVvrS','deliveries','','',1,0,NULL),('eb48b13c-9094-4de4-afc2-786b9dc93f96','christopher_pareyac@mailinator.com','christopher_pareyac','$2y$12$7W/t1R9Yj5c0EW4IHzVTmOrJCB/8pBfxhrbmAnDM3y6UTy7jz3skW','city_health',NULL,'',1,1,NULL);
+INSERT INTO `account` VALUES ('4a6458af-448c-4a9c-9681-25e698436b74','ladyglittersmackles@gmail.com','anuada_1990','$2y$12$Lnj2k7m0H1zUUry6SVj1Z.ODuGIqLQhzfGNBsvYKU18POWsh1KR1C','barangay_inc',NULL,'',1,0,NULL),('7594b921-87ea-437e-bd63-03e2809c3fc2','mariah_carey@mailinator.com','therealmariah_carey','$2y$12$woruQtIjGV3R2XmnjO7Q1uY2MFbyapxPeWNEN811k64v8p1z4H9vy','deliveries','02a07aee-d968-4113-85b5-ddcdca5784be','',1,0,NULL),('d95aa0c3-191d-4afc-b61a-49305cae5a88','dominic.sugbodoc@gmail.com','sabrina_carpenter','$2y$12$y.NrKimM44pPGKPAEr8oNefaZZNHsdDL3wLIZhPU3jeFd64oJl26W','barangay_inc','','',1,0,NULL),('eb48b13c-9094-4de4-afc2-786b9dc93f96','christopher_pareyac@mailinator.com','christopher_pareyac','$2y$12$vhCcXotkGrKZ.6cFCnyJKuWSkO86DH4yIaQkkgPbBhBrvg5cCvb3a','city_health',NULL,'',1,0,NULL),('fed03dd0-8db2-4d55-84c7-5b8033f2ab4f','tonya2025@mailinator.com','tonya2025','$2y$12$4z0uQsd4v7JBQG8CI7NPVup16RzbUZor5CWWNdsX41Mp.436tuYD.','barangay_inc','','',1,0,NULL);
 /*!40000 ALTER TABLE `account` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -84,7 +84,7 @@ DROP TABLE IF EXISTS `barangay_inc`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `barangay_inc` (
-  `accountId` varchar(100) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
+  `accountId` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
   `fname` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `lname` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `address` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
@@ -101,7 +101,7 @@ CREATE TABLE `barangay_inc` (
 
 LOCK TABLES `barangay_inc` WRITE;
 /*!40000 ALTER TABLE `barangay_inc` DISABLE KEYS */;
-INSERT INTO `barangay_inc` VALUES ('6c0b0a91-03a3-4614-a6a9-1a46133e8a60','Ericson','Anuada','Floptropica','09293929394','../assets/img/profile/barangay_incharge/6c0b0a91-03a3-4614-a6a9-1a46133e8a60.png');
+INSERT INTO `barangay_inc` VALUES ('4a6458af-448c-4a9c-9681-25e698436b74','Ericson','Anuada','Floptropica','09392019483','../assets/img/profile/barangay_incharge/4a6458af-448c-4a9c-9681-25e698436b74.png'),('d95aa0c3-191d-4afc-b61a-49305cae5a88','Sabrina','Carpenter','Floptropica','09293842918','..assets/img/profile/barangay_incharge/d95aa0c3-191d-4afc-b61a-49305cae5a88.png'),('fed03dd0-8db2-4d55-84c7-5b8033f2ab4f','Tonya','Anuada','Floptropica','09192948284','../assets/img/profile/barangay_incharge/fed03dd0-8db2-4d55-84c7-5b8033f2ab4f.png');
 /*!40000 ALTER TABLE `barangay_inc` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -113,7 +113,7 @@ DROP TABLE IF EXISTS `city_health`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `city_health` (
-  `accountId` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `accountId` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `fname` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `lname` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `address` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
@@ -130,7 +130,7 @@ CREATE TABLE `city_health` (
 
 LOCK TABLES `city_health` WRITE;
 /*!40000 ALTER TABLE `city_health` DISABLE KEYS */;
-INSERT INTO `city_health` VALUES ('eb48b13c-9094-4de4-afc2-786b9dc93f96','Christopher','Pareyac','Floptropica','09284928392','../assets/img/profile/city_health/eb48b13c-9094-4de4-afc2-786b9dc93f96.png');
+INSERT INTO `city_health` VALUES ('eb48b13c-9094-4de4-afc2-786b9dc93f96','Christopher Jamal','Pareyac','Floptropica','09284928392','../assets/img/profile/deleviries/eb48b13c-9094-4de4-afc2-786b9dc93f96.png');
 /*!40000 ALTER TABLE `city_health` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -222,7 +222,7 @@ CREATE TABLE `request_med` (
   CONSTRAINT `FK_request_med_barangay_inc` FOREIGN KEY (`barangay_inc_id`) REFERENCES `barangay_inc` (`accountId`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_request_med_city_health` FOREIGN KEY (`city_health_id`) REFERENCES `city_health` (`accountId`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_request_med_med_availabilty` FOREIGN KEY (`med_avail_Id`) REFERENCES `med_availabilty` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -243,4 +243,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-03-21 13:11:09
+-- Dump completed on 2025-03-22 20:18:16

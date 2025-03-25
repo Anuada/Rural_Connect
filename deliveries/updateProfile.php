@@ -1,16 +1,22 @@
 <?php
 session_start();
 require_once "../util/DbHelper.php";
-require_once "../shared/session.barangay_inc.php";
+require_once "../shared/session.delivery.php";
 
 $db = new DbHelper();
-$title = "Update Profile - Barangay";
+$title = "Update Profile - Deliveries";
+
+// Ensure accountId exists in the session
+if (!isset($_SESSION['accountId'])) {
+    header("Location: ../login.php");
+    exit();
+}
 
 $accountId = $_GET['accountId'] ?? $_SESSION['accountId'];
-$user = $db->getRecord("barangay_inc", ["accountId" => $accountId]);
+$user = $db->getRecord("deliveries", ["accountId" => $accountId]);
 
 ob_start();
-include "../shared/navbar_barangay_inc.php";
+include "../shared/navbar.deliveries.php";
 $navbar = ob_get_clean();
 ?>
 
@@ -24,7 +30,7 @@ $navbar = ob_get_clean();
             </a>
         </div>
         <button class="btn btn-info w-100 mb-3" data-bs-toggle="modal" data-bs-target="#profileModal">View ID</button>
-        <form action="../logic/updateProfileBarangay.php" method="POST" enctype="multipart/form-data">
+        <form action="../logic/updateProfileDeliveries.php" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="accountId" value="<?= htmlspecialchars($user['accountId']) ?>">
             <div class="mb-3">
                 <label for="fname" class="form-label">First Name</label>
