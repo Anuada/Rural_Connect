@@ -40,5 +40,11 @@ ob_start();
 <?php $content = ob_get_clean(); ?>
 
 <?php ob_start(); ?>
+<?php if (isset($_SESSION["username"])): ?>
+    <script>
+        document.getElementById("username").value = "<?php echo $_SESSION["username"] ?>";
+    </script>
+    <?php unset($_SESSION["username"]) ?>
+<?php endif ?>
 <?php $scripts = ob_get_clean(); ?>
 <?php require_once "../shared/layout.php"; ?>

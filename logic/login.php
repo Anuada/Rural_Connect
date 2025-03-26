@@ -32,8 +32,6 @@ if (isset($_POST["login"])) {
                         header("Location: ../city_health/");
                         break;
 
-
-
                     case 'deliveries':
                         $deliveries = $db->fetchRecords("deliveries", ["accountId" => $account[0]["accountId"]]);
                         $_SESSION["m"] = "Welcome " . $deliveries[0]["fname"] . " " . $deliveries[0]["lname"];
@@ -45,27 +43,25 @@ if (isset($_POST["login"])) {
                             $_SESSION["m"] = "Welcome " . $admin[0]["fname"] . " " . $admin[0]["lname"];
                             header("Location: ../admin/");
                             break;
-    
-
-                        
-
-
 
                     default:
                         break;
                 }
             } else {
                 $_SESSION["m"] = "Invalid password!";
+                $_SESSION["username"] = $username;
                 header("Location: ../page/login.php");
                 exit();
             }
         } else {
             $_SESSION["m"] = "Invalid username!";
+            $_SESSION["username"] = $username;
             header("Location: ../page/login.php");
             exit();
         }
     } else {
         $_SESSION["m"] = "Fill out the missing fields!";
+        $_SESSION["username"] = $username;
         header("Location: ../page/login.php");
         exit();
     }

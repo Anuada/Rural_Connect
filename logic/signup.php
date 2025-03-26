@@ -18,7 +18,7 @@ $userTypes = UserType::all();
 if (isset($_POST["signup"])) {
     $fname = $_POST["fname"];
     $lname = $_POST["lname"];
-    $contact = $_POST["contact"];
+    $contact = $_POST["contactNo"];
     $address = $_POST["address"];
     $email = $_POST["email"];
     $user_type = $_POST["user_type"];
@@ -26,6 +26,8 @@ if (isset($_POST["signup"])) {
     $password = $_POST["password"];
     $con_password = $_POST["con_password"];
     $id_verification = $_FILES["id_verification"];
+
+    $informations = ["fname" => $fname, "lname" => $lname, "address" => $address, "contactNo" => $contact, "email" => $email, "user_type" => $user_type, "username" => $username];
 
     if (!empty(trim($fname)) && !empty(trim($lname)) && !empty(trim($contact)) && !empty(trim($address)) && !empty(trim($email)) && !empty(trim($user_type)) && !empty(trim($username)) && !empty(trim($password)) && !empty(trim($con_password))) {
         if (in_array($user_type, $userTypes)) {
@@ -80,26 +82,31 @@ if (isset($_POST["signup"])) {
                         exit();
                     } else {
                         $_SESSION["m"] = "Passwords do not match!";
+                        $_SESSION["informations"] = $informations;
                         header("Location: ../page/signup.php");
                         exit();
                     }
                 } else {
                     $_SESSION["m"] = "Username already exists!";
+                    $_SESSION["informations"] = $informations;
                     header("Location: ../page/signup.php");
                     exit();
                 }
             } else {
                 $_SESSION["m"] = "Email already exists!";
+                $_SESSION["informations"] = $informations;
                 header("Location: ../page/signup.php");
                 exit();
             }
         } else {
             $_SESSION["m"] = "Invalid user type!";
+            $_SESSION["informations"] = $informations;
             header("Location: ../page/signup.php");
             exit();
         }
     } else {
         $_SESSION["m"] = "Fill out the missing fields!";
+        $_SESSION["informations"] = $informations;
         header("Location: ../page/signup.php");
         exit();
     }

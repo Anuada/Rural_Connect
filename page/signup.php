@@ -32,22 +32,23 @@
         </div>
 
         <div class="mb-3">
-            <input type="text" class="form-control" name="fname" placeholder="First Name" required>
+            <input type="text" class="form-control" name="fname" id="fname" placeholder="First Name" required>
         </div>
         <div class="mb-3">
-            <input type="text" class="form-control" name="lname" placeholder="Last Name" required>
+            <input type="text" class="form-control" name="lname" id="lname" placeholder="Last Name" required>
         </div>
         <div class="mb-3">
-            <input type="number" class="form-control" name="contact" placeholder="Contact Number" required>
+            <input type="number" class="form-control" name="contactNo" id="contactNo" placeholder="Contact Number"
+                required>
         </div>
         <div class="mb-3">
-            <input type="text" class="form-control" name="address" placeholder="Address" required>
+            <input type="text" class="form-control" name="address" id="address" placeholder="Address" required>
         </div>
         <div class="mb-3">
-            <input type="email" class="form-control" name="email" placeholder="Email" required>
+            <input type="email" class="form-control" name="email" id="email" placeholder="Email" required>
         </div>
         <div class="mb-3">
-            <select class="form-control" name="user_type" required>
+            <select class="form-control" name="user_type" id="user_type" required>
                 <option value="" disabled selected>Select User Type</option>
                 <option value="barangay_inc">Barangay Incharge</option>
                 <option value="city_health">City Health</option>
@@ -55,7 +56,7 @@
             </select>
         </div>
         <div class="mb-3">
-            <input type="text" class="form-control" name="username" placeholder="Username" required>
+            <input type="text" class="form-control" name="username" id="username" placeholder="Username" required>
         </div>
         <div class="mb-3">
             <input type="password" class="form-control" name="password" placeholder="Password" required>
@@ -71,6 +72,14 @@
 
 <?php ob_start(); ?>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<?php if (isset($_SESSION["informations"])): ?>
+    <script>
+        <?php foreach ($_SESSION["informations"] as $key => $value): ?>
+            document.getElementById("<?php echo $key ?>").value = "<?php echo $value ?>";
+        <?php endforeach ?>
+    </script>
+    <?php unset($_SESSION["informations"]) ?>
+<?php endif; ?>
 <?php $scripts = ob_get_clean(); ?>
 
 <?php require_once "../shared/layout.php"; ?>
