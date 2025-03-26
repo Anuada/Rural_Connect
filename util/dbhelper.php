@@ -148,7 +148,8 @@ public function fetchData($id)
         request_med.request_DosageForm,
         request_med.request_DosageStrength,
         request_med.id,
-        request_med.requestStatus
+        request_med.requestStatus,
+        request_med.delivery_date
     FROM 
         request_med
     LEFT JOIN 
@@ -200,7 +201,8 @@ public function barangayRequested_med($id)
         request_med.request_DosageForm,
         request_med.request_DosageStrength,
         request_med.id,
-        request_med.requestStatus
+        request_med.requestStatus,
+        request_med.delivery_date
     FROM 
         request_med
     LEFT JOIN 

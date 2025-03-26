@@ -42,7 +42,7 @@ $profileImage = isset($barangay_inc[0]['id_verification']) ? htmlspecialchars($b
                 </li>
                 <li class="nav-item">
 
-                    <a class="nav-link" style="margin-right: 15px;" href="view_med.php">My Requests</a>
+                    <a class="nav-link" style="margin-right: 15px;" href="barangayViewReq_Med.php">My Requests</a>
 
 
                 </li>

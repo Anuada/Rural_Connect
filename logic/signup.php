@@ -4,6 +4,7 @@ require_once "../util/DbHelper.php";
 require_once "../util/DirHandler.php";
 require_once "../util/EmailSender.php";
 require_once "../util/Misc.php";
+require_once "../enums/UserType.php";
 require_once "../vendor/autoload.php";
 
 use Ramsey\Uuid\Uuid;
@@ -12,6 +13,7 @@ $db = new DbHelper();
 $dh = new DirHandler();
 $es = new EmailSender();
 $ms = new Misc();
+$userTypes = UserType::all();
 
 if (isset($_POST["signup"])) {
     $fname = $_POST["fname"];
@@ -26,7 +28,7 @@ if (isset($_POST["signup"])) {
     $id_verification = $_FILES["id_verification"];
 
     if (!empty(trim($fname)) && !empty(trim($lname)) && !empty(trim($contact)) && !empty(trim($address)) && !empty(trim($email)) && !empty(trim($user_type)) && !empty(trim($username)) && !empty(trim($password)) && !empty(trim($con_password))) {
-        if ($user_type != 'Admin' && $user_type != 'admin') {
+        if (in_array($user_type, $userTypes)) {
             $check_email = $db->fetchRecords("account", ["email" => $email]);
             if ($check_email == null) {
                 $check_username = $db->fetchRecords("account", ["username" => $username]);
