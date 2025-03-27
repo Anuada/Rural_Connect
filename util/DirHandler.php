@@ -9,6 +9,7 @@ class DirHandler
     public $city_health_valid_id = "../assets/img/valid_id/c_valid_id/";
     public $barangay_incharge_valid_id = "../assets/img/valid_id/b_valid_id/";
     public $med_image = "../assets/img/med_image/";
+    public $upload_receipt ="../assets/img/upload_receipt/";
     
 }
 

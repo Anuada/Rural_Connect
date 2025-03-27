@@ -1,11 +1,15 @@
 <?php
 session_start();
-
+require_once "../util/Misc.php";
 require_once "../util/DbHelper.php";
+require_once "../util/DirHandler.php";
+
 $db = new DbHelper();
+$ms = new Misc();
+$dir = new DirHandler();
 
 if (isset($_POST['submit'])) {
-    request_med($db);
+    request_med($db, $ms, $dir);
 } elseif (isset($_POST['acceptRequest'])) {
     $requestId = $_POST['requestId'];
     handleAcceptRequest($db, $requestId);
@@ -15,8 +19,8 @@ if (isset($_POST['submit'])) {
 }
 
 
-function request_med($db)
-{   
+function request_med(DbHelper $db, Misc $ms, DirHandler $dir)
+{
     $city_health_id = $_POST['city_health_id'];
     $barangay_inc_id = $_POST['barangay_inc_id'];
     $med_avail_id = $_POST['med_avail_id'];
@@ -24,8 +28,15 @@ function request_med($db)
     $request_category = $_POST['request_category'];
     $request_DosageForm = $_POST['request_DosageForm'];
     $request_DosageStrength = $_POST['request_DosageStrength'];
+    $upload_receipt = $_FILES['upload_receipt'];
 
+    if (!isset($_FILES["upload_receipt"]) && $_FILES['upload_receipt']['size'] == 0) {
+        $_SESSION["m"] = "Please Upload Your Receipt!";
+        header("Location: ../barangay_inc/request_med.php?city_health_id=$city_health_id&id=$med_avail_id");
+        exit();
+    }
 
+    $receipt_uploaded = $ms->uploadImage($upload_receipt, $ms->generateUUID(), $dir->upload_receipt);
     $table = "request_med";
     $data = array(
         "city_health_id" => $city_health_id,
@@ -35,6 +46,7 @@ function request_med($db)
         "request_category" => $request_category,
         "request_DosageForm" => $request_DosageForm,
         "request_DosageStrength" => $request_DosageStrength,
+        "receipt_image" => $receipt_uploaded,
 
     );
 
@@ -46,7 +58,7 @@ function request_med($db)
         exit();
     } else {
         $_SESSION["m"] = "Error Requesting!";
-        header("Location: ../barangay_inc/view_med.php");
+        header("Location: ../barangay_inc/request_med.php?city_health_id=$city_health_id&id=$med_avail_id");
         exit();
     }
 }
