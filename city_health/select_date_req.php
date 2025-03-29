@@ -1,18 +1,17 @@
 <?php
 session_start();
 require_once "../util/DbHelper.php";
+require "../shared/navbar_city_health.php";
 require_once "../shared/session.city_health.php";
 
 $dbHelper = new DbHelper();
 $title = "Select Date for Delivery";
 
+// Get request ID from URL parameter
 $requestId = isset($_GET['requestId']) ? $_GET['requestId'] : null;
 
-
-// Capture navbar content
-ob_start();
-include "../shared/navbar_city_health.php";
-$navbar = ob_get_clean();
+// Fetch users for selection
+$users = $dbHelper->fetchDeliveries();
 ?>
 
 <?php ob_start(); ?>
@@ -76,26 +75,32 @@ $navbar = ob_get_clean();
         <!-- Main Content -->
         <div style="margin-top:10%;" class="col-md-9 col-lg-10 content-wrapper">
             <center>
-
                 <h2>Select Delivery Date</h2>
             </center>
 
             <!-- Date Submission Form -->
             <div class="d-flex justify-content-center mt-4">
-    <div class="card shadow-lg p-4 w-50">
-        <h4 class="text-center fw-bold">Select Delivery Date</h4>
-        <form action="../logic/Selectdate_req.php" method="POST">
-            <input type="hidden" name="requestId" value="<?php echo htmlspecialchars($requestId); ?>">
-            <div class="mb-3">
-                <label for="med_date" class="form-label fw-bold">Delivery Date:</label>
-                <input type="date" id="med_date" name="med_date" required class="form-control form-control-lg">
+                <div class="card shadow-lg p-4 w-50">
+                    <h4 class="text-center fw-bold">Select Delivery Date</h4>
+                    <form action="../logic/Selectdate_req.php" method="POST">
+                        <input type="hidden" name="requestId" value="<?php echo htmlspecialchars($requestId); ?>">
+                        
+                        <label for="assignedUser">Select User:</label>
+                        <select class="form-control" name="deliveries_accountId" required>
+                            <?php foreach ($users as $user): ?>
+                                <option value="<?php echo htmlspecialchars($user['accountId']); ?>"> 
+                                    <?php echo htmlspecialchars($user['fname'] . ' ' . $user['lname']); ?> 
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+
+                        <label for="date_of_supply">Select Supply Date:</label>
+                        <input type="date" name="date_of_supply" class="form-control" required>
+
+                        <button type="submit" name="submit" class="btn btn-primary mt-3">Assign</button>
+                    </form>
+                </div>
             </div>
-            <div class="text-center">
-                <button type="submit" name="submit" class="btn btn-primary btn-lg w-100">Confirm Date</button>
-            </div>
-        </form>
-    </div>
-</div>
 
         </div>
         <?php $content = ob_get_clean(); ?>

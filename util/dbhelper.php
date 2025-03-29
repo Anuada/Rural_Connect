@@ -306,5 +306,27 @@ public function countCancelled()
     return $row ? $row['cancelled_requests'] : 0; // Return the count directly
 }
 
+public function fetchDeliveries()
+{
+    $sql = "
+    SELECT 
+        deliveries.accountId,
+        deliveries.fname,
+        deliveries.lname
+    FROM deliveries";
+
+    $stmt = $this->conn->prepare($sql);
+    if (!$stmt) {
+        die("SQL Error: " . $this->conn->error);
+    }
+
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $records = $result->fetch_all(MYSQLI_ASSOC); // Fetch all records as an associative array
+
+    $stmt->close(); // Close the statement after use
+    return $records;
+}
+
 
 }
