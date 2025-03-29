@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 27, 2025 at 04:55 PM
+-- Generation Time: Mar 29, 2025 at 06:19 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -46,9 +46,9 @@ CREATE TABLE `account` (
 --
 
 INSERT INTO `account` (`accountId`, `email`, `username`, `password`, `user_type`, `recovery_token`, `verify_token`, `isVerify`, `isLogin`, `created_at`) VALUES
-('6c0b0a91-03a3-4614-a6a9-1a46133e8a60', 'ladyglittersmackles@gmail.com', 'anuada_1990', '$2y$12$9V6a/pa7KWygvvHmd/A37eM5F0BHbIvCA.zsGI3C9Zl1TpsQTo.xi', 'barangay_inc', '', '', 1, 1, NULL),
+('6c0b0a91-03a3-4614-a6a9-1a46133e8a60', 'ladyglittersmackles@gmail.com', 'anuada_1990', '$2y$12$9V6a/pa7KWygvvHmd/A37eM5F0BHbIvCA.zsGI3C9Zl1TpsQTo.xi', 'barangay_inc', '', '', 1, 0, NULL),
 ('7594b921-87ea-437e-bd63-03e2809c3fc2', 'mariah_carey@mailinator.com', 'therealmariah_carey', '$2y$12$qvCWyerLwX34QrtnG6SwIebSrazN.KDGsQrbLagqe6CzJWLKtVvrS', 'deliveries', '', '', 1, 0, NULL),
-('eb48b13c-9094-4de4-afc2-786b9dc93f96', 'christopher_pareyac@mailinator.com', 'christopher_pareyac', '$2y$12$7W/t1R9Yj5c0EW4IHzVTmOrJCB/8pBfxhrbmAnDM3y6UTy7jz3skW', 'city_health', NULL, '', 1, 0, NULL);
+('eb48b13c-9094-4de4-afc2-786b9dc93f96', 'christopher_pareyac@mailinator.com', 'christopher_pareyac', '$2y$12$7W/t1R9Yj5c0EW4IHzVTmOrJCB/8pBfxhrbmAnDM3y6UTy7jz3skW', 'city_health', NULL, '', 1, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -165,6 +165,26 @@ INSERT INTO `med_availabilty` (`id`, `med_name`, `med_description`, `quantity`, 
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `med_deliveries`
+--
+
+CREATE TABLE `med_deliveries` (
+  `id` int(11) NOT NULL,
+  `request_med_id` int(11) NOT NULL,
+  `deliveries_accountId` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
+  `date_of_supply` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `med_deliveries`
+--
+
+INSERT INTO `med_deliveries` (`id`, `request_med_id`, `deliveries_accountId`, `date_of_supply`) VALUES
+(10, 8, '7594b921-87ea-437e-bd63-03e2809c3fc2', '2025-03-11 00:00:00');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `request_med`
 --
 
@@ -188,7 +208,7 @@ CREATE TABLE `request_med` (
 --
 
 INSERT INTO `request_med` (`id`, `city_health_id`, `barangay_inc_id`, `med_avail_Id`, `request_quantity`, `request_category`, `request_DosageForm`, `request_DosageStrength`, `receipt_image`, `requestStatus`, `paymentStatus`, `delivery_date`) VALUES
-(8, 'eb48b13c-9094-4de4-afc2-786b9dc93f96', '6c0b0a91-03a3-4614-a6a9-1a46133e8a60', 21, '1000', 'Biogesic', 'tablet', '2500', '../assets/img/upload_receipt/cc3edebc-ebbc-4065-b257-17d2d4eb4192.png', 'Pending', 'Pending', '0000-00-00 00:00:00');
+(8, 'eb48b13c-9094-4de4-afc2-786b9dc93f96', '6c0b0a91-03a3-4614-a6a9-1a46133e8a60', 21, '1000', 'Biogesic', 'tablet', '2500', '../assets/img/upload_receipt/cc3edebc-ebbc-4065-b257-17d2d4eb4192.png', 'Accepted', 'Pending', '0000-00-00 00:00:00');
 
 --
 -- Indexes for dumped tables
@@ -232,6 +252,14 @@ ALTER TABLE `med_availabilty`
   ADD KEY `city_health_id` (`city_health_id`);
 
 --
+-- Indexes for table `med_deliveries`
+--
+ALTER TABLE `med_deliveries`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `deliveries_accountId` (`deliveries_accountId`),
+  ADD KEY `request_med_id` (`request_med_id`);
+
+--
 -- Indexes for table `request_med`
 --
 ALTER TABLE `request_med`
@@ -249,6 +277,12 @@ ALTER TABLE `request_med`
 --
 ALTER TABLE `med_availabilty`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
+-- AUTO_INCREMENT for table `med_deliveries`
+--
+ALTER TABLE `med_deliveries`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `request_med`
@@ -289,6 +323,13 @@ ALTER TABLE `deliveries`
 --
 ALTER TABLE `med_availabilty`
   ADD CONSTRAINT `FK_med_availabilty_city_health` FOREIGN KEY (`city_health_id`) REFERENCES `city_health` (`accountId`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `med_deliveries`
+--
+ALTER TABLE `med_deliveries`
+  ADD CONSTRAINT `med_deliveries_ibfk_1` FOREIGN KEY (`deliveries_accountId`) REFERENCES `deliveries` (`accountId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `med_deliveries_ibfk_2` FOREIGN KEY (`request_med_id`) REFERENCES `request_med` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `request_med`
