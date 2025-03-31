@@ -36,7 +36,7 @@ class DbHelper
         }
         return $rows;
     }
-	
+
     public function getRecord($table, $args)
     {
         $keys = array_keys($args);
@@ -51,10 +51,10 @@ class DbHelper
         $row = $query->fetch_assoc();
         return $row;
     }
-	
+
     #Delete record/s
-	
-	
+
+
     public function deleteRecord($table, $args)
     {
         $key = array_keys($args);
@@ -107,15 +107,16 @@ class DbHelper
         return $cond;
     }
 
-    public function executeQuery($sql, $params) {
+    public function executeQuery($sql, $params)
+    {
         if ($stmt = $this->conn->prepare($sql)) {
-            $types = str_repeat('s', count($params)); 
+            $types = str_repeat('s', count($params));
             $stmt->bind_param($types, ...$params);
 
             if ($stmt->execute()) {
-                return true; 
+                return true;
             } else {
-                
+
                 echo "Error executing query: " . $stmt->error;
                 return false;
             }
@@ -124,10 +125,10 @@ class DbHelper
             return false;
         }
     }
-// This Query for the status
-public function fetchData($id)
-{
-    $sql = "
+    // This Query for the status
+    public function fetchData($id)
+    {
+        $sql = "
     SELECT 
         barangay_inc.accountId,
         barangay_inc.fname,
@@ -160,27 +161,27 @@ public function fetchData($id)
         request_med.city_health_id = ?
     ";
 
-    $stmt = $this->conn->prepare($sql);
-    if (!$stmt) {
-        die("SQL Error: " . $this->conn->error);
+        $stmt = $this->conn->prepare($sql);
+        if (!$stmt) {
+            die("SQL Error: " . $this->conn->error);
+        }
+
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $records = [];
+
+        while ($row = $result->fetch_assoc()) {
+            $records[] = $row;
+        }
+
+        $stmt->close(); // Close the statement after use
+        return $records;
     }
-
-    $stmt->bind_param("i", $id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $records = [];
-
-    while ($row = $result->fetch_assoc()) {
-        $records[] = $row;
-    }
-
-    $stmt->close(); // Close the statement after use
-    return $records;
-}
-// Display Dashboard for requested in Barangay inc
-public function barangayRequested_med($id)
-{
-    $sql = "
+    // Display Dashboard for requested in Barangay inc
+    public function barangayRequested_med($id)
+    {
+        $sql = "
     SELECT 
         barangay_inc.accountId,
         barangay_inc.fname,
@@ -213,120 +214,168 @@ public function barangayRequested_med($id)
         request_med.barangay_inc_id = ?
     ";
 
-    $stmt = $this->conn->prepare($sql);
-    if (!$stmt) {
-        die("SQL Error: " . $this->conn->error);
+        $stmt = $this->conn->prepare($sql);
+        if (!$stmt) {
+            die("SQL Error: " . $this->conn->error);
+        }
+
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $records = [];
+
+        while ($row = $result->fetch_assoc()) {
+            $records[] = $row;
+        }
+
+        $stmt->close(); // Close the statement after use
+        return $records;
     }
 
-    $stmt->bind_param("i", $id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $records = [];
+    // count for pending
 
-    while ($row = $result->fetch_assoc()) {
-        $records[] = $row;
-    }
-
-    $stmt->close(); // Close the statement after use
-    return $records;
-}
-
-// count for pending
-
-public function countPending()
-{
-    $sql = "
+    public function countPending()
+    {
+        $sql = "
     SELECT COUNT(*) AS pending_requests
     FROM request_med
     WHERE requestStatus = 'pending';
     ";
 
-    $stmt = $this->conn->prepare($sql);
-    if (!$stmt) {
-        die("SQL Error: " . $this->conn->error);
+        $stmt = $this->conn->prepare($sql);
+        if (!$stmt) {
+            die("SQL Error: " . $this->conn->error);
+        }
+
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $row = $result->fetch_assoc(); // Fetch the single row result
+
+        $stmt->close(); // Close the statement after use
+
+        return $row ? $row['pending_requests'] : 0; // Return the count directly
     }
 
-    $stmt->execute();
-    $result = $stmt->get_result();
+    // count for Accempted 
 
-    $row = $result->fetch_assoc(); // Fetch the single row result
-
-    $stmt->close(); // Close the statement after use
-
-    return $row ? $row['pending_requests'] : 0; // Return the count directly
-}
-
-// count for Accempted 
-
-public function countAccempted()
-{
-    $sql = "
+    public function countAccempted()
+    {
+        $sql = "
     SELECT COUNT(*) AS Accepted_requests
     FROM request_med
     WHERE requestStatus = 'Accepted';
     ";
 
-    $stmt = $this->conn->prepare($sql);
-    if (!$stmt) {
-        die("SQL Error: " . $this->conn->error);
+        $stmt = $this->conn->prepare($sql);
+        if (!$stmt) {
+            die("SQL Error: " . $this->conn->error);
+        }
+
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $row = $result->fetch_assoc(); // Fetch the single row result
+
+        $stmt->close(); // Close the statement after use
+
+        return $row ? $row['Accepted_requests'] : 0; // Return the count directly
     }
 
-    $stmt->execute();
-    $result = $stmt->get_result();
+    // Count for cancelled
 
-    $row = $result->fetch_assoc(); // Fetch the single row result
-
-    $stmt->close(); // Close the statement after use
-
-    return $row ? $row['Accepted_requests'] : 0; // Return the count directly
-}
-
-// Count for cancelled
-
-public function countCancelled()
-{
-    $sql = "
+    public function countCancelled()
+    {
+        $sql = "
     SELECT COUNT(*) AS cancelled_requests
     FROM request_med
     WHERE requestStatus = 'Cancelled';
     ";
 
-    $stmt = $this->conn->prepare($sql);
-    if (!$stmt) {
-        die("SQL Error: " . $this->conn->error);
+        $stmt = $this->conn->prepare($sql);
+        if (!$stmt) {
+            die("SQL Error: " . $this->conn->error);
+        }
+
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $row = $result->fetch_assoc(); // Fetch the single row result
+
+        $stmt->close(); // Close the statement after use
+
+        return $row ? $row['cancelled_requests'] : 0; // Return the count directly
     }
 
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    $row = $result->fetch_assoc(); // Fetch the single row result
-
-    $stmt->close(); // Close the statement after use
-
-    return $row ? $row['cancelled_requests'] : 0; // Return the count directly
-}
-
-public function fetchDeliveries()
-{
-    $sql = "
+    public function fetchDeliveries()
+    {
+        $sql = "
     SELECT 
         deliveries.accountId,
         deliveries.fname,
         deliveries.lname
     FROM deliveries";
 
-    $stmt = $this->conn->prepare($sql);
-    if (!$stmt) {
-        die("SQL Error: " . $this->conn->error);
+        $stmt = $this->conn->prepare($sql);
+        if (!$stmt) {
+            die("SQL Error: " . $this->conn->error);
+        }
+
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $records = $result->fetch_all(MYSQLI_ASSOC); // Fetch all records as an associative array
+
+        $stmt->close(); // Close the statement after use
+        return $records;
     }
 
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $records = $result->fetch_all(MYSQLI_ASSOC); // Fetch all records as an associative array
+    // Fetch Data for Deliveries
 
-    $stmt->close(); // Close the statement after use
-    return $records;
-}
+    public function DisplayMed_to_Delivery($id)
+    {
+        $sql = "
+    SELECT 
+request_med.id,
+request_med.request_quantity,
+request_med.request_category,
+request_med.request_DosageForm,
+request_med.request_DosageStrength,
+barangay_inc.fname,
+barangay_inc.lname,
+barangay_inc.address,
+barangay_inc.contactNo,
+med_availabilty.med_name,
+med_deliveries.date_of_supply
 
+FROM med_deliveries
 
+LEFT JOIN 
+	request_med ON med_deliveries.request_med_id = request_med.id
+ LEFT JOIN
+	barangay_inc ON request_med.barangay_inc_id = request_med.barangay_inc_id
+ LEFT JOIN 
+ 	med_availabilty ON med_availabilty.id = request_med.med_avail_Id
+ 
+     WHERE med_deliveries.deliveries_accountId = ?;
+    
+
+    ";
+
+        $stmt = $this->conn->prepare($sql);
+        if (!$stmt) {
+            die("SQL Error: " . $this->conn->error);
+        }
+
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $records = [];
+
+        while ($row = $result->fetch_assoc()) {
+            $records[] = $row;
+        }
+
+        $stmt->close(); // Close the statement after use
+        return $records;
+    }
 }

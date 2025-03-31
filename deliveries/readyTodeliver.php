@@ -32,7 +32,7 @@ $requested = $dbHelper->DisplayMed_to_Delivery($id);
             <table id="medicineTable" style="margin-top: 10%;" class="table table-bordered">
               <thead>
                 <tr>
-                  <th colspan="8" class="bg-primary text-white text-center">Requested Medicine</th>
+                  <th colspan="7" class="bg-primary text-white text-center">Requested Medicine</th>
                 </tr>
                 <tr>
                   <th>Barangay Incharge</th>
@@ -57,7 +57,7 @@ $requested = $dbHelper->DisplayMed_to_Delivery($id);
                       <td><?php echo htmlspecialchars($req['request_category']); ?></td>
                       <td><?php echo htmlspecialchars($req['request_DosageForm']); ?></td>
                       <td><?php echo htmlspecialchars($req['request_DosageStrength']); ?></td>
-                      <td><?php echo date("F d, Y", strtotime($req['date_of_supply'])); ?></td>
+                      <td><?php echo htmlspecialchars($req['date_of_supply']); ?></td>
 
                       
                      
