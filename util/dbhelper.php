@@ -356,6 +356,7 @@ LEFT JOIN
  LEFT JOIN 
  	med_availabilty ON med_availabilty.id = request_med.med_avail_Id
  
+ 
      WHERE med_deliveries.deliveries_accountId = ?;
     
 
@@ -391,12 +392,14 @@ request_med.request_category,
 request_med.request_DosageForm,
 request_med.request_DosageStrength,
 request_med.requestStatus,
-barangay_inc.fname,
-barangay_inc.lname,
 barangay_inc.address,
 barangay_inc.contactNo,
 med_availabilty.med_name,
-med_deliveries.date_of_supply
+med_availabilty.med_description,
+med_deliveries.date_of_supply,
+city_health.contactNo,
+city_health.fname,
+city_health.lname
 
 FROM med_deliveries
 
@@ -406,6 +409,8 @@ LEFT JOIN
 	barangay_inc ON request_med.barangay_inc_id = request_med.barangay_inc_id
  LEFT JOIN 
  	med_availabilty ON med_availabilty.id = request_med.med_avail_Id
+ LEFT JOIN 
+ 	city_health ON request_med.city_health_id = request_med.city_health_id
  
      WHERE barangay_inc.accountId = ?;
     

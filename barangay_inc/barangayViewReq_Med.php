@@ -40,12 +40,10 @@ $requested = $dbHelper->Display_barangay_inc_req($id);
           <div class="table-container">
             <table id="medicineTable">
               <tr>
-                <th colspan="9" class="bg-primary text-white text-center">Requested Medicine</th>
+                <th colspan="8" class="bg-primary text-white text-center">Requested Medicine</th>
               </tr>
               <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Address</th>
+                <th>City Health Incharge</th>
                 <th>Contact No.</th>
                 <th>Status</th>
                 <th>Action</th>
@@ -53,22 +51,15 @@ $requested = $dbHelper->Display_barangay_inc_req($id);
               </tr>
               <?php foreach ($requested as $req) : ?>
                 <tr>
-                  <td><?php echo $req['fname']; ?></td>
-                  <td><?php echo $req['lname']; ?></td>
-                  <td><?php echo $req['address']; ?></td>
+                  <td><?php echo $req['fname'] . ' ' . $req['lname']; ?></td>
                   <td><?php echo $req['contactNo']; ?></td>
                   <td><?php echo $req['requestStatus']; ?></td>
                   <td>
                     <!-- View Button -->
                     <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#viewModal<?php echo $req['id']; ?>">View Details</button>
-
-                    <?php if ($req['requestStatus'] == "Pending") : ?>
-
-                    <?php endif; ?>
                   </td>
                   <td><?php echo date('F d, Y', strtotime($req['date_of_supply'])); ?></td>
                 </tr>
-               
 
                 <!-- View Modal -->
                 <div class="modal fade" id="viewModal<?php echo $req['id']; ?>" tabindex="-1" aria-labelledby="viewLabel" aria-hidden="true">
@@ -95,12 +86,6 @@ $requested = $dbHelper->Display_barangay_inc_req($id);
                     </div>
                   </div>
                 </div>
-
-
-
-
-
-
               <?php endforeach; ?>
             </table>
           </div>
@@ -110,7 +95,6 @@ $requested = $dbHelper->Display_barangay_inc_req($id);
             <span id="pageNumbers"></span>
             <button id="nextPage" class="btn btn-outline-primary">Next</button>
           </div>
-
         </div>
       </div>
     </div>
