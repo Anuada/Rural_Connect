@@ -378,4 +378,55 @@ LEFT JOIN
         $stmt->close(); // Close the statement after use
         return $records;
     }
+
+// display supply Date
+
+public function Display_barangay_inc_req($id)
+{
+    $sql = "
+    SELECT 
+request_med.id,
+request_med.request_quantity,
+request_med.request_category,
+request_med.request_DosageForm,
+request_med.request_DosageStrength,
+request_med.requestStatus,
+barangay_inc.fname,
+barangay_inc.lname,
+barangay_inc.address,
+barangay_inc.contactNo,
+med_availabilty.med_name,
+med_deliveries.date_of_supply
+
+FROM med_deliveries
+
+LEFT JOIN 
+	request_med ON med_deliveries.request_med_id = request_med.id
+ LEFT JOIN
+	barangay_inc ON request_med.barangay_inc_id = request_med.barangay_inc_id
+ LEFT JOIN 
+ 	med_availabilty ON med_availabilty.id = request_med.med_avail_Id
+ 
+     WHERE barangay_inc.accountId = ?;
+    
+    ";
+
+    $stmt = $this->conn->prepare($sql);
+    if (!$stmt) {
+        die("SQL Error: " . $this->conn->error);
+    }
+
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $records = [];
+
+    while ($row = $result->fetch_assoc()) {
+        $records[] = $row;
+    }
+
+    $stmt->close(); // Close the statement after use
+    return $records;
+
+}
 }

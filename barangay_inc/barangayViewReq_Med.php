@@ -17,7 +17,7 @@ if (isset($_SESSION['accountId'])) {
 }
 
 // Fetch requested medicine data
-$requested = $dbHelper->barangayRequested_med($id);
+$requested = $dbHelper->Display_barangay_inc_req($id);
 ?>
 
 <?php ob_start(); ?>
@@ -66,7 +66,7 @@ $requested = $dbHelper->barangayRequested_med($id);
 
                     <?php endif; ?>
                   </td>
-                  <td><?php echo date('F d, Y', strtotime($req['delivery_date'])); ?></td>
+                  <td><?php echo date('F d, Y', strtotime($req['date_of_supply'])); ?></td>
                 </tr>
                
 
