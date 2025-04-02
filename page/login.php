@@ -1,15 +1,16 @@
 <?php
 session_start();
- require_once "../shared/session.redirect.php";
+require_once "../shared/session.redirect.php";
 $title = "Login";
+
 ob_start();
 ?>
-
-<?php ob_start(); ?>
 <link rel="stylesheet" href="../assets/css/login.css">
-<?php $styles = ob_get_clean(); ?>
+<?php 
+$styles = ob_get_clean(); 
 
-<?php ob_start(); ?>
+ob_start();
+?>
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container">
@@ -23,28 +24,40 @@ ob_start();
     </div>
 </nav>
 
+<!-- Login Form -->
 <form action="../logic/login.php" method="post" id="loginform">
     <div class="login-container">
         <img src="../assets/img/misc/delivery_pic.jpeg" alt="Logo" />
         <div class="login-form">
             <h2>Login to Your Account</h2>
-            <input placeholder="Username" required aria-label="Username" type="text" id="username" name="username" />
-            <input placeholder="Password" required aria-label="Password" type="password" id="password"
-                name="password" />
+            <input 
+                type="text" 
+                id="username" 
+                name="username" 
+                placeholder="Username" 
+                required 
+                aria-label="Username"
+                value="<?php echo isset($_SESSION['username']) ? htmlspecialchars($_SESSION['username']) : ''; ?>"
+            />
+            <input 
+                type="password" 
+                id="password" 
+                name="password" 
+                placeholder="Password" 
+                required 
+                aria-label="Password" 
+            />
             <button type="submit" name="login">Login</button>
             <a class="forgot-password" href="../page/forgot-password.php">Forgot Password?</a>
             <a class="create-account" href="../page/signup.php">Create an Account →</a>
         </div>
     </div>
 </form>
-<?php $content = ob_get_clean(); ?>
+<?php 
+unset($_SESSION["username"]); // Clear session username after use
+$content = ob_get_clean(); 
 
-<?php ob_start(); ?>
-<?php if (isset($_SESSION["username"])): ?>
-    <script>
-        document.getElementById("username").value = "<?php echo $_SESSION["username"] ?>";
-    </script>
-    <?php unset($_SESSION["username"]) ?>
-<?php endif ?>
-<?php $scripts = ob_get_clean(); ?>
-<?php require_once "../shared/layout.php"; ?>
+$scripts = ''; // No additional scripts needed
+
+require_once "../shared/layout.php"; 
+?>
