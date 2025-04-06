@@ -12,7 +12,7 @@ $title = "Requested Medicine";
 $id = $_SESSION['accountId'];
 
 // Fetch requested medicine data
-$requested = $dbHelper->fetchData($id);
+$requested = $dbHelper->Display_barangay_inc_requested($id);
 ?>
 
 <?php ob_start(); ?>
@@ -37,8 +37,7 @@ $requested = $dbHelper->fetchData($id);
                 <th colspan="9" class="bg-primary text-white text-center">Requested Medicine</th>
               </tr>
               <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
+                <th>Barangay Incharge</th>
                 <th>Address</th>
                 <th>Contact No.</th>
                 <th>Status</th>
@@ -47,8 +46,7 @@ $requested = $dbHelper->fetchData($id);
               </tr>
               <?php foreach ($requested as $req): ?>
                 <tr>
-                  <td><?php echo $req['fname']; ?></td>
-                  <td><?php echo $req['lname']; ?></td>
+                <td><?php echo $req['fname'] . ' ' . $req['lname']; ?></td>
                   <td><?php echo $req['address']; ?></td>
                   <td><?php echo $req['contactNo']; ?></td>
                   <td><?php echo $req['requestStatus']; ?></td>
@@ -64,7 +62,7 @@ $requested = $dbHelper->fetchData($id);
                         data-bs-target="#cancelModal<?php echo $req['id']; ?>">Cancel</button>
                     <?php endif; ?>
                   </td>
-                  <td><?php echo date('F d, Y', strtotime($req['delivery_date'])); ?></td>
+                  <td><?php echo date('F d, Y', strtotime($req['date_of_supply'])); ?></td>
 
                 </tr>
 

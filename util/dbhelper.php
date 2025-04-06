@@ -149,8 +149,7 @@ class DbHelper
         request_med.request_DosageForm,
         request_med.request_DosageStrength,
         request_med.id,
-        request_med.requestStatus,
-        request_med.delivery_date
+        request_med.requestStatus
     FROM 
         request_med
     LEFT JOIN 
@@ -467,4 +466,58 @@ LEFT JOIN
         }
         return $rows;
     }
+
+
+// Display for Data Barangat Requested
+
+public function Display_barangay_inc_requested($id)
+{
+    $sql = "
+    SELECT 
+request_med.id,
+request_med.request_quantity,
+request_med.request_category,
+request_med.request_DosageForm,
+request_med.request_DosageStrength,
+request_med.requestStatus,
+barangay_inc.address,
+med_availabilty.med_name,
+med_availabilty.med_description,
+med_deliveries.date_of_supply,
+barangay_inc.contactNo,
+barangay_inc.fname,
+barangay_inc.lname
+
+FROM med_deliveries
+
+LEFT JOIN 
+	request_med ON med_deliveries.request_med_id = request_med.id
+ LEFT JOIN
+	barangay_inc ON request_med.barangay_inc_id = request_med.barangay_inc_id
+ LEFT JOIN 
+ 	med_availabilty ON med_availabilty.id = request_med.med_avail_Id
+ LEFT JOIN 
+ 	city_health ON request_med.city_health_id = request_med.city_health_id
+ 
+     WHERE city_health.accountId = ?;
+    
+    ";
+
+    $stmt = $this->conn->prepare($sql);
+    if (!$stmt) {
+        die("SQL Error: " . $this->conn->error);
+    }
+
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $records = [];
+
+    while ($row = $result->fetch_assoc()) {
+        $records[] = $row;
+    }
+
+    $stmt->close(); // Close the statement after use
+    return $records;
+}
 }
