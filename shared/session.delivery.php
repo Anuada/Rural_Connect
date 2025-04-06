@@ -3,7 +3,7 @@
 if (isset($_SESSION['accountId'])) {
     switch ($_SESSION["user_type"]) {
 
-        case 'city_health':
+        case 'barangay_inc':
             header("Location: ../barangay_inc/");
             break;
 

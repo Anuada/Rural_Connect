@@ -60,7 +60,7 @@ class EmailSender
             $this->mail->addAddress($email);
             $this->mail->Subject = $subject;
             $this->mail->Body = $body;
-            $this->mail->addEmbeddedImage("../assets/img/misc/rural_connect_logo_no_bg.png", "RuralConnectLogo");
+            $this->mail->addEmbeddedImage("../assets/img/misc/RuralConnectAltLogo.png", "RuralConnectLogo");
             $this->mail->send();
         } catch (Exception $e) {
             // Handle exception - Display custom error page for 500 Internal Server Error
@@ -116,6 +116,27 @@ class EmailSender
         $link = $this->misc->url("page/reset-password.php?accountId=$accountId&token=$token");
         ob_start();
         include "../misc/mail/request.reset.password.php";
+        $body = ob_get_clean();
+        $this->sendEmail($email, $subject, $body);
+    }
+
+    /**
+     * Sends an authentication email to the admin with the provided email, username, and token.
+     *
+     * This method constructs an email with a subject line indicating it is for admin authentication.
+     * It includes the content from a specified PHP file to generate the email body and then sends
+     * the email to the provided email address using the `sendEmail` method.
+     *
+     * @param mixed $email The email address of the admin to receive the authentication request.
+     * @param mixed $username The username of the admin for reference in the email.
+     * @param mixed $token A token used for authentication purposes.
+     * @return void
+     */
+    public function requestAdminAuthentication($email, $username, $token)
+    {
+        $subject = "ElevateHer | Admin Authentication";
+        ob_start();
+        include "../misc/mail/request.admin.authentication.php";
         $body = ob_get_clean();
         $this->sendEmail($email, $subject, $body);
     }

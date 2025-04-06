@@ -106,6 +106,7 @@ $profileImage = isset($deliveries[0]['id_verification']) ? htmlspecialchars($del
                             <a class="dropdown-item" href="#">Deliveries</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="../deliveries/updateProfile.php">Update Profile</a>
+                            <a class="dropdown-item" href="../page/rate-and-feedback.php">Rate & Feedback</a>
                             <a class="dropdown-item" href="../logic/logout.php">Logout</a>
                         </div>
                         <!-- Drop Down Menu -->

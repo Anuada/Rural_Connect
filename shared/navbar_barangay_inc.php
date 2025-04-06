@@ -74,6 +74,7 @@ $profileImage = isset($barangay_inc[0]['id_verification']) ? htmlspecialchars($b
                             </a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="updateProfile.php">Update Profile</a>
+                            <a class="dropdown-item" href="../page/rate-and-feedback.php">Rate & Feedback</a>
                             <a class="dropdown-item" href="../logic/logout.php">Logout</a>
                         </div>
                         <!-- Drop Down Menu -->

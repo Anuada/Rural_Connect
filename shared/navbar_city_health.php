@@ -66,6 +66,7 @@ $lname = isset($city_health[0]['lname']) ? $city_health[0]['lname'] : '';
                             </a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="../city_health/updateProfile.php">Update Profile</a>
+                            <a class="dropdown-item" href="../page/rate-and-feedback.php">Rate & Feedback</a>
                             <a class="dropdown-item" href="../logic/logout.php">Logout</a>
                         </div>
                         <!-- Drop Down Menu -->

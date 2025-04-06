@@ -1,4 +1,4 @@
-# <p align="center"><img src="./assets/img/misc/rural_connect_logo_no_bg.png" alter="Rural Connect" width="300"></p>
+# <p align="center"><img src="./assets/img/misc/RuralConnectAltLogo.png" alter="Rural Connect" width="300"></p>
 
 ### BRIDGE THE GAP BETWEEN CITY HEALTH PROVIDERS AND RURAL BARANGAY
 

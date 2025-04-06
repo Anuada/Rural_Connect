@@ -45,8 +45,8 @@
                     style="width:602px;border-collapse:collapse;border-spacing:0;text-align:left;">
                     <tr>
                         <td align="center" style="padding:60px 0 60px 0;background-color: #d8ebff">
-                            <img src="cid:RuralConnectLogo"
-                                alt="Rural Connect" width="400" style="height:auto;display:block;" />
+                            <img src="cid:RuralConnectLogo" alt="Rural Connect" width="400"
+                                style="height:auto;display:block;" />
                         </td>
                     </tr>
                     <tr>
@@ -59,22 +59,13 @@
                                             <?php echo $username ?>,
                                         </h1>
                                         <p
-                                            style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;text-indent:50px;">
-                                            Thank you for creating an account with Rural Connect! To ensure
-                                            the security of your account and activate its full functionality, please
-                                            verify your account by clicking on the button below.</p>
-                                        <div class="text-right"><a href="<?php echo $link ?>" id="resetPassword"
-                                                target="_blank">VERIFY YOUR ACCOUNT</a></div>
-                                        <p
-                                            style="text-align: center; font-size: 14px; margin-top: 10px; font-family: Arial, sans-serif;">
-                                            If the button is not working, you can copy and paste this link into your
-                                            browser:
-                                            <br>
-                                            <a href="<?php echo $link ?>" target="_blank"
-                                                style="word-break: break-all; color: #007bff;">
-                                                <?php echo $link ?>
-                                            </a>
-                                        </p>
+                                            style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">
+                                            Here's your authentication code.</p>
+                                        <div class="text-right">
+                                            <span
+                                                style="background-color: #d8ebff; font-size: 50px; color: #007bff; padding: 10px; border-radius: 10px; font-weight: bold; letter-spacing: 10px;"><?php echo $token ?>
+                                            </span>
+                                        </div>
                                         <p style="font-size:16px;margin:40px 0 20px 0;font-family:Arial,sans-serif;">
                                             Best Regards,</p>
                                         <p style="font-size:16px;margin:20px 0 20px 0;font-family:Arial,sans-serif;">
@@ -102,8 +93,7 @@
                                             <tr>
                                                 <td style="padding:0 0 0 10px;width:38px;">
                                                     <a href="mailto:frenchcries12@gmail.com"><img
-                                                            src="cid:RuralConnectLogo"
-                                                            alt="Rural Connect" width="200"
+                                                            src="cid:RuralConnectLogo" alt="Rural Connect" width="200"
                                                             style="height:auto;display:block;border:0;" /></a>
                                                 </td>
                                             </tr>

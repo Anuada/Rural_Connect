@@ -1,0 +1,37 @@
+body {
+    background-color: #d8ebff;
+}
+
+.otp-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    /* Space between the boxes */
+}
+
+.header-title {
+    margin-bottom: 20px;
+    font-size: 20px;
+    font-weight: 700;
+    text-transform: capitalize;
+}
+
+.header-desc {
+    font-size: 16px;
+    color: #040404;
+}
+
+.otp-input {
+    width: 40px;
+    /* Width of each box */
+    height: 40px;
+    /* Height of each box */
+    font-size: 24px;
+    /* Font size */
+    text-align: center;
+    /* Center the text */
+    border: 1px solid #ccc;
+    /* Border style */
+    border-radius: 5px;
+    /* Rounded corners */
+}

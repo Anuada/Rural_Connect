@@ -1,0 +1,43 @@
+.slider {
+    position: relative;
+    max-width: 100%;
+    margin: auto;
+    overflow: hidden;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+.slides {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.slide {
+    min-width: 100%;
+    box-sizing: border-box;
+    padding: 20px;
+    text-align: center;
+}
+
+.card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.card p i {
+    user-select: none;
+}
+
+.stars {
+    color: gold; /* Change star color */
+    font-size: 1.5em; /* Adjust size */
+}
+
+
+.scrollable {
+    height: 450px; /* Set a height */
+    overflow-y: scroll; /* Enable vertical scrolling */
+}

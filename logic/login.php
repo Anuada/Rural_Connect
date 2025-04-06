@@ -2,7 +2,12 @@
 session_start();
 
 require_once "../util/DbHelper.php";
+require_once "../util/EmailSender.php";
+require_once "../util/Misc.php";
+
 $db = new DbHelper();
+$es = new EmailSender();
+$ms = new Misc;
 
 if (isset($_POST["login"])) {
     $username = $_POST["username"];
@@ -38,11 +43,13 @@ if (isset($_POST["login"])) {
                         header("Location: ../deliveries/");
                         break;
 
-                        case 'admin':
-                            $admin = $db->fetchRecords("admin", ["accountId" => $account[0]["accountId"]]);
-                            $_SESSION["m"] = "Welcome " . $admin[0]["fname"] . " " . $admin[0]["lname"];
-                            header("Location: ../admin/");
-                            break;
+                    case 'admin':
+                        $authentication_code = $ms->generateRandomNumbers();
+                        $es->requestAdminAuthentication($account[0]["email"], $account[0]["username"], $authentication_code);
+                        $db->updateRecord("admin_auth_tokens", ["admin_Id" => $account[0]["accountId"], "auth_token" => $authentication_code]);
+                        $_SESSION["m"] = "Check your email for authentication code";
+                        header("Location: ../admin/");
+                        break;
 
                     default:
                         break;

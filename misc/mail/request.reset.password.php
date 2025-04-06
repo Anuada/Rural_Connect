@@ -21,8 +21,8 @@
         }
 
         #resetPassword {
-            background-color: #c8d3ff;
-            color: #354eab;
+            background-color: #d8ebff;
+            color: #007bff;
             border: none;
             border-radius: 4px;
             padding: 10px 20px;
@@ -44,7 +44,7 @@
                 <table role="presentation"
                     style="width:602px;border-collapse:collapse;border-spacing:0;text-align:left;">
                     <tr>
-                        <td align="center" style="padding:60px 0 60px 0;background-color: #c8d3ff">
+                        <td align="center" style="padding:60px 0 60px 0;background-color: #d8ebff">
                             <img src="cid:RuralConnectLogo" alt="Rural Connect" width="400"
                                 style="height:auto;display:block;" />
                         </td>
@@ -70,7 +70,7 @@
                                             browser:
                                             <br>
                                             <a href="<?php echo $link ?>" target="_blank"
-                                                style="word-break: break-all; color: #354eab;">
+                                                style="word-break: break-all; color: #007bff;">
                                                 <?php echo $link ?>
                                             </a>
                                         </p>
@@ -84,13 +84,13 @@
                         </td>
                     </tr>
                     <tr>
-                        <td style="padding:40px;background-color: #c8d3ff">
+                        <td style="padding:40px;background-color: #d8ebff">
                             <table role="presentation"
                                 style="width:100%;border-collapse:collapse;border:0;border-spacing:0;font-size:9px;font-family:Arial,sans-serif;">
                                 <tr>
                                     <td style="padding:0;width:50%;" align="left">
                                         <p
-                                            style="margin:0;font-size:14px;line-height:16px;font-family:Arial,sans-serif;color:#354eab;">
+                                            style="margin:0;font-size:14px;line-height:16px;font-family:Arial,sans-serif;color:#007bff;">
                                             &copy; Rural Connect
                                             <?php echo date("Y") ?><br />
                                         </p>

@@ -380,11 +380,11 @@ LEFT JOIN
         return $records;
     }
 
-// display supply Date
+    // display supply Date
 
-public function Display_barangay_inc_req($id)
-{
-    $sql = "
+    public function Display_barangay_inc_req($id)
+    {
+        $sql = "
     SELECT 
 request_med.id,
 request_med.request_quantity,
@@ -416,22 +416,55 @@ LEFT JOIN
     
     ";
 
-    $stmt = $this->conn->prepare($sql);
-    if (!$stmt) {
-        die("SQL Error: " . $this->conn->error);
+        $stmt = $this->conn->prepare($sql);
+        if (!$stmt) {
+            die("SQL Error: " . $this->conn->error);
+        }
+
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $records = [];
+
+        while ($row = $result->fetch_assoc()) {
+            $records[] = $row;
+        }
+
+        $stmt->close(); // Close the statement after use
+        return $records;
+
     }
 
-    $stmt->bind_param("i", $id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $records = [];
-
-    while ($row = $result->fetch_assoc()) {
-        $records[] = $row;
+    public function countRatings($num)
+    {
+        $sql = "SELECT COUNT(*) AS total_ratings FROM rate_and_feedback WHERE `rating` = $num";
+        $query = $this->conn->query($sql);
+        $total_rating = $query->fetch_assoc();
+        return $total_rating["total_ratings"];
     }
 
-    $stmt->close(); // Close the statement after use
-    return $records;
+    public function displayAllFeedbacks($rating = null)
+    {
+        $where = "";
+        if ($rating !== null) {
+            // Use prepared statements to prevent SQL injection
+            $where = " WHERE rate_and_feedback.rating = " . intval($rating);
+        }
 
-}
+        $sql = "SELECT account.username,
+                rate_and_feedback.rating,
+                rate_and_feedback.feedback
+            FROM rate_and_feedback
+            INNER JOIN account 
+            ON rate_and_feedback.accountId = account.accountId"
+            . $where .
+            " ORDER BY rate_and_feedback.rating DESC";
+
+        $query = $this->conn->query($sql);
+        $rows = [];
+        while ($row = $query->fetch_assoc()) {
+            $rows[] = $row;
+        }
+        return $rows;
+    }
 }

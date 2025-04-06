@@ -39,23 +39,49 @@ class Misc
 
     public function generateUUID()
     {
-    // Generate 16 random bytes
-    $data = random_bytes(16);
+        // Generate 16 random bytes
+        $data = random_bytes(16);
 
-    // Set the version to 0100 (version 4)
-    $data[6] = chr(ord($data[6]) & 0x0f | 0x40);
-    // Set the variant to 10xx (RFC 4122)
-    $data[8] = chr(ord($data[8]) & 0x3f | 0x80);
+        // Set the version to 0100 (version 4)
+        $data[6] = chr(ord($data[6]) & 0x0f | 0x40);
+        // Set the variant to 10xx (RFC 4122)
+        $data[8] = chr(ord($data[8]) & 0x3f | 0x80);
 
-    // Format the bytes as a UUID string
-    return sprintf(
-        '%s-%s-%s-%s-%s',
-        bin2hex(substr($data, 0, 4)),
-        bin2hex(substr($data, 4, 2)),
-        bin2hex(substr($data, 6, 2)),
-        bin2hex(substr($data, 8, 2)),
-        bin2hex(substr($data, 10, 6))
-    );
+        // Format the bytes as a UUID string
+        return sprintf(
+            '%s-%s-%s-%s-%s',
+            bin2hex(substr($data, 0, 4)),
+            bin2hex(substr($data, 4, 2)),
+            bin2hex(substr($data, 6, 2)),
+            bin2hex(substr($data, 8, 2)),
+            bin2hex(substr($data, 10, 6))
+        );
+    }
+
+    public function generateRandomNumbers()
+    {
+        $randomNumbers = [];
+        for ($i = 0; $i < 8; $i++) {
+            $randomNumbers[] = random_int(0, 9);
+        }
+
+        return implode('', $randomNumbers);
+    }
+
+    public function json_response($data, $message, $code = 200)
+    {
+        header("Content-Type: application/json");
+        http_response_code($code);
+
+        $response = [
+            "message" => $message,
+        ];
+
+        if ($data !== null) {
+            $response["data"] = $data;
+        }
+
+        return json_encode($response);
     }
 
     public static function displayEnums(array $enums)
