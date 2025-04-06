@@ -468,11 +468,11 @@ LEFT JOIN
     }
 
 
-// Display for Data Barangat Requested
+    // Display for Data Barangat Requested
 
-public function Display_barangay_inc_requested($id)
-{
-    $sql = "
+    public function Display_barangay_inc_requested($id)
+    {
+        $sql = "
     SELECT 
 request_med.id,
 request_med.request_quantity,
@@ -503,21 +503,21 @@ LEFT JOIN
     
     ";
 
-    $stmt = $this->conn->prepare($sql);
-    if (!$stmt) {
-        die("SQL Error: " . $this->conn->error);
+        $stmt = $this->conn->prepare($sql);
+        if (!$stmt) {
+            die("SQL Error: " . $this->conn->error);
+        }
+
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $records = [];
+
+        while ($row = $result->fetch_assoc()) {
+            $records[] = $row;
+        }
+
+        $stmt->close(); // Close the statement after use
+        return $records;
     }
-
-    $stmt->bind_param("i", $id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $records = [];
-
-    while ($row = $result->fetch_assoc()) {
-        $records[] = $row;
-    }
-
-    $stmt->close(); // Close the statement after use
-    return $records;
-}
 }
