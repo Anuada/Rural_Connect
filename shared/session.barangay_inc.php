@@ -10,7 +10,7 @@ if (isset($_SESSION['accountId'])) {
         case 'deliveries':
             header("Location: ../deliveries/");
             break;
-            
+
         case 'admin':
             header("Location: ../admin/");
             break;
@@ -19,7 +19,7 @@ if (isset($_SESSION['accountId'])) {
             break;
     }
     require_once "../shared/is.user.verified.php";
-   // require_once "../shared/is.subscribe.php";
+    require_once "../shared/is.subscribed.php";
 } else {
     header("Location: ../page/login.php");
     exit();

@@ -9,7 +9,7 @@ $ms = new Misc();
 $dir = new DirHandler();
 
 if (isset($_POST['submit'])) {
-    request_med($db, $ms);
+    request_med($db, $ms, $dir);
 } elseif (isset($_POST['acceptRequest'])) {
     $requestId = $_POST['requestId'];
     handleAcceptRequest($db, $requestId);
@@ -18,25 +18,21 @@ if (isset($_POST['submit'])) {
     handleCancelledRequest($db, $requestId);
 }
 
-function request_med(DbHelper $db, Misc $ms)
+function request_med(DbHelper $db, Misc $ms, DirHandler $dir)
 {
     $city_health_id = $_POST['city_health_id'];
     $barangay_inc_id = $_POST['barangay_inc_id'];
     $med_avail_id = $_POST['med_avail_id'];
     $request_quantity = $_POST['request_quantity'];
-   
-
 
     $table = "request_med";
-    $data = array(
+    $data = [
         "city_health_id" => $city_health_id,
         "barangay_inc_id" => $barangay_inc_id,
         "med_avail_id" => $med_avail_id,
         "request_quantity" => $request_quantity,
-     
-        "prescription" => $ms->uploadImage($_FILES["prescription"],$ms->generateUUID(),"../assets/img/upload_prescription")
-
-    );
+        "prescription" => $ms->uploadImage($_FILES["prescription"], $ms->generateUUID(), $dir->upload_prescription)
+    ];
 
     $success = $db->addRecord($table, $data);
 

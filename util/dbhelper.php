@@ -387,13 +387,13 @@ LEFT JOIN
     SELECT 
 request_med.id,
 request_med.request_quantity,
-request_med.request_category,
 request_med.request_DosageForm,
 request_med.request_DosageStrength,
 request_med.requestStatus,
 barangay_inc.address,
 barangay_inc.contactNo,
 med_availabilty.med_name,
+med_availabilty.category,
 med_availabilty.med_description,
 med_deliveries.date_of_supply,
 city_health.contactNo,
@@ -519,5 +519,25 @@ LEFT JOIN
 
         $stmt->close(); // Close the statement after use
         return $records;
+    }
+
+
+    public function display_details_for_receipt($id)
+    {
+        $sql = " SELECT subscription.id,
+            account.email,
+            subscription.created_at,
+            subscription.plan,
+            subscription.start_date,
+            subscription.end_date,
+            subscription.amount
+            FROM
+            subscription
+            JOIN barangay_inc ON barangay_inc.accountId = subscription.barangay_id
+            JOIN account ON account.accountId = barangay_inc.accountId
+            WHERE subscription.id = '$id'
+        ";
+        $query = $this->conn->query($sql);
+        return $query->fetch_assoc();
     }
 }

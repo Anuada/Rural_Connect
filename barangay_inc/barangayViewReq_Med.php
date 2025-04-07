@@ -75,7 +75,7 @@ $requested = $dbHelper->Display_barangay_inc_req($id);
                         <div class="medicine-card">
                           <h4 class="text-primary"><i class="bi bi-prescription2"></i> <?php echo $req['med_name']; ?></h4>
                           <p><i class="bi bi-file-text"></i> <strong>Description:</strong> <?php echo $req['med_description']; ?></p>
-                          <p><i class="bi bi-folder"></i> <strong>Requested Category:</strong> <?php echo $req['request_category']; ?></p>
+                          <p><i class="bi bi-folder"></i> <strong>Requested Category:</strong> <?php echo $req['category']; ?></p>
                           <p><i class="bi bi-eyedropper"></i> <strong>Requested Dosage:</strong> <?php echo $req['request_DosageForm'] . ' - ' . $req['request_DosageStrength']; ?></p>
                           <p><i class="bi bi-box"></i> <strong>Requested Quantity:</strong> <?php echo $req['request_quantity']; ?></p>
                         </div>
