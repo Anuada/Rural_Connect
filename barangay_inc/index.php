@@ -55,7 +55,7 @@ $navbar = ob_get_clean();
 
                 <div class="card shadow-lg border-0">
                     <div class="card-header bg-success text-white text-center">
-                        <h4>Completed Requests</h4>
+                        <h4>Cancelled Requests</h4>
                     </div>
                     <div class="card-body text-center">
                         <h3 class="display-4">15</h3>

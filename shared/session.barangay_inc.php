@@ -19,6 +19,7 @@ if (isset($_SESSION['accountId'])) {
             break;
     }
     require_once "../shared/is.user.verified.php";
+   // require_once "../shared/is.subscribe.php";
 } else {
     header("Location: ../page/login.php");
     exit();
