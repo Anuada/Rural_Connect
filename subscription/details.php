@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 require_once "../shared/session.subscription.php";
 ?>
@@ -32,7 +32,7 @@ $plan = $_GET["plan"];
         <form action="../logic/barangay-subscription.php" method="post" enctype="multipart/form-data">
             <input type="hidden" name="plan" value="<?php echo $plan ?>">
             <div class="image-box" style="margin-bottom:10px" onclick="document.getElementById('imageInput').click()">
-                <span id="placeholder">Click to upload receipt</span>
+                <span id="placeholder">Click to upload gcash receipt</span>
                 <img id="preview" src="" alt="" style="display: none;" />
             </div>
 

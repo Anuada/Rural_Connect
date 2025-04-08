@@ -42,18 +42,19 @@
                 required>
         </div>
         <div class="mb-3">
-            <input type="text" class="form-control" name="address" id="address" placeholder="Address" required>
-        </div>
-        <div class="mb-3">
             <input type="email" class="form-control" name="email" id="email" placeholder="Email" required>
         </div>
         <div class="mb-3">
             <select class="form-control" name="user_type" id="user_type" required>
-                <option value="" disabled selected>Select User Type</option>
+                <option value="" hidden selected>Select User Type</option>
                 <option value="barangay_inc">Barangay Incharge</option>
                 <option value="city_health">City Health</option>
                 <option value="deliveries">Deliveries</option>
             </select>
+        </div>
+        <div id="barangay_input_field"></div>
+        <div class="mb-3">
+            <input type="text" class="form-control" name="address" id="address" placeholder="Address" required>
         </div>
         <div class="mb-3">
             <input type="text" class="form-control" name="username" id="username" placeholder="Username" required>
@@ -72,6 +73,9 @@
 
 <?php ob_start(); ?>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+<script type="module" src="../assets/js/signup.js"></script>
+
 <?php if (isset($_SESSION["informations"])): ?>
     <script>
         <?php foreach ($_SESSION["informations"] as $key => $value): ?>
@@ -80,6 +84,7 @@
     </script>
     <?php unset($_SESSION["informations"]) ?>
 <?php endif; ?>
+
 <?php $scripts = ob_get_clean(); ?>
 
 <?php require_once "../shared/layout.php"; ?>

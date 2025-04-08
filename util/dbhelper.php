@@ -525,7 +525,10 @@ LEFT JOIN
     public function display_details_for_receipt($id)
     {
         $sql = " SELECT subscription.id,
+            barangay_inc.fname,
+            barangay_inc.lname,
             account.email,
+            barangay_inc.barangay,
             subscription.created_at,
             subscription.plan,
             subscription.start_date,
@@ -540,4 +543,45 @@ LEFT JOIN
         $query = $this->conn->query($sql);
         return $query->fetch_assoc();
     }
+
+    public function display_all_subscriptions($limit, $offset)
+    {
+        $sql = "SELECT
+                subscription.id,
+                barangay_inc.barangay,
+                barangay_inc.fname,
+                barangay_inc.lname,
+                subscription.plan,
+                subscription.receipt,
+                subscription.approve_status
+                FROM subscription
+                JOIN barangay_inc ON barangay_inc.accountId = subscription.barangay_id
+                ORDER BY
+                    CASE
+                        WHEN subscription.approve_status = 'Pending' THEN 0
+                        ELSE 1
+                END,
+                subscription.created_at DESC
+                LIMIT ? OFFSET ?";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("ii", $limit, $offset);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $rows = [];
+        while ($row = $result->fetch_assoc()) {
+            $rows[] = $row;
+        }
+        return $rows;
+    }
+
+    public function count_all_records($table)
+    {
+        $sql = "SELECT COUNT(*) as total FROM `$table`";
+        $query = $this->conn->query($sql);
+        $result = $query->fetch_assoc();
+        return $result['total'];
+    }
+
 }

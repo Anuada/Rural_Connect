@@ -134,9 +134,28 @@ class EmailSender
      */
     public function requestAdminAuthentication($email, $username, $token)
     {
-        $subject = "ElevateHer | Admin Authentication";
+        $subject = "Rural Connect | Admin Authentication";
         ob_start();
         include "../misc/mail/request.admin.authentication.php";
+        $body = ob_get_clean();
+        $this->sendEmail($email, $subject, $body);
+    }
+
+    public function barangaySubscriptionApproved($email, $username, $receipt_id, $plan)
+    {
+        $subject = "Rural Connect | Subscription Approved";
+        $link = $this->misc->url("receipt/?id=$receipt_id");
+        ob_start();
+        include "../misc/mail/barangay.subscription.approved.php";
+        $body = ob_get_clean();
+        $this->sendEmail($email, $subject, $body);
+    }
+
+    public function barangaySubscriptionCancelled($email, $username, $note, $plan)
+    {
+        $subject = "Rural Connect | Subscription Disapproved";
+        ob_start();
+        include "../misc/mail/barangay.subscription.cancelled.php";
         $body = ob_get_clean();
         $this->sendEmail($email, $subject, $body);
     }

@@ -16,14 +16,15 @@ $date = new DateTime();
 $subscribed_barangay = [];
 $pending_barangay = [];
 foreach ($barangay_subscriptions as $bs) {
-    $start_date = new DateTime($bs['start_date']);
-    $end_date = new DateTime($bs['end_date']);
+    $start_date = !empty($bs['start_date']) ? new DateTime($bs['start_date']) : null;
+    $end_date = !empty($bs['end_date']) ? new DateTime($bs['end_date']) : null;
     $approve_status = $bs['approve_status'];
-    if ($date >= $start_date && $date <= $end_date) {
-        if ($approve_status == 'Approved') {
+
+    if ($approve_status === 'Pending') {
+        $pending_barangay[] = $bs;
+    } elseif ($start_date !== null && $end_date !== null && $date >= $start_date && $date <= $end_date) {
+        if ($approve_status === 'Approved') {
             $subscribed_barangay[] = $bs;
-        } elseif ($approve_status == 'Pending') {
-            $pending_barangay[] = $bs;
         }
     }
 }

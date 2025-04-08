@@ -24,12 +24,14 @@ if (empty($check) || $check['approve_status'] == 'Pending' || $check['approve_st
 $receipt = new ReceiptGenerator();
 $data = (object) $db->display_details_for_receipt($id);
 
+$name = "$data->fname $data->lname";
 $user_email = $data->email;
+$barangay = $data->barangay;
 $receipt_no = $data->id;
-$date = date("Y-m-d", strtotime($data->created_at));
+$date = date("m/d/Y", strtotime($data->created_at));
 $plan = $data->plan;
-$start_date = $data->start_date;
-$end_date = $data->end_date;
+$start_date = date("m/d/Y", strtotime($data->start_date));
+$end_date = date("m/d/Y", strtotime($data->end_date));
 $amount = $data->amount;
 
-$receipt->generateReceipt($user_email, $receipt_no, $date, $plan, $start_date, $end_date, $amount);
+$receipt->generateReceipt($name, $user_email, $barangay, $receipt_no, $date, $plan, $start_date, $end_date, $amount);

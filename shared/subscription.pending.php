@@ -1,4 +1,4 @@
-<?php $title = "Verify Account" ?>
+<?php $title = "Pending Subscription" ?>
 
 <?php ob_start() ?>
 <style>

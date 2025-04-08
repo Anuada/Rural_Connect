@@ -14,7 +14,7 @@ class ReceiptGenerator
         $this->misc = new Misc();
     }
 
-    public function generateReceipt($user_email, $receipt_no, $date, $plan, $start_date, $end_date, $amount)
+    public function generateReceipt($name, $user_email, $barangay, $receipt_no, $date, $plan, $start_date, $end_date, $amount)
     {
         $this->pdf->AddPage();
 
@@ -30,7 +30,9 @@ class ReceiptGenerator
         $this->pdf->Ln(15);
         $this->pdf->SetFont('Arial', '', 12);
 
-        $this->pdf->Cell(95, 10, $user_email, 0, 1);
+        $this->pdf->Cell(95, 7, $name, 0, 1);
+        $this->pdf->Cell(95, 7, $user_email, 0, 1);
+        $this->pdf->Cell(95, 7, 'Barangay ' . $barangay, 0, 1);
 
         $this->pdf->Ln(15);
         $this->pdf->SetFont('Arial', '', 12);
@@ -55,10 +57,10 @@ class ReceiptGenerator
         // Subscription details
         $this->pdf->SetFont('Arial', '', 12);
         $this->pdf->Cell(30.4, 10, $date, 0, 0, 'L');
-        $this->pdf->Cell(50.16, 10, 'Medicine Access Point', 0, 0, 'L');
+        $this->pdf->Cell(50.16, 10, 'Medication Request', 0, 0, 'L');
         $this->pdf->Cell(28.58, 10, $plan, 0, 0, 'L');
         $this->pdf->Cell(42.86, 10, $start_date . ' - ' . $end_date, 0, 0, 'L');
-        $this->pdf->Cell(38, 10, 'PHP ' . number_format($amount,2), 0, 1, 'R');
+        $this->pdf->Cell(38, 10, 'PHP ' . number_format($amount, 2), 0, 1, 'R');
         $this->pdf->Ln(15);
         $this->pdf->Cell(190, 0, '', 'T');
         $this->pdf->Ln();
@@ -66,15 +68,16 @@ class ReceiptGenerator
         // Total amount
         $this->pdf->SetFont('Arial', 'B', 12);
         $this->pdf->Cell(155, 10, 'Total Amount', 0, 0, 'R');
-        $this->pdf->Cell(35, 10, 'PHP ' . number_format($amount,2), 0, 1, 'R');
+        $this->pdf->Cell(35, 10, 'PHP ' . number_format($amount, 2), 0, 1, 'R');
         $this->pdf->Cell(190, 0, '', 'T');
         $this->pdf->Ln(5);
 
 
         $this->pdf->Cell(65, 10, 'Payment Method:', 0, 0);
-        $this->pdf->Image($this->misc->url("assets/img/misc/gcash-logo.png"), 48, 149, 25);
+        $this->pdf->Image($this->misc->url("assets/img/misc/gcash-logo.png"), 48, 160, 25);
         // $this->pdf->Cell(40, 10, '**** *** 2810', 0, 0);
+
         // Output PDF
-        $this->pdf->Output();
+        $this->pdf->Output('', $receipt_no . ".pdf");
     }
 }

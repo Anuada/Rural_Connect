@@ -24,12 +24,10 @@ if (!isset($_POST["submit"])) {
 }
 
 $receipt_id = Uuid::uuid4();
-$date = new DateTime();
 
 $fieldInputs = [
     "id" => $receipt_id,
-    "barangay_id" => $_SESSION["accountId"],
-    "start_date" => $date->format('Y-m-d')
+    "barangay_id" => $_SESSION["accountId"]
 ];
 
 if (!isset($_POST['plan']) || !in_array($_POST['plan'], $plans)) {
@@ -48,11 +46,7 @@ if (!isset($_FILES['receipt']) || $_FILES['receipt']['size'] <= 0) {
 
 $fieldInputs['receipt'] = $ms->uploadImage($_FILES['receipt'], $receipt_id, $dir->upload_receipt);
 
-$fieldInputs['end_date'] = $fieldInputs['plan'] == SubscriptionPlan::Anually->value ?
-    $date->modify('+1 year')->format('Y-m-d') :
-    $date->modify('+1 month')->format('Y-m-d');
-
-$fieldInputs['amount'] = $fieldInputs['plan'] == SubscriptionPlan::Anually->value ?
+$fieldInputs['amount'] = $fieldInputs['plan'] == SubscriptionPlan::Annual->value ?
     2999 : 299;
 
 $subscribe = $db->addRecord("subscription", $fieldInputs);

@@ -5,6 +5,7 @@ require_once "../util/DirHandler.php";
 require_once "../util/EmailSender.php";
 require_once "../util/Misc.php";
 require_once "../enums/UserType.php";
+require_once "../enums/Barangay.php";
 require_once "../vendor/autoload.php";
 
 use Ramsey\Uuid\Uuid;
@@ -14,6 +15,7 @@ $dh = new DirHandler();
 $es = new EmailSender();
 $ms = new Misc();
 $userTypes = UserType::all();
+$barangays = Barangay::all();
 
 if (isset($_POST["signup"])) {
     $fname = $_POST["fname"];
@@ -25,12 +27,27 @@ if (isset($_POST["signup"])) {
     $username = $_POST["username"];
     $password = $_POST["password"];
     $con_password = $_POST["con_password"];
+    $barangay = $_POST["barangay"] ?? '';
     $id_verification = $_FILES["id_verification"];
 
     $informations = ["fname" => $fname, "lname" => $lname, "address" => $address, "contactNo" => $contact, "email" => $email, "user_type" => $user_type, "username" => $username];
 
-    if (!empty(trim($fname)) && !empty(trim($lname)) && !empty(trim($contact)) && !empty(trim($address)) && !empty(trim($email)) && !empty(trim($user_type)) && !empty(trim($username)) && !empty(trim($password)) && !empty(trim($con_password))) {
+    if (
+        !empty(trim($fname)) && !empty(trim($lname)) && !empty(trim($contact)) && !empty(trim($address)) && !empty(trim($email)) && !empty(trim($user_type)) && !empty(trim($username)) && !empty(trim($password)) && !empty(trim($con_password)) &&
+        ($user_type !== 'barangay_inc' || !empty(trim($barangay)))
+    ) {
         if (in_array($user_type, $userTypes)) {
+
+            if ($user_type == 'barangay_inc' && !in_array($barangay, $barangays)) {
+                $_SESSION['m'] = "Unknown Barangay!";
+                $_SESSION["informations"] = $informations;
+                header("Location: ../page/signup.php");
+                exit();
+            }
+            // elseif ($user_type == 'barangay_inc' && in_array($barangay, $barangays)) {
+            //     $informations['barangay'] = $barangay;
+            // }
+
             $check_email = $db->fetchRecords("account", ["email" => $email]);
             if ($check_email == null) {
                 $check_username = $db->fetchRecords("account", ["username" => $username]);
@@ -47,6 +64,7 @@ if (isset($_POST["signup"])) {
 
                             switch ($user_type) {
                                 case 'barangay_inc':
+                                    $info["barangay"] = $barangay;
                                     $info["id_verification"] = $ms->uploadImage($id_verification, $accountId, $dh->barangay_incharge_profile);
                                     $db->addRecord("barangay_inc", $info);
                                     break;
@@ -65,6 +83,7 @@ if (isset($_POST["signup"])) {
                             $info = ["accountId" => $accountId, "fname" => $fname, "lname" => $lname, "address" => $address, "contactNo" => $contact];
                             switch ($user_type) {
                                 case 'barangay_inc':
+                                    $info["barangay"] = $barangay;
                                     $db->addRecord("barangay_inc", $info);
                                     break;
                                 case 'city_health':

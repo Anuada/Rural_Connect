@@ -4,7 +4,7 @@ require_once "../util/Misc.php";
 
 enum SubscriptionPlan: string
 {
-    case Anually = "Annually";
+    case Annual = "Annual";
     case Monthly = "Monthly";
 
     public static function all()
