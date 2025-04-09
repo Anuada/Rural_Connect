@@ -87,6 +87,7 @@ $users = $dbHelper->fetchDeliveries();
                         
                         <label for="assignedUser">Select User:</label>
                         <select class="form-control" name="deliveries_accountId" required>
+                            <option hidden selected>SELECT COURIER</option>
                             <?php foreach ($users as $user): ?>
                                 <option value="<?php echo htmlspecialchars($user['accountId']); ?>"> 
                                     <?php echo htmlspecialchars($user['fname'] . ' ' . $user['lname']); ?> 

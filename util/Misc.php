@@ -70,7 +70,7 @@ class Misc
 
     public function json_response($data, $message, $code = 200)
     {
-        header("Content-Type: application/json");
+        header(header: "Content-Type: application/json");
         http_response_code($code);
 
         $response = [

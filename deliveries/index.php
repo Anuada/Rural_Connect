@@ -65,7 +65,7 @@ $requested = $dbHelper->DisplayMed_to_Delivery($id);
                   <?php endforeach; ?>
                 <?php else: ?>
                   <tr>
-                    <td colspan="7" class="text-center text-muted">No requested medicine found.</td>
+                    <td colspan="8" class="text-center text-muted">No requested medicine found.</td>
                   </tr>
                 <?php endif; ?>
               </tbody>

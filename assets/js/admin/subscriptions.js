@@ -1,7 +1,8 @@
 import fetch from "../utilities/fetchClient.js";
 import { successAlert, confirmAlert } from "../helpers/sweetAlert2.js";
-import { subscriptionLoader } from "./table.loader.js";
+import { subscriptionLoader } from "../utilities/table.loader.js";
 import serializeForm from "../helpers/serializeForm.js";
+import renderPagination from "../utilities/table.pagination.js";
 
 // VARIABLES
 let currentPage = 1;
@@ -9,6 +10,7 @@ const limit = 5;
 
 // Elements
 const table_data = document.getElementById('table-data');
+const paginationContainer = document.getElementById('pagination');
 const imgModalEl = document.getElementById('imageModal')
 const modalImage = document.getElementById('modalImage');
 const cancelStatusModalEl = document.getElementById('cancelStatusModal');
@@ -39,7 +41,7 @@ const displayTable = (data) => {
                     <td>${d.barangay}</td>
                     <td>${d.fname} ${d.lname}</td>
                     <td>${d.plan}</td>
-                    <td class="text-center">
+                    <td>
                         <button class="btn btn-primary view-gcash-receipt" data-image="${d.receipt}"><i class="fas fa-file-invoice"></i> <span
                                 style="margin-left:10px">View</span></button>
                     </td>
@@ -162,44 +164,11 @@ const fetchSubscribers = (page = 1) => {
             const { data, pagination } = response.data.data;
             displayTable(data);
             initTooltips();
-            renderPagination(pagination);
+            renderPagination(pagination, paginationContainer, fetchSubscribers);
         })
         .catch(error => {
             console.error(error);
         });
-};
-
-const renderPagination = (pagination) => {
-    const paginationContainer = document.getElementById('pagination');
-    paginationContainer.innerHTML = '';
-
-    let { currentPage, totalPages } = pagination;
-
-    if (totalPages <= 1) return;
-
-    // Prev
-    if (currentPage > 1) {
-        paginationContainer.innerHTML += `<button class="btn btn-secondary mx-1 page-btn" data-page="${currentPage - 1}">Prev</button>`;
-    }
-
-    // Page numbers
-    for (let i = 1; i <= totalPages; i++) {
-        paginationContainer.innerHTML += `<button class="btn btn${i === currentPage ? '-primary' : '-outline-primary'} mx-1 page-btn" data-page="${i}">${i}</button>`;
-    }
-
-    // Next
-    if (currentPage < totalPages) {
-        paginationContainer.innerHTML += `<button class="btn btn-secondary mx-1 page-btn" data-page="${currentPage + 1}">Next</button>`;
-    }
-
-    // Add event listeners
-    const buttons = document.querySelectorAll('.page-btn');
-    buttons.forEach(btn => {
-        btn.addEventListener('click', () => {
-            currentPage = parseInt(btn.getAttribute('data-page'));
-            fetchSubscribers(currentPage);
-        });
-    });
 };
 
 document.addEventListener('DOMContentLoaded', () => {

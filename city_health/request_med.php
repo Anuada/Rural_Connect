@@ -44,9 +44,10 @@ $requested = $dbHelper->Display_barangay_inc_requested($id);
                 <th>Action</th>
                 <th>Date of Supply</th>
               </tr>
+              <?php if(!empty($requested)): ?>
               <?php foreach ($requested as $req): ?>
                 <tr>
-                <td><?php echo $req['fname'] . ' ' . $req['lname']; ?></td>
+                  <td><?php echo $req['fname'] . ' ' . $req['lname']; ?></td>
                   <td><?php echo $req['address']; ?></td>
                   <td><?php echo $req['contactNo']; ?></td>
                   <td><?php echo $req['requestStatus']; ?></td>
@@ -62,7 +63,8 @@ $requested = $dbHelper->Display_barangay_inc_requested($id);
                         data-bs-target="#cancelModal<?php echo $req['id']; ?>">Cancel</button>
                     <?php endif; ?>
                   </td>
-                  <td><?php echo date('F d, Y', strtotime($req['date_of_supply'])); ?></td>
+                  <td><?php echo $req['date_of_supply'] != null ? date('F d, Y', strtotime($req['date_of_supply'])) : "" ?>
+                  </td>
 
                 </tr>
 
@@ -91,7 +93,7 @@ $requested = $dbHelper->Display_barangay_inc_requested($id);
                           <p><i class="bi bi-box"></i> <strong>Requested Quantity:</strong>
                             <?php echo $req['request_quantity']; ?></p>
                         </div>
-                       
+
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i
@@ -149,6 +151,9 @@ $requested = $dbHelper->Display_barangay_inc_requested($id);
                 </div>
 
               <?php endforeach; ?>
+              <?php else: ?>
+                <td colspan="9" class="text-center" style="height: 100px;">No Request Available</td>
+              <?php endif ?>
             </table>
           </div>
           <!-- Pagination Controls -->

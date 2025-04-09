@@ -309,11 +309,14 @@ class DbHelper
     public function fetchDeliveries()
     {
         $sql = "
-    SELECT 
-        deliveries.accountId,
-        deliveries.fname,
-        deliveries.lname
-    FROM deliveries";
+            SELECT 
+                deliveries.accountId,
+                deliveries.fname,
+                deliveries.lname
+            FROM deliveries
+            INNER JOIN account ON account.accountId = deliveries.accountId
+            WHERE account.account_status = 'Approved'
+        ";
 
         $stmt = $this->conn->prepare($sql);
         if (!$stmt) {
@@ -333,33 +336,27 @@ class DbHelper
     public function DisplayMed_to_Delivery($id)
     {
         $sql = "
-    SELECT 
-request_med.id,
-request_med.request_quantity,
-request_med.request_category,
-request_med.request_DosageForm,
-request_med.request_DosageStrength,
-barangay_inc.fname,
-barangay_inc.lname,
-barangay_inc.address,
-barangay_inc.contactNo,
-med_availabilty.med_name,
-med_deliveries.date_of_supply
+            SELECT 
+            request_med.id,
+            request_med.request_quantity,
+            request_med.request_DosageForm,
+            request_med.request_DosageStrength,
+            barangay_inc.fname,
+            barangay_inc.lname,
+            barangay_inc.address,
+            barangay_inc.contactNo,
+            med_availabilty.med_name,
+            med_availabilty.category AS request_category,
+            med_deliveries.date_of_supply
 
-FROM med_deliveries
+            FROM med_deliveries
 
-LEFT JOIN 
-	request_med ON med_deliveries.request_med_id = request_med.id
- LEFT JOIN
-	barangay_inc ON request_med.barangay_inc_id = request_med.barangay_inc_id
- LEFT JOIN 
- 	med_availabilty ON med_availabilty.id = request_med.med_avail_Id
- 
- 
-     WHERE med_deliveries.deliveries_accountId = ?;
-    
+            INNER JOIN request_med ON med_deliveries.request_med_id = request_med.id
+            INNER JOIN barangay_inc ON request_med.barangay_inc_id = barangay_inc.accountId
+            INNER JOIN med_availabilty ON request_med.med_avail_Id = med_availabilty.id
 
-    ";
+            WHERE med_deliveries.deliveries_accountId = ?
+        ";
 
         $stmt = $this->conn->prepare($sql);
         if (!$stmt) {
@@ -473,34 +470,28 @@ LEFT JOIN
     public function Display_barangay_inc_requested($id)
     {
         $sql = "
-    SELECT 
-request_med.id,
-request_med.request_quantity,
-request_med.request_category,
-request_med.request_DosageForm,
-request_med.request_DosageStrength,
-request_med.requestStatus,
-barangay_inc.address,
-med_availabilty.med_name,
-med_availabilty.med_description,
-med_deliveries.date_of_supply,
-barangay_inc.contactNo,
-barangay_inc.fname,
-barangay_inc.lname
+            SELECT 
+            request_med.id,
+            request_med.request_quantity,
+            request_med.request_DosageForm,
+            request_med.request_DosageStrength,
+            request_med.requestStatus,
+            barangay_inc.address,
+            med_availabilty.med_name,
+            med_availabilty.med_description,
+            med_availabilty.category AS request_category,
+            med_deliveries.date_of_supply,
+            barangay_inc.contactNo,
+            barangay_inc.fname,
+            barangay_inc.lname
 
-FROM med_deliveries
+            FROM request_med
 
-LEFT JOIN 
-	request_med ON med_deliveries.request_med_id = request_med.id
- LEFT JOIN
-	barangay_inc ON request_med.barangay_inc_id = request_med.barangay_inc_id
- LEFT JOIN 
- 	med_availabilty ON med_availabilty.id = request_med.med_avail_Id
- LEFT JOIN 
- 	city_health ON request_med.city_health_id = request_med.city_health_id
- 
-     WHERE city_health.accountId = ?;
-    
+            INNER JOIN barangay_inc ON request_med.barangay_inc_id = barangay_inc.accountId
+            INNER JOIN med_availabilty ON request_med.med_avail_Id = med_availabilty.id
+            LEFT JOIN med_deliveries ON med_deliveries.request_med_id = request_med.id
+            
+            WHERE request_med.city_health_id = ?
     ";
 
         $stmt = $this->conn->prepare($sql);
@@ -577,9 +568,39 @@ LEFT JOIN
         return $rows;
     }
 
-    public function count_all_records($table)
+    public function display_all_accounts($table, $args, $limit, $offset)
     {
-        $sql = "SELECT COUNT(*) as total FROM `$table`";
+        $key_value_pair = [];
+        foreach ($args as $key => $value) {
+            $key_value_pair[] = "`$key` = '$value'";
+        }
+        $condition = implode(" AND ", $key_value_pair);
+        $sql = "SELECT $table.*, account.email, account.username, account.created_at
+            FROM $table
+            JOIN account ON $table.accountId = account.accountId
+            WHERE $condition
+            ORDER BY account.created_at ASC
+            LIMIT $limit OFFSET $offset";
+        $query = $this->conn->query($sql);
+        $rows = [];
+        while ($row = $query->fetch_assoc()) {
+            $rows[] = $row;
+        }
+        return $rows;
+    }
+
+    public function count_all_records($table, $args = [])
+    {
+        $key_value_pair = [];
+        if (!empty($args)) {
+            foreach ($args as $key => $value) {
+                $key_value_pair[] = "`$key` = '$value'";
+            }
+            $condition = implode(" AND ", $key_value_pair);
+        }
+
+        $sql = !empty($args) ? "SELECT COUNT(*) as total FROM `$table` WHERE $condition"
+            : "SELECT COUNT(*) as total FROM `$table`";
         $query = $this->conn->query($sql);
         $result = $query->fetch_assoc();
         return $result['total'];

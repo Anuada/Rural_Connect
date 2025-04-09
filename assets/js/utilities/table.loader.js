@@ -1,4 +1,4 @@
-import fetch from "../utilities/fetchClient.js";
+import fetch from "./fetchClient.js";
 
 const tableLoader = (row_num, col_num, table_container) => {
     let column = [];
