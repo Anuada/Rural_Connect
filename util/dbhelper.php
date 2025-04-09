@@ -553,7 +553,8 @@ LEFT JOIN
                 barangay_inc.lname,
                 subscription.plan,
                 subscription.receipt,
-                subscription.approve_status
+                subscription.approve_status,
+                subscription.cancel_note
                 FROM subscription
                 JOIN barangay_inc ON barangay_inc.accountId = subscription.barangay_id
                 ORDER BY

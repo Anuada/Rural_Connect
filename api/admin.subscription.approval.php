@@ -36,11 +36,12 @@ $receipt_id = $subscription_details['id'];
 $plan = $subscription_details['plan'];
 
 if ($data['approve_status'] == 'Cancelled') {
-    if (!isset($data['note']) || empty(trim($data['note']))) {
-        echo $ms->json_response(['note' => 'note is required'], '', 422);
+    if (!isset($data['cancel_note']) || empty(trim($data['cancel_note']))) {
+        echo $ms->json_response(['note' => 'cancel note is required'], '', 422);
         exit();
     }
-    $note = $data['note'];
+    $note = $data['cancel_note'];
+    $fieldInputs['cancel_note'] = $data['cancel_note'];
     $es->barangaySubscriptionCancelled($email, $username, $note, $plan);
     $cancel_subscription = $db->updateRecord('subscription', $fieldInputs);
 

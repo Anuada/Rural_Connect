@@ -3,15 +3,32 @@ import { successAlert, confirmAlert } from "../helpers/sweetAlert2.js";
 import { subscriptionLoader } from "./table.loader.js";
 import serializeForm from "../helpers/serializeForm.js";
 
+// VARIABLES
+let currentPage = 1;
+const limit = 5;
+
+// Elements
 const table_data = document.getElementById('table-data');
-const imageModal = new bootstrap.Modal(document.getElementById('imageModal'));
+const imgModalEl = document.getElementById('imageModal')
 const modalImage = document.getElementById('modalImage');
-const canStaModal = document.getElementById('cancelStatusModal');
-const cancelStatusModal = new bootstrap.Modal(canStaModal);
+const cancelStatusModalEl = document.getElementById('cancelStatusModal');
+
+// Form Elements
+const formEl = document.getElementById('cancel-subscription');
 const idEl = document.getElementById('id');
 const approve_statusEl = document.getElementById('approve_status');
 const noteErrorEl = document.getElementById('noteError');
-const formEl = document.getElementById('cancel-subscription');
+
+// Bootstrap Modals
+const imageModal = new bootstrap.Modal(imgModalEl);
+const cancelStatusModal = new bootstrap.Modal(cancelStatusModalEl);
+
+cancelStatusModalEl.addEventListener('hidden.bs.modal', () => {
+    formEl.reset();
+    idEl.value = "";
+    approve_statusEl.value = "";
+    noteErrorEl.innerText = "";
+});
 
 const displayTable = (data) => {
     table_data.innerHTML = "";
@@ -111,7 +128,14 @@ const display_action = (data) => {
 			`;
 
         case "Cancelled":
-            return `<i class="text-danger user-select-none">${data.approve_status}</i>`;
+            return `
+            <i  class="text-danger user-select-none" 
+                data-bs-toggle="tooltip" 
+                data-bs-placement="right" 
+                title="${data.cancel_note ?? ""}">
+                ${data.approve_status}
+            </i>            
+            `;
 
         default:
             return `
@@ -121,14 +145,23 @@ const display_action = (data) => {
     }
 }
 
-let currentPage = 1;
-const limit = 5;
+const initTooltips = () => {
+    // Dispose any existing tooltips first
+    const existingTooltips = document.querySelectorAll('.tooltip');
+    existingTooltips.forEach(t => t.remove());
+
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+    tooltipTriggerList.forEach((tooltipTriggerEl) => {
+        new bootstrap.Tooltip(tooltipTriggerEl);
+    });
+};
 
 const fetchSubscribers = (page = 1) => {
     fetch.get(`../api/admin.subscribers.php?page=${page}&limit=${limit}`)
         .then(response => {
             const { data, pagination } = response.data.data;
             displayTable(data);
+            initTooltips();
             renderPagination(pagination);
         })
         .catch(error => {
@@ -168,7 +201,6 @@ const renderPagination = (pagination) => {
         });
     });
 };
-
 
 document.addEventListener('DOMContentLoaded', () => {
     fetchSubscribers(currentPage);

@@ -55,7 +55,7 @@ require_once "./is.admin.authenticated.php";
                     <input type="hidden" name="id" id="id">
                     <input type="hidden" name="approve_status" id="approve_status">
                     <div class="mb-3">
-                        <textarea class="form-control" name="note" id="note" rows="5" required></textarea>
+                        <textarea class="form-control" name="cancel_note" id="cancel_note" rows="5" required></textarea>
                         <div class="text-danger" style="height:15px" id="noteError"></div>
                     </div>
                     <div class="d-flex justify-content-end">
