@@ -41,7 +41,7 @@ if ($data['approve_status'] == 'Cancelled') {
         exit();
     }
     $note = $data['cancel_note'];
-    $fieldInputs['cancel_note'] = $data['cancel_note'];
+    $fieldInputs['cancel_note'] = htmlspecialchars($data['cancel_note']);
     $es->barangaySubscriptionCancelled($email, $username, $note, $plan);
     $cancel_subscription = $db->updateRecord('subscription', $fieldInputs);
 
