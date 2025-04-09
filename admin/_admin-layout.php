@@ -21,7 +21,7 @@ $title = "Admin";
         <a href="<?php echo $ms->url('admin/accounts.php') ?>" <?php echo $ms->url() === $ms->url('admin/accounts.php') ? "class='navbar-active'" : "" ?>>Accounts</a>
         <a href="<?php echo $ms->url('admin/pending-accounts.php') ?>" <?php echo $ms->url() === $ms->url('admin/pending-accounts.php') ? "class='navbar-active'" : "" ?>>Pending Accounts</a>
         <a href="<?php echo $ms->url('admin/subscription.php') ?>" <?php echo $ms->url() === $ms->url('admin/subscription.php') ? "class='navbar-active'" : "" ?>>Subscriptions</a>
-        <a href="<?php echo $ms->url('admin/subscription.php') ?>" <?php echo $ms->url() === $ms->url('admin/feedback.php') ? "class='navbar-active'" : "" ?>>Feedback</a>
+        <a href="<?php echo $ms->url('admin/feedback.php') ?>" <?php echo $ms->url() === $ms->url('admin/feedback.php') ? "class='navbar-active'" : "" ?>>Feedback</a>
         <a href="<?php echo $ms->url('admin/settings.php') ?>" <?php echo $ms->url() === $ms->url('admin/settings.php') ? "class='navbar-active'" : "" ?>>Settings</a>
         <a href="#" id="admin_logout">Logout</a>
     </div>
