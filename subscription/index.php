@@ -29,7 +29,7 @@ require_once "../enums/SubscriptionPlan.php";
                         <li>✔ Request Medicine</li>
                         <li>✔ Free Delivery</li>
                     </ul>
-                    <a href="../subscription/details.php?plan=<?php echo SubscriptionPlan::Monthly->value ?>"
+                    <a href="../subscription/details.php?plan=<?php echo SubscriptionPlan::Monthly->name ?>"
                         class="btn btn-primary btn-subscribe">Subscribe
                         Monthly</a>
                 </div>
@@ -47,7 +47,7 @@ require_once "../enums/SubscriptionPlan.php";
                         <li>✔ Free Delivery</li>
                         <li>✔ Save 16%</li>
                     </ul>
-                    <a href="../subscription/details.php?plan=<?php echo SubscriptionPlan::Annual->value ?>"
+                    <a href="../subscription/details.php?plan=<?php echo SubscriptionPlan::Annual->name ?>"
                         class="btn btn-success btn-subscribe">Subscribe
                         Annually</a>
                 </div>

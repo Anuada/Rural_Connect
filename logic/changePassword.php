@@ -1,11 +1,6 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['accountId'])) {
-    header("Location: ../login.php");
-    exit();
-}
-
 require_once "../util/DbHelper.php";
 
 $db = new DbHelper();
@@ -16,6 +11,7 @@ if (!isset($_POST["submit"])) {
 }
 
 $user = $db->fetchRecords("account", ["accountId" => $_SESSION["accountId"]])[0];
+$user_type = $user['user_type'];
 
 $infos = ["current_password", "new_password", "repeat_password"];
 $errorMessages = [];
@@ -37,7 +33,7 @@ if ($_POST["new_password"] !== $_POST["repeat_password"]) {
 
 if (!empty($errorMessages)) {
     $_SESSION["errorMessages"] = $errorMessages;
-    header("Location: ../barangay_inc/changePassword.php");
+    header("Location: ../$user_type/changePassword.php");
     exit();
 }
 
@@ -46,24 +42,10 @@ $changePassword = $db->updateRecord("account", ["accountId" => $user["accountId"
 
 if ($changePassword <= 0) {
     $_SESSION["m"] = "Password Not Changed!";
-    header("Location: ../barangay_inc/changePassword.php");
+    header("Location: ../$user_type/changePassword.php");
     exit();
 }
 
 $_SESSION["m"] = "Password changed successfully";
-switch ($user["user_type"]) {
-    case 'barangay_inc':
-        header("Location: ../barangay_inc/changePassword.php");
-        break;
-
-    case 'deliveries':
-        header("Location: ../deliveries/changePassword.php");
-        break;
-
-    case 'city_health':
-        header("Location: ../city_health/changePassword.php");
-        break;
-
-    default:
-        break;
-}
+header("Location: ../$user_type/changePassword.php");
+exit();

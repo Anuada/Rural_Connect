@@ -583,14 +583,14 @@ class DbHelper
         return $rows;
     }
 
-    public function count_all_records($table, $args = [])
+    public function count_all_records($table, $args = [], $special_arg = '')
     {
         $key_value_pair = [];
         if (!empty($args)) {
             foreach ($args as $key => $value) {
                 $key_value_pair[] = "`$key` = '$value'";
             }
-            $condition = implode(" AND ", $key_value_pair);
+            $condition = implode(" AND ", $key_value_pair) . $special_arg;
         }
 
         $sql = !empty($args) ? "SELECT COUNT(*) as total FROM `$table` WHERE $condition"
@@ -627,5 +627,13 @@ class DbHelper
         $query = $this->conn->query($sql);
         $result = $query->fetch_assoc();
         return number_format($result['total_rating'], 2);
+    }
+
+    public function get_month_year()
+    {
+        $sql = "SELECT DATE_FORMAT(CURRENT_DATE(), '%b %Y') AS month_year";
+        $query = $this->conn->query($sql);
+        $result = $query->fetch_assoc();
+        return $result['month_year'];
     }
 }

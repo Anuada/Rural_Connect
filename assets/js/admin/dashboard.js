@@ -11,9 +11,10 @@ const monthlyEarningsLabel = document.getElementById('monthlyEarningsLabel');
 const monthlyEarnings = document.getElementById('monthlyEarnings');
 const totalSubscribers = document.getElementById('totalSubscribers');
 const pendingSubscribers = document.getElementById('pendingSubscribers');
+const thisMonth = document.getElementById('thisMonth');
 
-// Doughnut Chart
-const subscribersChart = new Chart(document.getElementById('doughnutChart'), {
+// Subscribers Breakdown Chart
+const subscribersChart = new Chart(document.getElementById('subscribersBreakdownChart'), {
     type: 'doughnut',
     data: {
         labels: ['Annual', 'Monthly'],
@@ -23,16 +24,30 @@ const subscribersChart = new Chart(document.getElementById('doughnutChart'), {
             backgroundColor: ['#3b82f6', '#10b981'],
             hoverOffset: 4
         }]
-    }
+    },
+});
+
+// Total Users Breakdown Chart
+const totalUsersChart = new Chart(document.getElementById('totalUsersBreakdownChart'), {
+    type: 'doughnut',
+    data: {
+        labels: ['Barangay Incharge', 'City Health', 'Delivery'],
+        datasets: [{
+            label: 'Total Users',
+            data: [],
+            backgroundColor: ['#fbbf24', '#6366f1', '#10b981'],
+            hoverOffset: 4
+        }]
+    },
 });
 
 // Bar Chart
-const totalUsersChart = new Chart(document.getElementById('barChart'), {
+const totalUsersAddedThisMonth = new Chart(document.getElementById('totalUsersAddedThisMonth'), {
     type: 'bar',
     data: {
         labels: ['Barangay Incharge', 'City Health', 'Delivery'],
         datasets: [{
-            label: 'Total Accounts',
+            label: 'Total Users Added',
             data: [],
             backgroundColor: ['#fbbf24', '#6366f1', '#10b981']
         }]
@@ -42,7 +57,7 @@ const totalUsersChart = new Chart(document.getElementById('barChart'), {
             y: {
                 beginAtZero: true
             }
-        }
+        },
     }
 });
 
@@ -82,11 +97,24 @@ const fetchTotalSubscribers = () => {
         });
 }
 
+const fetchTotalUsersAddedThisMonth = () => {
+    fetch.get('../api/admin.total.users.added.php')
+        .then(response => {
+            const { total, month_year } = response.data.data;
+            thisMonth.innerHTML = `<span class="month-date">(${month_year})</span>`;
+            totalUsersAddedThisMonth.data.datasets[0].data = total;
+            totalUsersAddedThisMonth.update();
+        })
+        .catch(error => {
+            console.error(error);
+        });
+}
+
 const fetchTotalEarningsThisMonth = () => {
     fetch.get('../api/admin.total.earnings.php')
         .then(response => {
             const { data } = response.data;
-            monthlyEarningsLabel.textContent = `Monthly Earnings (${data.month_year})`;
+            monthlyEarningsLabel.innerHTML = `Monthly Earnings <span class="month-date">(${data.month_year})</span>`;
             monthlyEarnings.innerHTML = formatAsAmount(data.total_earnings);
         })
         .catch(error => {
@@ -123,4 +151,5 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchTotalRating();
     fetchTotalSubscribers();
     fetchTotalEarningsThisMonth();
+    fetchTotalUsersAddedThisMonth();
 })

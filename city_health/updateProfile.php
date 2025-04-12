@@ -1,61 +1,57 @@
 <?php
 session_start();
-require_once "../util/DbHelper.php";
 require_once "../shared/session.city_health.php";
+require_once "../util/DbHelper.php";
 
 $db = new DbHelper();
-$title = "Update Profile - City Health";
 
-$accountId = $_GET['accountId'] ?? $_SESSION['accountId'];
+$accountId = $_SESSION['accountId'];
 $user = $db->getRecord("city_health", ["accountId" => $accountId]);
 
-ob_start();
-include "../shared/navbar_city_health.php";
-$navbar = ob_get_clean();
+$city_health_title = "Settings";
 ?>
 
-<?php ob_start(); ?>
-<div class="container" style="padding-top: 150px; padding-bottom: 50px">
-    <div class="card p-4 shadow-lg rounded">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <h3 class="text-center mb-0">Update Profile</h3>
-            <a href="changePassword.php" class="btn btn-secondary">Change Password <i style="margin-left: 10px"
-                    class="fa fa-arrow-right" aria-hidden="true"></i>
-            </a>
-        </div>
-        <button class="btn btn-info w-100 mb-3" data-bs-toggle="modal" data-bs-target="#profileModal">View ID</button>
-        <form action="../logic/updateProfileCityHealth.php" method="POST" enctype="multipart/form-data">
-            <input type="hidden" name="accountId" value="<?= htmlspecialchars($user['accountId']) ?>">
-            <div class="mb-3">
-                <label for="fname" class="form-label">First Name</label>
-                <input type="text" id="fname" name="fname" class="form-control" value="<?= $user['fname'] ?>" required>
-                <div style="height: 15px" class="text-danger" id="fnameError"></div>
-            </div>
-            <div class="mb-3">
-                <label for="lname" class="form-label">Last Name</label>
-                <input type="text" id="lname" name="lname" class="form-control" value="<?= $user['lname'] ?>" required>
-                <div style="height: 15px" class="text-danger" id="lnameError"></div>
-            </div>
-            <div class="mb-3">
-                <label for="address" class="form-label">Address</label>
-                <input type="text" id="address" name="address" class="form-control" value="<?= $user['address'] ?>"
-                    required>
-                <div style="height: 15px" class="text-danger" id="addressError"></div>
-            </div>
-            <div class="mb-3">
-                <label for="contactNo" class="form-label">Contact Number</label>
-                <input type="text" id="contactNo" name="contactNo" class="form-control"
-                    value="<?= $user['contactNo'] ?>" required>
-                <div style="height: 15px" class="text-danger" id="contactNoError"></div>
-            </div>
-            <div class="mb-3">
-                <label for="id_verification" class="form-label">ID:</label>
-                <input type="file" id="id_verification" name="id_verification" class="form-control">
-            </div>
-            <button type="submit" name="submit" class="btn btn-primary w-100">Update Profile</button>
-        </form>
+<?php ob_start() ?>
+<div class="card p-4 shadow-lg rounded">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3 class="text-center mb-0">Update Profile</h3>
+        <a href="changePassword.php" class="btn btn-secondary">Change Password <i style="margin-left: 10px"
+                class="fa fa-arrow-right" aria-hidden="true"></i>
+        </a>
     </div>
+    <button class="btn btn-info w-100 mb-3" data-bs-toggle="modal" data-bs-target="#profileModal">View ID</button>
+    <form action="../logic/updateProfileCityHealth.php" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="accountId" value="<?= htmlspecialchars($user['accountId']) ?>">
+        <div class="mb-3">
+            <label for="fname" class="form-label">First Name</label>
+            <input type="text" id="fname" name="fname" class="form-control" value="<?= $user['fname'] ?>" required>
+            <div style="height: 15px" class="text-danger" id="fnameError"></div>
+        </div>
+        <div class="mb-3">
+            <label for="lname" class="form-label">Last Name</label>
+            <input type="text" id="lname" name="lname" class="form-control" value="<?= $user['lname'] ?>" required>
+            <div style="height: 15px" class="text-danger" id="lnameError"></div>
+        </div>
+        <div class="mb-3">
+            <label for="address" class="form-label">Address</label>
+            <input type="text" id="address" name="address" class="form-control" value="<?= $user['address'] ?>"
+                required>
+            <div style="height: 15px" class="text-danger" id="addressError"></div>
+        </div>
+        <div class="mb-3">
+            <label for="contactNo" class="form-label">Contact Number</label>
+            <input type="text" id="contactNo" name="contactNo" class="form-control" value="<?= $user['contactNo'] ?>"
+                required>
+            <div style="height: 15px" class="text-danger" id="contactNoError"></div>
+        </div>
+        <div class="mb-3">
+            <label for="id_verification" class="form-label">ID:</label>
+            <input type="file" id="id_verification" name="id_verification" class="form-control">
+        </div>
+        <button type="submit" name="submit" class="btn btn-primary w-100">Update Profile</button>
+    </form>
 </div>
+
 
 <!-- Profile Modal -->
 <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
@@ -76,12 +72,10 @@ $navbar = ob_get_clean();
     </div>
 </div>
 
-<?php $content = ob_get_clean(); ?>
+<?php $city_health_content = ob_get_clean() ?>
 
-<?php ob_start(); ?>
-<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-<script src="../assets/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<?php ob_start() ?>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         var myModal = new bootstrap.Modal(document.getElementById('profileModal'));
@@ -98,7 +92,6 @@ $navbar = ob_get_clean();
     </script>
     <?php unset($_SESSION["errorMessages"]) ?>
 <?php endif ?>
+<?php $city_health_scripts = ob_get_clean() ?>
 
-<?php $scripts = ob_get_clean(); ?>
-
-<?php require_once "../shared/layout.php"; ?>
+<?php require_once "_city-health-layout.php" ?>

@@ -53,7 +53,7 @@ if ($data['approve_status'] == 'Cancelled') {
 
 $date = new DateTime();
 $fieldInputs["start_date"] = $date->format('Y-m-d');
-$fieldInputs['end_date'] = $subscription_details['plan'] == SubscriptionPlan::Annual->value ?
+$fieldInputs['end_date'] = $subscription_details['plan'] == SubscriptionPlan::Annual->name ?
     $date->modify('+1 year')->format('Y-m-d') :
     $date->modify('+1 month')->format('Y-m-d');
 

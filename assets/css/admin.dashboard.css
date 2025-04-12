@@ -31,6 +31,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 2rem;
+    margin-bottom: 2rem;
 }
 
 .chart-box {
@@ -45,6 +46,11 @@
 
 canvas {
     max-width: 100%;
+}
+
+.month-date {
+    color: gray; 
+    user-select: none;
 }
 
 .fa-star {

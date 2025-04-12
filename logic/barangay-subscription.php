@@ -46,8 +46,8 @@ if (!isset($_FILES['receipt']) || $_FILES['receipt']['size'] <= 0) {
 
 $fieldInputs['receipt'] = $ms->uploadImage($_FILES['receipt'], $receipt_id, $dir->upload_receipt);
 
-$fieldInputs['amount'] = $fieldInputs['plan'] == SubscriptionPlan::Annual->value ?
-    2999 : 299;
+$fieldInputs['amount'] = $fieldInputs['plan'] == SubscriptionPlan::Annual->name ?
+    SubscriptionPlan::Annual->value : SubscriptionPlan::Monthly->value;
 
 $subscribe = $db->addRecord("subscription", $fieldInputs);
 

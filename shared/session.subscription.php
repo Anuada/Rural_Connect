@@ -4,8 +4,15 @@ if (!isset($_SESSION['accountId'])) {
     header("Location: ../page/login.php");
     exit();
 }
+
 require_once "../shared/is.user.verified.php";
+require_once "../enums/UserType.php";
 require_once "../util/DbHelper.php";
+
+if ($_SESSION['user_type'] != UserType::barangay_inc->value) {
+    header("Location: ../page/login.php");
+    exit();
+}
 
 $db = new DbHelper();
 

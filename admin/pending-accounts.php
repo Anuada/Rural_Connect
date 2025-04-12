@@ -12,20 +12,21 @@ $admin_title = "Pending Accounts";
 <?php ob_start() ?>
 
 <!-- Tabs -->
-<ul class="nav nav-tabs pt-3" id="pendingTabs" role="tablist">
-    <li class="nav-item" role="presentation">
-        <button class="nav-link active" id="barangay-inc-tab" style="width: 22.5vw" data-bs-toggle="tab"
+<ul class="nav nav-tabs pt-3 w-100" id="pendingTabs" role="tablist" style="display: flex;">
+    <li class="nav-item flex-fill text-center" role="presentation">
+        <button class="nav-link active w-100" id="barangay-inc-tab" data-bs-toggle="tab"
             data-bs-target="#barangay-inc" type="button" role="tab">Barangay Incharge</button>
     </li>
-    <li class="nav-item" role="presentation">
-        <button class="nav-link" id="city-health-tab" style="width: 22.5vw" data-bs-toggle="tab"
+    <li class="nav-item flex-fill text-center" role="presentation">
+        <button class="nav-link w-100" id="city-health-tab" data-bs-toggle="tab"
             data-bs-target="#city-health" type="button" role="tab">City Health</button>
     </li>
-    <li class="nav-item" role="presentation">
-        <button class="nav-link" id="deliveries-tab" style="width: 22.5vw" data-bs-toggle="tab"
+    <li class="nav-item flex-fill text-center" role="presentation">
+        <button class="nav-link w-100" id="deliveries-tab" data-bs-toggle="tab"
             data-bs-target="#deliveries" type="button" role="tab">Deliveries</button>
     </li>
 </ul>
+
 
 <!-- Tab Contents -->
 <div class="tab-content mt-3" id="pendingTabsContent">

@@ -43,12 +43,19 @@ $admin_title = "Dashboard";
 <div class="charts">
     <div class="chart-box">
         <h4>Subscribers Breakdown</h4>
-        <canvas id="doughnutChart"></canvas>
+        <canvas id="subscribersBreakdownChart"></canvas>
     </div>
 
     <div class="chart-box">
-        <h4>Total Users</h4>
-        <canvas id="barChart"></canvas>
+        <h4>Total Users Breakdown</h4>
+        <canvas id="totalUsersBreakdownChart"></canvas>
+    </div>
+</div>
+
+<div class="charts">
+    <div class="chart-box">
+        <h4>New Users <span id="thisMonth"></span></h4>
+        <canvas id="totalUsersAddedThisMonth"></canvas>
     </div>
 </div>
 <?php $admin_content = ob_get_clean() ?>

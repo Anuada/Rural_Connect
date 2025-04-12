@@ -84,6 +84,26 @@ class Misc
         return json_encode($response);
     }
 
+    public function truncateSentence($sentence, $limit = 70)
+    {
+        if (strlen($sentence) <= $limit)
+            return $sentence;
+
+        $truncated = substr($sentence, 0, $limit);
+        $lastSpace = strrpos($truncated, ' ');
+
+        if ($lastSpace !== false) {
+            $truncated = substr($truncated, 0, $lastSpace);
+        }
+
+        return "$truncated...";
+    }
+
+    public static function displayEnumNames(array $enums)
+    {
+        return array_column($enums, 'name');
+    }
+
     public static function displayEnums(array $enums)
     {
         return array_column($enums, 'value');

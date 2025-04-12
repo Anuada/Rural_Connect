@@ -18,12 +18,12 @@ if (isset($_POST["submit"])) {
         $updateMed = $db->updateRecord("med_availability", ["id" => $id, "med_name" => $med_name, "med_description" => $med_description, "quantity" => $quantity, "expiry_date" => $expiry_date, "DosageForm" => $DosageForm, "DosageStrength" => $DosageStrength, "category" => $category]);
 
         if ($updateMed) {
-            $_SESSION["m"] = "Updated Medicine successfully";
-            header("Location: ../city_health/uploadAvailableMed.php");
+            $_SESSION["m"] = "Medicine Updated Successfully";
+            header("Location: ../city_health/view_med.php");
             exit();
         } else {
-            $_SESSION["m"] = "Error uploading!";
-            header("Location: ../city_health/uploadMedEdit.php");
+            $_SESSION["m"] = "No Data Was Updated!";
+            header("Location: ../city_health/uploadMedEdit.php?id=$id");
             exit();
         }
     }
