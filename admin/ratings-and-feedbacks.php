@@ -2,6 +2,7 @@
 session_start();
 require_once "../shared/session.admin.php";
 require_once "./is.admin.authenticated.php";
+$admin_title = "Ratings and Feedbacks";
 ?>
 
 <?php ob_start() ?>
@@ -10,11 +11,7 @@ require_once "./is.admin.authenticated.php";
 
 <?php ob_start() ?>
 
-<div class="container">
-    <h3>Ratings and Feedback</h3>
-
-    <canvas id="ratingsChart"></canvas>
-</div>
+<canvas id="ratingsChart"></canvas>
 
 <!-- Modal -->
 <div class="modal fade" id="ratingModal" tabindex="-1" aria-labelledby="ratingModalLabel" aria-hidden="true">

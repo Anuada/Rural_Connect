@@ -87,12 +87,6 @@ $profileImage = isset($deliveries[0]['id_verification']) ? htmlspecialchars($del
                 <li class="nav-item">
                     <a class="nav-link fuchsia" style="margin-right: 20px;" href="./">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link fuchsia" style="margin-right: 20px;" href="view_med.php">Ready for Delivery</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link fuchsia" style="margin-right: 20px;" href="./events.php">Order Medicine</a>
-                </li>
                 <!-- Profile Dropdown -->
                 <li class="nav-item dropdown position-relative">
                     <div class="dropdown">

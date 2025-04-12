@@ -58,10 +58,12 @@ $users = $dbHelper->fetchDeliveries();
                     <a class="nav-link" href="#"><i class="fas fa-tachometer-alt me-2"></i> Dashboard</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="uploadAvailableMed.php"><i class="fas fa-upload me-2"></i> Upload Medicine</a>
+                    <a class="nav-link" href="uploadAvailableMed.php"><i class="fas fa-upload me-2"></i> Upload
+                        Medicine</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="request_med.php"><i class="fas fa-prescription-bottle me-2"></i> Requested Medicine</a>
+                    <a class="nav-link" href="request_med.php"><i class="fas fa-prescription-bottle me-2"></i> Requested
+                        Medicine</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#"><i class="fas fa-cogs me-2"></i> Settings</a>
@@ -84,13 +86,13 @@ $users = $dbHelper->fetchDeliveries();
                     <h4 class="text-center fw-bold">Select Delivery Date</h4>
                     <form action="../logic/Selectdate_req.php" method="POST">
                         <input type="hidden" name="requestId" value="<?php echo htmlspecialchars($requestId); ?>">
-                        
+
                         <label for="assignedUser">Select User:</label>
                         <select class="form-control" name="deliveries_accountId" required>
                             <option hidden selected>SELECT COURIER</option>
                             <?php foreach ($users as $user): ?>
-                                <option value="<?php echo htmlspecialchars($user['accountId']); ?>"> 
-                                    <?php echo htmlspecialchars($user['fname'] . ' ' . $user['lname']); ?> 
+                                <option value="<?php echo htmlspecialchars($user['accountId']); ?>">
+                                    <?php echo htmlspecialchars($user['fname'] . ' ' . $user['lname']); ?>
                                 </option>
                             <?php endforeach; ?>
                         </select>

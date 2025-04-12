@@ -8,10 +8,6 @@ require_once "../util/Misc.php";
 $db = new DbHelper();
 $ms = new Misc;
 
-$total_ratings = [];
+$total_rating = $db->total_rating();
 
-for ($i = 1; $i < 6; $i++) {
-    $total_ratings[] = (int) $db->countRatings($i);
-}
-
-echo $ms->json_response($total_ratings, "Number of Ratings");
+echo $ms->json_response($total_rating, "Total Rating");

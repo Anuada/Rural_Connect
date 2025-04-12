@@ -5,7 +5,7 @@ if (!isset($_SESSION['accountId'])) {
     exit();
 }
 require_once "../shared/is.user.verified.php";
-require_once "../util/dbhelper.php";
+require_once "../util/DbHelper.php";
 
 $db = new DbHelper();
 

@@ -2,6 +2,7 @@
 session_start();
 require_once "../shared/session.admin.php";
 require_once "./is.admin.authenticated.php";
+$admin_title = "Settings";
 ?>
 
 <?php ob_start() ?>
@@ -9,7 +10,7 @@ require_once "./is.admin.authenticated.php";
 <?php $admin_styles = ob_get_clean() ?>
 
 <?php ob_start() ?>
-<div class="container" id="form_container"></div>
+<div id="form_container"></div>
 
 <?php $admin_content = ob_get_clean() ?>
 

@@ -53,9 +53,9 @@ $navbar = ob_get_clean();
 <?php if (isset($_SESSION["errorMessages"])): ?>
     <script>
         const errorMessages = <?php echo json_encode($_SESSION["errorMessages"]) ?>;
-        document.getElementById("current_passwordError").innerHTML = errorMessages.current_password  != null ? errorMessages.current_password : "";
-        document.getElementById("new_passwordError").innerHTML = errorMessages.new_password  != null ? errorMessages.new_password : "";
-        document.getElementById("repeat_passwordError").innerHTML = errorMessages.repeat_password  != null ? errorMessages.repeat_password : "";
+        document.getElementById("current_passwordError").innerHTML = errorMessages.current_password != null ? errorMessages.current_password : "";
+        document.getElementById("new_passwordError").innerHTML = errorMessages.new_password != null ? errorMessages.new_password : "";
+        document.getElementById("repeat_passwordError").innerHTML = errorMessages.repeat_password != null ? errorMessages.repeat_password : "";
     </script>
     <?php unset($_SESSION["errorMessages"]) ?>
 <?php endif ?>

@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.30, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: med_deliveries
+-- Host: 127.0.0.1    Database: rural_connect
 -- ------------------------------------------------------
 -- Server version	8.0.30
 
@@ -44,7 +44,7 @@ CREATE TABLE `account` (
 
 LOCK TABLES `account` WRITE;
 /*!40000 ALTER TABLE `account` DISABLE KEYS */;
-INSERT INTO `account` VALUES ('0248dba5-eced-4c06-a57a-8ae35201dd3a','michelle_dee@mailinator.com','michelle_dee','$2y$12$7CtkXrDmb3KIbWGGSw1Puumtqub9fjYVu7OBIEYmDmlqA/K/fjMpS','city_health',NULL,'',1,0,'Pending','2025-04-09 15:22:33'),('102f4343-7843-4b85-bb49-05841e4811b3','hahah_roap@mailinator.com','hahah_roap','$2y$12$azxWhzyXV8It.3f6Zz9kHO5p71DFMQCgF6WWJzWZsDWYJzY8NOQKq','city_health',NULL,'',1,0,'Approved','2025-04-08 03:01:18'),('18d236b6-3892-498f-8612-767f777a4f34','bernard_wilson@mailinator.com','bernard_wilson','$2y$12$Z0OI3idGKBl0HVIYbz8yzua.zTz6Qx8.3ziIDXXkzUXKGnkv5pX76','barangay_inc',NULL,'',1,0,'Approved','2025-04-09 01:25:09'),('2f0444ac-230a-480e-9c4e-d5f68ccfe069','arizonamaine@mailinator.com','arizonamaine','$2y$12$CgDPRB1aiVkujYnzrcSZyeaVZ0IDXpcU4QSU8WH7vTH9wrfN9VUEW','barangay_inc',NULL,'',1,0,'Approved','2025-04-08 09:19:57'),('343e3676-6281-45d4-ab39-25eb15909b8b','janesmith@mailinator.com','janesmith','$2y$12$UEDCn08E9aDLAeJSFUdI4.BUo16ZMf6DJUBtuKdrJobP.BvxZdWYi','barangay_inc',NULL,'',1,0,'Approved','2025-04-08 01:45:49'),('3aeb96d7-b7f5-44d4-8bad-6a04cdd75477','junocarpenter@mailinator.com','junocarpenter','$2y$12$auIK3QA6E/exPVZuhcjgt.U6FzOWZ/grwH5BUs9zifVyfNE8cU00W','barangay_inc',NULL,'',1,0,'Pending','2025-04-07 15:52:05'),('55359fe8-e86a-4670-b0bf-4277c3c5d07f','virginia_montgomery@mailinator.com','virginia_montgomery','$2y$12$.dDjw9o2T2FUsqNixmoaXOPYN60syXbZbtUfxjuutYwjqrDWpKVwq','barangay_inc',NULL,'',1,0,'Pending','2025-04-09 11:24:45'),('66dcf1bd-51e1-45e3-8727-0c343577bdd5','ericsonmariebautista@mailinator.com','ericsonmariebautista','$2y$12$MPChjNnPM3fTn2bGJB9W/OzmK3knK4LDRFx5f3C2N7ojr4N4jTh16','admin',NULL,NULL,1,0,'Approved','2025-04-03 22:06:46'),('6c0b0a91-03a3-4614-a6a9-1a46133e8a60','ladyglittersmackles@gmail.com','anuada_1990','$2y$12$pzTQcKHz2TtTYxSt9km72u9sloyJtK4hbfA2n2ZTJsNFHaTlzMcfS','barangay_inc','','',1,0,'Approved','2025-04-03 17:40:37'),('74158fcb-d946-4787-b7c5-8ccaa3b30660','heroshigonzales@gmail.com','heroshi_paro','$2y$12$siu6lpmvdADUMoO9EH.K3u31kbwFXet8P8ia3vNbcsOotWagX.Ob2','admin','',NULL,1,0,'Approved','2025-04-03 17:40:35'),('7594b921-87ea-437e-bd63-03e2809c3fc2','mariah_carey@mailinator.com','therealmariah_carey','$2y$12$qvCWyerLwX34QrtnG6SwIebSrazN.KDGsQrbLagqe6CzJWLKtVvrS','deliveries','','',1,0,'Approved','2025-04-03 17:40:38'),('8c3acd7e-264b-4f64-a954-a425f09b97a0','laquantisha_johnson@mailinator.com','laquantisha_johnson','$2y$12$9UaUeUoxMAfjHkYF1Ew6eOgJheGr3BxLeVbGiSQDa1UXkYzYqbkKm','barangay_inc',NULL,'',1,0,'Approved','2025-04-08 03:04:03'),('a96ea61e-db52-4a28-a77b-efe8492ec2d4','olivia_rodrigo@mailinator.com','olivia_rodrigo','$2y$12$StCEnZ/CdF/R2kbv1iu9Z.AucFajV.1AyuubgPzfEZ3qgu966tnjW','deliveries',NULL,'',1,0,'Pending','2025-04-09 15:32:58'),('b5b54cf0-da93-401e-a353-2d2917210971','mharbenreypude.854@gmail.com','mharbenreypude','$2y$10$MRJGneSncga1iXrV18RFdu/GsLnp2CC944obFOVF38/FgS0v6cnEq','admin',NULL,NULL,1,0,'Approved','2025-04-03 21:50:07'),('d1b0d961-4460-444a-a7f2-0117347d28d2','jerryegamp21@gmail.com','jerryegamp21','$2y$10$GS6uoCetYreZQnAUhyFefefEjK1HgV.TO4pM0.041LDIc7ggnDePC','admin',NULL,NULL,1,0,'Approved','2025-04-03 21:59:17'),('d3da9bb6-b666-48c7-8310-ce227a2a9461','rana_guzman@mailinator.com','rana_guzman','$2y$12$ig4ASdaVOTf/v0K0gxVI1uiwybQUUEqi.NXi5dR69I4gE58NBLZci','barangay_inc',NULL,'',1,0,'Approved','2025-04-09 00:15:46'),('eb48b13c-9094-4de4-afc2-786b9dc93f96','christopher_pareyac@mailinator.com','christopher_pareyac','$2y$12$7W/t1R9Yj5c0EW4IHzVTmOrJCB/8pBfxhrbmAnDM3y6UTy7jz3skW','city_health',NULL,'',1,0,'Approved','2025-04-03 17:40:39'),('eb5452e2-2e5a-4510-9e0e-abac5714e03f','duncan_pello@mailinator.com','duncan_pello','$2y$12$nNIUEJOhe6y94BvBguJnsu0bU2lvkPvA.G0a36nz7JrPtzOFey.HK','barangay_inc',NULL,'',1,0,'Pending','2025-04-08 03:43:06'),('f3e92e97-dcb4-4e41-bfa0-a1b896ee2766','dualipa@mailinator.com','dualipa','$2y$12$1s/VeHUvlf.9hF7N9Kh7COkgwB9ZRa8QSsfqQkMMUnhqmtuQVJp92','deliveries',NULL,'',1,0,'Approved','2025-04-07 05:58:42');
+INSERT INTO `account` VALUES ('18d236b6-3892-498f-8612-767f777a4f34','bernard_wilson@mailinator.com','bernard_wilson','$2y$12$Z0OI3idGKBl0HVIYbz8yzua.zTz6Qx8.3ziIDXXkzUXKGnkv5pX76','barangay_inc',NULL,'',1,0,'Approved','2025-04-09 01:25:09'),('2f0444ac-230a-480e-9c4e-d5f68ccfe069','arizonamaine@mailinator.com','arizonamaine','$2y$12$CgDPRB1aiVkujYnzrcSZyeaVZ0IDXpcU4QSU8WH7vTH9wrfN9VUEW','barangay_inc',NULL,'',1,0,'Approved','2025-04-08 09:19:57'),('343e3676-6281-45d4-ab39-25eb15909b8b','janesmith@mailinator.com','janesmith','$2y$12$UEDCn08E9aDLAeJSFUdI4.BUo16ZMf6DJUBtuKdrJobP.BvxZdWYi','barangay_inc',NULL,'',1,0,'Approved','2025-04-08 01:45:49'),('3aeb96d7-b7f5-44d4-8bad-6a04cdd75477','junocarpenter@mailinator.com','junocarpenter','$2y$12$auIK3QA6E/exPVZuhcjgt.U6FzOWZ/grwH5BUs9zifVyfNE8cU00W','barangay_inc',NULL,'',1,0,'Approved','2025-04-07 15:52:05'),('55359fe8-e86a-4670-b0bf-4277c3c5d07f','virginia_montgomery@mailinator.com','virginia_montgomery','$2y$12$.dDjw9o2T2FUsqNixmoaXOPYN60syXbZbtUfxjuutYwjqrDWpKVwq','barangay_inc',NULL,'',1,0,'Approved','2025-04-09 11:24:45'),('66dcf1bd-51e1-45e3-8727-0c343577bdd5','ericsonmariebautista@mailinator.com','ericsonmariebautista','$2y$12$w/Hr3KIJIZk6JJEFpHvn/.znrK6cgPR9wa7/tp/Kg2pcGagYx5O..','admin',NULL,NULL,1,0,'Approved','2025-04-03 22:06:46'),('6c0b0a91-03a3-4614-a6a9-1a46133e8a60','ladyglittersmackles@gmail.com','anuada_1990','$2y$12$pzTQcKHz2TtTYxSt9km72u9sloyJtK4hbfA2n2ZTJsNFHaTlzMcfS','barangay_inc','','',1,0,'Approved','2025-04-03 17:40:37'),('74158fcb-d946-4787-b7c5-8ccaa3b30660','heroshigonzales@gmail.com','heroshi_paro','$2y$12$siu6lpmvdADUMoO9EH.K3u31kbwFXet8P8ia3vNbcsOotWagX.Ob2','admin','',NULL,1,0,'Approved','2025-04-03 17:40:35'),('7594b921-87ea-437e-bd63-03e2809c3fc2','mariah_carey@mailinator.com','therealmariah_carey','$2y$12$qvCWyerLwX34QrtnG6SwIebSrazN.KDGsQrbLagqe6CzJWLKtVvrS','deliveries','','',1,0,'Approved','2025-04-03 17:40:38'),('8c3acd7e-264b-4f64-a954-a425f09b97a0','laquantisha_johnson@mailinator.com','laquantisha_johnson','$2y$12$9UaUeUoxMAfjHkYF1Ew6eOgJheGr3BxLeVbGiSQDa1UXkYzYqbkKm','barangay_inc',NULL,'',1,0,'Approved','2025-04-08 03:04:03'),('a96ea61e-db52-4a28-a77b-efe8492ec2d4','olivia_rodrigo@mailinator.com','olivia_rodrigo','$2y$12$StCEnZ/CdF/R2kbv1iu9Z.AucFajV.1AyuubgPzfEZ3qgu966tnjW','deliveries',NULL,'',1,0,'Approved','2025-04-09 15:32:58'),('b5b54cf0-da93-401e-a353-2d2917210971','mharbenreypude.854@gmail.com','mharbenreypude','$2y$10$MRJGneSncga1iXrV18RFdu/GsLnp2CC944obFOVF38/FgS0v6cnEq','admin',NULL,NULL,1,0,'Approved','2025-04-03 21:50:07'),('d1b0d961-4460-444a-a7f2-0117347d28d2','jerryegamp21@gmail.com','jerryegamp21','$2y$10$GS6uoCetYreZQnAUhyFefefEjK1HgV.TO4pM0.041LDIc7ggnDePC','admin',NULL,NULL,1,0,'Approved','2025-04-03 21:59:17'),('d3da9bb6-b666-48c7-8310-ce227a2a9461','rana_guzman@mailinator.com','rana_guzman','$2y$12$ig4ASdaVOTf/v0K0gxVI1uiwybQUUEqi.NXi5dR69I4gE58NBLZci','barangay_inc',NULL,'',1,0,'Approved','2025-04-09 00:15:46'),('eb48b13c-9094-4de4-afc2-786b9dc93f96','christopher_pareyac@mailinator.com','christopher_pareyac','$2y$12$7W/t1R9Yj5c0EW4IHzVTmOrJCB/8pBfxhrbmAnDM3y6UTy7jz3skW','city_health',NULL,'',1,0,'Approved','2025-04-03 17:40:39'),('eb5452e2-2e5a-4510-9e0e-abac5714e03f','duncan_pello@mailinator.com','duncan_pello','$2y$12$nNIUEJOhe6y94BvBguJnsu0bU2lvkPvA.G0a36nz7JrPtzOFey.HK','barangay_inc',NULL,'',1,0,'Approved','2025-04-08 03:43:06'),('f3e92e97-dcb4-4e41-bfa0-a1b896ee2766','dualipa@mailinator.com','dualipa','$2y$12$1s/VeHUvlf.9hF7N9Kh7COkgwB9ZRa8QSsfqQkMMUnhqmtuQVJp92','deliveries',NULL,'',1,0,'Approved','2025-04-07 05:58:42');
 /*!40000 ALTER TABLE `account` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -74,7 +74,7 @@ CREATE TABLE `admin` (
 
 LOCK TABLES `admin` WRITE;
 /*!40000 ALTER TABLE `admin` DISABLE KEYS */;
-INSERT INTO `admin` VALUES ('66dcf1bd-51e1-45e3-8727-0c343577bdd5','Ericson Mar','Bautista','Floptropica, Cebu City','1990-01-31','09189389183','../assets/img/profile/admin/66dcf1bd-51e1-45e3-8727-0c343577bdd5.png'),('74158fcb-d946-4787-b7c5-8ccaa3b30660','Heroshi','Paro','Curvada, Juan Climaco Sr., Toledo City, Cebu','2002-01-31','09293820193','../assets/img/profile/admin/74158fcb-d946-4787-b7c5-8ccaa3b30660.png'),('b5b54cf0-da93-401e-a353-2d2917210971','Mharben Rey','Pude','Tres de Abril St., Cebu City, Cebu 6000','1998-10-16','09282719482','../assets/img/profile/admin/b5b54cf0-da93-401e-a353-2d2917210971.png'),('d1b0d961-4460-444a-a7f2-0117347d28d2','Jeremy','Gamboa','Tinabangay 2 Alaska Mambaling Cebu city, 6000','2000-12-21','09193828493','../assets/img/profile/admin/d1b0d961-4460-444a-a7f2-0117347d28d2.png');
+INSERT INTO `admin` VALUES ('66dcf1bd-51e1-45e3-8727-0c343577bdd5','Ericson Marie','Bautista','Floptropica, Cebu City','1990-01-31','09189389183','../assets/img/profile/admin/66dcf1bd-51e1-45e3-8727-0c343577bdd5.png'),('74158fcb-d946-4787-b7c5-8ccaa3b30660','Heroshi','Paro','Curvada, Juan Climaco Sr., Toledo City, Cebu','2002-01-31','09293820193','../assets/img/profile/admin/74158fcb-d946-4787-b7c5-8ccaa3b30660.png'),('b5b54cf0-da93-401e-a353-2d2917210971','Mharben Rey','Pude','Tres de Abril St., Cebu City, Cebu 6000','1998-10-16','09282719482','../assets/img/profile/admin/b5b54cf0-da93-401e-a353-2d2917210971.png'),('d1b0d961-4460-444a-a7f2-0117347d28d2','Jeremy','Gamboa','Tinabangay 2 Alaska Mambaling Cebu city, 6000','2000-12-21','09193828493','../assets/img/profile/admin/d1b0d961-4460-444a-a7f2-0117347d28d2.png');
 /*!40000 ALTER TABLE `admin` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -159,7 +159,7 @@ CREATE TABLE `city_health` (
 
 LOCK TABLES `city_health` WRITE;
 /*!40000 ALTER TABLE `city_health` DISABLE KEYS */;
-INSERT INTO `city_health` VALUES ('0248dba5-eced-4c06-a57a-8ae35201dd3a','Michelle','Dee','London, Pardo Cebu City','09284950392','../assets/img/profile/city_health/0248dba5-eced-4c06-a57a-8ae35201dd3a.png'),('102f4343-7843-4b85-bb49-05841e4811b3','Hahah','Roap','Floptropica City, USF','09183928484','../assets/img/profile/city_health/102f4343-7843-4b85-bb49-05841e4811b3.png'),('eb48b13c-9094-4de4-afc2-786b9dc93f96','Christopher','Pareyac','Floptropica','09284928392','../assets/img/profile/city_health/eb48b13c-9094-4de4-afc2-786b9dc93f96.png');
+INSERT INTO `city_health` VALUES ('eb48b13c-9094-4de4-afc2-786b9dc93f96','Christopher','Pareyac','Floptropica','09284928392','../assets/img/profile/city_health/eb48b13c-9094-4de4-afc2-786b9dc93f96.png');
 /*!40000 ALTER TABLE `city_health` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -193,13 +193,13 @@ INSERT INTO `deliveries` VALUES ('7594b921-87ea-437e-bd63-03e2809c3fc2','Mariah'
 UNLOCK TABLES;
 
 --
--- Table structure for table `med_availabilty`
+-- Table structure for table `med_availability`
 --
 
-DROP TABLE IF EXISTS `med_availabilty`;
+DROP TABLE IF EXISTS `med_availability`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `med_availabilty` (
+CREATE TABLE `med_availability` (
   `id` int NOT NULL AUTO_INCREMENT,
   `med_name` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
   `med_description` text COLLATE utf8mb4_general_ci NOT NULL,
@@ -218,13 +218,13 @@ CREATE TABLE `med_availabilty` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `med_availabilty`
+-- Dumping data for table `med_availability`
 --
 
-LOCK TABLES `med_availabilty` WRITE;
-/*!40000 ALTER TABLE `med_availabilty` DISABLE KEYS */;
-INSERT INTO `med_availabilty` VALUES (19,'Paracetamol','It is a common over-the-counter medication used to relieve pain and reduce fever. It is often used for headaches, muscle aches, arthritis, backaches, toothaches, colds, and fevers. Paracetamol is generally considered safe when used as directed, but it can be harmful in excessive doses, leading to liver damage. Always follow dosing instructions and consult a healthcare professional if you have any concerns.','1000','2025-03-21 06:43:10','2026-01-01 00:00:00','../assets/img/med_image/eb48b13c90944de4afc2786b9dc93f96_paracetamol_03202025224310.png','Tablet','500 mg','analgesics and antipyretics','eb48b13c-9094-4de4-afc2-786b9dc93f96'),(21,'Grethers Pastilles','Used to soothe throat discomfort and alleviate dry mouth symptoms.','1000','2025-03-21 06:52:56','2026-03-21 00:00:00','../assets/img/med_image/eb48b13c90944de4afc2786b9dc93f96_gretherspastilles_03202025225256.png','Pastille','110000 mg','throat lozenges or cough drops','eb48b13c-9094-4de4-afc2-786b9dc93f96'),(22,'Generic (BIOGESIC)','A trusted brand of paracetamol, Paracetamol (Biogesic) is a medication that is typically used to relieve mild to moderate pain such as headache, backache, menstrual cramps, muscular strain, minor arthritis pain, toothache, and reduce fevers caused by illnesses such as the common cold and flu','10000','2025-03-21 10:05:31','2025-03-22 00:00:00','../assets/img/med_image/eb48b13c90944de4afc2786b9dc93f96_generic(biogesic)_03212025030531.png','table','500mg','Biogesic 50mg Tablet belongs to a class of medicines known as nonsteroidal anti-inflammatory drugs (','eb48b13c-9094-4de4-afc2-786b9dc93f96'),(24,'para sa opaw','sa buhok','23','2025-03-21 11:29:37','9999-09-09 00:00:00','../assets/img/med_image/eb48b13c90944de4afc2786b9dc93f96_parasaopaw_03212025042937.png','Tablet, Capsule, Syrup','ml','Construction','eb48b13c-9094-4de4-afc2-786b9dc93f96');
-/*!40000 ALTER TABLE `med_availabilty` ENABLE KEYS */;
+LOCK TABLES `med_availability` WRITE;
+/*!40000 ALTER TABLE `med_availability` DISABLE KEYS */;
+INSERT INTO `med_availability` VALUES (19,'Paracetamol','It is a common over-the-counter medication used to relieve pain and reduce fever. It is often used for headaches, muscle aches, arthritis, backaches, toothaches, colds, and fevers. Paracetamol is generally considered safe when used as directed, but it can be harmful in excessive doses, leading to liver damage. Always follow dosing instructions and consult a healthcare professional if you have any concerns.','1000','2025-03-21 06:43:10','2026-01-01 00:00:00','../assets/img/med_image/eb48b13c90944de4afc2786b9dc93f96_paracetamol_03202025224310.png','Tablet','500 mg','analgesics and antipyretics','eb48b13c-9094-4de4-afc2-786b9dc93f96'),(21,'Grethers Pastilles','Used to soothe throat discomfort and alleviate dry mouth symptoms.','1000','2025-03-21 06:52:56','2026-03-21 00:00:00','../assets/img/med_image/eb48b13c90944de4afc2786b9dc93f96_gretherspastilles_03202025225256.png','Pastille','110000 mg','throat lozenges or cough drops','eb48b13c-9094-4de4-afc2-786b9dc93f96'),(22,'Generic (BIOGESIC)','A trusted brand of paracetamol, Paracetamol (Biogesic) is a medication that is typically used to relieve mild to moderate pain such as headache, backache, menstrual cramps, muscular strain, minor arthritis pain, toothache, and reduce fevers caused by illnesses such as the common cold and flu','9000','2025-03-21 10:05:31','2025-03-22 00:00:00','../assets/img/med_image/eb48b13c90944de4afc2786b9dc93f96_generic(biogesic)_03212025030531.png','table','500mg','Biogesic 50mg Tablet belongs to a class of medicines known as nonsteroidal anti-inflammatory drugs (','eb48b13c-9094-4de4-afc2-786b9dc93f96');
+/*!40000 ALTER TABLE `med_availability` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -244,7 +244,7 @@ CREATE TABLE `med_deliveries` (
   KEY `request_med_id` (`request_med_id`),
   CONSTRAINT `FK_med_deliveries_deliveries` FOREIGN KEY (`deliveries_accountId`) REFERENCES `deliveries` (`accountId`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_med_deliveries_request_med` FOREIGN KEY (`request_med_id`) REFERENCES `request_med` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -253,7 +253,7 @@ CREATE TABLE `med_deliveries` (
 
 LOCK TABLES `med_deliveries` WRITE;
 /*!40000 ALTER TABLE `med_deliveries` DISABLE KEYS */;
-INSERT INTO `med_deliveries` VALUES (11,9,'7594b921-87ea-437e-bd63-03e2809c3fc2','2025-03-20 00:00:00'),(12,10,'7594b921-87ea-437e-bd63-03e2809c3fc2','2025-05-01 00:00:00'),(13,11,'7594b921-87ea-437e-bd63-03e2809c3fc2','2025-04-16 00:00:00'),(14,14,'7594b921-87ea-437e-bd63-03e2809c3fc2','2025-04-11 00:00:00');
+INSERT INTO `med_deliveries` VALUES (15,17,'7594b921-87ea-437e-bd63-03e2809c3fc2','2025-04-13 00:00:00');
 /*!40000 ALTER TABLE `med_deliveries` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -281,7 +281,7 @@ CREATE TABLE `rate_and_feedback` (
 
 LOCK TABLES `rate_and_feedback` WRITE;
 /*!40000 ALTER TABLE `rate_and_feedback` DISABLE KEYS */;
-INSERT INTO `rate_and_feedback` VALUES ('18d236b6-3892-498f-8612-767f777a4f34',4,'nice siya','2025-04-09 08:11:12','2025-04-09 08:11:12'),('6c0b0a91-03a3-4614-a6a9-1a46133e8a60',3,'ok na to','2025-04-05 17:03:56','2025-04-06 12:18:18'),('7594b921-87ea-437e-bd63-03e2809c3fc2',5,'yehey, the service is so much better now, good thing you listen to the feedbacks from the users. keep it up po!!!','2025-04-05 15:19:45','2025-04-06 03:24:17'),('8c3acd7e-264b-4f64-a954-a425f09b97a0',4,'So far, it&#039;s nice','2025-04-08 09:03:47','2025-04-08 09:03:47'),('eb48b13c-9094-4de4-afc2-786b9dc93f96',1,'ako ay isang (reyna)4x','2025-04-05 16:24:03','2025-04-06 03:26:21'),('f3e92e97-dcb4-4e41-bfa0-a1b896ee2766',5,'Gimme chi, gimme purr, gimme meow, gimme her, gimme funds\r\nGimme rights, gimme fight, gimme nerve, gimme cunt, let me','2025-04-05 19:15:17','2025-04-05 19:15:17');
+INSERT INTO `rate_and_feedback` VALUES ('18d236b6-3892-498f-8612-767f777a4f34',4,'nice siya','2025-04-09 08:11:12','2025-04-09 08:11:12'),('6c0b0a91-03a3-4614-a6a9-1a46133e8a60',3,'ok na to','2025-04-05 17:03:56','2025-04-06 12:18:18'),('7594b921-87ea-437e-bd63-03e2809c3fc2',5,'yehey, the service is so much better now, good thing you listen to the feedbacks from the users. keep it up po!!!','2025-04-05 15:19:45','2025-04-06 03:24:17'),('8c3acd7e-264b-4f64-a954-a425f09b97a0',4,'So far, it&#039;s nice','2025-04-08 09:03:47','2025-04-08 09:03:47'),('eb48b13c-9094-4de4-afc2-786b9dc93f96',2,'ako ay isang (reyna)4x','2025-04-05 16:24:03','2025-04-11 22:06:30'),('f3e92e97-dcb4-4e41-bfa0-a1b896ee2766',5,'Gimme chi, gimme purr, gimme meow, gimme her, gimme funds\r\nGimme rights, gimme fight, gimme nerve, gimme cunt, let me','2025-04-05 19:15:17','2025-04-05 19:15:17');
 /*!40000 ALTER TABLE `rate_and_feedback` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -298,18 +298,16 @@ CREATE TABLE `request_med` (
   `barangay_inc_id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `med_avail_Id` int NOT NULL,
   `request_quantity` varchar(100) NOT NULL,
-  `request_DosageForm` varchar(100) NOT NULL,
-  `request_DosageStrength` varchar(100) NOT NULL,
   `requestStatus` enum('Pending','Accepted','Cancelled') NOT NULL DEFAULT 'Pending',
-  `prescription` varchar(100) NOT NULL,
+  `document` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `city_health_id` (`city_health_id`),
   KEY `barangay_inc_id` (`barangay_inc_id`),
   KEY `med_avail_Id` (`med_avail_Id`),
   CONSTRAINT `FK_request_med_barangay_inc` FOREIGN KEY (`barangay_inc_id`) REFERENCES `barangay_inc` (`accountId`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_request_med_city_health` FOREIGN KEY (`city_health_id`) REFERENCES `city_health` (`accountId`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `FK_request_med_med_availabilty` FOREIGN KEY (`med_avail_Id`) REFERENCES `med_availabilty` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+  CONSTRAINT `FK_request_med_med_availabilty` FOREIGN KEY (`med_avail_Id`) REFERENCES `med_availability` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -318,7 +316,7 @@ CREATE TABLE `request_med` (
 
 LOCK TABLES `request_med` WRITE;
 /*!40000 ALTER TABLE `request_med` DISABLE KEYS */;
-INSERT INTO `request_med` VALUES (9,'eb48b13c-9094-4de4-afc2-786b9dc93f96','6c0b0a91-03a3-4614-a6a9-1a46133e8a60',19,'100','Syrup','ml','Accepted',''),(10,'eb48b13c-9094-4de4-afc2-786b9dc93f96','6c0b0a91-03a3-4614-a6a9-1a46133e8a60',21,'500','Syrup','2500','Accepted',''),(11,'eb48b13c-9094-4de4-afc2-786b9dc93f96','6c0b0a91-03a3-4614-a6a9-1a46133e8a60',19,'1000','Tablet','2500','Accepted',''),(14,'eb48b13c-9094-4de4-afc2-786b9dc93f96','6c0b0a91-03a3-4614-a6a9-1a46133e8a60',19,'21','','250','Accepted',''),(15,'eb48b13c-9094-4de4-afc2-786b9dc93f96','6c0b0a91-03a3-4614-a6a9-1a46133e8a60',19,'8','','500','Pending','../assets/img/upload_prescription/9b796a75-1fbd-4aff-b495-a4a2bf7373bb.png');
+INSERT INTO `request_med` VALUES (15,'eb48b13c-9094-4de4-afc2-786b9dc93f96','6c0b0a91-03a3-4614-a6a9-1a46133e8a60',19,'8','Pending','../assets/img/upload_document/9b796a75-1fbd-4aff-b495-a4a2bf7373bb.png'),(17,'eb48b13c-9094-4de4-afc2-786b9dc93f96','6c0b0a91-03a3-4614-a6a9-1a46133e8a60',22,'1000','Accepted','../assets/img/upload_document/cf296070-d674-4691-8b2c-7deab5f63078.png');
 /*!40000 ALTER TABLE `request_med` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -352,7 +350,7 @@ CREATE TABLE `subscription` (
 
 LOCK TABLES `subscription` WRITE;
 /*!40000 ALTER TABLE `subscription` DISABLE KEYS */;
-INSERT INTO `subscription` VALUES ('4b0c6fab-477c-4894-a00c-bf8bd7f34eca','d3da9bb6-b666-48c7-8310-ce227a2a9461','../assets/img/upload_receipt/4b0c6fab-477c-4894-a00c-bf8bd7f34eca.png','Annual',2999,'Approved','2025-04-09','2026-04-09',NULL,'2025-04-09 01:13:24'),('5065e9bd-1c2e-4d74-8113-1b0046af435e','d3da9bb6-b666-48c7-8310-ce227a2a9461','../assets/img/upload_receipt/5065e9bd-1c2e-4d74-8113-1b0046af435e.png','Annual',2999,'Cancelled',NULL,NULL,'The photo you uploaded was not a receipt, please try to resubscribe again and upload the real receipt, a much clearer photo would be much appreciated!','2025-04-09 00:36:45'),('60151199-3307-4984-bd79-e82f0fbddc7c','18d236b6-3892-498f-8612-767f777a4f34','../assets/img/upload_receipt/60151199-3307-4984-bd79-e82f0fbddc7c.png','Monthly',299,'Cancelled',NULL,NULL,'The photo you uploaded was not a receipt, please try to resubscribe again and upload the real receipt, a much clearer one would be highly appreciated','2025-04-09 01:27:24'),('8629a7dc-a6d8-4067-bc8c-6b045712592f','6c0b0a91-03a3-4614-a6a9-1a46133e8a60','../assets/img/upload_receipt/8629a7dc-a6d8-4067-bc8c-6b045712592f.png','Monthly',299,'Cancelled',NULL,NULL,'The receipt you uploaded was blurry, I can&#039;t read the reference no. Please try to resubscribe and upload a much clearer photo of receipt. Thank You!','2025-04-09 03:05:43'),('955afd1c-d8bc-479a-a168-92687178e568','2f0444ac-230a-480e-9c4e-d5f68ccfe069','../assets/img/upload_receipt/955afd1c-d8bc-479a-a168-92687178e568.png','Annual',2999,'Approved','2025-04-08','2026-04-08',NULL,'2025-04-08 13:50:24'),('be1a1571-ba79-42c8-b06e-27f562c91e6f','18d236b6-3892-498f-8612-767f777a4f34','../assets/img/upload_receipt/be1a1571-ba79-42c8-b06e-27f562c91e6f.png','Monthly',299,'Approved','2025-04-09','2025-05-09',NULL,'2025-04-09 08:02:51'),('c1273f93-0f40-4cb8-8c47-531bc4856ed3','6c0b0a91-03a3-4614-a6a9-1a46133e8a60','../assets/img/upload_receipt/c1273f93-0f40-4cb8-8c47-531bc4856ed3.png','Monthly',299,'Approved','2025-04-09','2025-05-09',NULL,'2025-04-09 03:13:10'),('c4549a95-6eb7-4b3b-9257-568df429ec2c','8c3acd7e-264b-4f64-a954-a425f09b97a0','../assets/img/upload_receipt/c4549a95-6eb7-4b3b-9257-568df429ec2c.png','Annual',2999,'Approved','2025-04-09','2026-04-09',NULL,'2025-04-09 01:13:49'),('f94bd7d9-06cc-4e47-9ecf-7f64157cd46d','343e3676-6281-45d4-ab39-25eb15909b8b','../assets/img/upload_receipt/f94bd7d9-06cc-4e47-9ecf-7f64157cd46d.png','Annual',2999,'Approved','2025-04-08','2026-04-08',NULL,'2025-04-08 13:56:17');
+INSERT INTO `subscription` VALUES ('4b0c6fab-477c-4894-a00c-bf8bd7f34eca','d3da9bb6-b666-48c7-8310-ce227a2a9461','../assets/img/upload_receipt/4b0c6fab-477c-4894-a00c-bf8bd7f34eca.png','Annual',2999,'Approved','2025-04-09','2026-04-09',NULL,'2025-04-09 13:38:36'),('4b4f63b2-fcc8-413b-bdab-ca41271f60d4','3aeb96d7-b7f5-44d4-8bad-6a04cdd75477','../assets/img/upload_receipt/4b4f63b2-fcc8-413b-bdab-ca41271f60d4.png','Annual',2999,'Approved','2025-04-09','2026-04-09',NULL,'2025-04-09 22:40:42'),('5065e9bd-1c2e-4d74-8113-1b0046af435e','d3da9bb6-b666-48c7-8310-ce227a2a9461','../assets/img/upload_receipt/5065e9bd-1c2e-4d74-8113-1b0046af435e.png','Annual',2999,'Cancelled',NULL,NULL,'The photo you uploaded was not a receipt, please try to resubscribe again and upload the real receipt, a much clearer photo would be much appreciated!','2025-04-09 00:36:45'),('60151199-3307-4984-bd79-e82f0fbddc7c','18d236b6-3892-498f-8612-767f777a4f34','../assets/img/upload_receipt/60151199-3307-4984-bd79-e82f0fbddc7c.png','Monthly',299,'Cancelled',NULL,NULL,'The photo you uploaded was not a receipt, please try to resubscribe again and upload the real receipt, a much clearer one would be highly appreciated','2025-04-09 01:27:24'),('8629a7dc-a6d8-4067-bc8c-6b045712592f','6c0b0a91-03a3-4614-a6a9-1a46133e8a60','../assets/img/upload_receipt/8629a7dc-a6d8-4067-bc8c-6b045712592f.png','Monthly',299,'Cancelled',NULL,NULL,'The receipt you uploaded was blurry, I can&#039;t read the reference no. Please try to resubscribe and upload a much clearer photo of receipt. Thank You!','2025-04-09 03:05:43'),('955afd1c-d8bc-479a-a168-92687178e568','2f0444ac-230a-480e-9c4e-d5f68ccfe069','../assets/img/upload_receipt/955afd1c-d8bc-479a-a168-92687178e568.png','Annual',2999,'Approved','2025-04-08','2026-04-08',NULL,'2025-04-08 13:50:24'),('be1a1571-ba79-42c8-b06e-27f562c91e6f','18d236b6-3892-498f-8612-767f777a4f34','../assets/img/upload_receipt/be1a1571-ba79-42c8-b06e-27f562c91e6f.png','Monthly',299,'Approved','2025-04-09','2025-05-09',NULL,'2025-04-09 13:41:09'),('c1273f93-0f40-4cb8-8c47-531bc4856ed3','6c0b0a91-03a3-4614-a6a9-1a46133e8a60','../assets/img/upload_receipt/c1273f93-0f40-4cb8-8c47-531bc4856ed3.png','Monthly',299,'Approved','2025-04-09','2025-05-09',NULL,'2025-04-09 03:13:10'),('c4549a95-6eb7-4b3b-9257-568df429ec2c','8c3acd7e-264b-4f64-a954-a425f09b97a0','../assets/img/upload_receipt/c4549a95-6eb7-4b3b-9257-568df429ec2c.png','Annual',2999,'Approved','2025-04-09','2026-04-09',NULL,'2025-04-09 01:13:49'),('cee3e00d-09c5-47aa-a874-b2f412f7d342','eb5452e2-2e5a-4510-9e0e-abac5714e03f','../assets/img/upload_receipt/cee3e00d-09c5-47aa-a874-b2f412f7d342.png','Monthly',299,'Approved','2025-04-11','2025-05-11',NULL,'2025-04-11 21:44:50'),('f94bd7d9-06cc-4e47-9ecf-7f64157cd46d','343e3676-6281-45d4-ab39-25eb15909b8b','../assets/img/upload_receipt/f94bd7d9-06cc-4e47-9ecf-7f64157cd46d.png','Annual',2999,'Approved','2025-04-08','2026-04-08',NULL,'2025-04-08 13:56:17');
 /*!40000 ALTER TABLE `subscription` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -365,4 +363,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-04-10  5:37:59
+-- Dump completed on 2025-04-12  7:42:05

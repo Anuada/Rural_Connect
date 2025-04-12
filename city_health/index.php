@@ -27,26 +27,29 @@ $navbar = ob_get_clean();
     <div class="row">
         <!-- Sidebar -->
         <div class="col-md-3 bg-dark text-white vh-100 p-3" style="margin-top: 30px;">
-        <br>
-        <br>
-        <br>
+            <br>
+            <br>
+            <br>
             <h4 class="text-center">City Health Officer</h4>
             <ul class="nav flex-column">
-            <li class="nav-item">
-                <a class="nav-link text-white" href="#"><i class="fas fa-tachometer-alt me-2"></i> Dashboard</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white" href="uploadAvailableMed.php"><i class="fas fa-upload me-2"></i> Upload Medicine</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white" href="request_med.php"><i class="fas fa-prescription-bottle me-2"></i>Brgy. Med Request</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white" href="#"><i class="fas fa-cogs me-2"></i> Settings</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white" href="view_med.php"><i class="fas fa-pills me-2"></i> Available Medicine</a>
-            </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#"><i class="fas fa-tachometer-alt me-2"></i> Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="uploadAvailableMed.php"><i class="fas fa-upload me-2"></i>
+                        Upload Medicine</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="request_med.php"><i
+                            class="fas fa-prescription-bottle me-2"></i>Brgy. Med Request</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#"><i class="fas fa-cogs me-2"></i> Settings</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="view_med.php"><i class="fas fa-pills me-2"></i> Available
+                        Medicine</a>
+                </li>
             </ul>
         </div>
 
@@ -55,7 +58,8 @@ $navbar = ob_get_clean();
             <div class="row">
                 <!-- Pending Requests Card -->
                 <div class="col-md-4">
-                    <div class="card text-center" style="width: 100%; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#pendingChartModal">
+                    <div class="card text-center" style="width: 100%; cursor: pointer;" data-bs-toggle="modal"
+                        data-bs-target="#pendingChartModal">
                         <div class="card-body">
                             <i class="fas fa-hourglass-half fa-5x text-warning"></i>
                             <h4 class="mt-3"><?= $pendingCount ?></h4>
@@ -66,7 +70,8 @@ $navbar = ob_get_clean();
 
                 <!-- Accepted Requests Card -->
                 <div class="col-md-4">
-                    <div class="card text-center" style="width: 100%; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#acceptedChartModal">
+                    <div class="card text-center" style="width: 100%; cursor: pointer;" data-bs-toggle="modal"
+                        data-bs-target="#acceptedChartModal">
                         <div class="card-body">
                             <i class="fas fa-check-circle fa-5x text-success"></i>
                             <h4 class="mt-3"><?= $acceptedCount ?></h4>
@@ -77,7 +82,8 @@ $navbar = ob_get_clean();
 
                 <!-- Cancelled Requests Card -->
                 <div class="col-md-4">
-                    <div class="card text-center" style="width: 100%; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#cancelledChartModal">
+                    <div class="card text-center" style="width: 100%; cursor: pointer;" data-bs-toggle="modal"
+                        data-bs-target="#cancelledChartModal">
                         <div class="card-body">
                             <i class="fas fa-times-circle fa-5x text-danger"></i>
                             <h4 class="mt-3"><?= $cancelledCount ?></h4>
@@ -104,7 +110,8 @@ $navbar = ob_get_clean();
         </div>
     </div>
 
-    <div class="modal fade" id="acceptedChartModal" tabindex="-1" aria-labelledby="acceptedChartLabel" aria-hidden="true">
+    <div class="modal fade" id="acceptedChartModal" tabindex="-1" aria-labelledby="acceptedChartLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -118,7 +125,8 @@ $navbar = ob_get_clean();
         </div>
     </div>
 
-    <div class="modal fade" id="cancelledChartModal" tabindex="-1" aria-labelledby="cancelledChartLabel" aria-hidden="true">
+    <div class="modal fade" id="cancelledChartModal" tabindex="-1" aria-labelledby="cancelledChartLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">

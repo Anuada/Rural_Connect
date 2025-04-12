@@ -44,6 +44,9 @@ class ReceiptGenerator
         $this->pdf->Cell(190, 0, '', 'T');
         $this->pdf->Ln();
 
+        // Capture table top Y
+        $startY = $this->pdf->GetY();
+
         // Table header
         $this->pdf->SetFont('Arial', 'B', 12);
         $this->pdf->Cell(30.4, 10, 'Date', 0, 0, 'L');
@@ -70,6 +73,14 @@ class ReceiptGenerator
         $this->pdf->Cell(155, 10, 'Total Amount', 0, 0, 'R');
         $this->pdf->Cell(35, 10, 'PHP ' . number_format($amount, 2), 0, 1, 'R');
         $this->pdf->Cell(190, 0, '', 'T');
+
+        // Capture table bottom Y
+        $endY = $this->pdf->GetY();
+
+        // Draw left and right border lines
+        $this->pdf->Line(10, $startY, 10, $endY);
+        $this->pdf->Line(200, $startY, 200, $endY);
+
         $this->pdf->Ln(5);
 
 

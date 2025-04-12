@@ -6,7 +6,7 @@ require_once "../shared/session.city_health.php";
 $dbHelper = new DbHelper();
 $title = "Medicine Availability";
 
-$tableName = "med_availabilty"; 
+$tableName = "med_availability";
 $records = $dbHelper->fetchRecords($tableName);
 
 // Capture navbar content
@@ -27,16 +27,19 @@ $navbar = ob_get_clean();
         width: 250px;
         background-color: #343a40;
         padding-top: 20px;
-        margin-top:5%;
+        margin-top: 5%;
     }
+
     .sidebar .nav-link {
         color: white;
         font-size: 16px;
     }
+
     .sidebar .nav-link:hover {
         background-color: #495057;
         border-radius: 5px;
     }
+
     .content-wrapper {
         margin-left: 260px;
         padding: 20px;
@@ -47,10 +50,10 @@ $navbar = ob_get_clean();
 <?php ob_start(); ?>
 <br>
 <div class="container-fluid">
-    
+
     <div class="row">
         <!-- Sidebar -->
-        
+
         <nav class="col-md-3 col-lg-2 sidebar">
             <h4 class="text-center text-white">City Health Officer</h4>
             <ul class="nav flex-column">
@@ -58,10 +61,12 @@ $navbar = ob_get_clean();
                     <a class="nav-link" href="#"><i class="fas fa-tachometer-alt me-2"></i> Dashboard</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="uploadAvailableMed.php"><i class="fas fa-upload me-2"></i> Upload Medicine</a>
+                    <a class="nav-link" href="uploadAvailableMed.php"><i class="fas fa-upload me-2"></i> Upload
+                        Medicine</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="request_med.php"><i class="fas fa-prescription-bottle me-2"></i> Requested Medicine</a>
+                    <a class="nav-link" href="request_med.php"><i class="fas fa-prescription-bottle me-2"></i> Requested
+                        Medicine</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#"><i class="fas fa-cogs me-2"></i> Settings</a>
@@ -90,8 +95,8 @@ $navbar = ob_get_clean();
                     </tr>
                 </thead>
                 <tbody>
-                    <?php if (is_array($records) && !empty($records)) : ?>
-                        <?php foreach ($records as $row) : ?>
+                    <?php if (is_array($records) && !empty($records)): ?>
+                        <?php foreach ($records as $row): ?>
                             <tr>
                                 <td><?php echo htmlspecialchars($row['med_name']); ?></td>
                                 <td><?php echo htmlspecialchars($row['med_description']); ?></td>
@@ -111,7 +116,7 @@ $navbar = ob_get_clean();
                                 </td>
                             </tr>
                         <?php endforeach; ?>
-                    <?php else : ?>
+                    <?php else: ?>
                         <tr>
                             <td colspan="9" class="text-center">No records found</td>
                         </tr>

@@ -10,7 +10,7 @@ class DirHandler
     public $barangay_incharge_valid_id = "../assets/img/valid_id/b_valid_id/";
     public $med_image = "../assets/img/med_image/";
     public $upload_receipt ="../assets/img/upload_receipt/";
-    public $upload_prescription = "../assets/img/upload_prescription/";
+    public $upload_document = "../assets/img/upload_document/";
 }
 
 ?>

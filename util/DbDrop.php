@@ -3,7 +3,7 @@
 $servername = "127.0.0.1";
 $username = "root";
 $password = "";
-$database = "med_deliveries";
+$database = "rural_connect";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password);

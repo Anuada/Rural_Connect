@@ -43,7 +43,7 @@ $requested = $dbHelper->DisplayMed_to_Delivery($id);
                   <th>Dosage Form</th>
                   <th>Dosage Strength</th>
                   <th>Date of Supply</th>
-                 
+
                 </tr>
               </thead>
               <tbody>
@@ -59,8 +59,8 @@ $requested = $dbHelper->DisplayMed_to_Delivery($id);
                       <td><?php echo htmlspecialchars($req['request_DosageStrength']); ?></td>
                       <td><?php echo date("F d, Y", strtotime($req['date_of_supply'])); ?></td>
 
-                      
-                     
+
+
                     </tr>
                   <?php endforeach; ?>
                 <?php else: ?>

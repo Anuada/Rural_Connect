@@ -18,7 +18,7 @@ if (!in_array($user_type, $user_types)) {
     exit();
 }
 
-require_once "../util/dbhelper.php";
+require_once "../util/DbHelper.php";
 
 $db = new DbHelper();
 

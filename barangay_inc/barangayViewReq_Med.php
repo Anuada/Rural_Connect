@@ -35,7 +35,8 @@ $requested = $dbHelper->Display_barangay_inc_req($id);
     <div class="container-fluid">
       <div class="row justify-content-center">
         <div class="col-md-10">
-          <input style="margin-top:8%;" type="text" id="searchInput" class="form-control mb-3" placeholder="Search by name, address, or contact number..." onkeyup="searchTable()">
+          <input style="margin-top:8%;" type="text" id="searchInput" class="form-control mb-3"
+            placeholder="Search by name, address, or contact number..." onkeyup="searchTable()">
 
           <div class="table-container">
             <table id="medicineTable">
@@ -49,39 +50,48 @@ $requested = $dbHelper->Display_barangay_inc_req($id);
                 <th>Action</th>
                 <th>Date of Supply</th>
               </tr>
-              <?php foreach ($requested as $req) : ?>
+              <?php foreach ($requested as $req): ?>
                 <tr>
                   <td><?php echo $req['fname'] . ' ' . $req['lname']; ?></td>
                   <td><?php echo $req['contactNo']; ?></td>
                   <td><?php echo $req['requestStatus']; ?></td>
                   <td>
                     <!-- View Button -->
-                    <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#viewModal<?php echo $req['id']; ?>">View Details</button>
+                    <button class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                      data-bs-target="#viewModal<?php echo $req['id']; ?>">View Details</button>
                   </td>
                   <td><?php echo date('F d, Y', strtotime($req['date_of_supply'])); ?></td>
                 </tr>
 
                 <!-- View Modal -->
-                <div class="modal fade" id="viewModal<?php echo $req['id']; ?>" tabindex="-1" aria-labelledby="viewLabel" aria-hidden="true">
+                <div class="modal fade" id="viewModal<?php echo $req['id']; ?>" tabindex="-1" aria-labelledby="viewLabel"
+                  aria-hidden="true">
                   <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content custom-modal">
                       <div class="modal-header bg-primary text-white">
                         <h5 class="modal-title" id="viewLabel">
                           <i class="bi bi-capsule"></i> Medicine Requested Details
                         </h5>
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                          aria-label="Close"></button>
                       </div>
                       <div class="modal-body">
                         <div class="medicine-card">
-                          <h4 class="text-primary"><i class="bi bi-prescription2"></i> <?php echo $req['med_name']; ?></h4>
-                          <p><i class="bi bi-file-text"></i> <strong>Description:</strong> <?php echo $req['med_description']; ?></p>
-                          <p><i class="bi bi-folder"></i> <strong>Requested Category:</strong> <?php echo $req['category']; ?></p>
-                          <p><i class="bi bi-eyedropper"></i> <strong>Requested Dosage:</strong> <?php echo $req['request_DosageForm'] . ' - ' . $req['request_DosageStrength']; ?></p>
-                          <p><i class="bi bi-box"></i> <strong>Requested Quantity:</strong> <?php echo $req['request_quantity']; ?></p>
+                          <h4 class="text-primary"><i class="bi bi-prescription2"></i> <?php echo $req['med_name']; ?>
+                          </h4>
+                          <p><i class="bi bi-file-text"></i> <strong>Description:</strong>
+                            <?php echo $req['med_description']; ?></p>
+                          <p><i class="bi bi-folder"></i> <strong>Requested Category:</strong>
+                            <?php echo $req['category']; ?></p>
+                          <p><i class="bi bi-eyedropper"></i> <strong>Requested Dosage:</strong>
+                            <?php echo $req['request_DosageForm'] . ' - ' . $req['request_DosageStrength']; ?></p>
+                          <p><i class="bi bi-box"></i> <strong>Requested Quantity:</strong>
+                            <?php echo $req['request_quantity']; ?></p>
                         </div>
                       </div>
                       <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x-circle"></i> Close</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i
+                            class="bi bi-x-circle"></i> Close</button>
                       </div>
                     </div>
                   </div>

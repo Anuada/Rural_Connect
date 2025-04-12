@@ -4,7 +4,7 @@
 $servername = '127.0.0.1';
 $username = 'root';
 $password = '';
-$database = 'med_deliveries';
+$database = 'rural_connect';
 
 // Define the desired save location (including filename)
 $save_location = __DIR__ . '\\' . $database . '.sql';

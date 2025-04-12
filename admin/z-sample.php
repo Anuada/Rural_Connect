@@ -2,6 +2,7 @@
 session_start();
 require_once "../shared/session.admin.php";
 require_once "./is.admin.authenticated.php";
+$admin_title = "Sample";
 ?>
 
 <?php ob_start() ?>

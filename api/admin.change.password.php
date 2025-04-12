@@ -2,7 +2,7 @@
 session_start();
 require_once "../shared/session.admin.php";
 require_once "../admin/is.admin.authenticated.php";
-require_once "../util/dbhelper.php";
+require_once "../util/DbHelper.php";
 require_once "../util/Misc.php";
 
 $db = new DbHelper();
@@ -56,8 +56,8 @@ $newPassword = password_hash($data["new_password"], PASSWORD_DEFAULT);
 $changePassword = $db->updateRecord("account", ["accountId" => $user["accountId"], "password" => $newPassword]);
 
 if ($changePassword <= 0) {
-    echo $ms->json_response(null,"Password Not Changed",422);
+    echo $ms->json_response(null, "Password Not Changed", 422);
     exit();
 }
 
-echo $ms->json_response(null,"Password changed successfully");
+echo $ms->json_response(null, "Password changed successfully");

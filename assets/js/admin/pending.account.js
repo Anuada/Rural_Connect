@@ -1,5 +1,5 @@
 import { confirmAlert, errorAlert, successAlert } from "../helpers/sweetAlert2.js";
-import { dateFormatter } from "../utilities/dateFormatter.js";
+import { dateFormatter, truncateText } from "../utilities/formatter.js";
 import fetch from "../utilities/fetchClient.js";
 import renderPagination from "../utilities/table.pagination.js";
 
@@ -33,14 +33,17 @@ const displayTable = (data, tableBody, colspan) => {
                 <tr>
                     <td>${d.fname} ${d.lname}</td>
                     ${d.barangay != null ? `<td>${d.barangay}</td>` : ''}
+                    <td>${truncateText(d.email)}</td>
                     <td>
-                        <button class="btn btn-primary view-id-verification" data-image="${d.id_verification}"><i class="fas fa-file-invoice"></i> <span
+                        <button class="btn btn-primary view-id-verification" data-image="${d.id_verification}"><i class="fas fa-image"></i> <span
                                 style="margin-left:10px">View</span></button>
                     </td>
                     <td>${dateFormatter(d.created_at)}</td>
                     <td>
-                        <button class="btn btn-success approve-status" title="Approve" data-id="${d.accountId}" data-approve-status="Approved"><i class="fas fa-check"></i></button>
-			            <button class="btn btn-danger approve-status" title="Cancel" data-id="${d.accountId}" data-approve-status="Cancelled"><i class="fas fa-times"></i></button>
+                        <span class="d-flex justify-content-start">
+                            <button class="btn btn-success approve-status" title="Approve" data-id="${d.accountId}" data-approve-status="Approved"><i class="fas fa-check"></i></button>
+                            <button class="btn btn-danger approve-status" title="Cancel" data-id="${d.accountId}" data-approve-status="Cancelled" style="margin-left:10px"><i class="fas fa-times"></i></button>
+                        </span>
                     </td>                    
                 </tr>
             `;
@@ -48,7 +51,7 @@ const displayTable = (data, tableBody, colspan) => {
     } else {
         tableBody.innerHTML = `
         <tr>
-            <td colspan="${colspan}" class="text-center" style="height:100px">No Data Found</td>
+            <td colspan="${colspan}" class="text-center" style="height:100px">No Pending Accounts Found</td>
         </tr>
         `;
     }
@@ -63,6 +66,7 @@ const displayTable = (data, tableBody, colspan) => {
         })
     });
 
+    // Appprove Status
     const approveStatus = document.querySelectorAll('.approve-status');
     approveStatus.forEach(status => {
         status.addEventListener('click', () => {
@@ -74,7 +78,33 @@ const displayTable = (data, tableBody, colspan) => {
             confirmAlert(question, handle_approval_status, payload);
         });
     });
+
+    // Copy Email
+    const tooltip = document.querySelectorAll('.tool-tip');
+    tooltip.forEach(t => {
+        t.addEventListener('click', () => {
+            const text = t.dataset.fulltext;
+            navigator.clipboard.writeText(text)
+                .then(() => {
+                    successAlert('Email Copied');
+                })
+                .catch((error) => {
+                    console.error('failed to copy');
+                });
+        })
+    });
 }
+
+const initTooltips = () => {
+    // Dispose any existing tooltips first
+    const existingTooltips = document.querySelectorAll('.tooltip');
+    existingTooltips.forEach(t => t.remove());
+
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+    tooltipTriggerList.forEach((tooltipTriggerEl) => {
+        new bootstrap.Tooltip(tooltipTriggerEl);
+    });
+};
 
 const handle_approval_status = (payload) => {
     console.log(payload);
@@ -100,7 +130,8 @@ const fetchBarangayInc = (page = 1) => {
     fetch.get(`../api/admin.display.accounts.php?user_type=barangay_inc&approve_status=Pending&page=${page}&limit=${limit}`)
         .then(response => {
             const { data, pagination } = response.data.data;
-            displayTable(data, brgyIncTblEl, 5);
+            displayTable(data, brgyIncTblEl, 6);
+            initTooltips();
             renderPagination(pagination, brgyIncPagEl, fetchBarangayInc);
         })
         .catch(error => {
@@ -112,7 +143,8 @@ const fetchCityHealth = (page = 1) => {
     fetch.get(`../api/admin.display.accounts.php?user_type=city_health&approve_status=Pending&page=${page}&limit=${limit}`)
         .then(response => {
             const { data, pagination } = response.data.data;
-            displayTable(data, cityHealthTblEl, 4);
+            displayTable(data, cityHealthTblEl, 5);
+            initTooltips();
             renderPagination(pagination, cityHealthPagEl, fetchCityHealth);
         })
         .catch(error => {
@@ -124,7 +156,8 @@ const fetchDeliveries = (page = 1) => {
     fetch.get(`../api/admin.display.accounts.php?user_type=deliveries&approve_status=Pending&page=${page}&limit=${limit}`)
         .then(response => {
             const { data, pagination } = response.data.data;
-            displayTable(data, delTblEl, 4);
+            displayTable(data, delTblEl, 5);
+            initTooltips();
             renderPagination(pagination, delPagEl, fetchDeliveries);
         })
         .catch(error => {

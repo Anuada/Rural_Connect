@@ -30,8 +30,7 @@ if (isset($_SESSION['accountId'])) {
     <div class="bg-white shadow-sm rounded"
         style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);-ms-transform:translate(-50%,-50%); padding: 50px">
         <p class="p-6 text-center">
-            <img src="../assets/img/misc/RuralConnectAltLogo.png" alt="Rural Connect Logo"
-                width="500">
+            <img src="../assets/img/misc/RuralConnectAltLogo.png" alt="Rural Connect Logo" width="500">
         <h3 style="padding-top: 15px">It seems that you are not verified yet!</h3>
         <h5 style="padding-bottom: 15px; color:#D3D3D3">Please check your email for the verification link or click the
             'Resend

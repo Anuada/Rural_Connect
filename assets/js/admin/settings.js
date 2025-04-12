@@ -37,14 +37,14 @@ document.addEventListener("submit", async (e) => {
     const id = e.target.id;
     if (id == "updateProfileForm") {
         const payload = serializeForm(e.target);
-
+        const [fnameError, lnameError, addressError, contactNoError, dobError] = ['fnameError', 'lnameError', 'addressError', 'contactNoError', 'dobError'].map(el => document.getElementById(el))
         try {
             const response = await fetch.put('../api/admin.update.profile.php', payload);
             successAlert(response.data.message);
+            [fnameError, lnameError, addressError, contactNoError, dobError].map(el => { el.innerHTML = '' })
             fetchData();
         } catch (error) {
             const errors = error.data.data;
-            const [fnameError, lnameError, addressError, contactNoError, dobError] = ['fnameError', 'lnameError', 'addressError', 'contactNoError', 'dobError'].map(el => document.getElementById(el))
             fnameError.innerHTML = errors.fname ?? "";
             lnameError.innerHTML = errors.lname ?? "";
             addressError.innerHTML = errors.address ?? "";
@@ -54,16 +54,19 @@ document.addEventListener("submit", async (e) => {
         }
     } else if (id == "changePasswordForm") {
         const payload = serializeForm(e.target);
+        const [current_password, new_password, repeat_password] = ['current_password', 'new_password', 'repeat_password'].map(el => document.getElementById(el));
+        const [current_passwordError, new_passwordError, repeat_passwordError] = ['current_passwordError', 'new_passwordError', 'repeat_passwordError'].map(el => document.getElementById(el));
         try {
             const response = await fetch.put("../api/admin.change.password.php", payload);
             successAlert(response.data.message);
+            [current_password, new_password, repeat_password].map(el => { if (el) { el.value = '' } })
+            [current_passwordError, new_passwordError, repeat_passwordError].map(el => { el.innerHTML = '' })
         } catch (error) {
-            const errors = error.data.data;
-            const [current_passwordError, new_passwordError, repeat_passwordError] = ['current_passwordError', 'new_passwordError', 'repeat_passwordError'].map(el => document.getElementById(el));
-            current_passwordError.innerHTML = errors.current_password ?? "";
-            new_passwordError.innerHTML = errors.new_password ?? "";
-            repeat_passwordError.innerHTML = errors.repeat_password ?? "";
-            if (errors == null) {
+            const errors = error?.data?.data;
+            current_passwordError.innerHTML = errors?.current_password ?? "";
+            new_passwordError.innerHTML = errors?.new_password ?? "";
+            repeat_passwordError.innerHTML = errors?.repeat_password ?? "";
+            if (errors == null && error?.data?.message != null) {
                 errorAlert(error.data.message);
             }
         }

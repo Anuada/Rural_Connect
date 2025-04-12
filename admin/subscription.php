@@ -2,6 +2,7 @@
 session_start();
 require_once "../shared/session.admin.php";
 require_once "./is.admin.authenticated.php";
+$admin_title = "Subscriptions";
 ?>
 
 <?php ob_start() ?>
@@ -9,23 +10,20 @@ require_once "./is.admin.authenticated.php";
 <?php $admin_styles = ob_get_clean() ?>
 
 <?php ob_start() ?>
-<div class="container">
-    <h3>Subscriptions</h3>
+<table>
+    <thead>
+        <tr class="justify-content-center">
+            <th>Barangay</th>
+            <th>Incharge</th>
+            <th>Plan</th>
+            <th>GCash Receipt</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody id="table-data"></tbody>
+</table>
+<div id="pagination" class="pagination mt-3 d-flex justify-content-end"></div>
 
-    <table>
-        <thead>
-            <tr class="justify-content-center">
-                <th>Barangay</th>
-                <th>Incharge</th>
-                <th>Plan</th>
-                <th>GCash Receipt</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody id="table-data"></tbody>
-    </table>
-    <div id="pagination" class="pagination mt-3 d-flex justify-content-end"></div>
-</div>
 
 <!-- Image Modal -->
 <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">

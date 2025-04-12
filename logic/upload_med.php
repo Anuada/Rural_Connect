@@ -29,7 +29,7 @@ function uploadMedAvailable(DbHelper $db, DirHandler $dh, Misc $ms)
     $img_name = str_replace("-", "", $city_health_id) . "_" . strtolower(str_replace(' ', '', $med_name)) . "_" . date('mdYHis');
     $img_file = $ms->uploadImage($med_image, $img_name, $dh->med_image);
 
-    $table = "med_availabilty";
+    $table = "med_availability";
     $data = array(
         "city_health_id" => $city_health_id,
         "med_name" => $med_name,

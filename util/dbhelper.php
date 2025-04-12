@@ -5,7 +5,7 @@ class DbHelper
     private $hostname = "127.0.0.1";
     private $username = "root";
     private $password = "";
-    private $database = "med_deliveries";
+    private $database = "rural_connect";
     private $conn;
 
     public function __construct()
@@ -136,14 +136,14 @@ class DbHelper
         barangay_inc.address,
         barangay_inc.contactNo,
         barangay_inc.id_verification,
-        med_availabilty.med_name,
-        med_availabilty.med_description,
-        med_availabilty.quantity,
-        med_availabilty.expiry_date,
-        med_availabilty.DosageForm,
-        med_availabilty.DosageStrength,
-        med_availabilty.category,
-        med_availabilty.city_health_id,
+        med_availability.med_name,
+        med_availability.med_description,
+        med_availability.quantity,
+        med_availability.expiry_date,
+        med_availability.DosageForm,
+        med_availability.DosageStrength,
+        med_availability.category,
+        med_availability.city_health_id,
         request_med.request_quantity,
         request_med.request_category,
         request_med.request_DosageForm,
@@ -153,7 +153,7 @@ class DbHelper
     FROM 
         request_med
     LEFT JOIN 
-        med_availabilty ON request_med.med_avail_Id = med_availabilty.id
+        med_availability ON request_med.med_avail_Id = med_availability.id
     LEFT JOIN 
         barangay_inc ON request_med.barangay_inc_id = barangay_inc.accountId
     WHERE  
@@ -188,14 +188,14 @@ class DbHelper
         barangay_inc.address,
         barangay_inc.contactNo,
         barangay_inc.id_verification,
-        med_availabilty.med_name,
-        med_availabilty.med_description,
-        med_availabilty.quantity,
-        med_availabilty.expiry_date,
-        med_availabilty.DosageForm,
-        med_availabilty.DosageStrength,
-        med_availabilty.category,
-        med_availabilty.city_health_id,
+        med_availability.med_name,
+        med_availability.med_description,
+        med_availability.quantity,
+        med_availability.expiry_date,
+        med_availability.DosageForm,
+        med_availability.DosageStrength,
+        med_availability.category,
+        med_availability.city_health_id,
         request_med.request_quantity,
         request_med.request_category,
         request_med.request_DosageForm,
@@ -206,7 +206,7 @@ class DbHelper
     FROM 
         request_med
     LEFT JOIN 
-        med_availabilty ON request_med.med_avail_Id = med_availabilty.id
+        med_availability ON request_med.med_avail_Id = med_availability.id
     LEFT JOIN 
         barangay_inc ON request_med.barangay_inc_id = barangay_inc.accountId
     WHERE  
@@ -339,21 +339,22 @@ class DbHelper
             SELECT 
             request_med.id,
             request_med.request_quantity,
-            request_med.request_DosageForm,
-            request_med.request_DosageStrength,
+
             barangay_inc.fname,
             barangay_inc.lname,
             barangay_inc.address,
             barangay_inc.contactNo,
-            med_availabilty.med_name,
-            med_availabilty.category AS request_category,
+            med_availability.med_name,
+            med_availability.category AS request_category,
+            med_availability.DosageForm AS request_DosageForm,
+            med_availability.DosageStrength AS request_DosageStrength,
             med_deliveries.date_of_supply
 
             FROM med_deliveries
 
             INNER JOIN request_med ON med_deliveries.request_med_id = request_med.id
             INNER JOIN barangay_inc ON request_med.barangay_inc_id = barangay_inc.accountId
-            INNER JOIN med_availabilty ON request_med.med_avail_Id = med_availabilty.id
+            INNER JOIN med_availability ON request_med.med_avail_Id = med_availability.id
 
             WHERE med_deliveries.deliveries_accountId = ?
         ";
@@ -377,39 +378,33 @@ class DbHelper
     }
 
     // display supply Date
-
     public function Display_barangay_inc_req($id)
     {
         $sql = "
-    SELECT 
-request_med.id,
-request_med.request_quantity,
-request_med.request_DosageForm,
-request_med.request_DosageStrength,
-request_med.requestStatus,
-barangay_inc.address,
-barangay_inc.contactNo,
-med_availabilty.med_name,
-med_availabilty.category,
-med_availabilty.med_description,
-med_deliveries.date_of_supply,
-city_health.contactNo,
-city_health.fname,
-city_health.lname
+            SELECT 
+            request_med.id,
+            request_med.request_quantity,
+            request_med.requestStatus,
+            barangay_inc.address,
+            barangay_inc.contactNo,
+            med_availability.med_name,
+            med_availability.category,
+            med_availability.DosageForm AS request_DosageForm,
+            med_availability.DosageStrength AS request_DosageStrength,
+            med_availability.med_description,
+            med_deliveries.date_of_supply,
+            city_health.contactNo,
+            city_health.fname,
+            city_health.lname
 
-FROM med_deliveries
+            FROM barangay_inc
 
-LEFT JOIN 
-	request_med ON med_deliveries.request_med_id = request_med.id
- LEFT JOIN
-	barangay_inc ON request_med.barangay_inc_id = request_med.barangay_inc_id
- LEFT JOIN 
- 	med_availabilty ON med_availabilty.id = request_med.med_avail_Id
- LEFT JOIN 
- 	city_health ON request_med.city_health_id = request_med.city_health_id
- 
-     WHERE barangay_inc.accountId = ?;
-    
+            INNER JOIN request_med ON request_med.barangay_inc_id = barangay_inc.accountId
+            INNER JOIN med_availability ON request_med.med_avail_Id = med_availability.id
+            INNER JOIN med_deliveries ON med_deliveries.request_med_id = request_med.id
+            INNER JOIN city_health ON med_availability.city_health_id = city_health.accountId
+            
+            WHERE barangay_inc.accountId = ?
     ";
 
         $stmt = $this->conn->prepare($sql);
@@ -466,20 +461,20 @@ LEFT JOIN
 
 
     // Display for Data Barangat Requested
-
     public function Display_barangay_inc_requested($id)
     {
         $sql = "
             SELECT 
             request_med.id,
             request_med.request_quantity,
-            request_med.request_DosageForm,
-            request_med.request_DosageStrength,
             request_med.requestStatus,
+            request_med.document,
             barangay_inc.address,
-            med_availabilty.med_name,
-            med_availabilty.med_description,
-            med_availabilty.category AS request_category,
+            med_availability.med_name,
+            med_availability.med_description,
+            med_availability.category AS request_category,
+            med_availability.DosageForm AS request_DosageForm,
+            med_availability.DosageStrength AS request_DosageStrength,
             med_deliveries.date_of_supply,
             barangay_inc.contactNo,
             barangay_inc.fname,
@@ -488,7 +483,7 @@ LEFT JOIN
             FROM request_med
 
             INNER JOIN barangay_inc ON request_med.barangay_inc_id = barangay_inc.accountId
-            INNER JOIN med_availabilty ON request_med.med_avail_Id = med_availabilty.id
+            INNER JOIN med_availability ON request_med.med_avail_Id = med_availability.id
             LEFT JOIN med_deliveries ON med_deliveries.request_med_id = request_med.id
             
             WHERE request_med.city_health_id = ?
@@ -511,7 +506,6 @@ LEFT JOIN
         $stmt->close(); // Close the statement after use
         return $records;
     }
-
 
     public function display_details_for_receipt($id)
     {
@@ -606,4 +600,32 @@ LEFT JOIN
         return $result['total'];
     }
 
+    public function count_all_subscribers_per_plan($plan)
+    {
+        $sql = "SELECT COUNT(*) AS total FROM subscription 
+                WHERE plan = '$plan' 
+                AND approve_status = 'Approved'
+                AND CURRENT_DATE() >= start_date AND CURRENT_DATE() <= end_date";
+        $query = $this->conn->query($sql);
+        $result = $query->fetch_assoc();
+        return $result['total'];
+    }
+
+    public function total_earnings_this_month()
+    {
+        $sql = "SELECT DATE_FORMAT(CURRENT_DATE(), '%b %Y') AS month_year, SUM(amount) AS total_earnings
+                FROM subscription 
+                WHERE DATE_FORMAT(created_at,'%Y-%m') = DATE_FORMAT(CURRENT_DATE(), '%Y-%m')
+                AND approve_status = 'Approved'";
+        $query = $this->conn->query($sql);
+        return $query->fetch_assoc();
+    }
+
+    public function total_rating()
+    {
+        $sql = "SELECT AVG(rating) AS total_rating FROM rate_and_feedback";
+        $query = $this->conn->query($sql);
+        $result = $query->fetch_assoc();
+        return number_format($result['total_rating'], 2);
+    }
 }
