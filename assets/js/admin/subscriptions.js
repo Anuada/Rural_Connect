@@ -159,8 +159,8 @@ const initTooltips = () => {
     });
 };
 
-const fetchSubscribers = (page = 1, search = '') => {
-    fetch.get(`../api/admin.subscribers.php?page=${page}&limit=${limit}&search=${search}`)
+const fetchSubscribers = (page = 1) => {
+    fetch.get(`../api/admin.subscribers.php?page=${page}&limit=${limit}`)
         .then(response => {
             const { data, pagination } = response.data.data;
             displayTable(data);
@@ -171,11 +171,6 @@ const fetchSubscribers = (page = 1, search = '') => {
             console.error(error);
         });
 };
-
-searchEl.addEventListener('input', (e) => {
-    const value = e.target.value;
-    fetchSubscribers(currentPage, value);
-});
 
 document.addEventListener('DOMContentLoaded', () => {
     fetchSubscribers(currentPage);

@@ -11,7 +11,6 @@ $ms = new Misc;
 // Get page and limit from query string
 $page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
 $limit = isset($_GET['limit']) ? (int) $_GET['limit'] : 5;
-$search = $_GET['search'] ?? '';
 $offset = ($page - 1) * $limit;
 
 // Get total count
@@ -19,7 +18,7 @@ $total = $db->count_all_records('subscription');
 $totalPages = ceil($total / $limit);
 
 // Fetch paginated data
-$subscribers = $db->display_all_subscriptions($limit, $offset, $search);
+$subscribers = $db->display_all_subscriptions($limit, $offset);
 
 // Return data with pagination info
 $response = [

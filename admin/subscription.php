@@ -10,7 +10,6 @@ $admin_title = "Subscriptions";
 <?php $admin_styles = ob_get_clean() ?>
 
 <?php ob_start() ?>
-<input type="search" name="search" id="search" class="form-control" placeholder="Search by barangay or incharge">
 <table>
     <thead>
         <tr class="justify-content-center">

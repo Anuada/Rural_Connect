@@ -537,9 +537,8 @@ class DbHelper
         return $query->fetch_assoc();
     }
 
-    public function display_all_subscriptions($limit, $offset, $search = '')
+    public function display_all_subscriptions($limit, $offset)
     {
-        $search = "%$search%";
     
         $sql = "SELECT
                     subscription.id,
@@ -552,10 +551,6 @@ class DbHelper
                     subscription.cancel_note
                 FROM subscription
                 JOIN barangay_inc ON barangay_inc.accountId = subscription.barangay_id
-                WHERE (
-                    barangay_inc.barangay LIKE ? OR
-                    CONCAT_WS(' ', barangay_inc.fname, barangay_inc.lname) LIKE ? 
-                )
                 ORDER BY
                     CASE
                         WHEN subscription.approve_status = 'Pending' THEN 0
@@ -565,7 +560,7 @@ class DbHelper
                 LIMIT ? OFFSET ?";
     
         $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("ssii", $search, $search, $limit, $offset);
+        $stmt->bind_param("ii", $limit, $offset);
         $stmt->execute();
         $result = $stmt->get_result();
     
