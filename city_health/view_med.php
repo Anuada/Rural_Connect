@@ -45,17 +45,17 @@ $city_health_title = "Available Medicine";
                             </span>
                         </span>
                     </td>
-                    <td><button class="btn btn-primary other-details" data-details='<?php echo json_encode($row) ?>'><i
+                    <td><button class="btn btn-primary shadow other-details" data-details='<?php echo json_encode($row) ?>'><i
                                 class="fas fa-eye"></i><span style="margin-left:10px">View</span></button></td>
                     <td><?php echo date('F d, Y', strtotime($row['date'])) ?></td>
                     <td><?php echo date('F d, Y', strtotime($row['expiry_date'])) ?></td>
                     <td>
                         <span class="d-flex justify-content-start">
                             <a href="<?php echo $ms->url("city_health/uploadMedEdit.php?id=" . $row['id']) ?>"
-                                class="btn btn-warning" title="Edit" style="margin-right: 10px">
+                                class="btn btn-warning shadow" title="Edit" style="margin-right: 10px">
                                 <i class="fas fa-edit"></i>
                             </a>
-                            <button data-id="<?php echo $row['id'] ?>" title="Delete" class="btn btn-danger delete-medicine">
+                            <button data-id="<?php echo $row['id'] ?>" title="Delete" class="btn btn-danger shadow delete-medicine">
                                 <i class="fas fa-trash"></i>
                             </button>
                         </span>

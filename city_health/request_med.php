@@ -24,7 +24,7 @@ $city_health_title = "Barangay Medicine Request";
             <th>Requested Medicine</th>
             <th>Barangay</th>
             <th>Other Details</th>
-            <th>Date of Supply</th>
+            <th>Scheduled Delivery</th>
             <th>Action</th>
         </tr>
         <?php if (!empty($requested)): ?>
@@ -45,18 +45,27 @@ $city_health_title = "Barangay Medicine Request";
                         </span>
                     </td>
                     <td><?php echo $req['barangay']; ?></td>
-                    <td><button class="btn btn-primary view-details" data-details='<?php echo json_encode($req) ?>'><i
+                    <td><button class="btn btn-primary shadow view-details" data-details='<?php echo json_encode($req) ?>'><i
                                 class="fas fa-eye"></i><span style="margin-left:10px">View</span></button></td>
                     <td>
-                        <?php echo $req['date_of_supply'] != null ? date('F d, Y', strtotime($req['date_of_supply'])) : "" ?>
+                        <?php echo $req['date_of_supply'] != null ? date('F d, Y', strtotime($req['date_of_supply'])) : "<div class='text-center'><span class='user-select-none text-secondary'>TBD</span></div>" ?>
                     </td>
                     <td>
                         <span class="d-flex justify-content-start">
                             <?php if ($req['requestStatus'] == "Pending"): ?>
-                                <button class="btn btn-success" style="margin-right: 10px;" title="Accept" data-bs-toggle="modal"
-                                    data-bs-target="#acceptModal<?php echo $req['id']; ?>"><i class="fas fa-check"></i></button>
-                                <button class="btn btn-danger" title="Cancel" data-bs-toggle="modal"
-                                    data-bs-target="#cancelModal<?php echo $req['id']; ?>"><i class="fas fa-times"></i></button>
+                                <form class="accept-requests" action="../logic/request_med.php" method="POST">
+                                    <input type="hidden" name="acceptRequest">
+                                    <input type="hidden" name="requestId" value="<?php echo $req['id']; ?>">
+                                    <button type="submit" class="btn btn-success shadow" style="margin-right: 10px;" title="Accept"><i
+                                            class="fas fa-check"></i></button>
+                                </form>
+
+                                <form class="cancel-requests" action="../logic/request_med.php" method="POST">
+                                    <input type="hidden" name="cancelledRequest">
+                                    <input type="hidden" name="requestId" value="<?php echo $req['id']; ?>">
+                                    <button type="submit" class="btn btn-danger shadow" title="Cancel"><i
+                                            class="fas fa-times"></i></button>
+                                </form>
                             <?php elseif ($req['requestStatus'] == "Accepted"): ?>
                                 <i class="text-success user-select-none"><?php echo $req['requestStatus'] ?></i>
                             <?php else: ?>
@@ -65,53 +74,6 @@ $city_health_title = "Barangay Medicine Request";
                         </span>
                     </td>
                 </tr>
-
-                <!-- Accept Modal -->
-                <div class="modal fade" id="acceptModal<?php echo $req['id']; ?>" tabindex="-1" aria-labelledby="acceptLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="acceptLabel">Accept Request</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                Are you sure you want to accept this request?
-                            </div>
-                            <div class="modal-footer">
-                                <form action="../logic/request_med.php" method="POST">
-                                    <input type="hidden" name="requestId" value="<?php echo $req['id']; ?>">
-                                    <button type="submit" name="acceptRequest" class="btn btn-success">Yes, Accept</button>
-                                </form>
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Cancel Modal -->
-                <div class="modal fade" id="cancelModal<?php echo $req['id']; ?>" tabindex="-1" aria-labelledby="cancelLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="cancelLabel">Cancel Request</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                Are you sure you want to cancel this request?
-                            </div>
-                            <div class="modal-footer">
-                                <form action="../logic/request_med.php" method="POST">
-                                    <input type="hidden" name="requestId" value="<?php echo $req['id']; ?>">
-                                    <button type="submit" name="cancelledRequest" class="btn btn-danger">Yes, Cancel</button>
-                                </form>
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
             <?php endforeach; ?>
         <?php else: ?>
             <td colspan="9" class="text-center" style="height: 100px;">No Request Available</td>
@@ -182,42 +144,7 @@ $city_health_title = "Barangay Medicine Request";
 <?php $city_health_content = ob_get_clean() ?>
 
 <?php ob_start() ?>
-<script>
-    const detailModalEl = document.getElementById('detailModal');
-    const detailModal = new bootstrap.Modal(detailModalEl);
-    const viewDetailsBtnEl = document.querySelectorAll('.view-details');
-    viewDetailsBtnEl.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const data = JSON.parse(btn.getAttribute('data-details'));
-            document.getElementById('requested_medicine').textContent = data.med_name;
-            document.getElementById('requested_quantity').textContent = data.request_quantity;
-            document.getElementById('incharge_barangay').textContent = data.barangay;
-            document.getElementById('incharge_name').textContent = `${data.fname} ${data.lname}`;
-            document.getElementById('incharge_address').textContent = data.address;
-            document.getElementById('incharge_contact_number').textContent = data.contactNo;
-            document.getElementById('modalImage').src = data.document;
-            detailModal.show();
-        });
-    });
-
-    const previewOverlay = document.getElementById('previewOverlay');
-    const previewImage = document.getElementById('previewImage');
-    const clickableImage = document.getElementById('modalImage');
-
-    clickableImage.addEventListener('click', () => {
-        previewImage.src = clickableImage.src;
-        previewOverlay.classList.remove('hidden');
-    });
-
-    // Close preview when clicking outside the image
-    previewOverlay.addEventListener('click', (e) => {
-        if (e.target === previewOverlay) {
-            previewOverlay.classList.add('hidden');
-            previewImage.src = '';
-        }
-    });
-
-</script>
+<script type="module" src="../assets/js/city_health/brgy.med.req.js"></script>
 <script src="../assets/js/searc_req_cityhealth.js"></script>
 <script src="../assets/js/pagenion_med_req.js"></script>
 <?php $city_health_scripts = ob_get_clean() ?>

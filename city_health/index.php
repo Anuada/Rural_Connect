@@ -55,7 +55,7 @@ $city_health_title = "Dashboard";
 <div class="row">
     <div class="col">
         <div class="chart-box">
-            <h4>Requests Chart</h4>
+            <h4 class="text-center">Requests Chart</h4>
             <canvas id="barChart"></canvas>
         </div>
     </div>
