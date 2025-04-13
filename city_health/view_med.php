@@ -16,7 +16,7 @@ $city_health_title = "Available Medicine";
 
 <?php ob_start() ?>
 <input type="text" id="searchInput" class="form-control mb-3"
-    placeholder="Search by name, address, or contact number..." onkeyup="searchTable()">
+    placeholder="Search by medicine name, category, or dosage form..." onkeyup="searchTable()">
 <table id="medicineTable">
     <thead>
         <tr>
