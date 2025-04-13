@@ -76,7 +76,7 @@ $city_health_title = "Barangay Medicine Request";
                 </tr>
             <?php endforeach; ?>
         <?php else: ?>
-            <td colspan="9" class="text-center" style="height: 100px;">No Request Available</td>
+            <td colspan="5" class="text-center" style="height: 100px;">No Request Available</td>
         <?php endif ?>
     </table>
 </div>

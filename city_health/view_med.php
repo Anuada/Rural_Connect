@@ -64,7 +64,7 @@ $city_health_title = "Available Medicine";
             <?php endforeach; ?>
         <?php else: ?>
             <tr>
-                <td colspan="9" class="text-center">No records found</td>
+                <td colspan="5" class="text-center">No records found</td>
             </tr>
         <?php endif; ?>
     </tbody>
