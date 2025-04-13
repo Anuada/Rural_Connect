@@ -537,38 +537,45 @@ class DbHelper
         return $query->fetch_assoc();
     }
 
-    public function display_all_subscriptions($limit, $offset)
+    public function display_all_subscriptions($limit, $offset, $search = '')
     {
+        $search = "%$search%";
+    
         $sql = "SELECT
-                subscription.id,
-                barangay_inc.barangay,
-                barangay_inc.fname,
-                barangay_inc.lname,
-                subscription.plan,
-                subscription.receipt,
-                subscription.approve_status,
-                subscription.cancel_note
+                    subscription.id,
+                    barangay_inc.barangay,
+                    barangay_inc.fname,
+                    barangay_inc.lname,
+                    subscription.plan,
+                    subscription.receipt,
+                    subscription.approve_status,
+                    subscription.cancel_note
                 FROM subscription
                 JOIN barangay_inc ON barangay_inc.accountId = subscription.barangay_id
+                WHERE (
+                    barangay_inc.barangay LIKE ? OR
+                    CONCAT_WS(' ', barangay_inc.fname, barangay_inc.lname) LIKE ? 
+                )
                 ORDER BY
                     CASE
                         WHEN subscription.approve_status = 'Pending' THEN 0
                         ELSE 1
-                END,
-                subscription.created_at DESC
+                    END,
+                    subscription.created_at DESC
                 LIMIT ? OFFSET ?";
-
+    
         $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("ii", $limit, $offset);
+        $stmt->bind_param("ssii", $search, $search, $limit, $offset);
         $stmt->execute();
         $result = $stmt->get_result();
-
+    
         $rows = [];
         while ($row = $result->fetch_assoc()) {
             $rows[] = $row;
         }
         return $rows;
     }
+    
 
     public function display_all_accounts($table, $args, $limit, $offset)
     {

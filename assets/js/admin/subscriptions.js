@@ -9,6 +9,7 @@ let currentPage = 1;
 const limit = 5;
 
 // Elements
+const searchEl = document.getElementById('search');
 const table_data = document.getElementById('table-data');
 const paginationContainer = document.getElementById('pagination');
 const imgModalEl = document.getElementById('imageModal')
@@ -42,7 +43,7 @@ const displayTable = (data) => {
                     <td>${d.fname} ${d.lname}</td>
                     <td>${d.plan}</td>
                     <td>
-                        <button class="btn btn-primary view-gcash-receipt" data-image="${d.receipt}"><i class="fas fa-file-invoice"></i> <span
+                        <button class="btn btn-primary shadow view-gcash-receipt" data-image="${d.receipt}"><i class="fas fa-file-invoice"></i> <span
                                 style="margin-left:10px">View</span></button>
                     </td>
                     <td>${display_action(d)}</td>
@@ -52,7 +53,7 @@ const displayTable = (data) => {
     } else {
         table_data.innerHTML = `
         <tr>
-            <td colspan="5" class="text-center" style="height:100px">No Subscribers Found</td>
+            <td colspan="5" class="text-center text-secondary user-select-none" style="height:100px">No Subscribers Found</td>
         </tr>
         `;
     }
@@ -123,7 +124,7 @@ const display_action = (data) => {
     switch (data.approve_status) {
         case "Approved":
             return `
-            <a href="../receipt/?id=${data.id}" target="_blank" class="btn btn-success">
+            <a href="../receipt/?id=${data.id}" target="_blank" class="btn btn-success shadow">
 				<i class="fas fa-file-invoice"></i> 
 				<span style="margin-left:10px">View Receipt</span>
 			</a>
@@ -141,8 +142,8 @@ const display_action = (data) => {
 
         default:
             return `
-			<button class="btn btn-success approve-status" title="Approve" data-id="${data.id}" data-approve-status="Approved"><i class="fas fa-check"></i></button>
-			<button class="btn btn-danger cancel-status" title="Cancel" data-id="${data.id}" data-cancel-status="Cancelled"><i class="fas fa-times"></i></button>
+			<button class="btn btn-success shadow approve-status" title="Approve" data-id="${data.id}" data-approve-status="Approved"><i class="fas fa-check"></i></button>
+			<button class="btn btn-danger shadow cancel-status" title="Cancel" data-id="${data.id}" data-cancel-status="Cancelled"><i class="fas fa-times"></i></button>
 			`;
     }
 }
@@ -158,8 +159,8 @@ const initTooltips = () => {
     });
 };
 
-const fetchSubscribers = (page = 1) => {
-    fetch.get(`../api/admin.subscribers.php?page=${page}&limit=${limit}`)
+const fetchSubscribers = (page = 1, search = '') => {
+    fetch.get(`../api/admin.subscribers.php?page=${page}&limit=${limit}&search=${search}`)
         .then(response => {
             const { data, pagination } = response.data.data;
             displayTable(data);
@@ -170,6 +171,11 @@ const fetchSubscribers = (page = 1) => {
             console.error(error);
         });
 };
+
+searchEl.addEventListener('input', (e) => {
+    const value = e.target.value;
+    fetchSubscribers(currentPage, value);
+});
 
 document.addEventListener('DOMContentLoaded', () => {
     fetchSubscribers(currentPage);

@@ -35,14 +35,14 @@ const displayTable = (data, tableBody, colspan) => {
                     ${d.barangay != null ? `<td>${d.barangay}</td>` : ''}
                     <td>${truncateText(d.email)}</td>
                     <td>
-                        <button class="btn btn-primary view-id-verification" data-image="${d.id_verification}"><i class="fas fa-image"></i> <span
+                        <button class="btn btn-primary shadow view-id-verification" data-image="${d.id_verification}"><i class="fas fa-image"></i> <span
                                 style="margin-left:10px">View</span></button>
                     </td>
                     <td>${dateFormatter(d.created_at)}</td>
                     <td>
                         <span class="d-flex justify-content-start">
-                            <button class="btn btn-success approve-status" title="Approve" data-id="${d.accountId}" data-approve-status="Approved"><i class="fas fa-check"></i></button>
-                            <button class="btn btn-danger approve-status" title="Cancel" data-id="${d.accountId}" data-approve-status="Cancelled" style="margin-left:10px"><i class="fas fa-times"></i></button>
+                            <button class="btn btn-success shadow approve-status" title="Approve" data-id="${d.accountId}" data-approve-status="Approved"><i class="fas fa-check"></i></button>
+                            <button class="btn btn-danger shadow approve-status" title="Cancel" data-id="${d.accountId}" data-approve-status="Cancelled" style="margin-left:10px"><i class="fas fa-times"></i></button>
                         </span>
                     </td>                    
                 </tr>
@@ -51,7 +51,7 @@ const displayTable = (data, tableBody, colspan) => {
     } else {
         tableBody.innerHTML = `
         <tr>
-            <td colspan="${colspan}" class="text-center" style="height:100px">No Pending Accounts Found</td>
+            <td colspan="${colspan}" class="text-center text-secondary user-select-none" style="height:100px">No Pending Accounts Found</td>
         </tr>
         `;
     }
