@@ -17,7 +17,7 @@ $city_health_title = "Barangay Medicine Request";
 
 <?php ob_start() ?>
 <input type="text" id="searchInput" class="form-control mb-3"
-    placeholder="Search by name, address, or contact number..." onkeyup="searchTable()">
+    placeholder="Search" onkeyup="searchTable()">
 <div class="table-container">
     <table id="medicineTable">
         <tr>
