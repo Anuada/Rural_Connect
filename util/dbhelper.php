@@ -472,13 +472,15 @@ class DbHelper
             barangay_inc.address,
             med_availability.med_name,
             med_availability.med_description,
+            med_availability.med_image,
             med_availability.category AS request_category,
             med_availability.DosageForm AS request_DosageForm,
             med_availability.DosageStrength AS request_DosageStrength,
             med_deliveries.date_of_supply,
             barangay_inc.contactNo,
             barangay_inc.fname,
-            barangay_inc.lname
+            barangay_inc.lname,
+            barangay_inc.barangay
 
             FROM request_med
 
@@ -487,6 +489,12 @@ class DbHelper
             LEFT JOIN med_deliveries ON med_deliveries.request_med_id = request_med.id
             
             WHERE request_med.city_health_id = ?
+
+            ORDER BY 
+            CASE 
+                WHEN request_med.requestStatus = 'Pending' THEN 0 
+                ELSE 1 
+            END
     ";
 
         $stmt = $this->conn->prepare($sql);

@@ -1,46 +1,39 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const rowsPerPage = 5; // Set the number of rows per page
+document.addEventListener("DOMContentLoaded", () => {
+    const rowsPerPage = 3;
     let currentPage = 1;
-    const table = document.getElementById("medicineTable");
-    const rows = table.getElementsByTagName("tr");
-    const totalRows = rows.length - 2; // Subtract header rows
-    const totalPages = Math.ceil(totalRows / rowsPerPage);
 
-    const prevPageButton = document.getElementById("prevPage");
-    const nextPageButton = document.getElementById("nextPage");
+    const table = document.getElementById("medicineTable");
+    const rows = Array.from(table.getElementsByTagName("tr")).slice(1); // Exclude header
+    const totalPages = Math.ceil(rows.length / rowsPerPage);
+
+    const prevBtn = document.getElementById("prevPage");
+    const nextBtn = document.getElementById("nextPage");
     const pageNumbers = document.getElementById("pageNumbers");
 
-    function showPage(page) {
-        currentPage = page;
-        let start = (currentPage - 1) * rowsPerPage + 2; // Skip header rows
-        let end = start + rowsPerPage;
+    const displayPage = (page) => {
+        rows.forEach((row, index) => {
+            row.style.display = (index >= (page - 1) * rowsPerPage && index < page * rowsPerPage) ? "" : "none";
+        });
 
-        for (let i = 2; i < rows.length; i++) { // Start from index 2 to avoid table headers
-            rows[i].style.display = i >= start && i < end ? "" : "none";
-        }
+        prevBtn.disabled = page === 1;
+        nextBtn.disabled = page === totalPages;
 
-        prevPageButton.disabled = currentPage === 1;
-        nextPageButton.disabled = currentPage === totalPages;
-        updatePageNumbers();
+        pageNumbers.innerText = `Page ${page} of ${totalPages}`;
     }
 
-    function updatePageNumbers() {
-        pageNumbers.innerHTML = `Page ${currentPage} of ${totalPages}`;
-    }
-
-    prevPageButton.addEventListener("click", function () {
+    prevBtn.addEventListener("click", () => {
         if (currentPage > 1) {
-            showPage(currentPage - 1);
+            currentPage--;
+            displayPage(currentPage);
         }
     });
 
-    nextPageButton.addEventListener("click", function () {
+    nextBtn.addEventListener("click", () => {
         if (currentPage < totalPages) {
-            showPage(currentPage + 1);
+            currentPage++;
+            displayPage(currentPage);
         }
     });
 
-    if (totalPages > 0) {
-        showPage(1); // Initialize first page
-    }
+    displayPage(currentPage);
 });

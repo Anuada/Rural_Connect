@@ -13,11 +13,11 @@ $city_health_title = "Dashboard";
 ?>
 
 <?php ob_start() ?>
-<!-- css/styles here -->
+<link rel="stylesheet" href="../assets/css/city.health.dashboard.css">
 <?php $city_health_styles = ob_get_clean() ?>
 
 <?php ob_start() ?>
-<div class="row" style="margin-bottom: 40px">
+<div class="row" style="margin-bottom: 20px">
     <!-- Pending Requests Card -->
     <div class="col-md-4">
         <div class="card text-center" style="width: 100%;">
@@ -53,7 +53,12 @@ $city_health_title = "Dashboard";
 </div>
 
 <div class="row">
-    <canvas id="barChart"></canvas>
+    <div class="col">
+        <div class="chart-box">
+            <h4>Requests Chart</h4>
+            <canvas id="barChart"></canvas>
+        </div>
+    </div>
 </div>
 <?php $city_health_content = ob_get_clean() ?>
 
