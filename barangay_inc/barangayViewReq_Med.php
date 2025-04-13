@@ -60,7 +60,9 @@ $requested = $dbHelper->Display_barangay_inc_req($id);
                     <button class="btn btn-primary btn-sm" data-bs-toggle="modal"
                       data-bs-target="#viewModal<?php echo $req['id']; ?>">View Details</button>
                   </td>
-                  <td><?php echo date('F d, Y', strtotime($req['date_of_supply'])); ?></td>
+                  <td>
+                    <?php echo $req['date_of_supply'] != null ? date('F d, Y', strtotime($req['date_of_supply'])) : ""; ?>
+                  </td>
                 </tr>
 
                 <!-- View Modal -->

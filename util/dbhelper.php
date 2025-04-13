@@ -401,7 +401,7 @@ class DbHelper
 
             INNER JOIN request_med ON request_med.barangay_inc_id = barangay_inc.accountId
             INNER JOIN med_availability ON request_med.med_avail_Id = med_availability.id
-            INNER JOIN med_deliveries ON med_deliveries.request_med_id = request_med.id
+            LEFT JOIN med_deliveries ON med_deliveries.request_med_id = request_med.id
             INNER JOIN city_health ON med_availability.city_health_id = city_health.accountId
             
             WHERE barangay_inc.accountId = ?
@@ -539,7 +539,7 @@ class DbHelper
 
     public function display_all_subscriptions($limit, $offset)
     {
-    
+
         $sql = "SELECT
                     subscription.id,
                     barangay_inc.barangay,
@@ -558,19 +558,19 @@ class DbHelper
                     END,
                     subscription.created_at DESC
                 LIMIT ? OFFSET ?";
-    
+
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param("ii", $limit, $offset);
         $stmt->execute();
         $result = $stmt->get_result();
-    
+
         $rows = [];
         while ($row = $result->fetch_assoc()) {
             $rows[] = $row;
         }
         return $rows;
     }
-    
+
 
     public function display_all_accounts($table, $args, $limit, $offset)
     {
