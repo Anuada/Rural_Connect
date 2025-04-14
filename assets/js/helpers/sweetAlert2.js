@@ -13,7 +13,7 @@ export const successAlert = (message, darkmode = false) => {
         timer: 2000,
         timerProgressBar: true,
         background: darkmode ? "#333" : "#fff",
-        color: darkmode ? "#f1f1f1" : "#000",
+        color: darkmode ? "#f1f1f1" : undefined,
         iconColor: darkmode ? "#10b981" : undefined,
         customClass: {
             popup: darkmode ? "dark-swal" : "",
@@ -34,7 +34,7 @@ export const errorAlert = (message, darkmode = false) => {
         timer: 2000,
         timerProgressBar: true,
         background: darkmode ? "#333" : "#fff",
-        color: darkmode ? "#f1f1f1" : "#000",
+        color: darkmode ? "#f1f1f1" : undefined,
         iconColor: darkmode ? "#ef4444" : undefined,
         customClass: {
             popup: darkmode ? "dark-swal" : "",
@@ -57,7 +57,7 @@ export const confirmAlert = (question, action, darkmode = false, ...actionArgs) 
         denyButtonText: "No",
         confirmButtonColor: "#007bff",
         background: darkmode ? "#333" : "#fff",
-        color: darkmode ? "#f1f1f1" : "#000",
+        color: darkmode ? "#f1f1f1" : undefined,
         iconColor: darkmode ? "#fbbf24" : undefined,
         customClass: {
             popup: darkmode ? "dark-swal" : "",
