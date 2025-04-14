@@ -10,7 +10,7 @@ const barChart = new Chart(document.getElementById('barChart'), {
         datasets: [{
             label: 'Total Requests',
             data: [],
-            backgroundColor: ['#ffc107', '#198754', '#dc3545']
+            backgroundColor: ['#ffcd38', '#37e978', '#ff5162']
         }]
     },
     options: {

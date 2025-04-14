@@ -1,33 +1,36 @@
 <?php
 session_start();
 require_once "../shared/session.city_health.php";
-$city_health_title = "Settings";
+require_once "../util/Misc.php";
+$city_health_title = Misc::displayPageTitle("Settings","fa-gear");
 ?>
 
 <?php ob_start() ?>
 <div class="card p-4 shadow-lg rounded">
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <a href="updateProfile.php" class="btn btn-secondary"><i style="margin-right: 10px" class="fa fa-arrow-left"
-                aria-hidden="true"></i>Update Profile</a>
-        <h3 class="text-center mb-0">Change Password</h3>
+        <a href="updateProfile.php" class="rc-blue-text text-decoration-none"><i style="margin-right: 10px"
+                class="fa fa-arrow-left" aria-hidden="true"></i>Update Profile</a>
+        <h3 class="text-center mb-0 rc-blue-text">Change Password</h3>
     </div>
-    <form action="../logic/changePassword.php" method="POST" enctype="multipart/form-data">
-        <div class="mb-3">
-            <label for="current_password" class="form-label">Current Password</label>
-            <input type="password" id="current_password" name="current_password" class="form-control" required>
-            <div style="height: 15px" class="text-danger" id="current_passwordError"></div>
+    <form action="../logic/changePassword.php" method="POST">
+        <div class="form-fields">
+            <div class="mb-3">
+                <label for="current_password">Current Password</label>
+                <input type="password" id="current_password" name="current_password" required>
+                <div style="height: 15px" class="text-danger" id="current_passwordError" placeholder="Enter your current password"></div>
+            </div>
+            <div class="mb-3">
+                <label for="new_password">New Password</label>
+                <input type="password" id="new_password" name="new_password" required>
+                <div style="height: 15px" class="text-danger" id="new_passwordError"></div>
+            </div>
+            <div class="mb-3">
+                <label for="repeat_password">Repeat Password</label>
+                <input type="password" id="repeat_password" name="repeat_password" required>
+                <div style="height: 15px" class="text-danger" id="repeat_passwordError"></div>
+            </div>
+            <button type="submit" name="submit">Change Password</button>
         </div>
-        <div class="mb-3">
-            <label for="new_password" class="form-label">New Password</label>
-            <input type="password" id="new_password" name="new_password" class="form-control" required>
-            <div style="height: 15px" class="text-danger" id="new_passwordError"></div>
-        </div>
-        <div class="mb-3">
-            <label for="repeat_password" class="form-label">Repeat Password</label>
-            <input type="password" id="repeat_password" name="repeat_password" class="form-control" required>
-            <div style="height: 15px" class="text-danger" id="repeat_passwordError"></div>
-        </div>
-        <button type="submit" name="submit" class="btn btn-primary w-100">Change Password</button>
     </form>
 </div>
 <?php $city_health_content = ob_get_clean() ?>

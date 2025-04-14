@@ -7,7 +7,7 @@ require_once "../util/Misc.php";
 $db = new DbHelper();
 $ms = new Misc;
 $records = $db->fetchRecords('med_availability');
-$city_health_title = "Available Medicine";
+$city_health_title = Misc::displayPageTitle("Available Medicine","fa-pills me-2");
 ?>
 
 <?php ob_start() ?>
@@ -52,10 +52,10 @@ $city_health_title = "Available Medicine";
                     <td>
                         <span class="d-flex justify-content-start">
                             <a href="<?php echo $ms->url("city_health/uploadMedEdit.php?id=" . $row['id']) ?>"
-                                class="btn btn-warning shadow" title="Edit" style="margin-right: 10px">
+                                class="btn btn-primary shadow" title="Edit" style="margin-right: 10px">
                                 <i class="fas fa-edit"></i>
                             </a>
-                            <button data-id="<?php echo $row['id'] ?>" title="Delete" class="btn btn-danger shadow delete-medicine">
+                            <button data-id="<?php echo $row['id'] ?>" title="Delete" class="btn btn-outline-primary shadow delete-medicine">
                                 <i class="fas fa-trash"></i>
                             </button>
                         </span>
@@ -72,9 +72,9 @@ $city_health_title = "Available Medicine";
 
 <!-- Pagination Controls -->
 <div class="pagination-container mt-3 d-flex justify-content-end">
-    <button id="prevPage" class="btn btn-outline-primary" disabled>Prev</button>
+    <button id="prevPage" class="btn btn-primary shadow" disabled>Prev</button>
     <span id="pageNumbers" class="mx-2 d-flex justify-content-center align-items-center"></span>
-    <button id="nextPage" class="btn btn-outline-primary">Next</button>
+    <button id="nextPage" class="btn btn-primary shadow">Next</button>
 </div>
 
 <!-- View Modal -->
@@ -83,19 +83,19 @@ $city_health_title = "Available Medicine";
         <div class="modal-content custom-modal">
             <div class="modal-header bg-primary text-white">
                 <h5 class="modal-title" id="viewLabel">
-                    <i class="bi bi-capsule"></i> Medicine Details
+                    <i class="fas fa-capsules"></i> Medicine Details
                 </h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
                     aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="medicine-card">
-                    <h4 class="text-primary"><i class="bi bi-prescription2"></i> <span id="med_name"></span>
+                    <h4 class="text-primary"><i class="fas fa-pills me-2"></i> <span id="med_name"></span>
                     </h4>
-                    <p><i class="bi bi-file-text"></i> <strong>Quantity:</strong>
+                    <p><i class="fas fa-file-alt"></i> <strong>Quantity:</strong>
                         <span id="quantity"></span>
                     </p>
-                    <p><i class="bi bi-file-text"></i> <strong>Description:</strong>
+                    <p><i class="fas fa-file-alt"></i> <strong>Description:</strong>
                         <span id="med_description"></span>
                     </p>
                 </div>

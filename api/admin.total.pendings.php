@@ -8,7 +8,7 @@ require_once "../util/Misc.php";
 $db = new DbHelper();
 $ms = new Misc;
 
-$pending_accounts = $db->count_all_records('account', ['account_status' => 'Pending']);
+$pending_accounts = $db->count_all_records('account', ['account_status' => 'Pending', 'isVerify' => 1]);
 
 $pending_subscribers = $db->count_all_records('subscription', ['approve_status' => 'Pending']);
 

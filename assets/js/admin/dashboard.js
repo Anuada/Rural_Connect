@@ -21,10 +21,20 @@ const subscribersChart = new Chart(document.getElementById('subscribersBreakdown
         datasets: [{
             label: 'Subscribers',
             data: [],
-            backgroundColor: ['#3b82f6', '#10b981'],
-            hoverOffset: 4
+            backgroundColor: ['#1d4ed8', '#06d6a0'],
+            hoverOffset: 4,
+            borderWidth: 0,
         }]
     },
+    options: {
+        plugins: {
+            legend: {
+                labels: {
+                    color: 'lightgray'
+                }
+            }
+        }
+    }
 });
 
 // Total Users Breakdown Chart
@@ -35,10 +45,20 @@ const totalUsersChart = new Chart(document.getElementById('totalUsersBreakdownCh
         datasets: [{
             label: 'Total Users',
             data: [],
-            backgroundColor: ['#fbbf24', '#6366f1', '#10b981'],
-            hoverOffset: 4
+            backgroundColor: ['#facc15', '#7c3aed', '#06d6a0'],
+            hoverOffset: 4,
+            borderWidth: 0,
         }]
     },
+    options: {
+        plugins: {
+            legend: {
+                labels: {
+                    color: 'lightgray'
+                }
+            }
+        }
+    }
 });
 
 // Bar Chart
@@ -49,13 +69,34 @@ const totalUsersAddedThisMonth = new Chart(document.getElementById('totalUsersAd
         datasets: [{
             label: 'Total Users Added',
             data: [],
-            backgroundColor: ['#fbbf24', '#6366f1', '#10b981']
+            backgroundColor: ['#facc15', '#7c3aed', '#06d6a0']
         }]
     },
     options: {
+        plugins: {
+            legend: {
+                labels: {
+                    color: 'lightgray'
+                }
+            }
+        },
         scales: {
             y: {
-                beginAtZero: true
+                beginAtZero: true,
+                ticks: {
+                    color: '#ccc' // Light gray ticks
+                },
+                grid: {
+                    color: '#444' // Subtle grid lines
+                }
+            },
+            x: {
+                ticks: {
+                    color: '#ccc'
+                },
+                grid: {
+                    color: '#444'
+                }
             }
         },
     }

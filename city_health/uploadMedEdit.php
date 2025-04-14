@@ -3,7 +3,7 @@ session_start();
 require_once "../shared/session.city_health.php";
 require_once "../util/DbHelper.php";
 require_once "../util/Misc.php";
-$city_health_title = "Update Medicine";
+$city_health_title = Misc::displayPageTitle("Update Medicine","fa-pills me-2");
 
 $db = new DbHelper();
 $ms = new Misc;
@@ -31,48 +31,51 @@ if (!$medicine) {
 <div class="card p-4 shadow-lg rounded">
     <form action="../logic/upadate_med_avail.php" method="post">
         <input type="hidden" name="id" value="<?php echo htmlspecialchars($medicine["id"]); ?>">
+        <div class="form-fields">
+            <div class="mb-3">
+                <label for="med_name">Medicine Name</label>
+                <input type="text" id="med_name" name="med_name"
+                    value="<?php echo htmlspecialchars($medicine["med_name"]); ?>" required>
+            </div>
 
-        <div class="mb-3">
-            <label for="med_name" class="form-label">Medicine Name</label>
-            <input type="text" id="med_name" name="med_name" class="form-control"
-                value="<?php echo htmlspecialchars($medicine["med_name"]); ?>" required>
+            <div class="mb-3">
+                <label for="med_description">Description</label>
+                <textarea id="med_description" name="med_description" rows="4" required></textarea>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="category">Category</label>
+                    <input type="text" id="category" name="category"
+                        value="<?php echo htmlspecialchars($medicine["category"]); ?>" required>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label for="DosageForm">Dosage Form</label>
+                    <input type="text" id="DosageForm" name="DosageForm"
+                        value="<?php echo htmlspecialchars($medicine["DosageForm"]); ?>" required>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label for="DosageStrength">Dosage Strength</label>
+                    <input type="text" id="DosageStrength" name="DosageStrength"
+                        value="<?php echo htmlspecialchars($medicine["DosageStrength"]); ?>" required>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label for="quantity">Quantity</label>
+                    <input type="number" id="quantity" name="quantity"
+                        value="<?php echo intval($medicine["quantity"]); ?>" required>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label for="expiry_date">Expiry Date</label>
+                    <input type="date" id="expiry_date" name="expiry_date" required>
+                </div>
+            </div>
+
+            <button type="submit" name="submit">Update Medicine</button>
         </div>
-
-        <div class="mb-3">
-            <label for="med_description" class="form-label">Description</label>
-            <textarea id="med_description" name="med_description" class="form-control" rows="4" required></textarea>
-        </div>
-
-        <div class="mb-3">
-            <label for="category" class="form-label">Category</label>
-            <input type="text" id="category" name="category" class="form-control"
-                value="<?php echo htmlspecialchars($medicine["category"]); ?>" required>
-        </div>
-
-        <div class="mb-3">
-            <label for="DosageForm" class="form-label">Dosage Form</label>
-            <input type="text" id="DosageForm" name="DosageForm" class="form-control"
-                value="<?php echo htmlspecialchars($medicine["DosageForm"]); ?>" required>
-        </div>
-
-        <div class="mb-3">
-            <label for="DosageStrength" class="form-label">Dosage Strength</label>
-            <input type="text" id="DosageStrength" name="DosageStrength" class="form-control"
-                value="<?php echo htmlspecialchars($medicine["DosageStrength"]); ?>" required>
-        </div>
-
-        <div class="mb-3">
-            <label for="quantity" class="form-label">Quantity</label>
-            <input type="number" id="quantity" name="quantity" class="form-control"
-                value="<?php echo intval($medicine["quantity"]); ?>" required>
-        </div>
-
-        <div class="mb-3">
-            <label for="expiry_date" class="form-label">Expiry Date</label>
-            <input type="date" id="expiry_date" name="expiry_date" class="form-control" required>
-        </div>
-
-        <button type="submit" name="submit" class="btn btn-primary w-100">Update Medicine</button>
     </form>
 </div>
 <?php $city_health_content = ob_get_clean() ?>

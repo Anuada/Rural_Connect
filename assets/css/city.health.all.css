@@ -1,10 +1,14 @@
+body {
+    background: linear-gradient(135deg, #D8EFFF, #A1D2FF);
+}
+
 .sidenav {
     height: 100vh;
     width: 300px; /* increased from 220px */
     position: fixed;
     top: 0;
     left: 0;
-    background-color: #333;
+    background-color: white;
     padding-top: 20px;
     display: flex;
     flex-direction: column;
@@ -12,6 +16,7 @@
     padding-left: 20px;
     padding-right: 20px;
     overflow-y: auto;
+    color: #007bff;
 }
 
 .sidenav::-webkit-scrollbar {
@@ -19,12 +24,12 @@
 }
 
 .sidenav::-webkit-scrollbar-thumb {
-    background-color: #555;
+    background-color: #E0F7FA;
     border-radius: 3px;
 }
 
 .sidenav::-webkit-scrollbar-track {
-    background-color: #333;
+    background-color: #97bbc0;
 }
 
 .no-select {
@@ -37,11 +42,11 @@
     flex-direction: column;
     align-items: center;
     text-decoration: none;
-    color: white;
+    color: #007bff;
 }
 
 .sidenav a {
-    color: white;
+    color: #007bff;
     padding: 12px;
     text-decoration: none;
     border-radius: 8px;
@@ -49,11 +54,11 @@
 }
 
 .sidenav a[name="nav-link"]:hover {
-    background-color: #575757;
+    background-color: #E0F7FA;
 }
 
 .sidenav-active {
-    background-color: #575757;
+    background-color: #E0F7FA;
 }
 
 .sidenav h3 {
@@ -93,7 +98,7 @@ th, td {
     text-align: left;
 }
 th {
-    background-color: #333;
+    background-color: #007bff;
     color: white;
 }
 tr:nth-child(even) {
@@ -123,4 +128,45 @@ tr:hover {
     padding: 1rem;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 
+}
+
+.form-fields label {
+    color: #007bff;
+}
+
+.form-fields input, 
+.form-fields textarea,
+.form-fields select {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #007bff;
+    border-radius: 8px;
+    font-size: 16px;
+    background: rgba(255, 255, 255, 1);
+    color: #333;
+    outline: none;
+    transition: 0.3s;
+}
+
+.form-fields input::placeholder,
+.form-fields textarea::placeholder {
+    color: #888;
+}
+
+.form-fields button {
+    width: 100%;
+    padding: 12px;
+    background: #007bff;
+    border: none;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.form-fields button:hover {
+    transform: translateY(-2px);
 }

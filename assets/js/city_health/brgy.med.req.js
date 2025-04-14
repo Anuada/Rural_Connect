@@ -57,12 +57,12 @@ acceptRequests.forEach(accept => {
             form.submit();
         }
         const question = "Are you sure you want to accept this request?";
-        confirmAlert(question, submitForm);
+        confirmAlert(question, submitForm, false);
     });
 });
 
 cancelRequests.forEach(cancel => {
-    cancel.addEventListener('submit', (e) => { 
+    cancel.addEventListener('submit', (e) => {
         e.preventDefault();
 
         const form = e.target;
@@ -73,4 +73,19 @@ cancelRequests.forEach(cancel => {
         const question = "Are you sure you want to cancel this request?";
         confirmAlert(question, submitForm);
     });
+});
+
+const initTooltips = () => {
+    // Dispose any existing tooltips first
+    const existingTooltips = document.querySelectorAll('.tooltip');
+    existingTooltips.forEach(t => t.remove());
+
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+    tooltipTriggerList.forEach((tooltipTriggerEl) => {
+        new bootstrap.Tooltip(tooltipTriggerEl);
+    });
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+    initTooltips();
 });

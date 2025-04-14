@@ -53,7 +53,7 @@ const displayTable = (data) => {
     } else {
         table_data.innerHTML = `
         <tr>
-            <td colspan="5" class="text-center text-secondary user-select-none" style="height:100px">No Subscribers Found</td>
+            <td colspan="5" class="text-center user-select-none" style="height:100px; color: lightgray">No Subscribers Found</td>
         </tr>
         `;
     }
@@ -77,7 +77,7 @@ const displayTable = (data) => {
                 approve_status: status.getAttribute('data-approve-status')
             };
             const question = `Are you sure you want to get this subscription ${payload.approve_status.toLowerCase()}?`;
-            confirmAlert(question, handle_approval_status, payload);
+            confirmAlert(question, handle_approval_status, true, payload);
         });
     });
 
@@ -98,7 +98,7 @@ formEl.addEventListener('submit', (e) => {
     e.preventDefault();
     const payload = serializeForm(formEl);
     const question = `Are you sure you want to get this subscription ${payload.approve_status.toLowerCase()}?`;
-    confirmAlert(question, handle_approval_status, payload);
+    confirmAlert(question, handle_approval_status, true, payload);
 })
 
 const handle_approval_status = (payload) => {
@@ -109,7 +109,7 @@ const handle_approval_status = (payload) => {
             cancelStatusModal.hide();
             formEl.reset();
             fetchSubscribers();
-            successAlert(response.data.message);
+            successAlert(response.data.message, true);
         })
         .catch(error => {
             const errors = error.data.data;

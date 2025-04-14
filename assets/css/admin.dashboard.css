@@ -2,13 +2,13 @@
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
-    margin-bottom: 2rem;
+    margin-bottom: 20px;
   }
 
 .kpi-card {
     flex: 1;
     min-width: 200px;
-    background: white;
+    background-color: #333;
     border-radius: 12px;
     padding: 1rem;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
@@ -16,7 +16,7 @@
   }
 
 .kpi-card h5 {
-    color: gray;
+    color: lightgray;
     font-weight: normal;
     margin: 0;
 }
@@ -31,11 +31,11 @@
     display: flex;
     flex-wrap: wrap;
     gap: 2rem;
-    margin-bottom: 2rem;
+    margin-bottom: 20px;
 }
 
 .chart-box {
-    background: white;
+    background: #333;
     padding: 1rem;
     border-radius: 12px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
@@ -44,12 +44,17 @@
     min-width: 300px;
 }
 
+.chart-box h4 {
+    color:lightgray;
+    text-align: center;
+}
+
 canvas {
     max-width: 100%;
 }
 
 .month-date {
-    color: gray; 
+    color: lightgray; 
     user-select: none;
 }
 

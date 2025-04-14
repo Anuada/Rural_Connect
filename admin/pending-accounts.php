@@ -2,7 +2,8 @@
 session_start();
 require_once "../shared/session.admin.php";
 require_once "./is.admin.authenticated.php";
-$admin_title = "Pending Accounts";
+require_once "../util/Misc.php";
+$admin_title = Misc::displayPageTitle("Pending Accounts","fa-user");
 ?>
 
 <?php ob_start() ?>

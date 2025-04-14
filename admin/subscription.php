@@ -2,7 +2,8 @@
 session_start();
 require_once "../shared/session.admin.php";
 require_once "./is.admin.authenticated.php";
-$admin_title = "Subscriptions";
+require_once "../util/Misc.php";
+$admin_title = Misc::displayPageTitle("Subscriptions", "fa-clipboard-list");
 ?>
 
 <?php ob_start() ?>

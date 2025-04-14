@@ -40,7 +40,7 @@ document.addEventListener("submit", async (e) => {
         const [fnameError, lnameError, addressError, contactNoError, dobError] = ['fnameError', 'lnameError', 'addressError', 'contactNoError', 'dobError'].map(el => document.getElementById(el))
         try {
             const response = await fetch.put('../api/admin.update.profile.php', payload);
-            successAlert(response.data.message);
+            successAlert(response.data.message, true);
             [fnameError, lnameError, addressError, contactNoError, dobError].map(el => { el.innerHTML = '' })
             fetchData();
         } catch (error) {
@@ -58,7 +58,7 @@ document.addEventListener("submit", async (e) => {
         const [current_passwordError, new_passwordError, repeat_passwordError] = ['current_passwordError', 'new_passwordError', 'repeat_passwordError'].map(el => document.getElementById(el));
         try {
             const response = await fetch.put("../api/admin.change.password.php", payload);
-            successAlert(response.data.message);
+            successAlert(response.data.message, true);
             [current_password, new_password, repeat_password].map(el => { if (el) { el.value = '' } })
             [current_passwordError, new_passwordError, repeat_passwordError].map(el => { el.innerHTML = '' })
         } catch (error) {
@@ -67,7 +67,7 @@ document.addEventListener("submit", async (e) => {
             new_passwordError.innerHTML = errors?.new_password ?? "";
             repeat_passwordError.innerHTML = errors?.repeat_password ?? "";
             if (errors == null && error?.data?.message != null) {
-                errorAlert(error.data.message);
+                errorAlert(error.data.message, true);
             }
         }
     }

@@ -2,6 +2,7 @@
 session_start();
 require_once "../shared/session.city_health.php";
 require_once "../util/DbHelper.php";
+require_once "../util/Misc.php";
 
 $db = new DbHelper();
 
@@ -9,7 +10,7 @@ $pendingCount = $db->countPending();
 $acceptedCount = $db->countAccempted();
 $cancelledCount = $db->countCancelled();
 
-$city_health_title = "Dashboard";
+$city_health_title = Misc::displayPageTitle("Dashboard","fa-home");
 ?>
 
 <?php ob_start() ?>
@@ -23,8 +24,8 @@ $city_health_title = "Dashboard";
         <div class="card text-center" style="width: 100%;">
             <div class="card-body">
                 <i class="fas fa-hourglass-half fa-5x text-warning"></i>
-                <h4 class="mt-3"><?php echo $pendingCount ?></h4>
-                <p class="card-text">Pending Requests</p>
+                <h4 class="mt-3 text-secondary"><?php echo $pendingCount ?></h4>
+                <p class="card-text text-secondary">Pending Requests</p>
             </div>
         </div>
     </div>
@@ -34,8 +35,8 @@ $city_health_title = "Dashboard";
         <div class="card text-center" style="width: 100%;">
             <div class="card-body">
                 <i class="fas fa-check-circle fa-5x text-success"></i>
-                <h4 class="mt-3"><?php echo $acceptedCount ?></h4>
-                <p class="card-text">Accepted Requests</p>
+                <h4 class="mt-3 text-secondary"><?php echo $acceptedCount ?></h4>
+                <p class="card-text text-secondary">Accepted Requests</p>
             </div>
         </div>
     </div>
@@ -45,8 +46,8 @@ $city_health_title = "Dashboard";
         <div class="card text-center" style="width: 100%;">
             <div class="card-body">
                 <i class="fas fa-times-circle fa-5x text-danger"></i>
-                <h4 class="mt-3"><?php echo $cancelledCount ?></h4>
-                <p class="card-text">Cancelled Requests</p>
+                <h4 class="mt-3 text-secondary"><?php echo $cancelledCount ?></h4>
+                <p class="card-text text-secondary">Cancelled Requests</p>
             </div>
         </div>
     </div>
@@ -55,7 +56,7 @@ $city_health_title = "Dashboard";
 <div class="row">
     <div class="col">
         <div class="chart-box">
-            <h4 class="text-center">Requests Chart</h4>
+            <h4 class="text-center text-secondary">Requests Chart</h4>
             <canvas id="barChart"></canvas>
         </div>
     </div>

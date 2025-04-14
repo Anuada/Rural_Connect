@@ -40,25 +40,43 @@ document.addEventListener('DOMContentLoaded', () => {
                 label: 'Number of Ratings',
                 data: [],
                 backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                ], borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(255, 206, 86, 1)',
+                    '#ef4444', // red-500
+                    '#a78bfa', // violet-400
+                    '#3b82f6', // blue-500
+                    '#34d399', // emerald-400
+                    '#fbbf24', // amber-400
                 ],
-                borderWidth: 1
+                borderColor: 'transparent', // or simply remove border if not needed
+                borderWidth: 0
             }]
         },
         options: {
             responsive: true,
             scales: {
-                y: { beginAtZero: true }
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        color: '#ccc' // Light gray ticks
+                    },
+                    grid: {
+                        color: '#444' // Subtle grid lines
+                    }
+                },
+                x: {
+                    ticks: {
+                        color: '#ccc'
+                    },
+                    grid: {
+                        color: '#444'
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#ccc' // Light gray text for dark mode
+                    }
+                },
             },
             onClick: function (event) {
                 let activePoints = this.getElementsAtEventForMode(event, 'nearest', { intersect: true }, false);
@@ -66,32 +84,25 @@ document.addEventListener('DOMContentLoaded', () => {
                     let clickedIndex = activePoints[0].index;
                     let ratingValue = this.data.labels[clickedIndex];
                     let rating = ratingValue[0];
-
+    
                     fetch.get(`../api/admin.feedback.php?rating=${rating}`)
                         .then(response => {
                             displayFeedbacksOnModal(response.data.data);
                         })
                         .catch(error => {
                             console.error(error);
-                        })
-
-                    // Show the modal
+                        });
+    
                     let modal = new bootstrap.Modal(document.getElementById('ratingModal'));
                     modal.show();
                 }
             },
             onHover: function (event, chartElement) {
-                if (chartElement.length) {
-                    // Change cursor to pointer when hovering over a bar
-                    event.native.target.style.cursor = 'pointer';
-                } else {
-                    // Reset cursor when not hovering over a bar
-                    event.native.target.style.cursor = 'default';
-                }
+                event.native.target.style.cursor = chartElement.length ? 'pointer' : 'default';
             }
-
         }
     });
+    
 
     fetch.get('../api/admin.ratings.php')
         .then(({ data }) => {

@@ -67,7 +67,7 @@ $title = "City Health";
         <div class="card">
             <div class="card-body">
                 <span class="d-flex justify-content-start align-items-center">
-                    <h3><?php echo $city_health_title ?? "" ?></h3>
+                    <h3 class="rc-blue-text fw-bold"><?php echo $city_health_title ?? "" ?></h3>
                 </span>
             </div>
         </div>

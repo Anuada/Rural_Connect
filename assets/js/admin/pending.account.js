@@ -51,7 +51,7 @@ const displayTable = (data, tableBody, colspan) => {
     } else {
         tableBody.innerHTML = `
         <tr>
-            <td colspan="${colspan}" class="text-center text-secondary user-select-none" style="height:100px">No Pending Accounts Found</td>
+            <td colspan="${colspan}" class="text-center user-select-none" style="height:100px; color: lightgray">No Pending Accounts Found</td>
         </tr>
         `;
     }
@@ -75,7 +75,7 @@ const displayTable = (data, tableBody, colspan) => {
                 account_status: status.getAttribute('data-approve-status')
             };
             const question = `Are you sure you want to get this account ${payload.account_status.toLowerCase()}?`;
-            confirmAlert(question, handle_approval_status, payload);
+            confirmAlert(question, handle_approval_status, true, payload);
         });
     });
 
@@ -86,7 +86,7 @@ const displayTable = (data, tableBody, colspan) => {
             const text = t.dataset.fulltext;
             navigator.clipboard.writeText(text)
                 .then(() => {
-                    successAlert('Email Copied');
+                    successAlert('Email Copied', true);
                 })
                 .catch((error) => {
                     console.error('failed to copy');
@@ -110,12 +110,12 @@ const handle_approval_status = (payload) => {
     console.log(payload);
     fetch.put('../api/admin.user.account.approval.php', payload)
         .then(response => {
-            successAlert(response.data.message);
+            successAlert(response.data.message, true);
         })
         .catch(error => {
             const { message } = error?.data;
             if (message != null) {
-                errorAlert(error.data.message);
+                errorAlert(error.data.message, true);
             } else {
                 console.error(error);
             }

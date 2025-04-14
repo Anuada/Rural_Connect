@@ -2,11 +2,12 @@
 session_start();
 require_once "../shared/session.admin.php";
 require_once "./is.admin.authenticated.php";
-$admin_title = "Settings";
+require_once "../util/Misc.php";
+$admin_title = Misc::displayPageTitle("Settings","fa-gear");
 ?>
 
 <?php ob_start() ?>
-<!-- css/styles here -->
+<link rel="stylesheet" href="../assets/css/admin.settings.css">
 <?php $admin_styles = ob_get_clean() ?>
 
 <?php ob_start() ?>

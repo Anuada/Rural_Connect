@@ -7,3 +7,15 @@
     flex: 1;
     min-width: 300px;
 }
+
+.text-warning {
+    color:#ffcd38!important;
+}
+
+.text-success {
+    color:#37e978!important;
+}
+
+.text-danger {
+    color: #ff5162!important;
+}

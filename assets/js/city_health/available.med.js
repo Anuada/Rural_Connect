@@ -25,7 +25,7 @@ deleteMedicineBtnEl.forEach(btn => {
     btn.addEventListener('click', () => {
         const id = btn.getAttribute('data-id');
         const question = "Are you sure you want to delete this medicine?";
-        confirmAlert(question, handleDeleteMedicine, id);
+        confirmAlert(question, handleDeleteMedicine, false, id);
     });
 });
 

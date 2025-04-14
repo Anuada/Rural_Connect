@@ -2,7 +2,8 @@
 session_start();
 require_once "../shared/session.admin.php";
 require_once "./is.admin.authenticated.php";
-$admin_title = "Dashboard";
+require_once "../util/Misc.php";
+$admin_title = Misc::displayPageTitle("Dashboard","fa-home");
 ?>
 
 <?php ob_start() ?>

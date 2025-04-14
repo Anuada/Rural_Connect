@@ -2,13 +2,15 @@
 session_start();
 require_once "../shared/session.city_health.php";
 require_once "../util/DbHelper.php";
+require_once "../util/Misc.php";
 
 $db = new DbHelper();
+$ms = new Misc;
 
 $id = $_SESSION['accountId'];
 
 $requested = $db->Display_barangay_inc_requested($id);
-$city_health_title = "Barangay Medicine Request";
+$city_health_title = Misc::displayPageTitle("Barangay Medicine Request","fa-prescription-bottle me-2");
 ?>
 
 <?php ob_start() ?>
@@ -16,8 +18,7 @@ $city_health_title = "Barangay Medicine Request";
 <?php $city_health_styles = ob_get_clean() ?>
 
 <?php ob_start() ?>
-<input type="text" id="searchInput" class="form-control mb-3"
-    placeholder="Search" onkeyup="searchTable()">
+<input type="text" id="searchInput" class="form-control mb-3" placeholder="Search" onkeyup="searchTable()">
 <div class="table-container">
     <table id="medicineTable">
         <tr>
@@ -48,7 +49,7 @@ $city_health_title = "Barangay Medicine Request";
                     <td><button class="btn btn-primary shadow view-details" data-details='<?php echo json_encode($req) ?>'><i
                                 class="fas fa-eye"></i><span style="margin-left:10px">View</span></button></td>
                     <td>
-                        <?php echo $req['date_of_supply'] != null ? date('F d, Y', strtotime($req['date_of_supply'])) : "<div class='text-center'><span class='user-select-none text-secondary'>TBD</span></div>" ?>
+                        <?php echo $req['date_of_supply'] != null ? "<div class='text-center'>".date('F d, Y', strtotime($req['date_of_supply']))."</div>" : "<div class='text-center'><span class='user-select-none text-secondary'>TBD</span></div>" ?>
                     </td>
                     <td>
                         <span class="d-flex justify-content-start">
@@ -56,18 +57,26 @@ $city_health_title = "Barangay Medicine Request";
                                 <form class="accept-requests" action="../logic/request_med.php" method="POST">
                                     <input type="hidden" name="acceptRequest">
                                     <input type="hidden" name="requestId" value="<?php echo $req['id']; ?>">
-                                    <button type="submit" class="btn btn-success shadow" style="margin-right: 10px;" title="Accept"><i
-                                            class="fas fa-check"></i></button>
+                                    <button type="submit" class="btn btn-primary shadow" style="margin-right: 10px;"
+                                        title="Accept"><i class="fas fa-check"></i></button>
                                 </form>
 
                                 <form class="cancel-requests" action="../logic/request_med.php" method="POST">
                                     <input type="hidden" name="cancelledRequest">
                                     <input type="hidden" name="requestId" value="<?php echo $req['id']; ?>">
-                                    <button type="submit" class="btn btn-danger shadow" title="Cancel"><i
+                                    <button type="submit" class="btn btn-outline-primary shadow" title="Cancel"><i
                                             class="fas fa-times"></i></button>
                                 </form>
                             <?php elseif ($req['requestStatus'] == "Accepted"): ?>
-                                <i class="text-success user-select-none"><?php echo $req['requestStatus'] ?></i>
+                                <?php if ($req['date_of_supply'] != null): ?>
+                                    <i class="text-success user-select-none"><?php echo $req['requestStatus'] ?></i>
+                                <?php else: ?>
+                                    <a href="<?php echo $ms->url('city_health/select_date_req.php?requestId=' . $req['id']) ?>" 
+                                       class="btn btn-primary shadow tool-tip" 
+                                       data-bs-toggle="tooltip" 
+                                       data-bs-placement="right"
+                                       title="Click this button to Assign Courier and Schedule Delivery"><i class="fas fa-circle-info"></i></a>
+                                <?php endif ?>
                             <?php else: ?>
                                 <i class="text-danger user-select-none"><?php echo $req['requestStatus'] ?></i>
                             <?php endif; ?>
@@ -83,9 +92,9 @@ $city_health_title = "Barangay Medicine Request";
 
 <!-- Pagination Controls -->
 <div class="pagination-container mt-3 d-flex justify-content-end">
-    <button id="prevPage" class="btn btn-outline-primary" disabled>Prev</button>
+    <button id="prevPage" class="btn btn-primary shadow" disabled>Prev</button>
     <span id="pageNumbers" class="mx-2 d-flex justify-content-center align-items-center"></span>
-    <button id="nextPage" class="btn btn-outline-primary">Next</button>
+    <button id="nextPage" class="btn btn-primary shadow">Next</button>
 </div>
 
 <!-- Image Preview Overlay -->
@@ -101,33 +110,33 @@ $city_health_title = "Barangay Medicine Request";
         <div class="modal-content custom-modal">
             <div class="modal-header bg-primary text-white">
                 <h5 class="modal-title" id="viewLabel">
-                    <i class="bi bi-capsule"></i> Barangay Incharge Details
+                    <i class="fas fa-capsules"></i> Barangay Incharge Details
                 </h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
                     aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="medicine-card">
-                    <h4 class="text-primary"><i class="bi bi-prescription2"></i> <span id="incharge_name"></span>
+                    <h4 class="text-primary"><i class="fas fa-user"></i> <span id="incharge_name"></span>
                     </h4>
-                    <p><i class="bi bi-file-text"></i> <strong>Requested Medicine:</strong>
+                    <p><i class="fas fa-file-alt"></i> <strong>Requested Medicine:</strong>
                         <span id="requested_medicine"></span>
                     </p>
-                    <p><i class="bi bi-file-text"></i> <strong>Requested Quantity:</strong>
+                    <p><i class="fas fa-file-alt"></i> <strong>Requested Quantity:</strong>
                         <span id="requested_quantity"></span>
                     </p>
-                    <p><i class="bi bi-file-text"></i> <strong>Barangay:</strong>
+                    <p><i class="fas fa-file-alt"></i> <strong>Barangay:</strong>
                         <span id="incharge_barangay"></span>
                     </p>
-                    <p><i class="bi bi-file-text"></i> <strong>Address:</strong>
+                    <p><i class="fas fa-file-alt"></i> <strong>Address:</strong>
                         <span id="incharge_address"></span>
                     </p>
-                    <p><i class="bi bi-folder"></i> <strong>Contact Number:</strong>
+                    <p><i class="fas fa-file-alt"></i> <strong>Contact Number:</strong>
                         <span id="incharge_contact_number"></span>
                     </p>
                 </div>
                 <div class="medicine-card mt-3">
-                    <h4>Document:</h4>
+                    <h4><i class="fas fa-folder"></i> Document</h4>
                     <p class="text-center">
                         <img id="modalImage" src="" alt="Modal Image" class="img-fluid clickable-image" width="300">
                     </p>

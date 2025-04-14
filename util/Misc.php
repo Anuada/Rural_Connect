@@ -99,6 +99,16 @@ class Misc
         return "$truncated...";
     }
 
+    public static function displayPageTitle($title, $icon)
+    {
+        return "
+        <div class='row align-items-center'>
+            <div class='col-sm-auto' style='width: 10px'><i class='fas $icon'></i></div>
+            <div class='col' style='margin-left: 30px'><span>$title</span></div>
+        </div>
+        ";
+    }
+
     public static function displayEnumNames(array $enums)
     {
         return array_column($enums, 'name');

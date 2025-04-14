@@ -1,0 +1,40 @@
+.form-fields label {
+    color: #f1f1f1; /* already dark mode appropriate */
+}
+
+.form-fields input, 
+.form-fields textarea,
+.form-fields select {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #f1f1f1; /* softened blue border for dark mode */
+    border-radius: 8px;
+    font-size: 16px;
+    background: #333; /* dark background for input */
+    color: #f1f1f1; /* light text for visibility */
+    outline: none;
+    transition: 0.3s;
+}
+
+.form-fields input::placeholder,
+.form-fields textarea::placeholder {
+    color: #aaa; /* lighter placeholder for contrast */
+}
+
+.form-fields button {
+    width: 100%;
+    padding: 12px;
+    background: #007bff; /* modern blue for dark mode */
+    border: none;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.form-fields button:hover {
+    transform: translateY(-2px);
+}

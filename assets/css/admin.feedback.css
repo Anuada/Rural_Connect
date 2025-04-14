@@ -1,12 +1,40 @@
+/* Modal Content */
+.modal-content {
+    background-color: #1f1f1f; /* Dark background */
+    color: #f1f1f1; /* Light text */
+    border: 1px solid #333; /* Subtle border */
+}
+
+.modal-header {
+    border-bottom: 1px solid #333;
+}
+
+.modal-title {
+    color: #ffffff;
+}
+
+/* Scrollable area inside modal */
+.scrollable {
+    height: 450px;
+    overflow-y: auto;
+    background-color: #2a2a2a; /* Slightly lighter than modal background */
+    color: #ddd;
+    padding: 10px;
+    border-radius: 6px;
+}
+
+/* Slider Container */
 .slider {
     position: relative;
     max-width: 100%;
     margin: auto;
     overflow: hidden;
-    border: 1px solid #ccc;
+    border: 1px solid #444;
     border-radius: 10px;
+    background-color: #1e1e1e; /* Darker bg for the slider wrapper */
 }
 
+/* Slider Items */
 .slides {
     display: flex;
     transition: transform 0.5s ease;
@@ -19,25 +47,37 @@
     text-align: center;
 }
 
+/* Card inside each Slide */
 .slide .card {
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
+    background-color: #2b2b2b; /* Dark card */
+    border: 1px solid #444;
     border-radius: 8px;
     padding: 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4); /* Darker shadow */
+    color: #eee;
 }
 
+.scrollable::-webkit-scrollbar {
+    width: 8px;
+}
+
+.scrollable::-webkit-scrollbar-thumb {
+    background-color: #555;
+    border-radius: 4px;
+}
+
+.scrollable::-webkit-scrollbar-track {
+    background: #2a2a2a;
+}
+
+
+/* Non-selectable text like icons */
 .card p i {
     user-select: none;
 }
 
+/* Star Rating Color */
 .stars {
-    color: gold; /* Change star color */
-    font-size: 1.5em; /* Adjust size */
-}
-
-
-.scrollable {
-    height: 450px; /* Set a height */
-    overflow-y: scroll; /* Enable vertical scrolling */
+    color: gold;
+    font-size: 1.5em;
 }

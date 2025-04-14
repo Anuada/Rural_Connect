@@ -26,7 +26,7 @@ $title = "Admin";
 
     <a href="<?php echo $ms->url('admin/pending-accounts.php') ?>" name="nav-link" <?php echo $ms->url() === $ms->url('admin/pending-accounts.php') ? "class='sidenav-active'" : "" ?>>
         <div class="row align-items-center">
-            <div class="col-sm-2"><i class="fas fa-spinner fa-spin"></i></div>
+            <div class="col-sm-2"><i class="fas fa-user"></i></div>
             <div class="col"><span>Pending Accounts</span></div>
         </div>
     </a>
@@ -66,7 +66,7 @@ $title = "Admin";
         <div class="card">
             <div class="card-body">
                 <span class="d-flex justify-content-start align-items-center">
-                    <h3><?php echo $admin_title ?? "" ?></h3>
+                    <h3 class="fw-bold"><?php echo $admin_title ?? "" ?></h3>
                 </span>
             </div>
         </div>
