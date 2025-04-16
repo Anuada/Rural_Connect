@@ -82,7 +82,7 @@ $title = "City Health";
 
 <?php ob_start() ?>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="../assets/js/city.health.all.js"></script>
+<script type="module" src="../assets/js/city.health.all.js"></script>
 <?php echo $city_health_scripts ?? "" ?>
 <?php $scripts = ob_get_clean() ?>
 
