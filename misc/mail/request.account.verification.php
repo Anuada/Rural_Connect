@@ -45,8 +45,8 @@
                     style="width:602px;border-collapse:collapse;border-spacing:0;text-align:left;">
                     <tr>
                         <td align="center" style="padding:60px 0 60px 0;background-color: #d8ebff">
-                            <img src="cid:RuralConnectLogo"
-                                alt="Rural Connect" width="400" style="height:auto;display:block;" />
+                            <img src="cid:RuralConnectLogo" alt="Rural Connect" width="400"
+                                style="height:auto;display:block;" />
                         </td>
                     </tr>
                     <tr>
@@ -101,9 +101,8 @@
                                             style="border-collapse:collapse;border:0;border-spacing:0;">
                                             <tr>
                                                 <td style="padding:0 0 0 10px;width:38px;">
-                                                    <a href="mailto:frenchcries12@gmail.com"><img
-                                                            src="cid:RuralConnectLogo"
-                                                            alt="Rural Connect" width="200"
+                                                    <a href="mailto:rural.connect2025@gmail.com"><img
+                                                            src="cid:RuralConnectLogo" alt="Rural Connect" width="200"
                                                             style="height:auto;display:block;border:0;" /></a>
                                                 </td>
                                             </tr>

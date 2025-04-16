@@ -64,7 +64,9 @@
                                             subscription plan was not approved. For more information, please refer to
                                             the admin's note below.</p>
 
-                                        <div style="margin-top: 20px;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">Admin's Note: </div>
+                                        <div
+                                            style="margin-top: 20px;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">
+                                            Admin's Note: </div>
                                         <p
                                             style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;text-indent:50px;">
                                             <?php echo $note; ?>
@@ -97,7 +99,7 @@
                                             style="border-collapse:collapse;border:0;border-spacing:0;">
                                             <tr>
                                                 <td style="padding:0 0 0 10px;width:38px;">
-                                                    <a href="mailto:frenchcries12@gmail.com"><img
+                                                    <a href="mailto:rural.connect2025@gmail.com"><img
                                                             src="cid:RuralConnectLogo" alt="Rural Connect" width="200"
                                                             style="height:auto;display:block;border:0;" /></a>
                                                 </td>
