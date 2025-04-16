@@ -1,15 +1,11 @@
+import { confirmAlert } from "./helpers/sweetAlert2.js";
 const admin_logout = document.getElementById('admin_logout');
 
-admin_logout.addEventListener('click', () => {
-    Swal.fire({
-        title: "Do you want to logout?",
-        showDenyButton: true,
-        confirmButtonColor: "#007bff",
-        confirmButtonText: "Yes",
-        denyButtonText: `No`,
-    }).then((result) => {
-        if (result.isConfirmed) {
-            location.href = "../logic/logout.php";
-        }
-    });
-})
+const handleLogout = () => {
+    location.href = "../logic/logout.php";
+}
+
+admin_logout.addEventListener('click', () => { 
+    const question = "Are you sure you want to logout?";
+    confirmAlert(question, handleLogout, true);
+});

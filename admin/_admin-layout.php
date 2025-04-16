@@ -79,7 +79,7 @@ $title = "Admin";
 <?php $content = ob_get_clean() ?>
 
 <?php ob_start() ?>
-<script src="../assets/js/admin.all.js"></script>
+<script type="module" src="../assets/js/admin.all.js"></script>
 <?php echo $admin_scripts ?? "" ?>
 <?php $scripts = ob_get_clean() ?>
 
