@@ -36,8 +36,8 @@ export const update_profile_form = `
                         <input type="text" id="contactNo" name="contactNo" required>
                         <div style="height: 15px" class="text-danger" id="contactNoError"></div>
                     </div>
-                    <button type="submit" name="submit">Update Profile</button>
                 </div>
+                <button type="submit" name="submit">Update Profile</button>
             </div>
         </form>
     </div>
