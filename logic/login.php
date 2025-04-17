@@ -40,8 +40,8 @@ if (isset($_POST["login"])) {
                     case 'deliveries':
                         $deliveries = $db->fetchRecords("deliveries", ["accountId" => $account[0]["accountId"]]);
                         $_SESSION["m"] = "Welcome " . $deliveries[0]["fname"] . " " . $deliveries[0]["lname"];
-                        header("Location: ../deliveries/");
-                        break;
+                        header("Location: " . $ms->url('deliveries'));
+                        exit;
 
                     case 'admin':
                         $authentication_code = $ms->generateRandomNumbers();

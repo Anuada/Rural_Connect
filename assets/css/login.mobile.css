@@ -1,0 +1,123 @@
+/* GLOBAL STYLING */
+body {
+    background: linear-gradient(135deg, #D8EFFF, #A1D2FF);
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    color: #333;
+    padding: 20px;
+}
+
+/* LOGIN CONTAINER */
+.login-container {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(15px);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 380px;
+    text-align: center;
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+/* LOGO */
+.login-container img {
+    width: 70px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+}
+
+/* FORM HEADER */
+.login-form h2 {
+    font-size: 22px;
+    margin-bottom: 15px;
+    font-weight: 600;
+    color: #007bff;
+}
+
+/* INPUTS */
+.login-form input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    background: rgba(255, 255, 255, 0.95);
+    color: #333;
+    outline: none;
+    transition: 0.3s;
+}
+
+.login-form input::placeholder {
+    color: #888;
+}
+
+.login-form input:focus {
+    border: 1px solid #007bff;
+    background: white;
+}
+
+/* BUTTON */
+.login-form button {
+    width: 100%;
+    padding: 12px;
+    background: #007bff;
+    border: none;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.login-form button:hover {
+    background: #0056b3;
+    transform: translateY(-2px);
+}
+
+/* ANIMATION */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* RESPONSIVENESS */
+@media screen and (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+
+    .login-container {
+        padding: 25px 20px;
+    }
+
+    .login-form h2 {
+        font-size: 20px;
+    }
+
+    .login-form input {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .login-form button {
+        font-size: 15px;
+        padding: 10px;
+    }
+
+    .login-container img {
+        width: 60px;
+    }
+}

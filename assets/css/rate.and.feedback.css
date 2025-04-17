@@ -49,32 +49,98 @@
 }
 
 /* Rate and Feedback */
+.rate-feedback-container {
+    padding-top: 100px;
+    padding-bottom: 30px;
+}
 
 .star-rating {
-    direction: rtl; /* Right to left for easier hover effect */
-    display: inline-block;
+    direction: rtl;
+    display: flex;
+    justify-content: end;
+    gap: 5px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
 }
 
 input[type="radio"] {
-    display: none; /* Hide the radio buttons */
+    display: none;
 }
 
 .star {
-    font-size: 100px; /* Size of the stars */
-    color: #ccc; /* Default color */
+    font-size: 100px;
+    color: #ccc;
     cursor: pointer;
     transition: color 0.2s;
 }
 
 .star:hover,
 .star:hover ~ .star {
-    color: #007bff; /* Color on hover */
+    color: #007bff;
 }
 
 input[type="radio"]:checked ~ .star {
-    color: #007bff; /* Color when selected */
+    color: #007bff;
 }
 
 input[type="radio"]:checked + .star {
-    color: #007bff; /* Color for the selected star */
+    color: #007bff;
+}
+
+textarea.form-control {
+    font-size: 16px;
+    resize: vertical;
+    padding: 10px;
+    border-radius: 6px;
+}
+
+button.btn {
+    width: 100%;
+    font-size: 18px;
+    padding: 12px;
+    border-radius: 6px;
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+    .navbar-brand {
+        font-size: 16px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .blue-color {
+        font-size: 18px;
+    }
+
+    .reg-w {
+        margin-left: 0;
+        font-size: 14px;
+    }
+
+    .star {
+        font-size: 60px;
+    }
+
+    textarea.form-control {
+        font-size: 14px;
+    }
+
+    button.btn {
+        font-size: 16px;
+    }
+
+    .rate-feedback-container {
+        padding: 100px 15px 30px 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .star {
+        font-size: 40px;
+    }
+
+    .rate-feedback-container {
+        padding-top: 100px;
+    }
 }

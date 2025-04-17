@@ -31,12 +31,12 @@ class EmailSender
         $this->mail->isHTML(true);
         $this->mail->isSMTP();
         $this->mail->SMTPAuth = true;
-        $this->mail->Host = 'smtp-relay.brevo.com';
-        $this->mail->Username = '8a6da9002@smtp-brevo.com';
-        $this->mail->Password = 'ASR5qKbIQEXj6vYT';
-        $this->mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $this->mail->Port = 587;
-        $this->mail->setFrom('rural.connect2025@gmail.com', "Rural Connect Team");
+        $this->mail->Host = 'smtp.gmail.com';
+        $this->mail->Username = 'frenchcries12@gmail.com';
+        $this->mail->Password = 'ehlxzxdcksskipfe';
+        $this->mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+        $this->mail->Port = 465;
+        $this->mail->setFrom('frenchcries12@gmail.com', "Rural Connect Team");
         $this->misc = new Misc;
     }
 
@@ -56,17 +56,17 @@ class EmailSender
      */
     private function sendEmail($email, $subject, $body)
     {
-        // try {
+        try {
             $this->mail->addAddress($email);
             $this->mail->Subject = $subject;
             $this->mail->Body = $body;
             $this->mail->addEmbeddedImage("../assets/img/misc/RuralConnectAltLogo.png", "RuralConnectLogo");
             $this->mail->send();
-        // } catch (Exception $e) {
-        //     http_response_code(500);
-        //     include "../shared/500.page.php";
-        //     exit;
-        // }
+        } catch (Exception $e) {
+            http_response_code(500);
+            include "../shared/500.page.php";
+            exit;
+        }
     }
 
     /**

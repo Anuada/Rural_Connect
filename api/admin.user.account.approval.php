@@ -11,8 +11,7 @@ $ms = new Misc;
 $approve_statuses = ApproveStatus::all();
 
 if ($_SERVER['REQUEST_METHOD'] !== 'PUT') {
-    http_response_code(405);
-    echo json_encode(['message' => 'Method Not Allowed']);
+    echo $ms->json_response(null, 'Method Not Allowed', 405);
     exit();
 }
 

@@ -13,6 +13,8 @@ if (!isset($_SESSION['accountId'])) {
     exit();
 }
 
+require_once "../shared/is.user.verified.php";
+
 if (!in_array($user_type, $user_types)) {
     header("Location: ../page/");
     exit();
@@ -24,21 +26,19 @@ if (!in_array($user_type, $user_types)) {
 <?php $styles = ob_get_clean() ?>
 
 <?php ob_start() ?>
-
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container">
-        <span class="navbar-brand"><span class="blue-color" id="title">Rural Connect</span><span class="reg-w">Rate and
-                Feedback</span></span>
-
+        <span class="navbar-brand">
+            <span class="blue-color" id="title">Rural Connect</span>
+            <span class="reg-w">Rate and Feedback</span>
+        </span>
     </div>
 </nav>
-
 <?php $navbar = ob_get_clean() ?>
 
-
 <?php ob_start() ?>
-<div class="container" style="padding-top:100px">
+<div class="container rate-feedback-container">
     <form action="../logic/rate-and-feedback.php" method="post">
         <p style="font-size:20px">Rate Our Service!</p>
         <div class="star-rating">
@@ -58,26 +58,24 @@ if (!in_array($user_type, $user_types)) {
             <label for="star1" class="star">&#9733;</label>
         </div>
         <div class="text-danger" style="height:30px" id="ratingError"></div>
+
         <p>
             <label for="feedback" style="font-size:20px">Feedback</label>
-            <textarea class="form-control" id="feedback" name="feedback" rows="8"
+            <textarea class="form-control" id="feedback" name="feedback" rows="6"
                 placeholder="(Optional) We appreciate your input on how we can do better."></textarea>
         </p>
+
         <p>
-            <button type="submit" class="btn btn-primary" style="width:100%" name="submit">Submit</button>
+            <button type="submit" class="btn btn-primary" name="submit">Submit</button>
         </p>
     </form>
-
 </div>
 <?php $content = ob_get_clean() ?>
 
-
 <?php ob_start() ?>
-
 <script>
     const title = document.getElementById("title");
-
-    title.addEventListener("click", () => { 
+    title.addEventListener("click", () => {
         location.href = "../<?php echo $user_type ?>/";
     });
 </script>
@@ -86,10 +84,8 @@ if (!in_array($user_type, $user_types)) {
     <script>
         document.getElementById("ratingError").innerHTML = "<?php echo $_SESSION["ratingError"] ?>";
     </script>
-
     <?php unset($_SESSION["ratingError"]) ?>
 <?php endif ?>
-
 <?php $scripts = ob_get_clean() ?>
 
 <?php require_once "../shared/layout.php" ?>
