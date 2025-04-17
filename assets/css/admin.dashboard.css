@@ -30,7 +30,7 @@
 .charts {
     display: flex;
     flex-wrap: wrap;
-    gap: 2rem;
+    gap: 1rem;
     margin-bottom: 20px;
 }
 
@@ -39,7 +39,6 @@
     padding: 1rem;
     border-radius: 12px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-
     flex: 1;
     min-width: 300px;
 }
