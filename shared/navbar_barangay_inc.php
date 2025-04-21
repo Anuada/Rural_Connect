@@ -43,7 +43,7 @@ $profileImage = isset($barangay_inc[0]['id_verification']) ? htmlspecialchars($b
                     <a class="nav-link" style="margin-right: 15px;" href="barangayViewReq_Med.php">My Requests</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" style="margin-right: 15px;" href="#">Custom Medicine Requisition</a>
+                    <a class="nav-link" style="margin-right: 15px;" href="../barangay_inc/custom-med-request.php">Custom Medicine Requisition</a>
                 </li>
                 <li class="nav-item dropdown position-relative">
                     <div class="dropdown">

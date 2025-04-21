@@ -1,92 +1,116 @@
 <?php
 session_start();
-require_once "../util/DbHelper.php";
 require_once "../shared/session.barangay_inc.php";
+require_once "../util/DbHelper.php";
+require_once "../util/Misc.php";
+$barangay_inc_title = Misc::displayPageTitle("Request Medicine", "fa-notes-medical");
 
 $db = new DbHelper();
 
-$med_avail = $db->getRecord('med_availability', ['id' => $_GET['id']]);
-$limit = (int) ($med_avail['quantity'] * 0.20);
-$title = "Request Medicine - City Health";
+if (!isset($_GET['id']) || empty(trim($_GET['id']))) {
+    $_SESSION['m'] = "ID not found!";
+    header("Location: ../barangay_inc/view_med.php");
+    exit();
+}
 
-ob_start();
-include "../shared/navbar_barangay_inc.php";
-$navbar = ob_get_clean();
+$med_avail = $db->getRecord('med_availability', ['id' => $_GET['id']]);
+
+if (empty($med_avail)) {
+    $_SESSION['m'] = "Medicine not found!";
+    header("Location: ../barangay_inc/view_med.php");
+    exit();
+}
+
+$limit = (int) ($med_avail['quantity'] * 0.20);
 ?>
 
-<?php ob_start(); ?>
-<link rel="stylesheet" href="../assets/css/bootstrap.min.css">
-<style>
-    body {
-        background-color: #f0f8ff;
-        font-family: 'Poppins', sans-serif;
-    }
+<?php ob_start() ?>
+<link rel="stylesheet" href="../assets/css/barangay.inc.request.med.css">
+<?php $barangay_inc_styles = ob_get_clean() ?>
 
-    .navbar {
-        background-color: hsl(0, 0.00%, 98.80%) !important;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
+<?php ob_start() ?>
+<div class="medicine-container">
 
-    .container {
-        margin-top: 180px;
-        padding-bottom: 2px;
-    }
+    <div class="row g-4">
+        <!-- Left column: Image + Form -->
+        <div class="col-lg-4">
+            <!-- Medicine Image -->
+            <div class="text-center mb-4">
+                <img src="<?php echo $med_avail['med_image'] ?>" alt="<?php echo $med_avail['med_name'] ?>"
+                    class="shadow medicine-image" />
+            </div>
 
-    .request-card,
-    .qr-container {
-        background: #ffffff;
-        padding: 30px;
-        border-radius: 12px;
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-        transition: transform 0.2s ease-in-out;
-    }
-
-    .request-card:hover,
-    .qr-container:hover {
-        transform: scale(1.02);
-    }
-
-    .btn-primary {
-        background-color: #007bff;
-        border: none;
-        padding: 12px;
-        font-weight: bold;
-        border-radius: 8px;
-    }
-
-    .btn-primary:hover {
-        background-color: #0056b3;
-    }
-</style>
-<?php $styles = ob_get_clean(); ?>
-
-<?php ob_start(); ?>
-<div class="container">
-    <div class="row justify-content-center align-items-center">
-        <div class="col-md-6 request-card">
-            <h4 class="text-center text-primary mb-4"><i class="fas fa-medkit"></i> Medicine Request Form</h4>
-            <form action="../logic/request_med.php" method="post" enctype="multipart/form-data">
-                <input type="hidden" name="barangay_inc_id" value="<?= htmlspecialchars($_SESSION['accountId']) ?>">
-                <input type="hidden" name="city_health_id" value="<?= htmlspecialchars($_GET['city_health_id']) ?>">
+            <!-- Request Form -->
+            <form id="submit-request" action="../logic/request_med.php" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="submitRequest">
                 <input type="hidden" name="med_avail_id" value="<?= htmlspecialchars($_GET['id']) ?>">
-                <div class="mb-3">
-                    <label class="form-label"><i class="fas fa-sort-numeric-up"></i> Quantity</label>
-                    <input type="number" class="form-control" name="request_quantity" max="<?php echo $limit ?>"
-                        placeholder="Enter Quantity" required>
+                <input type="hidden" name="barangay_inc_id" value="<?= htmlspecialchars($_SESSION['accountId']) ?>">
+                <div class="form-fields">
+                    <div class="mb-3">
+                        <label for="request_quantity">Select Quantity</label>
+                        <input type="number" name="request_quantity" id="request_quantity" min="1" max="<?php echo $limit; ?>"
+                            value="1" required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="document">Upload Document</label>
+                        <input type="file" name="document" class="form-control" id="document" accept="image/*" required />
+                        <div class="form-text">Accepted: any images</div>
+                    </div>
+                    <button type="submit">Submit Request</button>
                 </div>
-                <div class="mb-3">
-                    <label class="form-label"><i class="fas fa-file-invoice"></i> Document For Request</label>
-                    <input type="file" class="form-control" name="document" required>
-                </div>
-                <button type="submit" name="submit" class="btn btn-primary w-100"><i class="fas fa-paper-plane"></i>
-                    Submit Request</button>
+                
             </form>
         </div>
+
+        <!-- Right column: Details -->
+        <div class="col-lg-8">
+            <h2 class="mb-3 rc-blue-text fw-bold"><i class="fas fa-pills me-2"></i><?php echo $med_avail['med_name'] ?>
+            </h2>
+
+            <p class="mb-4 text-secondary">
+                <?php echo $med_avail['med_description'] ?>
+            </p>
+
+            <table class="table" style="box-shadow: none">
+                <colgroup>
+                    <col style="width: 30%">
+                    </col>
+                    <col style="width: 70%%">
+                    </col>
+                </colgroup>
+                <tbody class="align-middle">
+                    <tr>
+                        <th>Category</th>
+                        <td><?php echo $med_avail['category'] ?></td>
+                    </tr>
+                    <tr>
+                        <th>Dosage Form</th>
+                        <td><?php echo $med_avail['DosageForm'] ?></td>
+                    </tr>
+                    <tr>
+                        <th>Dosage Strength</th>
+                        <td><?php echo $med_avail['DosageStrength'] ?></td>
+                    </tr>
+                    <tr>
+                        <th>Expiration Date</th>
+                        <td><?php echo date('F d, Y', strtotime($med_avail['expiry_date'])) ?></td>
+                    </tr>
+                    <tr>
+                        <th>Total Available</th>
+                        <td>
+                            <?php echo $med_avail['quantity'] ?>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-    <?php $content = ob_get_clean(); ?>
+</div>
+<?php $barangay_inc_content = ob_get_clean() ?>
 
-    <?php ob_start(); ?>
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-    <?php $scripts = ob_get_clean(); ?>
+<?php ob_start() ?>
+<script type="module" src="../assets/js/barangay_inc/request.med.js"></script>
+<?php $barangay_inc_scripts = ob_get_clean() ?>
 
-    <?php require_once "../shared/layout.php"; ?>
+<?php require_once "_barangay-inc-layout.php" ?>

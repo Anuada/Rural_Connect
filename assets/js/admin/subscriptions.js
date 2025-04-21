@@ -9,7 +9,6 @@ let currentPage = 1;
 const limit = 5;
 
 // Elements
-const searchEl = document.getElementById('search');
 const table_data = document.getElementById('table-data');
 const paginationContainer = document.getElementById('pagination');
 const imgModalEl = document.getElementById('imageModal')

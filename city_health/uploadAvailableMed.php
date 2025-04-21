@@ -55,7 +55,7 @@ $city_health_title = Misc::displayPageTitle("Upload Medicine","fa-upload me-2");
 
                 <div class="col-md-6 mb-3">
                     <label for="med_image">Upload Image</label>
-                    <input type="file" accept="image/*" name="med_image" id="med_image" required>
+                    <input type="file" accept="image/*" class="form-control" name="med_image" id="med_image" required>
                 </div>
             </div>
             

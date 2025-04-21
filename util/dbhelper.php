@@ -378,41 +378,38 @@ class DbHelper
     }
 
     // display supply Date
-    public function Display_barangay_inc_req($id)
+    public function display_barangay_inc_request_med($id, $limit, $offset)
     {
-        $sql = "
-            SELECT 
-            request_med.id,
-            request_med.request_quantity,
-            request_med.requestStatus,
-            barangay_inc.address,
-            barangay_inc.contactNo,
-            med_availability.med_name,
-            med_availability.category,
-            med_availability.DosageForm AS request_DosageForm,
-            med_availability.DosageStrength AS request_DosageStrength,
-            med_availability.med_description,
-            med_deliveries.date_of_supply,
-            city_health.contactNo,
-            city_health.fname,
-            city_health.lname
+        $sql = " SELECT 
+        request_med.id,
+        request_med.request_quantity,
+        request_med.requestStatus,
+        request_med.document,
+        med_availability.med_name,
+        med_availability.category,
+        med_availability.DosageForm AS dosage_form,
+        med_availability.DosageStrength AS dosage_strength,
+        med_availability.med_image,
+        med_deliveries.id AS med_delivery_id,
+        med_deliveries.date_of_supply
 
-            FROM barangay_inc
+        FROM request_med
 
-            INNER JOIN request_med ON request_med.barangay_inc_id = barangay_inc.accountId
-            INNER JOIN med_availability ON request_med.med_avail_Id = med_availability.id
-            LEFT JOIN med_deliveries ON med_deliveries.request_med_id = request_med.id
-            INNER JOIN city_health ON med_availability.city_health_id = city_health.accountId
-            
-            WHERE barangay_inc.accountId = ?
-    ";
+        INNER JOIN barangay_inc ON request_med.barangay_inc_id = barangay_inc.accountId
+        INNER JOIN med_availability ON request_med.med_avail_Id = med_availability.id
+        LEFT JOIN med_deliveries ON request_med.id = med_deliveries.request_med_id
+
+        WHERE barangay_inc.accountId = ?
+
+        LIMIT ? OFFSET ?
+        ";
 
         $stmt = $this->conn->prepare($sql);
         if (!$stmt) {
             die("SQL Error: " . $this->conn->error);
         }
 
-        $stmt->bind_param("i", $id);
+        $stmt->bind_param("sii", $id, $limit, $offset);
         $stmt->execute();
         $result = $stmt->get_result();
         $records = [];
@@ -421,7 +418,50 @@ class DbHelper
             $records[] = $row;
         }
 
-        $stmt->close(); // Close the statement after use
+        $stmt->close();
+        return $records;
+
+    }
+
+    public function display_barangay_inc_customized_med_request($id, $limit, $offset)
+    {
+        $sql = " SELECT        
+        custom_med_request.id,
+        custom_med_request.requested_quantity AS request_quantity,
+        custom_med_request.request_status AS requestStatus,
+        custom_med_request.requested_medicine AS med_name,
+        custom_med_request.category,
+        custom_med_request.dosage_form,
+        custom_med_request.dosage_strength,
+        custom_med_request.document,
+        custom_med_deliveries.id AS med_delivery_id,
+        custom_med_deliveries.date_of_supply
+
+        FROM custom_med_request
+
+        INNER JOIN barangay_inc ON custom_med_request.barangay_inc_id = barangay_inc.accountId
+        LEFT JOIN custom_med_deliveries ON custom_med_deliveries.custom_med_request_id = custom_med_request.id
+
+        WHERE barangay_inc.accountId = ?
+
+        LIMIT ? OFFSET ?
+        ";
+
+        $stmt = $this->conn->prepare($sql);
+        if (!$stmt) {
+            die("SQL Error: " . $this->conn->error);
+        }
+
+        $stmt->bind_param("sii", $id, $limit, $offset);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $records = [];
+
+        while ($row = $result->fetch_assoc()) {
+            $records[] = $row;
+        }
+
+        $stmt->close();
         return $records;
 
     }
@@ -460,59 +500,89 @@ class DbHelper
     }
 
 
-    // Display for Data Barangat Requested
-    public function Display_barangay_inc_requested($id)
+    // Display for Data Barangay Requested
+    public function display_barangay_inc_requested($limit, $offset)
     {
-        $sql = "
-            SELECT 
+        $sql = "SELECT 
             request_med.id,
             request_med.request_quantity,
-            request_med.requestStatus,
+            request_med.requestStatus AS status,
             request_med.document,
-            barangay_inc.address,
             med_availability.med_name,
-            med_availability.med_description,
             med_availability.med_image,
-            med_availability.category AS request_category,
-            med_availability.DosageForm AS request_DosageForm,
-            med_availability.DosageStrength AS request_DosageStrength,
+            med_availability.category,
+            med_availability.DosageForm AS dosage_form,
+            med_availability.DosageStrength AS dosage_strength,
             med_deliveries.date_of_supply,
             barangay_inc.contactNo,
             barangay_inc.fname,
             barangay_inc.lname,
-            barangay_inc.barangay
+            barangay_inc.barangay,
+            barangay_inc.address
 
             FROM request_med
 
             INNER JOIN barangay_inc ON request_med.barangay_inc_id = barangay_inc.accountId
             INNER JOIN med_availability ON request_med.med_avail_Id = med_availability.id
+            INNER JOIN city_health ON med_availability.city_health_id = city_health.accountId
             LEFT JOIN med_deliveries ON med_deliveries.request_med_id = request_med.id
-            
-            WHERE request_med.city_health_id = ?
 
             ORDER BY 
             CASE 
                 WHEN request_med.requestStatus = 'Pending' THEN 0 
                 ELSE 1 
             END
-    ";
 
-        $stmt = $this->conn->prepare($sql);
-        if (!$stmt) {
-            die("SQL Error: " . $this->conn->error);
+            LIMIT $limit OFFSET $offset
+        ";
+        $query = $this->conn->query($sql);
+        $rows = [];
+        while ($row = $query->fetch_assoc()) {
+            $rows[] = $row;
         }
 
-        $stmt->bind_param("i", $id);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $records = [];
+        return $rows;
+    }
 
-        while ($row = $result->fetch_assoc()) {
-            $records[] = $row;
+    public function display_barangay_inc_customized_requests($limit, $offset)
+    {
+        $sql = "SELECT 
+            custom_med_request.id,
+            custom_med_request.requested_quantity AS request_quantity,
+            custom_med_request.request_status AS status,
+            custom_med_request.document,
+            custom_med_request.requested_medicine AS med_name,
+            custom_med_request.category,
+            custom_med_request.dosage_form,
+            custom_med_request.dosage_strength,
+            custom_med_deliveries.date_of_supply,
+            barangay_inc.contactNo,
+            barangay_inc.fname,
+            barangay_inc.lname,
+            barangay_inc.barangay,
+            barangay_inc.address
+
+            FROM custom_med_request
+
+            INNER JOIN barangay_inc ON custom_med_request.barangay_inc_id = barangay_inc.accountId
+            LEFT JOIN custom_med_deliveries ON custom_med_request.id = custom_med_deliveries.custom_med_request_id
+
+            ORDER BY 
+            CASE 
+                WHEN custom_med_request.request_status = 'Pending' THEN 0 
+                ELSE 1 
+            END
+
+            LIMIT $limit OFFSET $offset
+        ";
+
+        $query = $this->conn->query($sql);
+        $rows = [];
+        while ($row = $query->fetch_assoc()) {
+            $rows[] = $row;
         }
 
-        $stmt->close(); // Close the statement after use
-        return $records;
+        return $rows;
     }
 
     public function display_details_for_receipt($id)

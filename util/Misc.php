@@ -109,6 +109,20 @@ class Misc
         ";
     }
 
+    public function formatListWithOxfordComma(array $items)
+    {
+        $count = count($items);
+
+        if ($count === 1) {
+            return $items[0];
+        } elseif ($count === 2) {
+            return $items[0] . ' and ' . $items[1];
+        } else {
+            $last = array_pop($items);
+            return implode(', ', $items) . ', and ' . $last;
+        }
+    }
+
     public static function displayEnumNames(array $enums)
     {
         return array_column($enums, 'name');

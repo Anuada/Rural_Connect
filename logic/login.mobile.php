@@ -46,6 +46,8 @@ if (!password_verify($_POST['password'], $account['password'])) {
     exit();
 }
 
+$db->updateRecord("account", ["accountId" => $account["accountId"], "isLogin" => "1"]);
+
 $_SESSION["accountId"] = $account["accountId"];
 $_SESSION["email"] = $account["email"];
 $_SESSION["username"] = $account["username"];

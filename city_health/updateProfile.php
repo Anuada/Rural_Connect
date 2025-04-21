@@ -46,7 +46,7 @@ $city_health_title = Misc::displayPageTitle("Settings","fa-gear");
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="id_verification">Upload ID</label>
-                    <input type="file" id="id_verification" name="id_verification">
+                    <input type="file" id="id_verification" class="form-control" name="id_verification">
                 </div>
                 <div class="col-md-6 mb-3">
                     <label>Preview ID</label>

@@ -1,0 +1,161 @@
+body {
+    background: linear-gradient(135deg, #D8EFFF, #A1D2FF);
+}
+
+.sidenav {
+    height: 100vh;
+    width: 300px; /* increased from 220px */
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: white;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    overflow-y: auto;
+    color: #007bff;
+}
+
+.sidenav::-webkit-scrollbar {
+    width: 6px;
+}
+
+.sidenav::-webkit-scrollbar-thumb {
+    background-color: #E0F7FA;
+    border-radius: 3px;
+}
+
+.sidenav::-webkit-scrollbar-track {
+    background-color: #97bbc0;
+}
+
+.no-select {
+    user-select: none;
+    color: #272727;
+}
+
+.sidenav h3 a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: #007bff;
+}
+
+.sidenav a {
+    color: #007bff;
+    padding: 12px;
+    text-decoration: none;
+    border-radius: 8px;
+    display: block;
+}
+
+.sidenav a[name="nav-link"]:hover {
+    background-color: #E0F7FA;
+}
+
+.sidenav-active {
+    background-color: #E0F7FA;
+}
+
+.sidenav h3 {
+    margin-bottom: 10px;
+}
+
+.main-content {
+    margin-left: 300px; /* updated to match sidenav width + spacing */
+    padding: 20px;
+}
+
+/* Other CSS */
+.rc-blue-bg, .rc-blue-bg:hover {
+    background-color: #007bff;
+    color: #fff;
+} 
+
+.rc-blue-text {
+    color: #007bff;
+}
+
+/* Table CSS */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+table, th, td {
+    border: 1px solid #ddd;
+}
+th, td {
+    padding: 12px;
+    text-align: left;
+}
+th {
+    background-color: #007bff;
+    color: white;
+}
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+.container .card {
+    flex: 1;
+    min-width: 200px;
+    background: white;
+    border-radius: 12px;
+    border: none;
+    padding: 1rem;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+
+}
+
+.form-fields label {
+    color: #007bff;
+}
+
+.form-fields input, 
+.form-fields textarea,
+.form-fields select {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #007bff;
+    border-radius: 8px;
+    font-size: 16px;
+    background: rgba(255, 255, 255, 1);
+    color: #333;
+    outline: none;
+    transition: 0.3s;
+}
+
+.form-fields input::placeholder,
+.form-fields textarea::placeholder {
+    color: #888;
+}
+
+.form-fields button {
+    width: 100%;
+    padding: 12px;
+    background: #007bff;
+    border: none;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.form-fields button:hover {
+    transform: translateY(-2px);
+}

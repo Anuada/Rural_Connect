@@ -8,19 +8,14 @@ $db = new DbHelper();
 $ms = new Misc();
 $dir = new DirHandler();
 
-if (isset($_POST['submit'])) {
+if (isset($_POST['submitRequest'])) {
     request_med($db, $ms, $dir);
-} elseif (isset($_POST['acceptRequest'])) {
-    $requestId = $_POST['requestId'];
-    handleAcceptRequest($db, $requestId);
-} elseif (isset($_POST['cancelledRequest'])) {
-    $requestId = $_POST['requestId'];
-    handleCancelledRequest($db, $requestId);
+} elseif (isset($_POST['customRequest'])) {
+    custom_med_request($db, $ms, $dir);
 }
 
 function request_med(DbHelper $db, Misc $ms, DirHandler $dir)
 {
-    $city_health_id = $_POST['city_health_id'];
     $barangay_inc_id = $_POST['barangay_inc_id'];
     $med_avail_id = $_POST['med_avail_id'];
     $request_quantity = (int) $_POST['request_quantity'];
@@ -28,15 +23,27 @@ function request_med(DbHelper $db, Misc $ms, DirHandler $dir)
     $med_avail = $db->getRecord('med_availability', ['id' => $med_avail_id]);
     $limit = (int) ($med_avail['quantity'] * 0.20);
 
-    if ($request_quantity > $limit) {
-        $_SESSION["m"] = "You've requested more than the allowed amount of this medicine!";
-        header("Location: ../barangay_inc/request_med.php?city_health_id=$city_health_id&id=$med_avail_id");
+    if ($request_quantity <= 0) {
+        $_SESSION["m"] = "Please select quantity!";
+        header("Location: ../barangay_inc/request_med.php?id=$med_avail_id");
         exit();
     }
 
+    if ($request_quantity > $limit) {
+        $_SESSION["m"] = "You've requested more than the allowed amount of this medicine!";
+        header("Location: ../barangay_inc/request_med.php?id=$med_avail_id");
+        exit();
+    }
+
+    if (!isset($_FILES["document"]) || $_FILES["document"]["size"] <= 0) {
+        $_SESSION["m"] = "Please upload a valid document!";
+        header("Location: ../barangay_inc/request_med.php?id=$med_avail_id");
+        exit();
+    }
+
+
     $table = "request_med";
     $data = [
-        "city_health_id" => $city_health_id,
         "barangay_inc_id" => $barangay_inc_id,
         "med_avail_id" => $med_avail_id,
         "request_quantity" => $request_quantity,
@@ -51,39 +58,66 @@ function request_med(DbHelper $db, Misc $ms, DirHandler $dir)
         exit();
     } else {
         $_SESSION["m"] = "Error Requesting!";
-        header("Location: ../barangay_inc/request_med.php?city_health_id=$city_health_id&id=$med_avail_id");
+        header("Location: ../barangay_inc/request_med.php?id=$med_avail_id");
         exit();
     }
 }
 
-function handleAcceptRequest(DbHelper $db, string $requestId)
+function custom_med_request(DbHelper $db, Misc $ms, DirHandler $dir)
 {
-    $requested_med = $db->getRecord("request_med", ['id' => $requestId]);
-    $med_avail = $db->getRecord('med_availability', ['id' => $requested_med['med_avail_Id']]);
-    $new_total_quantity = (int) $med_avail['quantity'] - (int) $requested_med['request_quantity'];
-    $db->updateRecord('med_availability', ['id' => $requested_med['med_avail_Id'], 'quantity' => $new_total_quantity]);
-    $result = $db->updateRecord("request_med", ['id' => $requestId, 'requestStatus' => 'Accepted']);
+    $formInputs = [
+        "barangay_inc_id" => $_SESSION["accountId"]
+    ];
 
-    if ($result > 0) {
-        $_SESSION["m"] = "Request accepted";
-        header("Location: ../city_health/select_date_req.php?requestId=" . $requestId);
-        exit();
-    } else {
-        $_SESSION["m"] = "Error updating request. Please try again!";
-        header("Location: ../city_health/select_date_req.php");
+    $errorMessages = [];
+
+    foreach ($_POST as $key => $value) {
+        if ($key !== "customRequest" && empty(trim($value))) {
+            $_key = str_replace("_"," ", $key);
+            $errorMessages[$key] = "$_key is required.";
+        }
+    }
+
+    if (!empty($errorMessages)) {
+        $_SESSION['errorMessages'] = $errorMessages;
+        $_SESSION['formFields'] = $_POST;
+        header("Location: ../barangay_inc/custom-med-request.php");
         exit();
     }
-}
 
-function handleCancelledRequest(DbHelper $db, string $requestId)
-{
-    $result = $db->updateRecord("request_med", ['id' => $requestId, 'requestStatus' => 'Cancelled']);
-
-    if ($result > 0) {
-        $_SESSION["m"] = "Request Cancelled";
-    } else {
-        $_SESSION["m"] = "Error updating request. Please try again!";
+    $requested_quantity = (int) $_POST['requested_quantity'];
+    if ($requested_quantity <= 0) {
+        $errorMessages["requested_quantity"] = "Please select quantity!";
+        $_SESSION['errorMessages'] = $errorMessages;
+        $_SESSION['formFields'] = $_POST;
+        header("Location: ../barangay_inc/custom-med-request.php");
+        exit();
     }
-    header("Location: ../city_health/request_med.php");
-    exit();
+
+    if (!isset($_FILES["document"]) || $_FILES["document"]["size"] <= 0) {
+        $errorMessages["document"] = "Please upload a valid document!";
+        $_SESSION['errorMessages'] = $errorMessages;
+        $_SESSION['formFields'] = $_POST;
+        header("Location: ../barangay_inc/custom-med-request.php");
+        exit();
+    }
+
+    foreach ($_POST as $key => $value) {
+        if ($key !== "customRequest") {
+            $formInputs[$key] = $value;
+        }
+    }
+
+    $formInputs['document'] = $ms->uploadImage($_FILES["document"], $ms->generateUUID(), $dir->upload_document);
+
+    $createRequest = $db->addRecord("custom_med_request", $formInputs);
+    if ($createRequest > 0) {
+        $_SESSION["m"] = "Request successfully";
+        header("Location: ../barangay_inc/custom-med-request.php");
+        exit();
+    } else {
+        $_SESSION["m"] = "Error Requesting!";
+        header("Location: ../barangay_inc/custom-med-request.php");
+        exit();
+    }
 }

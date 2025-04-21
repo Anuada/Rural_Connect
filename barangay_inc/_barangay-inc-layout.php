@@ -1,12 +1,12 @@
 <?php
 require_once "../util/Misc.php";
 $ms = new Misc;
-$title = "City Health";
+$title = "Barangay Incharge";
 ?>
 
 <?php ob_start() ?>
-<link rel="stylesheet" href="../assets/css/city.health.all.css">
-<?php echo $city_health_styles ?? "" ?>
+<link rel="stylesheet" href="../assets/css/barangay.inc.all.css">
+<?php echo $barangay_inc_styles ?? "" ?>
 <?php $styles = ob_get_clean() ?>
 
 <?php ob_start() ?>
@@ -14,34 +14,34 @@ $title = "City Health";
     <h3>
         <a href="">
             <img src="../assets/img/misc/RuralConnectAltLogo.png" alt="Rural Connect Logo" width="200px">
-            <h4>City Health</h4>
+            <h5>Barangay Incharge</h5>
         </a>
     </h3>
-    <a href="<?php echo $ms->url('city_health') ?>" name="nav-link" <?php echo $ms->url() === $ms->url('city_health/') ? "class='sidenav-active'" : "" ?>>
+    <a href="<?php echo $ms->url('barangay_inc') ?>" name="nav-link" <?php echo $ms->url() === $ms->url('barangay_inc/') ? "class='sidenav-active'" : "" ?>>
         <div class="row align-items-center">
             <div class="col-sm-2"><i class="fas fa-home"></i></div>
             <div class="col"><span>Dashboard</span></div>
         </div>
     </a>
-    <a href="<?php echo $ms->url('city_health/uploadAvailableMed.php') ?>" name="nav-link" <?php echo $ms->url() === $ms->url('city_health/uploadAvailableMed.php') ? "class='sidenav-active'" : "" ?>>
+    <a href="<?php echo $ms->url('barangay_inc/view_med.php') ?>" name="nav-link" <?php echo $ms->url() === $ms->url('barangay_inc/view_med.php') || $ms->url() === $ms->url('barangay_inc/request_med.php') ? "class='sidenav-active'" : "" ?>>
         <div class="row align-items-center">
-            <div class="col-sm-2"><i class="fas fa-upload me-2"></i></div>
-            <div class="col"><span>Upload Medicine</span></div>
+            <div class="col-sm-2"><i class="fas fa-notes-medical"></i></div>
+            <div class="col"><span>Get Medicine</span></div>
         </div>
     </a>
-    <a href="<?php echo $ms->url('city_health/view_med.php') ?>" name="nav-link" <?php echo $ms->url() === $ms->url('city_health/view_med.php') || $ms->url() === $ms->url('city_health/uploadMedEdit.php') ? "class='sidenav-active'" : "" ?>>
+    <a href="<?php echo $ms->url('barangay_inc/custom-med-request.php') ?>" name="nav-link" <?php echo $ms->url() === $ms->url('barangay_inc/custom-med-request.php') ? "class='sidenav-active'" : "" ?>>
         <div class="row align-items-center">
-            <div class="col-sm-2"><i class="fas fa-pills me-2"></i></div>
-            <div class="col"><span>Available Medicine</span></div>
+            <div class="col-sm-2"><i class="fas fa-file-medical"></i></div>
+            <div class="col"><span>Custom Med Request</span></div>
         </div>
     </a>
-    <a href="<?php echo $ms->url('city_health/barangay-med-requests.php') ?>" name="nav-link" <?php echo $ms->url() === $ms->url('city_health/barangay-med-requests.php') ? "class='sidenav-active'" : "" ?>>
+    <a href="<?php echo $ms->url('barangay_inc/my-requests.php') ?>" name="nav-link" <?php echo $ms->url() === $ms->url('barangay_inc/my-requests.php') ? "class='sidenav-active'" : "" ?>>
         <div class="row align-items-center">
-            <div class="col-sm-2"><i class="fas fa-prescription-bottle me-2"></i></div>
-            <div class="col"><span>Brgy Medicine Request</span></div>
+            <div class="col-sm-2"><i class="fas fa-clipboard-list"></i></div>
+            <div class="col"><span>My Requests</span></div>
         </div>
     </a>
-    <a href="<?php echo $ms->url('city_health/updateProfile.php') ?>" name="nav-link" <?php echo $ms->url() === $ms->url('city_health/updateProfile.php') || $ms->url() === $ms->url('city_health/changePassword.php') ? "class='sidenav-active'" : "" ?>>
+    <a href="<?php echo $ms->url('barangay_inc/updateProfile.php') ?>" name="nav-link" <?php echo $ms->url() === $ms->url('barangay_inc/updateProfile.php') || $ms->url() === $ms->url('barangay_inc/changePassword.php') ? "class='sidenav-active'" : "" ?>>
         <div class="row align-items-center">
             <div class="col-sm-2"><i class="fas fa-gear"></i></div>
             <div class="col"><span>Settings</span></div>
@@ -67,12 +67,12 @@ $title = "City Health";
         <div class="card">
             <div class="card-body">
                 <span class="d-flex justify-content-start align-items-center">
-                    <h3 class="rc-blue-text fw-bold"><?php echo $city_health_title ?? "" ?></h3>
+                    <h3 class="rc-blue-text fw-bold"><?php echo $barangay_inc_title ?? "" ?></h3>
                 </span>
             </div>
         </div>
         <div style="margin-top:20px">
-            <?php echo $city_health_content ?? "" ?>
+            <?php echo $barangay_inc_content ?? "" ?>
         </div>
     </div>
 </div>
@@ -83,7 +83,7 @@ $title = "City Health";
 <?php ob_start() ?>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script type="module" src="../assets/js/city.health.all.js"></script>
-<?php echo $city_health_scripts ?? "" ?>
+<?php echo $barangay_inc_scripts ?? "" ?>
 <?php $scripts = ob_get_clean() ?>
 
 <?php require_once "../shared/layout.php" ?>
