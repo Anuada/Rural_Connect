@@ -3,18 +3,22 @@ session_start();
 require_once "../util/Misc.php";
 require_once "../util/DbHelper.php";
 require_once "../util/DirHandler.php";
+require_once "../vendor/autoload.php";
 
+use Ramsey\Uuid\Uuid;
 $db = new DbHelper();
 $ms = new Misc();
 $dir = new DirHandler();
 
 if (isset($_POST['submitRequest'])) {
-    request_med($db, $ms, $dir);
+    $request_med_id = Uuid::uuid4();
+    request_med($db, $ms, $dir, $request_med_id);
 } elseif (isset($_POST['customRequest'])) {
-    custom_med_request($db, $ms, $dir);
+    $custom_med_request_id = Uuid::uuid4();
+    custom_med_request($db, $ms, $dir, $custom_med_request_id);
 }
 
-function request_med(DbHelper $db, Misc $ms, DirHandler $dir)
+function request_med(DbHelper $db, Misc $ms, DirHandler $dir, string $id)
 {
     $barangay_inc_id = $_POST['barangay_inc_id'];
     $med_avail_id = $_POST['med_avail_id'];
@@ -44,6 +48,7 @@ function request_med(DbHelper $db, Misc $ms, DirHandler $dir)
 
     $table = "request_med";
     $data = [
+        "id" => $id,
         "barangay_inc_id" => $barangay_inc_id,
         "med_avail_id" => $med_avail_id,
         "request_quantity" => $request_quantity,
@@ -63,9 +68,10 @@ function request_med(DbHelper $db, Misc $ms, DirHandler $dir)
     }
 }
 
-function custom_med_request(DbHelper $db, Misc $ms, DirHandler $dir)
+function custom_med_request(DbHelper $db, Misc $ms, DirHandler $dir, string $id)
 {
     $formInputs = [
+        "id" => $id,
         "barangay_inc_id" => $_SESSION["accountId"]
     ];
 
@@ -73,7 +79,7 @@ function custom_med_request(DbHelper $db, Misc $ms, DirHandler $dir)
 
     foreach ($_POST as $key => $value) {
         if ($key !== "customRequest" && empty(trim($value))) {
-            $_key = str_replace("_"," ", $key);
+            $_key = str_replace("_", " ", $key);
             $errorMessages[$key] = "$_key is required.";
         }
     }

@@ -3,6 +3,7 @@ import { dateFormatter } from "../utilities/formatter.js";
 import fetch from "../utilities/fetchClient.js";
 import renderPagination from "../utilities/table.pagination.js";
 import serializeForm from '../helpers/serializeForm.js';
+import displayDeliveryStatus from '../utilities/displayDeliveryStatusColor.js';
 
 // VARIABLES
 let currentPage = 1;
@@ -159,7 +160,7 @@ const displayMedicine = (data) => {
 const displayStatus = (data) => {
     switch (data.status) {
         case 'Accepted':
-            return `<i class="text-success user-select-none">${data.status}</i>`;
+            return displayDeliveryStatus(data.delivery_status);
 
         case 'Cancelled':
             return `<i class="text-danger user-select-none">${data.status}</i>`;
@@ -249,7 +250,7 @@ const callFetches = () => {
 document.addEventListener('DOMContentLoaded', () => {
     callFetches();
 
-    const today = new Date().toISOString().split('T')[0]; // gets today's date in YYYY-MM-DD format
+    const today = new Date().toISOString().split('T')[0];
     document.getElementById("date_of_supply").setAttribute("min", today);
 
     tabElements.forEach(tab => {

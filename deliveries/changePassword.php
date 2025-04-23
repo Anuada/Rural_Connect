@@ -1,55 +1,45 @@
 <?php
 session_start();
-require_once "../util/DbHelper.php";
 require_once "../shared/session.delivery.php";
-
-$db = new DbHelper();
-$title = "Change Password - Deliveries";
-
-// Ensure accountId exists in the session
-if (!isset($_SESSION['accountId'])) {
-    header("Location: ../login.php");
-    exit();
-}
-
-ob_start();
-include "../shared/navbar.deliveries.php";
-$navbar = ob_get_clean();
+require_once "../util/Misc.php";
+$deliveries_title = Misc::displayPageTitle("Settings", "fa-gear");
 ?>
 
-<?php ob_start(); ?>
-<div class="container" style="padding-top: 150px; padding-bottom: 50px">
-    <div class="card p-4 shadow-lg rounded">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <a href="updateProfile.php" class="btn btn-secondary"><i style="margin-right: 10px" class="fa fa-arrow-left"
-                    aria-hidden="true"></i>Update Profile</a>
-            <h3 class="text-center mb-0">Change Password</h3>
-        </div>
-        <form action="../logic/changePassword.php" method="POST" enctype="multipart/form-data">
+<?php ob_start() ?>
+<div class="card p-4 shadow-lg rounded">
+    <div class="d-flex justify-content-between align-items-center flex-wrap flex-sm-nowrap mb-3">
+        <a href="updateProfile.php" class="rc-blue-text text-decoration-none d-flex align-items-center fs-6 fs-md-5">
+            <i class="fa fa-arrow-left me-2" aria-hidden="true"></i>
+            <span class="d-none d-sm-inline">Update Profile</span>
+        </a>
+        <h3 class="text-center mb-0 rc-blue-text fs-5 fs-md-4">Change Password</h3>
+    </div>
+    <form action="../logic/changePassword.php" method="POST">
+        <div class="form-fields">
             <div class="mb-3">
-                <label for="current_password" class="form-label">Current Password</label>
-                <input type="password" id="current_password" name="current_password" class="form-control" required>
-                <div style="height: 15px" class="text-danger" id="current_passwordError"></div>
+                <label for="current_password">Current Password</label>
+                <input type="password" id="current_password" name="current_password" required>
+                <div style="height: 15px" class="text-danger" id="current_passwordError"
+                    placeholder="Enter your current password"></div>
             </div>
             <div class="mb-3">
-                <label for="new_password" class="form-label">New Password</label>
-                <input type="password" id="new_password" name="new_password" class="form-control" required>
+                <label for="new_password">New Password</label>
+                <input type="password" id="new_password" name="new_password" required>
                 <div style="height: 15px" class="text-danger" id="new_passwordError"></div>
             </div>
             <div class="mb-3">
-                <label for="repeat_password" class="form-label">Repeat Password</label>
-                <input type="password" id="repeat_password" name="repeat_password" class="form-control" required>
+                <label for="repeat_password">Repeat Password</label>
+                <input type="password" id="repeat_password" name="repeat_password" required>
                 <div style="height: 15px" class="text-danger" id="repeat_passwordError"></div>
             </div>
-            <button type="submit" name="submit" class="btn btn-primary w-100">Change Password</button>
-        </form>
-    </div>
+            <button type="submit" name="submit">Change Password</button>
+        </div>
+    </form>
 </div>
+<?php $deliveries_content = ob_get_clean() ?>
 
-<?php $content = ob_get_clean(); ?>
 
-<?php ob_start(); ?>
-
+<?php ob_start() ?>
 <?php if (isset($_SESSION["errorMessages"])): ?>
     <script>
         const errorMessages = <?php echo json_encode($_SESSION["errorMessages"]) ?>;
@@ -59,7 +49,6 @@ $navbar = ob_get_clean();
     </script>
     <?php unset($_SESSION["errorMessages"]) ?>
 <?php endif ?>
+<?php $deliveries_scripts = ob_get_clean() ?>
 
-<?php $scripts = ob_get_clean(); ?>
-
-<?php require_once "../shared/layout.php"; ?>
+<?php require_once "_deliveries-layout.php" ?>

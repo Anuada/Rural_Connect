@@ -5,41 +5,10 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
-.fuchsia{
-    color: #EC1D87;
+.text-teal {
+    color: #20c997;
 }
 
-.bg-fuchsia{
-    background-color: #EC1D87;
-}
-
-.bg-fuchsia-hover:hover {
-    background-color: #EC1D87;
-    color: #FFF;
-}
-
-.lilac{
-    color: #A153A0;
-}
-
-.lilac-hover:hover {
-    color: #A153A0;
-}
-
-.bg-lilac {
-    background-color: #A153A0;
-    color: #FFF;
-}
-
-.bg-lilac-hover:hover {
-    background-color: #A153A0;
-    color: #FFF;
-}
-
-.bg-bubble-gum{
-    background-color: #FFC0CB;
-}
-
-.bubble-gum{
-    color: #FFC0CB;
+.cursor-pointer {
+    cursor: pointer!important;
 }

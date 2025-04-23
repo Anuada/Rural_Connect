@@ -1,0 +1,39 @@
+.med-card {
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
+    transition: 0.3s ease;
+}
+
+.med-card:hover {
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+}
+
+.med-img img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+
+@media (max-width: 768px) {
+    .med-card {
+        flex-direction: column;
+        text-align: left;
+    }
+
+    .med-img img {
+        width: 100%;
+        height: auto;
+        max-height: 200px;
+    }
+
+    .med-info {
+        width: 100%;
+        text-align: left;
+        margin-top: 5px;
+    }
+
+    .med-details {
+        width: 100%;
+    }
+}

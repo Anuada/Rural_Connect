@@ -9,15 +9,16 @@ $db = new DbHelper();
 $accountId = $_SESSION['accountId'];
 $user = $db->getRecord("city_health", ["accountId" => $accountId]);
 
-$city_health_title = Misc::displayPageTitle("Settings","fa-gear");
+$city_health_title = Misc::displayPageTitle("Settings", "fa-gear");
 ?>
 
 <?php ob_start() ?>
 <div class="card p-4 shadow-lg rounded">
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <h3 class="text-center mb-0 rc-blue-text">Update Profile</h3>
-        <a href="changePassword.php" class="rc-blue-text text-decoration-none">Change Password <i
-                style="margin-left: 10px" class="fa fa-arrow-right" aria-hidden="true"></i>
+    <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap">
+        <h3 class="text-center mb-0 rc-blue-text fs-4 fs-md-3">Update Profile</h3>
+        <a href="changePassword.php" class="rc-blue-text text-decoration-none fs-6 fs-md-5 d-flex align-items-center">
+            <span class="d-none d-sm-inline">Change Password</span>
+            <i class="fa fa-arrow-right ms-2" aria-hidden="true"></i>
         </a>
     </div>
     <form action="../logic/updateProfileCityHealth.php" method="POST" enctype="multipart/form-data">

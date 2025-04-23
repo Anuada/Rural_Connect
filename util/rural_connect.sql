@@ -44,7 +44,7 @@ CREATE TABLE `account` (
 
 LOCK TABLES `account` WRITE;
 /*!40000 ALTER TABLE `account` DISABLE KEYS */;
-INSERT INTO `account` VALUES ('18d236b6-3892-498f-8612-767f777a4f34','bernard_wilson@mailinator.com','bernard_wilson','$2y$12$Z0OI3idGKBl0HVIYbz8yzua.zTz6Qx8.3ziIDXXkzUXKGnkv5pX76','barangay_inc',NULL,'',1,0,'Approved','2025-03-09 01:25:09'),('1bb43733-7b54-4068-b40c-ae921611a37e','finneas_heath@mailinator.com','finneas_heath','$2y$12$eaK.Y3mRtBKJsDuH1Px9nuDW5iFgkk9QuIns8ARkmRbfAVaIkCZdq','deliveries',NULL,'',1,0,'Approved','2025-04-15 01:02:38'),('2f0444ac-230a-480e-9c4e-d5f68ccfe069','arizonamaine@mailinator.com','arizonamaine','$2y$12$CgDPRB1aiVkujYnzrcSZyeaVZ0IDXpcU4QSU8WH7vTH9wrfN9VUEW','barangay_inc',NULL,'',1,0,'Approved','2025-03-08 09:19:57'),('343e3676-6281-45d4-ab39-25eb15909b8b','janesmith@mailinator.com','janesmith','$2y$12$UEDCn08E9aDLAeJSFUdI4.BUo16ZMf6DJUBtuKdrJobP.BvxZdWYi','barangay_inc',NULL,'',1,0,'Approved','2025-03-08 01:45:49'),('360c0be8-bf56-4d1f-b52b-7fe06e0936b1','anthony_wang@mailinator.com','anthony_wang','$2y$12$CXrCOEawyq4N1F29m8Ig1eP.yD3iz31e1/7zSy1PYC6qcAPT8XWoK','deliveries',NULL,'',1,0,'Approved','2025-04-17 04:26:42'),('3aeb96d7-b7f5-44d4-8bad-6a04cdd75477','junocarpenter@mailinator.com','junocarpenter','$2y$12$auIK3QA6E/exPVZuhcjgt.U6FzOWZ/grwH5BUs9zifVyfNE8cU00W','barangay_inc',NULL,'',1,0,'Approved','2025-04-07 15:52:05'),('55359fe8-e86a-4670-b0bf-4277c3c5d07f','virginia_montgomery@mailinator.com','virginia_montgomery','$2y$12$.dDjw9o2T2FUsqNixmoaXOPYN60syXbZbtUfxjuutYwjqrDWpKVwq','barangay_inc',NULL,'',1,0,'Approved','2025-04-09 11:24:45'),('66dcf1bd-51e1-45e3-8727-0c343577bdd5','ericsonmariebautista@mailinator.com','ericsonmariebautista','$2y$12$YmCH90LAvl5jQ5CL3VqCGuM8RncYfDQPawrym2tkuDT8QFETpJSvq','admin',NULL,NULL,1,0,'Approved','2025-04-03 22:06:46'),('6c0b0a91-03a3-4614-a6a9-1a46133e8a60','ladyglittersmackles@gmail.com','anuada_1990','$2y$12$EdnfZqOmV.zsuo/oqWEzi.TcnlOSoXdVMABsfPhSbmznsvNN9NceC','barangay_inc','','',1,1,'Approved','2025-03-03 17:40:37'),('74158fcb-d946-4787-b7c5-8ccaa3b30660','heroshigonzales@gmail.com','heroshi_paro','$2y$12$siu6lpmvdADUMoO9EH.K3u31kbwFXet8P8ia3vNbcsOotWagX.Ob2','admin','',NULL,1,0,'Approved','2025-04-03 17:40:35'),('7594b921-87ea-437e-bd63-03e2809c3fc2','mariah_carey@mailinator.com','therealmariah_carey','$2y$12$qvCWyerLwX34QrtnG6SwIebSrazN.KDGsQrbLagqe6CzJWLKtVvrS','deliveries','','',1,0,'Approved','2025-03-03 17:40:38'),('8c3acd7e-264b-4f64-a954-a425f09b97a0','laquantisha_johnson@mailinator.com','laquantisha_johnson','$2y$12$9UaUeUoxMAfjHkYF1Ew6eOgJheGr3BxLeVbGiSQDa1UXkYzYqbkKm','barangay_inc',NULL,'',1,0,'Approved','2025-04-08 03:04:03'),('a96ea61e-db52-4a28-a77b-efe8492ec2d4','olivia_rodrigo@mailinator.com','olivia_rodrigo','$2y$12$StCEnZ/CdF/R2kbv1iu9Z.AucFajV.1AyuubgPzfEZ3qgu966tnjW','deliveries',NULL,'',1,0,'Approved','2025-03-09 15:32:58'),('b5b54cf0-da93-401e-a353-2d2917210971','mharbenreypude.854@gmail.com','mharbenreypude','$2y$10$MRJGneSncga1iXrV18RFdu/GsLnp2CC944obFOVF38/FgS0v6cnEq','admin',NULL,NULL,1,0,'Approved','2025-04-03 21:50:07'),('c1cb89f6-159f-4a70-a65f-c9c823a66f81','isabella_cruz@mailinator.com','isabella_cruz','$2y$12$.oyHB8TcOW3sYPao4QuzWO36LywgXAyZfIbBPkbKEDQxoyWkSkoxK','barangay_inc',NULL,'',1,0,'Approved','2025-04-14 13:56:35'),('d1b0d961-4460-444a-a7f2-0117347d28d2','jerryegamp21@gmail.com','jerryegamp21','$2y$10$GS6uoCetYreZQnAUhyFefefEjK1HgV.TO4pM0.041LDIc7ggnDePC','admin',NULL,NULL,1,0,'Approved','2025-04-03 21:59:17'),('d3da9bb6-b666-48c7-8310-ce227a2a9461','rana_guzman@mailinator.com','rana_guzman','$2y$12$ig4ASdaVOTf/v0K0gxVI1uiwybQUUEqi.NXi5dR69I4gE58NBLZci','barangay_inc',NULL,'',1,0,'Approved','2025-04-09 00:15:46'),('eb48b13c-9094-4de4-afc2-786b9dc93f96','christopher_pareyac@mailinator.com','christopher_pareyac','$2y$12$SYJ2EzTPsN7HYue9LU9PaOt6CXInIJjeJ9.7jwzJSSNnfVeJLpZHa','city_health','','',1,1,'Approved','2025-02-28 17:40:39'),('eb5452e2-2e5a-4510-9e0e-abac5714e03f','duncan_pello@mailinator.com','duncan_pello','$2y$12$nNIUEJOhe6y94BvBguJnsu0bU2lvkPvA.G0a36nz7JrPtzOFey.HK','barangay_inc',NULL,'',1,0,'Approved','2025-04-08 03:43:06'),('f3e92e97-dcb4-4e41-bfa0-a1b896ee2766','dualipa@mailinator.com','dualipa','$2y$12$1s/VeHUvlf.9hF7N9Kh7COkgwB9ZRa8QSsfqQkMMUnhqmtuQVJp92','deliveries',NULL,'',1,0,'Approved','2025-04-07 05:58:42');
+INSERT INTO `account` VALUES ('18d236b6-3892-498f-8612-767f777a4f34','bernard_wilson@mailinator.com','bernard_wilson','$2y$12$Z0OI3idGKBl0HVIYbz8yzua.zTz6Qx8.3ziIDXXkzUXKGnkv5pX76','barangay_inc',NULL,'',1,0,'Approved','2025-03-09 01:25:09'),('1bb43733-7b54-4068-b40c-ae921611a37e','finneas_heath@mailinator.com','finneas_heath','$2y$12$eaK.Y3mRtBKJsDuH1Px9nuDW5iFgkk9QuIns8ARkmRbfAVaIkCZdq','deliveries',NULL,'',1,0,'Approved','2025-04-15 01:02:38'),('2f0444ac-230a-480e-9c4e-d5f68ccfe069','arizonamaine@mailinator.com','arizonamaine','$2y$12$CgDPRB1aiVkujYnzrcSZyeaVZ0IDXpcU4QSU8WH7vTH9wrfN9VUEW','barangay_inc',NULL,'',1,0,'Approved','2025-03-08 09:19:57'),('343e3676-6281-45d4-ab39-25eb15909b8b','janesmith@mailinator.com','janesmith','$2y$12$UEDCn08E9aDLAeJSFUdI4.BUo16ZMf6DJUBtuKdrJobP.BvxZdWYi','barangay_inc',NULL,'',1,0,'Approved','2025-03-08 01:45:49'),('360c0be8-bf56-4d1f-b52b-7fe06e0936b1','anthony_wang@mailinator.com','anthony_wang','$2y$12$CXrCOEawyq4N1F29m8Ig1eP.yD3iz31e1/7zSy1PYC6qcAPT8XWoK','deliveries',NULL,'',1,0,'Approved','2025-04-17 04:26:42'),('3aeb96d7-b7f5-44d4-8bad-6a04cdd75477','junocarpenter@mailinator.com','junocarpenter','$2y$12$auIK3QA6E/exPVZuhcjgt.U6FzOWZ/grwH5BUs9zifVyfNE8cU00W','barangay_inc',NULL,'',1,0,'Approved','2025-04-07 15:52:05'),('55359fe8-e86a-4670-b0bf-4277c3c5d07f','virginia_montgomery@mailinator.com','virginia_montgomery','$2y$12$.dDjw9o2T2FUsqNixmoaXOPYN60syXbZbtUfxjuutYwjqrDWpKVwq','barangay_inc',NULL,'',1,0,'Approved','2025-04-09 11:24:45'),('66dcf1bd-51e1-45e3-8727-0c343577bdd5','ericsonmariebautista@mailinator.com','ericsonmariebautista','$2y$12$YmCH90LAvl5jQ5CL3VqCGuM8RncYfDQPawrym2tkuDT8QFETpJSvq','admin',NULL,NULL,1,0,'Approved','2025-04-03 22:06:46'),('6c0b0a91-03a3-4614-a6a9-1a46133e8a60','ladyglittersmackles@gmail.com','anuada_1990','$2y$12$EdnfZqOmV.zsuo/oqWEzi.TcnlOSoXdVMABsfPhSbmznsvNN9NceC','barangay_inc','','',1,0,'Approved','2025-03-03 17:40:37'),('74158fcb-d946-4787-b7c5-8ccaa3b30660','heroshigonzales@gmail.com','heroshi_paro','$2y$12$siu6lpmvdADUMoO9EH.K3u31kbwFXet8P8ia3vNbcsOotWagX.Ob2','admin','',NULL,1,0,'Approved','2025-04-03 17:40:35'),('7594b921-87ea-437e-bd63-03e2809c3fc2','mariah_carey@mailinator.com','therealmariah_carey','$2y$12$IgCsOGlwdMcN5OjVls3LS..2qxwvT2weN9H3rNLZyoFVaAqEecauy','deliveries','','',1,0,'Approved','2025-03-03 17:40:38'),('8c3acd7e-264b-4f64-a954-a425f09b97a0','laquantisha_johnson@mailinator.com','laquantisha_johnson','$2y$12$9UaUeUoxMAfjHkYF1Ew6eOgJheGr3BxLeVbGiSQDa1UXkYzYqbkKm','barangay_inc',NULL,'',1,0,'Approved','2025-04-08 03:04:03'),('a96ea61e-db52-4a28-a77b-efe8492ec2d4','olivia_rodrigo@mailinator.com','olivia_rodrigo','$2y$12$StCEnZ/CdF/R2kbv1iu9Z.AucFajV.1AyuubgPzfEZ3qgu966tnjW','deliveries',NULL,'',1,0,'Approved','2025-03-09 15:32:58'),('b5b54cf0-da93-401e-a353-2d2917210971','mharbenreypude.854@gmail.com','mharbenreypude','$2y$10$MRJGneSncga1iXrV18RFdu/GsLnp2CC944obFOVF38/FgS0v6cnEq','admin',NULL,NULL,1,0,'Approved','2025-04-03 21:50:07'),('c1cb89f6-159f-4a70-a65f-c9c823a66f81','isabella_cruz@mailinator.com','isabella_cruz','$2y$12$.oyHB8TcOW3sYPao4QuzWO36LywgXAyZfIbBPkbKEDQxoyWkSkoxK','barangay_inc',NULL,'',1,0,'Approved','2025-04-14 13:56:35'),('d1b0d961-4460-444a-a7f2-0117347d28d2','jerryegamp21@gmail.com','jerryegamp21','$2y$10$GS6uoCetYreZQnAUhyFefefEjK1HgV.TO4pM0.041LDIc7ggnDePC','admin',NULL,NULL,1,0,'Approved','2025-04-03 21:59:17'),('d3da9bb6-b666-48c7-8310-ce227a2a9461','rana_guzman@mailinator.com','rana_guzman','$2y$12$ig4ASdaVOTf/v0K0gxVI1uiwybQUUEqi.NXi5dR69I4gE58NBLZci','barangay_inc',NULL,'',1,0,'Approved','2025-04-09 00:15:46'),('eb48b13c-9094-4de4-afc2-786b9dc93f96','christopher_pareyac@mailinator.com','christopher_pareyac','$2y$12$SYJ2EzTPsN7HYue9LU9PaOt6CXInIJjeJ9.7jwzJSSNnfVeJLpZHa','city_health','','',1,0,'Approved','2025-02-28 17:40:39'),('eb5452e2-2e5a-4510-9e0e-abac5714e03f','duncan_pello@mailinator.com','duncan_pello','$2y$12$nNIUEJOhe6y94BvBguJnsu0bU2lvkPvA.G0a36nz7JrPtzOFey.HK','barangay_inc',NULL,'',1,0,'Approved','2025-04-08 03:43:06'),('f3e92e97-dcb4-4e41-bfa0-a1b896ee2766','dualipa@mailinator.com','dualipa','$2y$12$1s/VeHUvlf.9hF7N9Kh7COkgwB9ZRa8QSsfqQkMMUnhqmtuQVJp92','deliveries',NULL,'',1,0,'Approved','2025-04-07 05:58:42');
 /*!40000 ALTER TABLE `account` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -171,16 +171,17 @@ DROP TABLE IF EXISTS `custom_med_deliveries`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `custom_med_deliveries` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `custom_med_request_id` int NOT NULL,
+  `id` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `custom_med_request_id` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
   `delivery_account_id` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `delivery_status` enum('To Deliver','In Transit','Failed Delivery','Returned','Delivered','Claimed') COLLATE utf8mb4_general_ci DEFAULT 'To Deliver',
   `date_of_supply` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_custom_med_deliveries_deliveries` (`delivery_account_id`),
   KEY `FK_custom_med_deliveries_custom_med_request` (`custom_med_request_id`),
   CONSTRAINT `FK_custom_med_deliveries_custom_med_request` FOREIGN KEY (`custom_med_request_id`) REFERENCES `custom_med_request` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_custom_med_deliveries_deliveries` FOREIGN KEY (`delivery_account_id`) REFERENCES `deliveries` (`accountId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -189,8 +190,36 @@ CREATE TABLE `custom_med_deliveries` (
 
 LOCK TABLES `custom_med_deliveries` WRITE;
 /*!40000 ALTER TABLE `custom_med_deliveries` DISABLE KEYS */;
-INSERT INTO `custom_med_deliveries` VALUES (2,1,'7594b921-87ea-437e-bd63-03e2809c3fc2','2025-04-27 00:00:00');
+INSERT INTO `custom_med_deliveries` VALUES ('4736e67d-002a-4086-903c-0aa031d4b376','8d01d3f2-7698-4641-901b-58eda1788760','360c0be8-bf56-4d1f-b52b-7fe06e0936b1','To Deliver','2025-04-23 00:00:00');
 /*!40000 ALTER TABLE `custom_med_deliveries` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `custom_med_delivery_status_history`
+--
+
+DROP TABLE IF EXISTS `custom_med_delivery_status_history`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `custom_med_delivery_status_history` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `delivery_id` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `status` enum('To Deliver','In Transit','Failed Delivery','Returned','Delivered','Claimed') COLLATE utf8mb4_general_ci DEFAULT 'To Deliver',
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `FK_custom_med_delivery_status_history_custom_med_deliveries` (`delivery_id`),
+  CONSTRAINT `FK_custom_med_delivery_status_history_custom_med_deliveries` FOREIGN KEY (`delivery_id`) REFERENCES `custom_med_deliveries` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `custom_med_delivery_status_history`
+--
+
+LOCK TABLES `custom_med_delivery_status_history` WRITE;
+/*!40000 ALTER TABLE `custom_med_delivery_status_history` DISABLE KEYS */;
+INSERT INTO `custom_med_delivery_status_history` VALUES (5,'4736e67d-002a-4086-903c-0aa031d4b376','To Deliver','2025-04-22 09:37:51');
+/*!40000 ALTER TABLE `custom_med_delivery_status_history` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -201,7 +230,7 @@ DROP TABLE IF EXISTS `custom_med_request`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `custom_med_request` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
   `barangay_inc_id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `requested_medicine` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `requested_quantity` int NOT NULL DEFAULT '0',
@@ -214,7 +243,7 @@ CREATE TABLE `custom_med_request` (
   PRIMARY KEY (`id`),
   KEY `FK_custom_med_request_barangay_inc` (`barangay_inc_id`),
   CONSTRAINT `FK_custom_med_request_barangay_inc` FOREIGN KEY (`barangay_inc_id`) REFERENCES `barangay_inc` (`accountId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -223,7 +252,7 @@ CREATE TABLE `custom_med_request` (
 
 LOCK TABLES `custom_med_request` WRITE;
 /*!40000 ALTER TABLE `custom_med_request` DISABLE KEYS */;
-INSERT INTO `custom_med_request` VALUES (1,'6c0b0a91-03a3-4614-a6a9-1a46133e8a60','Carbocisteine',100,'mucolytics','Syrup','500ml','../assets/img/upload_document/73d5c472-ef48-4887-b8f8-31fa2059d5f2.png','Accepted','2025-04-19 07:27:41'),(2,'6c0b0a91-03a3-4614-a6a9-1a46133e8a60','Amoxicillin',30,'Antibiotic (Penicillin class)','Capsule','500mg','../assets/img/upload_document/b40e587c-0409-4216-a58d-c9efb335c968.png','Pending','2025-04-19 08:19:44');
+INSERT INTO `custom_med_request` VALUES ('8d01d3f2-7698-4641-901b-58eda1788760','eb5452e2-2e5a-4510-9e0e-abac5714e03f','Loratadine',50,'Antihistamine (Allergy Relief)','Tablet','10 mg','../assets/img/upload_document/c3e7923e-36a7-4034-b8a6-2a81671b3c9a.png','Accepted','2025-04-22 06:31:12'),('a26230e8-b4cb-45b1-a3ee-40355958aece','6c0b0a91-03a3-4614-a6a9-1a46133e8a60','Amoxicillin',30,'Antibiotic (Penicillin class)','Capsule','500mg','../assets/img/upload_document/b40e587c-0409-4216-a58d-c9efb335c968.png','Pending','2025-04-19 08:19:44'),('d4f96cc7-c571-4aca-af20-507d828828a4','6c0b0a91-03a3-4614-a6a9-1a46133e8a60','Carbocisteine',100,'mucolytics','Syrup','500ml','../assets/img/upload_document/73d5c472-ef48-4887-b8f8-31fa2059d5f2.png','Pending','2025-04-19 07:27:41');
 /*!40000 ALTER TABLE `custom_med_request` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -254,6 +283,34 @@ LOCK TABLES `deliveries` WRITE;
 /*!40000 ALTER TABLE `deliveries` DISABLE KEYS */;
 INSERT INTO `deliveries` VALUES ('1bb43733-7b54-4068-b40c-ae921611a37e','Finneas','Heath','Floptropica, Cebu City','09739647867','../assets/img/profile/deleviries/1bb43733-7b54-4068-b40c-ae921611a37e.png'),('360c0be8-bf56-4d1f-b52b-7fe06e0936b1','Anthony','Wang','Floptropica City, Floptropica','09182738291','../assets/img/profile/deleviries/360c0be8-bf56-4d1f-b52b-7fe06e0936b1.png'),('7594b921-87ea-437e-bd63-03e2809c3fc2','Mariah','Carey','Floptropica','09284738274','../assets/img/profile/deleviries/7594b921-87ea-437e-bd63-03e2809c3fc2.png'),('a96ea61e-db52-4a28-a77b-efe8492ec2d4','Olivia','Rodrigo','London, Pardo Cebu City','09592930132','../assets/img/profile/deleviries/a96ea61e-db52-4a28-a77b-efe8492ec2d4.png'),('f3e92e97-dcb4-4e41-bfa0-a1b896ee2766','Dua','Lipa','London, Pardo Cebu City','09939294859','../assets/img/profile/deleviries/f3e92e97-dcb4-4e41-bfa0-a1b896ee2766.png');
 /*!40000 ALTER TABLE `deliveries` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `delivery_status_history`
+--
+
+DROP TABLE IF EXISTS `delivery_status_history`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `delivery_status_history` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `delivery_id` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `status` enum('To Deliver','In Transit','Failed Delivery','Returned','Delivered','Claimed') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT 'To Deliver',
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `FK_delivery_status_history_med_deliveries` (`delivery_id`),
+  CONSTRAINT `FK_delivery_status_history_med_deliveries` FOREIGN KEY (`delivery_id`) REFERENCES `med_deliveries` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `delivery_status_history`
+--
+
+LOCK TABLES `delivery_status_history` WRITE;
+/*!40000 ALTER TABLE `delivery_status_history` DISABLE KEYS */;
+INSERT INTO `delivery_status_history` VALUES (13,'1b94dc9f-f67f-4281-ad7f-b8ee87d3b26b','To Deliver','2025-04-22 06:38:13'),(14,'6a794052-586c-4fd5-894c-ee4a3114ee8d','To Deliver','2025-04-22 09:20:47'),(15,'660dc09f-2be7-4079-835d-9ea3ee313523','To Deliver','2025-04-22 13:19:08'),(17,'6a794052-586c-4fd5-894c-ee4a3114ee8d','In Transit','2025-04-23 03:50:01'),(18,'6a794052-586c-4fd5-894c-ee4a3114ee8d','Delivered','2025-04-23 04:14:29'),(19,'6a794052-586c-4fd5-894c-ee4a3114ee8d','Claimed','2025-04-23 04:14:52'),(20,'e8cf83e5-6a41-4791-a958-192706cd6a46','To Deliver','2025-04-23 05:44:46'),(21,'e8cf83e5-6a41-4791-a958-192706cd6a46','In Transit','2025-04-23 12:40:11'),(22,'e8cf83e5-6a41-4791-a958-192706cd6a46','Failed Delivery','2025-04-23 12:41:16'),(23,'e8cf83e5-6a41-4791-a958-192706cd6a46','In Transit','2025-04-23 12:43:01'),(24,'e8cf83e5-6a41-4791-a958-192706cd6a46','Delivered','2025-04-23 12:45:09'),(25,'e8cf83e5-6a41-4791-a958-192706cd6a46','Claimed','2025-04-23 12:45:49');
+/*!40000 ALTER TABLE `delivery_status_history` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -299,16 +356,17 @@ DROP TABLE IF EXISTS `med_deliveries`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `med_deliveries` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `request_med_id` int NOT NULL,
+  `id` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `request_med_id` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
   `deliveries_accountId` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `delivery_status` enum('To Deliver','In Transit','Failed Delivery','Returned','Delivered','Claimed') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT 'To Deliver',
   `date_of_supply` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `deliveries_accountId` (`deliveries_accountId`),
   KEY `request_med_id` (`request_med_id`),
   CONSTRAINT `FK_med_deliveries_deliveries` FOREIGN KEY (`deliveries_accountId`) REFERENCES `deliveries` (`accountId`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_med_deliveries_request_med` FOREIGN KEY (`request_med_id`) REFERENCES `request_med` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -317,7 +375,7 @@ CREATE TABLE `med_deliveries` (
 
 LOCK TABLES `med_deliveries` WRITE;
 /*!40000 ALTER TABLE `med_deliveries` DISABLE KEYS */;
-INSERT INTO `med_deliveries` VALUES (22,20,'7594b921-87ea-437e-bd63-03e2809c3fc2','2025-04-06 00:00:00'),(23,15,'f3e92e97-dcb4-4e41-bfa0-a1b896ee2766','2025-04-15 00:00:00'),(24,18,'7594b921-87ea-437e-bd63-03e2809c3fc2','2025-04-17 00:00:00'),(25,21,'360c0be8-bf56-4d1f-b52b-7fe06e0936b1','2025-04-09 00:00:00'),(26,17,'7594b921-87ea-437e-bd63-03e2809c3fc2','2025-04-22 00:00:00');
+INSERT INTO `med_deliveries` VALUES ('1b94dc9f-f67f-4281-ad7f-b8ee87d3b26b','c2b85369-8383-4082-a98a-82db2ae96310','360c0be8-bf56-4d1f-b52b-7fe06e0936b1','To Deliver','2025-04-27 00:00:00'),('660dc09f-2be7-4079-835d-9ea3ee313523','84066338-974f-4fb3-b7b5-87823903a5af','360c0be8-bf56-4d1f-b52b-7fe06e0936b1','To Deliver','2025-04-23 00:00:00'),('6a794052-586c-4fd5-894c-ee4a3114ee8d','099078d6-09a5-4b5d-9221-0f20aa8ea8e9','360c0be8-bf56-4d1f-b52b-7fe06e0936b1','Claimed','2025-04-24 00:00:00'),('e8cf83e5-6a41-4791-a958-192706cd6a46','7ed92a0d-15d5-48b2-87fd-53b877c5a5f9','360c0be8-bf56-4d1f-b52b-7fe06e0936b1','Claimed','2025-04-25 00:00:00');
 /*!40000 ALTER TABLE `med_deliveries` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -345,7 +403,7 @@ CREATE TABLE `rate_and_feedback` (
 
 LOCK TABLES `rate_and_feedback` WRITE;
 /*!40000 ALTER TABLE `rate_and_feedback` DISABLE KEYS */;
-INSERT INTO `rate_and_feedback` VALUES ('18d236b6-3892-498f-8612-767f777a4f34',4,'nice siya','2025-04-09 08:11:12','2025-04-09 08:11:12'),('6c0b0a91-03a3-4614-a6a9-1a46133e8a60',3,'ok na to','2025-04-05 17:03:56','2025-04-06 12:18:18'),('7594b921-87ea-437e-bd63-03e2809c3fc2',5,'the service is very good','2025-04-05 15:19:45','2025-04-17 12:18:26'),('8c3acd7e-264b-4f64-a954-a425f09b97a0',4,'So far, it&#039;s nice','2025-04-08 09:03:47','2025-04-08 09:03:47'),('eb48b13c-9094-4de4-afc2-786b9dc93f96',4,'it&#039;s ok now, i guess','2025-04-05 16:24:03','2025-04-17 02:57:54'),('f3e92e97-dcb4-4e41-bfa0-a1b896ee2766',5,NULL,'2025-04-05 19:15:17','2025-04-20 14:41:53');
+INSERT INTO `rate_and_feedback` VALUES ('18d236b6-3892-498f-8612-767f777a4f34',4,'nice siya','2025-04-09 08:11:12','2025-04-09 08:11:12'),('6c0b0a91-03a3-4614-a6a9-1a46133e8a60',3,'ok na to','2025-04-05 17:03:56','2025-04-06 12:18:18'),('7594b921-87ea-437e-bd63-03e2809c3fc2',5,'the service is very good','2025-04-05 15:19:45','2025-04-17 12:18:26'),('8c3acd7e-264b-4f64-a954-a425f09b97a0',4,'So far, it&#039;s nice','2025-04-08 09:03:47','2025-04-08 09:03:47'),('eb48b13c-9094-4de4-afc2-786b9dc93f96',4,'it&#039;s ok now, i guess','2025-04-05 16:24:03','2025-04-17 02:57:54'),('f3e92e97-dcb4-4e41-bfa0-a1b896ee2766',5,'this is great!','2025-04-05 19:15:17','2025-04-21 12:05:19');
 /*!40000 ALTER TABLE `rate_and_feedback` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -357,7 +415,7 @@ DROP TABLE IF EXISTS `request_med`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `request_med` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `barangay_inc_id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `med_avail_Id` int NOT NULL,
   `request_quantity` varchar(100) NOT NULL,
@@ -368,7 +426,7 @@ CREATE TABLE `request_med` (
   KEY `med_avail_Id` (`med_avail_Id`),
   CONSTRAINT `FK_request_med_barangay_inc` FOREIGN KEY (`barangay_inc_id`) REFERENCES `barangay_inc` (`accountId`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_request_med_med_availabilty` FOREIGN KEY (`med_avail_Id`) REFERENCES `med_availability` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -377,7 +435,7 @@ CREATE TABLE `request_med` (
 
 LOCK TABLES `request_med` WRITE;
 /*!40000 ALTER TABLE `request_med` DISABLE KEYS */;
-INSERT INTO `request_med` VALUES (15,'6c0b0a91-03a3-4614-a6a9-1a46133e8a60',19,'8','Accepted','../assets/img/upload_document/9b796a75-1fbd-4aff-b495-a4a2bf7373bb.png'),(17,'6c0b0a91-03a3-4614-a6a9-1a46133e8a60',22,'1000','Accepted','../assets/img/upload_document/cf296070-d674-4691-8b2c-7deab5f63078.png'),(18,'3aeb96d7-b7f5-44d4-8bad-6a04cdd75477',25,'100','Accepted','../assets/img/upload_document/edb91f23-5d24-4ecd-bc5b-85a1348c21ed.png'),(19,'eb5452e2-2e5a-4510-9e0e-abac5714e03f',21,'100','Cancelled','../assets/img/upload_document/666ec9b5-1048-4fed-a4ad-bd5e501969fa.png'),(20,'2f0444ac-230a-480e-9c4e-d5f68ccfe069',21,'100','Accepted','../assets/img/upload_document/9888b0b3-f883-423f-b169-ee1fd1ccbd7c.png'),(21,'6c0b0a91-03a3-4614-a6a9-1a46133e8a60',25,'100','Accepted','../assets/img/upload_document/b488d67e-3ce8-489f-95e1-16f1d5521091.png');
+INSERT INTO `request_med` VALUES ('099078d6-09a5-4b5d-9221-0f20aa8ea8e9','2f0444ac-230a-480e-9c4e-d5f68ccfe069',22,'100','Accepted','../assets/img/upload_document/f826cd2d-0750-413b-ad22-cf04efc1e75f.png'),('3931c642-a15c-4844-ba91-fc5b8ad3a94b','3aeb96d7-b7f5-44d4-8bad-6a04cdd75477',25,'100','Pending','../assets/img/upload_document/edb91f23-5d24-4ecd-bc5b-85a1348c21ed.png'),('5c2eed7c-f55e-4343-9efe-ed336ae58925','6c0b0a91-03a3-4614-a6a9-1a46133e8a60',19,'8','Pending','../assets/img/upload_document/9b796a75-1fbd-4aff-b495-a4a2bf7373bb.png'),('7c894dbd-6506-45d6-a135-a579762a625b','6c0b0a91-03a3-4614-a6a9-1a46133e8a60',22,'1000','Pending','../assets/img/upload_document/cf296070-d674-4691-8b2c-7deab5f63078.png'),('7ed92a0d-15d5-48b2-87fd-53b877c5a5f9','eb5452e2-2e5a-4510-9e0e-abac5714e03f',19,'100','Accepted','../assets/img/upload_document/fa3fa48c-6091-434d-8563-4ee8412a8c72.png'),('84066338-974f-4fb3-b7b5-87823903a5af','2f0444ac-230a-480e-9c4e-d5f68ccfe069',21,'100','Accepted','../assets/img/upload_document/9888b0b3-f883-423f-b169-ee1fd1ccbd7c.png'),('c2b85369-8383-4082-a98a-82db2ae96310','6c0b0a91-03a3-4614-a6a9-1a46133e8a60',25,'100','Accepted','../assets/img/upload_document/b488d67e-3ce8-489f-95e1-16f1d5521091.png'),('c46c81b8-b13d-4eea-a31d-4b697e0d460c','eb5452e2-2e5a-4510-9e0e-abac5714e03f',21,'100','Cancelled','../assets/img/upload_document/666ec9b5-1048-4fed-a4ad-bd5e501969fa.png');
 /*!40000 ALTER TABLE `request_med` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -424,4 +482,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-04-21 15:29:51
+-- Dump completed on 2025-04-23 20:53:13

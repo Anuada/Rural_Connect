@@ -1,6 +1,7 @@
 import { dateFormatter } from "../utilities/formatter.js";
 import fetch from "../utilities/fetchClient.js";
 import renderPagination from "../utilities/table.pagination.js";
+import displayDeliveryStatus from "../utilities/displayDeliveryStatusColor.js";
 
 // VARIABLES
 let currentPage = 1;
@@ -30,8 +31,8 @@ const displayTable = (data, tableBody) => {
                     <td>${displayMedicine(d)}</td>
                     <td>${d.request_quantity}</td>
                     <td><button class="btn btn-primary view-med-document" data-med-document="${d.document}"><i class="fas fa-eye"></i> <span style="margin-left: 10px">View</span></button></td>
-                    <td class="text-center">${d.date_of_supply !== null ? dateFormatter(d.date_of_supply) : "<span class='user-select-none text-secondary'>TBD</span>"}</td>
-                    <td>${displayStatus(d.requestStatus)}</td>
+                    <td class="text-center">${d.date_of_supply !== null ? `<span class="cursor-pointer track-delivery-status" data-request-type="${d.med_image != undefined ? "med-delivery" : "custom-med-delivery"}" data-request-id="${d.med_delivery_id}" data-bs-toggle="tooltip" data-bs-placement="top" title="Track Delivery Status">${dateFormatter(d.date_of_supply)}</span>` : "<span class='user-select-none text-secondary'>TBD</span>"}</td>
+                    <td>${displayStatus(d)}</td>
                 </tr>
             `;
         });
@@ -58,6 +59,16 @@ const displayTable = (data, tableBody) => {
             previewOverlay.classList.add('hidden');
             previewImage.src = '';
         }
+    });
+
+    const trackDeliveryStatus = document.querySelectorAll('.track-delivery-status');
+    trackDeliveryStatus.forEach(deliveryStatus => {
+        deliveryStatus.addEventListener('click', () => {
+            const request_type = deliveryStatus.getAttribute('data-request-type');
+            const request_id = deliveryStatus.getAttribute('data-request-id');
+
+            window.location.href = `../barangay_inc/track-delivery-status.php?${request_type}=${request_id}`;
+        });
     });
 }
 
@@ -86,24 +97,36 @@ const displayMedicine = (data) => {
     `;
 }
 
-const displayStatus = (status) => {
-    switch (status) {
+const displayStatus = (data) => {
+    switch (data.requestStatus) {
         case 'Accepted':
-            return `<i class="text-success user-select-none">${status}</i>`;
+            return displayDeliveryStatus(data.delivery_status);
 
         case 'Cancelled':
-            return `<i class="text-danger user-select-none">${status}</i>`;
+            return `<i class="text-danger user-select-none">${data.requestStatus}</i>`;
 
         default:
-            return `<i class="text-warning user-select-none">${status}</i>`;
+            return `<i class="text-warning user-select-none">${data.requestStatus}</i>`;
     }
 }
+
+const initTooltips = () => {
+    // Dispose any existing tooltips first
+    const existingTooltips = document.querySelectorAll('.tooltip');
+    existingTooltips.forEach(t => t.remove());
+
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+    tooltipTriggerList.forEach((tooltipTriggerEl) => {
+        new bootstrap.Tooltip(tooltipTriggerEl);
+    });
+};
 
 const fetchRequestedMedicine = (page = 1) => {
     fetch.get(`../api/barangay.inc.requested.med.php?page=${page}&limit=${limit}`)
         .then(response => {
             const { data, pagination } = response.data.data;
             displayTable(data, requestedMedTableEl);
+            initTooltips();
             renderPagination(pagination, requestedMedPageEl, fetchRequestedMedicine);
         })
         .catch(error => {
@@ -116,6 +139,7 @@ const fetchCustomizedRequestMedicine = (page = 1) => {
         .then(response => {
             const { data, pagination } = response.data.data;
             displayTable(data, customizedMedRequestEl);
+            initTooltips();
             renderPagination(pagination, customizedMedRequestPageEl, fetchCustomizedRequestMedicine);
         })
         .catch(error => {

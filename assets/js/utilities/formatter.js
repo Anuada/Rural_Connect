@@ -34,3 +34,15 @@ export const dateFormatter = (d) => {
         day: "numeric",
     })
 }
+
+export const timestampFormatter = (d) => {
+    const date = new Date(d);
+    return date.toLocaleString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        hour: "numeric",
+        minute: "2-digit",
+        hour12: true,
+    });
+};

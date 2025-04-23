@@ -2,22 +2,25 @@
 session_start();
 require_once "../shared/session.barangay_inc.php";
 require_once "../util/Misc.php";
-$barangay_inc_title = Misc::displayPageTitle("Settings","fa-gear");
+$barangay_inc_title = Misc::displayPageTitle("Settings", "fa-gear");
 ?>
 
 <?php ob_start() ?>
 <div class="card p-4 shadow-lg rounded">
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <a href="updateProfile.php" class="rc-blue-text text-decoration-none"><i style="margin-right: 10px"
-                class="fa fa-arrow-left" aria-hidden="true"></i>Update Profile</a>
-        <h3 class="text-center mb-0 rc-blue-text">Change Password</h3>
+    <div class="d-flex justify-content-between align-items-center flex-wrap flex-sm-nowrap mb-3">
+        <a href="updateProfile.php" class="rc-blue-text text-decoration-none d-flex align-items-center fs-6 fs-md-5">
+            <i class="fa fa-arrow-left me-2" aria-hidden="true"></i>
+            <span class="d-none d-sm-inline">Update Profile</span>
+        </a>
+        <h3 class="text-center mb-0 rc-blue-text fs-5 fs-md-4">Change Password</h3>
     </div>
     <form action="../logic/changePassword.php" method="POST">
         <div class="form-fields">
             <div class="mb-3">
                 <label for="current_password">Current Password</label>
                 <input type="password" id="current_password" name="current_password" required>
-                <div style="height: 15px" class="text-danger" id="current_passwordError" placeholder="Enter your current password"></div>
+                <div style="height: 15px" class="text-danger" id="current_passwordError"
+                    placeholder="Enter your current password"></div>
             </div>
             <div class="mb-3">
                 <label for="new_password">New Password</label>

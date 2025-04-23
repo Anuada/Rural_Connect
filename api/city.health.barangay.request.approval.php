@@ -4,6 +4,9 @@ require_once "../shared/session.city_health.php";
 require_once "../util/DbHelper.php";
 require_once "../util/Misc.php";
 require_once "../enums/RequestStatus.php";
+require_once "../vendor/autoload.php";
+
+use Ramsey\Uuid\Uuid;
 
 $db = new DbHelper();
 $ms = new Misc;
@@ -46,10 +49,26 @@ switch ($data['request_type']) {
         }
 
         if ($data['status'] == RequestStatus::Accepted->value) {
+            $dateOfSupply = (new DateTime($data['date_of_supply']))->setTime(0, 0, 0);
+            $today = (new DateTime())->setTime(0, 0, 0);
+
+            if ($dateOfSupply < $today) {
+                echo $ms->json_response(null, "Looks like you picked a date that's behind us—let's stay current!", 422);
+                exit();
+            }
+
             $d = ["id" => $data['barangay_request_id'], "requestStatus" => $data['status']];
+
             $db->updateRecord('request_med', $d);
-            $e = ["request_med_id" => $data['barangay_request_id'], "deliveries_accountId" => $data['delivery_id'], "date_of_supply" => $data['date_of_supply']];
+
+            $delivery_id = Uuid::uuid4();
+
+            $e = ["id" => $delivery_id, "request_med_id" => $data['barangay_request_id'], "deliveries_accountId" => $data['delivery_id'], "date_of_supply" => $data['date_of_supply']];
+
             $db->addRecord('med_deliveries', $e);
+
+            $db->addRecord("delivery_status_history", ["delivery_id" => $delivery_id]);
+
             echo $ms->json_response(null, "Request successfully " . strtolower($data['status']));
             exit();
         }
@@ -67,10 +86,26 @@ switch ($data['request_type']) {
         }
 
         if ($data['status'] == RequestStatus::Accepted->value) {
+            $dateOfSupply = (new DateTime($data['date_of_supply']))->setTime(0, 0, 0);
+            $today = (new DateTime())->setTime(0, 0, 0);
+
+            if ($dateOfSupply < $today) {
+                echo $ms->json_response(null, "Looks like you picked a date that's behind us—let's stay current!", 422);
+                exit();
+            }
+
             $d = ["id" => $data['barangay_request_id'], "request_status" => $data['status']];
+
             $db->updateRecord('custom_med_request', $d);
-            $e = ["custom_med_request_id" => $data['barangay_request_id'], "delivery_account_id" => $data['delivery_id'], "date_of_supply" => $data['date_of_supply']];
+
+            $delivery_id = Uuid::uuid4();
+
+            $e = ["id" => $delivery_id, "custom_med_request_id" => $data['barangay_request_id'], "delivery_account_id" => $data['delivery_id'], "date_of_supply" => $data['date_of_supply']];
+
             $db->addRecord('custom_med_deliveries', $e);
+
+            $db->addRecord("custom_med_delivery_status_history", ["delivery_id" => $delivery_id]);
+
             echo $ms->json_response(null, "Request successfully " . strtolower($data['status']));
             exit();
         }
