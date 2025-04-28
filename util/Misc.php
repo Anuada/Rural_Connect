@@ -1,6 +1,15 @@
 <?php
 
-require "../vendor/autoload.php";
+$filePath1 = './vendor/autoload.php';
+$filePath2 = '../vendor/autoload.php';
+
+if (file_exists($filePath1)) {
+    require_once $filePath1;
+} elseif (file_exists($filePath2)) {
+    require_once $filePath2;
+} else {
+    die("Error: File does not exist in both directories.");
+}
 
 use Doctrine\Inflector\InflectorFactory;
 

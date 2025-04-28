@@ -1,3 +1,6 @@
 <?php
+require_once "./util/Misc.php";
 
-header("Location: ../page/");
+$ms = new Misc;
+
+header("Location: " . $ms->url('page/'));
