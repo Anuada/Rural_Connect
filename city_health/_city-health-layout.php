@@ -23,22 +23,22 @@ $title = "City Health";
             <div class="col"><span>Dashboard</span></div>
         </div>
     </a>
-    <a href="<?php echo $ms->url('city_health/uploadAvailableMed.php') ?>" name="nav-link" <?php echo $ms->url() === $ms->url('city_health/uploadAvailableMed.php') ? "class='sidenav-active'" : "" ?>>
+    <a href="<?php echo $ms->url('city_health/add-new-medicine.php') ?>" name="nav-link" <?php echo $ms->url() === $ms->url('city_health/add-new-medicine.php') ? "class='sidenav-active'" : "" ?>>
         <div class="row align-items-center">
-            <div class="col-sm-2"><i class="fas fa-upload me-2"></i></div>
-            <div class="col"><span>Upload Medicine</span></div>
+            <div class="col-sm-2"><i class="fas fa-plus-circle"></i></div>
+            <div class="col"><span>New Medicine</span></div>
         </div>
     </a>
-    <a href="<?php echo $ms->url('city_health/view_med.php') ?>" name="nav-link" <?php echo $ms->url() === $ms->url('city_health/view_med.php') || $ms->url() === $ms->url('city_health/uploadMedEdit.php') ? "class='sidenav-active'" : "" ?>>
+    <a href="<?php echo $ms->url('city_health/medicine-inventory.php') ?>" name="nav-link" <?php echo $ms->url() === $ms->url('city_health/medicine-inventory.php') || $ms->url() === $ms->url('city_health/edit-medicine.php') ? "class='sidenav-active'" : "" ?>>
         <div class="row align-items-center">
             <div class="col-sm-2"><i class="fas fa-pills me-2"></i></div>
-            <div class="col"><span>Available Medicine</span></div>
+            <div class="col"><span>Medicine Inventory</span></div>
         </div>
     </a>
     <a href="<?php echo $ms->url('city_health/barangay-med-requests.php') ?>" name="nav-link" <?php echo $ms->url() === $ms->url('city_health/barangay-med-requests.php') ? "class='sidenav-active'" : "" ?>>
         <div class="row align-items-center">
-            <div class="col-sm-2"><i class="fas fa-prescription-bottle me-2"></i></div>
-            <div class="col"><span>Brgy Medicine Request</span></div>
+            <div class="col-sm-2"><i class="fas fa-file-medical"></i></div>
+            <div class="col"><span>Medicine Requests</span></div>
         </div>
     </a>
     <a href="<?php echo $ms->url('city_health/updateProfile.php') ?>" name="nav-link" <?php echo $ms->url() === $ms->url('city_health/updateProfile.php') || $ms->url() === $ms->url('city_health/changePassword.php') ? "class='sidenav-active'" : "" ?>>
@@ -82,7 +82,7 @@ $title = "City Health";
 
 <?php ob_start() ?>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script type="module" src="../assets/js/city.health.all.js"></script>
+<script type="module" src="../assets/js/logout.js"></script>
 <?php echo $city_health_scripts ?? "" ?>
 <?php $scripts = ob_get_clean() ?>
 

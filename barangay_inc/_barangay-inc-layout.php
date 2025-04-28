@@ -26,18 +26,18 @@ $title = "Barangay Incharge";
     <a href="<?php echo $ms->url('barangay_inc/view_med.php') ?>" name="nav-link" <?php echo $ms->url() === $ms->url('barangay_inc/view_med.php') || $ms->url() === $ms->url('barangay_inc/request_med.php') ? "class='sidenav-active'" : "" ?>>
         <div class="row align-items-center">
             <div class="col-sm-2"><i class="fas fa-notes-medical"></i></div>
-            <div class="col"><span>Get Medicine</span></div>
+            <div class="col"><span>Request Medicine</span></div>
         </div>
     </a>
     <a href="<?php echo $ms->url('barangay_inc/custom-med-request.php') ?>" name="nav-link" <?php echo $ms->url() === $ms->url('barangay_inc/custom-med-request.php') ? "class='sidenav-active'" : "" ?>>
         <div class="row align-items-center">
-            <div class="col-sm-2"><i class="fas fa-file-medical"></i></div>
-            <div class="col"><span>Custom Med Request</span></div>
+            <div class="col-sm-2"><i class="fas fa-sliders"></i></div>
+            <div class="col"><span>Customize Request</span></div>
         </div>
     </a>
-    <a href="<?php echo $ms->url('barangay_inc/my-requests.php') ?>" name="nav-link" <?php echo $ms->url() === $ms->url('barangay_inc/my-requests.php') ? "class='sidenav-active'" : "" ?>>
+    <a href="<?php echo $ms->url('barangay_inc/my-requests.php') ?>" name="nav-link" <?php echo $ms->url() === $ms->url('barangay_inc/my-requests.php') || $ms->url() === $ms->url('barangay_inc/track-delivery-status.php') ? "class='sidenav-active'" : "" ?>>
         <div class="row align-items-center">
-            <div class="col-sm-2"><i class="fas fa-clipboard-list"></i></div>
+            <div class="col-sm-2"><i class="fas fa-file-medical"></i></div>
             <div class="col"><span>My Requests</span></div>
         </div>
     </a>
@@ -82,7 +82,7 @@ $title = "Barangay Incharge";
 
 <?php ob_start() ?>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script type="module" src="../assets/js/city.health.all.js"></script>
+<script type="module" src="../assets/js/logout.js"></script>
 <?php echo $barangay_inc_scripts ?? "" ?>
 <?php $scripts = ob_get_clean() ?>
 

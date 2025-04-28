@@ -1,7 +1,12 @@
 <?php
 
+require "../vendor/autoload.php";
+
+use Doctrine\Inflector\InflectorFactory;
+
 class Misc
 {
+
     public function lastIndex($string)
     {
         $stringCount = strlen($string);
@@ -131,5 +136,11 @@ class Misc
     public static function displayEnums(array $enums)
     {
         return array_column($enums, 'value');
+    }
+
+    public function pluralize(string $word)
+    {
+        $inflector = InflectorFactory::create()->build();
+        return $inflector->pluralize($word);
     }
 }

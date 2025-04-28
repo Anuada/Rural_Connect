@@ -17,7 +17,7 @@ $ms = new Misc();
 $userTypes = UserType::all();
 $barangays = Barangay::all();
 
-if (isset($_POST["signup"])) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $fname = $_POST["fname"];
     $lname = $_POST["lname"];
     $contact = $_POST["contactNo"];
@@ -44,9 +44,13 @@ if (isset($_POST["signup"])) {
                 header("Location: ../page/signup.php");
                 exit();
             }
-            // elseif ($user_type == 'barangay_inc' && in_array($barangay, $barangays)) {
-            //     $informations['barangay'] = $barangay;
-            // }
+
+            if ($user_type == 'barangay_inc' && $db->isBarangayRegisteredAlready($barangay)) {
+                $_SESSION['m'] = "A Barangay In-Charge is already registered for Barangay $barangay!";
+                $_SESSION["informations"] = $informations;
+                header("Location: ../page/signup.php");
+                exit();
+            }
 
             $check_email = $db->fetchRecords("account", ["email" => $email]);
             if ($check_email == null) {

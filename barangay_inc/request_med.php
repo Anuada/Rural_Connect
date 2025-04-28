@@ -6,6 +6,7 @@ require_once "../util/Misc.php";
 $barangay_inc_title = Misc::displayPageTitle("Request Medicine", "fa-notes-medical");
 
 $db = new DbHelper();
+$ms = new Misc;
 
 if (!isset($_GET['id']) || empty(trim($_GET['id']))) {
     $_SESSION['m'] = "ID not found!";
@@ -81,25 +82,25 @@ $limit = (int) ($med_avail['quantity'] * 0.20);
                 </colgroup>
                 <tbody class="align-middle">
                     <tr>
+                        <th>Brand Name</th>
+                        <td><?php echo $med_avail['brand_name'] ?></td>
+                    </tr>
+                    <tr>
                         <th>Category</th>
                         <td><?php echo $med_avail['category'] ?></td>
                     </tr>
                     <tr>
-                        <th>Dosage Form</th>
-                        <td><?php echo $med_avail['DosageForm'] ?></td>
+                        <th>Unit</th>
+                        <td><?php echo $med_avail['unit'] ?></td>
                     </tr>
                     <tr>
                         <th>Dosage Strength</th>
-                        <td><?php echo $med_avail['DosageStrength'] ?></td>
-                    </tr>
-                    <tr>
-                        <th>Expiration Date</th>
-                        <td><?php echo date('F d, Y', strtotime($med_avail['expiry_date'])) ?></td>
+                        <td><?php echo $med_avail['dosage_strength'] ?></td>
                     </tr>
                     <tr>
                         <th>Total Available</th>
                         <td>
-                            <?php echo $med_avail['quantity'] ?>
+                            <?php echo $med_avail['quantity'] . " " . ($med_avail['quantity'] > 1 ? $ms->pluralize(strtolower($med_avail['unit'])) : strtolower($med_avail['unit'])) ?>
                         </td>
                     </tr>
                 </tbody>

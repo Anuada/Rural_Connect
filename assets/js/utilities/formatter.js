@@ -1,3 +1,5 @@
+import fetch from "./fetchClient.js";
+
 export const truncateText = (text) => {
     const truncatedText = text.slice(0, 10);
 
@@ -13,6 +15,19 @@ export const truncateText = (text) => {
             ${truncatedText}<span class="no-select">...</span>
         </span>
     `;
+}
+
+export const truncateSentence = (sentence, limit = 70) => {
+    if (sentence.length <= limit) return sentence;
+
+    let truncated = sentence.substring(0, limit);
+    const lastSpace = truncated.lastIndexOf(' ');
+
+    if (lastSpace !== -1) {
+        truncated = truncated.substring(0, lastSpace);
+    }
+
+    return `${truncated}...`;
 }
 
 export const formatAsAmount = (number) => {
@@ -46,3 +61,21 @@ export const timestampFormatter = (d) => {
         hour12: true,
     });
 };
+
+export const capitalizeFirstLetter = (str) => {
+    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+}
+
+export const pluralize = async (word) => {
+    return await handleFetchPluralForm(word);
+}
+
+const handleFetchPluralForm = async (word) => {
+    try {
+        const response = await fetch.get(`../api/pluralize.word.php?word=${word}`);
+        const { data } = response?.data;
+        return data;
+    } catch (error) {
+        return error;
+    }
+}

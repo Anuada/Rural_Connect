@@ -1,4 +1,4 @@
-import { dateFormatter } from "../utilities/formatter.js";
+import { dateFormatter, truncateSentence } from "../utilities/formatter.js";
 import fetch from "../utilities/fetchClient.js";
 import renderPagination from "../utilities/table.pagination.js";
 import displayDeliveryStatus from "../utilities/displayDeliveryStatusColor.js";
@@ -31,7 +31,11 @@ const displayTable = (data, tableBody) => {
                     <td>${displayMedicine(d)}</td>
                     <td>${d.request_quantity}</td>
                     <td><button class="btn btn-primary view-med-document" data-med-document="${d.document}"><i class="fas fa-eye"></i> <span style="margin-left: 10px">View</span></button></td>
-                    <td class="text-center">${d.date_of_supply !== null ? `<span class="cursor-pointer track-delivery-status" data-request-type="${d.med_image != undefined ? "med-delivery" : "custom-med-delivery"}" data-request-id="${d.med_delivery_id}" data-bs-toggle="tooltip" data-bs-placement="top" title="Track Delivery Status">${dateFormatter(d.date_of_supply)}</span>` : "<span class='user-select-none text-secondary'>TBD</span>"}</td>
+                    <td class="text-center">
+                        ${d.date_of_supply !== null ?
+                    `<span class="cursor-pointer track-delivery-status" data-request-type="${d.med_image != undefined ? "med-delivery" : "custom-med-delivery"}" data-request-id="${d.med_delivery_id}" data-bs-toggle="tooltip" data-bs-placement="top" title="Track Delivery Status">${dateFormatter(d.date_of_supply)}</span>`
+                    : "<span class='user-select-none text-secondary'>TBD</span>"}
+                    </td>
                     <td>${displayStatus(d)}</td>
                 </tr>
             `;
@@ -82,8 +86,15 @@ const displayMedicine = (data) => {
                 </span>
                 <span class="col">
                     <span class="row">${data.med_name}</span>
-                    <span class="row text-secondary">${data.category}</span>
-                    <span class="row text-secondary">${data.dosage_form} - ${data.dosage_strength}</span>
+                    <span class="row text-secondary">${data.brand_name}</span>
+                    <span class="row text-secondary cursor-default"
+                        data-fulltext="${data.category}"
+                        data-bs-toggle="tooltip" 
+                        data-bs-placement="top"
+                        title="${data.category}">
+                        ${truncateSentence(data.category, 35)}
+                    </span>
+                    <span class="row text-secondary">${data.unit} - ${data.dosage_strength}</span>
                 </span>
             </span>
         `;
@@ -92,7 +103,7 @@ const displayMedicine = (data) => {
         <div style="margin-left: 20px">
             <span class="row">${data.med_name}</span>
             <span class="row text-secondary">${data.category}</span>
-            <span class="row text-secondary">${data.dosage_form} - ${data.dosage_strength}</span>
+            <span class="row text-secondary">${data.unit} - ${data.dosage_strength}</span>
         </div>
     `;
 }

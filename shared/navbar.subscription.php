@@ -4,7 +4,7 @@
         <span class="navbar-brand"><span class="blue-color" id="title">Rural Connect</span><span
                 class="reg-w">Subscription</span></span>
         <div class="nav-links">
-            <a href="../logic/logout.php" id="admin_logout">Logout</a>
+            <a href="#" id="admin_logout">Logout</a>
         </div>
     </div>
 </nav>
@@ -16,3 +16,5 @@
         location.href = "../subscription/";
     });
 </script>
+
+<script type="module" src="../assets/js/logout.js"></script>

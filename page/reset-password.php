@@ -28,18 +28,12 @@ $title = "Reset Password";
 <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container">
         <a class="navbar-brand" href="../page/">Rural Connect</a>
-        <ul class="navbar-nav ms-auto">
-            <li class="nav-item"><a class="nav-link" href="../page/">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="aboutus.php">About Us</a></li>
-            <li class="nav-item"><a class="nav-link" href="value.php">Value</a></li>
-            <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
-        </ul>
     </div>
 </nav>
 
 <form action="../logic/reset-password.php" method="post" id="loginform">
     <div class="login-container">
-        <img src="../assets/img/misc/delivery_pic.jpeg" alt="Logo" />
+        <img src="../assets/img/misc/rural_connect_icon_logo.png" alt="Logo" />
         <div class="login-form">
             <h2>Reset Password</h2>
             <input type="hidden" name="accountId" id="accountId">

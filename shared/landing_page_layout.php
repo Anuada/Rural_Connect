@@ -12,20 +12,21 @@ $ms = new Misc;
     <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="logo" style="margin-left: 20px">
-            <img src="../assets/img/misc/delivery_pic.jpeg" style="object-fit: cover;" alt="Company Logo">
+            <img src="../assets/img/misc/rural_connect_circle_icon_logo.png" style="object-fit: cover;"
+                alt="Company Logo">
         </div>
         <ul>
-            <li><a href="../page/"
-                    style="color: <?php echo $ms->url() == strtolower($ms->url("page/")) || $ms->url() == strtolower($ms->url("page/index.php")) ? '#ffdd57' : ''; ?>">Home</a>
+            <li><a href="<?php echo $ms->url("page/") ?>"
+                    style="color: <?php echo strtolower($ms->url()) == strtolower($ms->url("page/")) || strtolower($ms->url()) == strtolower($ms->url("page/index.php")) ? '#ffdd57' : ''; ?>">Home</a>
             </li>
-            <li><a href="aboutus.php"
-                    style="color: <?php echo $ms->url() == strtolower($ms->url("page/aboutus.php")) ? '#ffdd57' : ''; ?>">About
+            <li><a href="<?php echo $ms->url("page/aboutus.php") ?>"
+                    style="color: <?php echo strtolower($ms->url()) == strtolower($ms->url("page/aboutus.php")) ? '#ffdd57' : ''; ?>">About
                     Us</a></li>
-            <li><a href="value.php"
-                    style="color: <?php echo $ms->url() == strtolower($ms->url("page/value.php")) ? '#ffdd57' : ''; ?>">Value</a>
+            <li><a href="<?php echo $ms->url("page/value.php") ?>"
+                    style="color: <?php echo strtolower($ms->url()) == strtolower($ms->url("page/value.php")) ? '#ffdd57' : ''; ?>">Value</a>
             </li>
-            <li><a href="contact.php"
-                    style="color: <?php echo $ms->url() == strtolower($ms->url("page/contact.php")) ? '#ffdd57' : ''; ?>">Contact</a>
+            <li><a href="<?php echo $ms->url("page/contact.php") ?>"
+                    style="color: <?php echo strtolower($ms->url()) == strtolower($ms->url("page/contact.php")) ? '#ffdd57' : ''; ?>">Contact</a>
             </li>
         </ul>
         <?php if (isset($_SESSION["accountId"])): ?>

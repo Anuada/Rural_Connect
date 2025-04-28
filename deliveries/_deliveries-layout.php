@@ -28,14 +28,14 @@ $title = "Delivery";
     <a href="<?php echo $ms->url('deliveries/medicine-requests.php') ?>" name="nav-link" <?php echo $ms->url() === $ms->url('deliveries/medicine-requests.php') ? "class='sidenav-active'" : "" ?>>
         <div class="nav-link-inner">
             <i class="fas fa-clipboard me-2"></i>
-            <span>Med Requests</span>
+            <span>Standard Requests</span>
         </div>
     </a>
 
     <a href="<?php echo $ms->url('deliveries/custom-medicine-requests.php') ?>" name="nav-link" <?php echo $ms->url() === $ms->url('deliveries/custom-medicine-requests.php') ? "class='sidenav-active'" : "" ?>>
         <div class="nav-link-inner">
             <i class="fas fa-clipboard-list me-2"></i>
-            <span>Custom Med Requests</span>
+            <span>Customized Requests</span>
         </div>
     </a>
 

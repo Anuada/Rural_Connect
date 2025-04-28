@@ -1,5 +1,5 @@
 import { confirmAlert, errorAlert, successAlert } from '../helpers/sweetAlert2.js';
-import { dateFormatter } from "../utilities/formatter.js";
+import { dateFormatter, pluralize, truncateSentence } from "../utilities/formatter.js";
 import fetch from "../utilities/fetchClient.js";
 import renderPagination from "../utilities/table.pagination.js";
 import serializeForm from '../helpers/serializeForm.js';
@@ -94,10 +94,10 @@ const displayTable = (data, tableBody) => {
 
     const viewDetailsBtnEl = document.querySelectorAll('.view-details');
     viewDetailsBtnEl.forEach(btn => {
-        btn.addEventListener('click', () => {
+        btn.addEventListener('click', async () => {
             const data = JSON.parse(btn.getAttribute('data-details'));
             requested_medicine.textContent = data.med_name;
-            requested_quantity.textContent = data.request_quantity;
+            requested_quantity.textContent = `${data.request_quantity} ${data.request_quantity > 1 ? await pluralize(data.unit.toLowerCase()) : data.unit.toLowerCase()}`;
             incharge_barangay.textContent = data.barangay;
             incharge_name.textContent = `${data.fname} ${data.lname}`;
             incharge_address.textContent = data.address;
@@ -142,8 +142,15 @@ const displayMedicine = (data) => {
                 </span>
                 <span class="col">
                     <span class="row">${data.med_name}</span>
-                    <span class="row text-secondary">${data.category}</span>
-                    <span class="row text-secondary">${data.dosage_form} - ${data.dosage_strength}</span>
+                    <span class="row text-secondary">${data.brand_name}</span>
+                    <span class="row text-secondary cursor-default"
+                        data-fulltext="${data.category}"
+                        data-bs-toggle="tooltip" 
+                        data-bs-placement="top"
+                        title="${data.category}">
+                        ${truncateSentence(data.category, 35)}
+                    </span>
+                    <span class="row text-secondary">${data.dosage_strength}</span>
                 </span>
             </span>
         `;
@@ -152,7 +159,7 @@ const displayMedicine = (data) => {
         <div style="margin-left: 20px">
             <span class="row">${data.med_name}</span>
             <span class="row text-secondary">${data.category}</span>
-            <span class="row text-secondary">${data.dosage_form} - ${data.dosage_strength}</span>
+            <span class="row text-secondary">${data.dosage_strength}</span>
         </div>
     `;
 }
@@ -223,6 +230,7 @@ const fetchRequestedMedicine = (page = 1) => {
         .then(response => {
             const { data, pagination } = response.data.data;
             displayTable(data, requestedMedTableEl);
+            initTooltips();
             renderPagination(pagination, requestedMedPageEl, fetchRequestedMedicine);
         })
         .catch(error => {
@@ -235,12 +243,24 @@ const fetchCustomizedRequestMedicine = (page = 1) => {
         .then(response => {
             const { data, pagination } = response.data.data;
             displayTable(data, customizedMedRequestEl);
+            initTooltips();
             renderPagination(pagination, customizedMedRequestPageEl, fetchCustomizedRequestMedicine);
         })
         .catch(error => {
             console.error(error);
         })
 }
+
+const initTooltips = () => {
+    // Dispose any existing tooltips first
+    const existingTooltips = document.querySelectorAll('.tooltip');
+    existingTooltips.forEach(t => t.remove());
+
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+    tooltipTriggerList.forEach((tooltipTriggerEl) => {
+        new bootstrap.Tooltip(tooltipTriggerEl);
+    });
+};
 
 const callFetches = () => {
     fetchRequestedMedicine(currentPage);

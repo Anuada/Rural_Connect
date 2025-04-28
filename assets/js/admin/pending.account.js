@@ -113,8 +113,7 @@ const handle_approval_status = (payload) => {
             successAlert(response.data.message, true);
         })
         .catch(error => {
-            const { message } = error?.data;
-            if (message != null) {
+            if (error?.data?.message != undefined) {
                 errorAlert(error.data.message, true);
             } else {
                 console.error(error);

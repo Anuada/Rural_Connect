@@ -2,7 +2,7 @@
 session_start();
 require_once "../shared/session.barangay_inc.php";
 require_once "../util/Misc.php";
-$barangay_inc_title = Misc::displayPageTitle("Custom Medicine Request", "fa-file-medical");
+$barangay_inc_title = Misc::displayPageTitle("Customize Medicine Request", "fa-sliders");
 ?>
 
 <?php ob_start() ?>
@@ -24,9 +24,9 @@ $barangay_inc_title = Misc::displayPageTitle("Custom Medicine Request", "fa-file
                 </div>
 
                 <div class="col-md-6 mb-3">
-                    <label for="dosage_form">Dosage Form</label>
-                    <input type="text" class="form-control" id="dosage_form" name="dosage_form" required>
-                    <div style="height: 15px" class="form-text" id="dosage_formError"></div>
+                    <label for="unit">Unit</label>
+                    <input type="text" class="form-control" id="unit" name="unit" required>
+                    <div style="height: 15px" class="form-text" id="unitError"></div>
                 </div>
 
                 <div class="col-md-6 mb-3">
@@ -61,8 +61,8 @@ $barangay_inc_title = Misc::displayPageTitle("Custom Medicine Request", "fa-file
     <script>
         <?php foreach ($_SESSION['errorMessages'] as $key => $value): ?>
             let <?php echo $key ?>ErrorEl = document.getElementById("<?php echo $key ?>Error");
-            <?php echo $key ?>ErrorEl.classList.add("text-danger");
-            <?php echo $key ?>ErrorEl.innerText = "<?php echo $value ?>";
+                            <?php echo $key ?>ErrorEl.classList.add("text-danger");
+                            <?php echo $key ?>ErrorEl.innerText = "<?php echo $value ?>";
         <?php endforeach ?>
     </script>
     <?php unset($_SESSION['errorMessages']) ?>

@@ -19,6 +19,8 @@ if (!in_array($user_type, $user_types)) {
     header("Location: ../page/");
     exit();
 }
+
+$title = "Rate and Feedback";
 ?>
 
 <?php ob_start() ?>

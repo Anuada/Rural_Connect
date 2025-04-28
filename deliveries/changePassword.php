@@ -6,6 +6,10 @@ $deliveries_title = Misc::displayPageTitle("Settings", "fa-gear");
 ?>
 
 <?php ob_start() ?>
+<link rel="stylesheet" href="../assets/css/change.password.css">
+<?php $deliveries_styles = ob_get_clean() ?>
+
+<?php ob_start() ?>
 <div class="card p-4 shadow-lg rounded">
     <div class="d-flex justify-content-between align-items-center flex-wrap flex-sm-nowrap mb-3">
         <a href="updateProfile.php" class="rc-blue-text text-decoration-none d-flex align-items-center fs-6 fs-md-5">
@@ -16,21 +20,24 @@ $deliveries_title = Misc::displayPageTitle("Settings", "fa-gear");
     </div>
     <form action="../logic/changePassword.php" method="POST">
         <div class="form-fields">
-            <div class="mb-3">
+            <div class="mb-3 password-container">
                 <label for="current_password">Current Password</label>
-                <input type="password" id="current_password" name="current_password" required>
-                <div style="height: 15px" class="text-danger" id="current_passwordError"
+                <input type="password" class="passwordEl" id="current_password" name="current_password" required>
+                <i class="fas fa-eye" data-action="togglePassword" style="cursor: pointer;"></i>
+                <div style="height:20px" class="text-danger" id="current_passwordError"
                     placeholder="Enter your current password"></div>
             </div>
-            <div class="mb-3">
+            <div class="mb-3 password-container">
                 <label for="new_password">New Password</label>
-                <input type="password" id="new_password" name="new_password" required>
-                <div style="height: 15px" class="text-danger" id="new_passwordError"></div>
+                <input type="password" class="passwordEl" id="new_password" name="new_password" required>
+                <i class="fas fa-eye" data-action="togglePassword" style="cursor: pointer;"></i>
+                <div style="height:20px" class="text-danger" id="new_passwordError"></div>
             </div>
-            <div class="mb-3">
+            <div class="mb-3 password-container">
                 <label for="repeat_password">Repeat Password</label>
-                <input type="password" id="repeat_password" name="repeat_password" required>
-                <div style="height: 15px" class="text-danger" id="repeat_passwordError"></div>
+                <input type="password" class="passwordEl" id="repeat_password" name="repeat_password" required>
+                <i class="fas fa-eye" data-action="togglePassword" style="cursor: pointer;"></i>
+                <div style="height:20px" class="text-danger" id="repeat_passwordError"></div>
             </div>
             <button type="submit" name="submit">Change Password</button>
         </div>
@@ -40,6 +47,7 @@ $deliveries_title = Misc::displayPageTitle("Settings", "fa-gear");
 
 
 <?php ob_start() ?>
+<script src="../assets/js/change.password.js"></script>
 <?php if (isset($_SESSION["errorMessages"])): ?>
     <script>
         const errorMessages = <?php echo json_encode($_SESSION["errorMessages"]) ?>;

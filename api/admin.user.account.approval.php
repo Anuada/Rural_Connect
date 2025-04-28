@@ -45,7 +45,18 @@ if (!empty($errorMessages)) {
     exit();
 }
 
+if ($check_user['user_type'] == 'barangay_inc') {
+    $check_barangay = $db->getRecord('barangay_inc', ['accountId' => $data['accountId']]);
+    $barangay = $check_barangay['barangay'];
+    if ($data['account_status'] == 'Approved' && $db->isBarangayRegisteredAlready($barangay)) {
+        $message = "A Barangay In-Charge is already registered for Barangay $barangay!";
+        echo $ms->json_response(null, $message, 422);
+        exit();
+    }
+}
+
 $updateApproveStatus = $db->updateRecord('account', $data);
 if ($updateApproveStatus > 0) {
     echo $ms->json_response(null, "Account Successfully " . $data['account_status']);
+    exit();
 }

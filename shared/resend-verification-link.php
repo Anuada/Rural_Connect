@@ -42,14 +42,16 @@ if (isset($_SESSION['accountId'])) {
                 <button class="btn shadow-sm" style="background-color: #354eab;color: #fff;" type="submit"
                     name="resend_email">Resend Verification Link</button>
             </form>
-            <a href="../logic/logout.php" class="btn btn-danger shadow-sm">Logout</a>
+            <form action="../logic/logout.php" method="post" id="logout">
+                <button type="submit" class="btn btn-danger shadow-sm">Logout</button>
+            </form>
         </div>
     </div>
 </div>
 <?php $content = ob_get_clean() ?>
 
 <?php ob_start() ?>
-<!-- scripts -->
+<script type="module" src="../assets/js/form-logout.js"></script>
 <?php $scripts = ob_get_clean() ?>
 
 <?php require_once "./layout.php" ?>

@@ -8,7 +8,7 @@ $ms = new Misc;
 $db = new DbHelper();
 
 $couriers = $db->fetchDeliveries();
-$city_health_title = Misc::displayPageTitle("Barangay Medicine Request", "fa-prescription-bottle me-2");
+$city_health_title = Misc::displayPageTitle("Manage Medicine Requests", "fa-file-medical");
 ?>
 
 <?php ob_start() ?>
@@ -21,11 +21,11 @@ $city_health_title = Misc::displayPageTitle("Barangay Medicine Request", "fa-pre
 <ul class="nav nav-tabs pt-3 w-100" id="pendingTabs" role="tablist" style="display: flex;">
     <li class="nav-item flex-fill text-center" role="presentation">
         <button class="nav-link active w-100" id="requested-med-tab" data-bs-toggle="tab"
-            data-bs-target="#requested-med" type="button" role="tab">Requested Medicine</button>
+            data-bs-target="#requested-med" type="button" role="tab">Standard Request</button>
     </li>
     <li class="nav-item flex-fill text-center" role="presentation">
         <button class="nav-link w-100" id="customized-med-request-tab" data-bs-toggle="tab"
-            data-bs-target="#customized-med-request" type="button" role="tab">Customized Request Medicine</button>
+            data-bs-target="#customized-med-request" type="button" role="tab">Customized Request</button>
     </li>
 </ul>
 

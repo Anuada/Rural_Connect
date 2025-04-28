@@ -7,7 +7,7 @@ require_once "../util/Misc.php";
 $db = new DbHelper();
 $ms = new Misc;
 $records = $db->fetchRecords('med_availability');
-$city_health_title = Misc::displayPageTitle("Available Medicine","fa-pills me-2");
+$city_health_title = Misc::displayPageTitle("Manage Medicine Inventory", "fa-pills me-2");
 ?>
 
 <?php ob_start() ?>
@@ -15,15 +15,13 @@ $city_health_title = Misc::displayPageTitle("Available Medicine","fa-pills me-2"
 <?php $city_health_styles = ob_get_clean() ?>
 
 <?php ob_start() ?>
-<input type="text" id="searchInput" class="form-control mb-3"
-    placeholder="Search" onkeyup="searchTable()">
+<input type="text" id="searchInput" class="form-control mb-3" placeholder="Search" onkeyup="searchTable()">
 <table id="medicineTable">
     <thead>
         <tr>
             <th>Medicine</th>
             <th>Other Details</th>
             <th>Date Added</th>
-            <th>Expiry Date</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -39,23 +37,28 @@ $city_health_title = Misc::displayPageTitle("Available Medicine","fa-pills me-2"
                             </span>
                             <span class="col">
                                 <span class="row"><?php echo $row['med_name'] ?></span>
-                                <span class="row text-secondary"><?php echo $row['category'] ?></span>
+                                <span class="row text-secondary"><?php echo $row['brand_name'] ?></span>
+                                <span class="row text-secondary" data-fulltext="<?php echo $row['category'] ?>" data-bs-toggle="tooltip"
+                                    data-bs-placement="top" title="<?php echo $row['category'] ?>">
+                                    <?php echo $ms->truncateSentence($row['category'], 35) ?>
+                                </span>
                                 <span
-                                    class="row text-secondary"><?php echo $row['DosageForm'] . " - " . $row['DosageStrength'] ?></span>
+                                    class="row text-secondary"><?php echo $row['dosage_strength'] ?></span>
                             </span>
                         </span>
                     </td>
                     <td><button class="btn btn-primary shadow other-details" data-details='<?php echo json_encode($row) ?>'><i
                                 class="fas fa-eye"></i><span style="margin-left:10px">View</span></button></td>
                     <td><?php echo date('F d, Y', strtotime($row['date'])) ?></td>
-                    <td><?php echo date('F d, Y', strtotime($row['expiry_date'])) ?></td>
                     <td>
                         <span class="d-flex justify-content-start">
-                            <a href="<?php echo $ms->url("city_health/uploadMedEdit.php?id=" . $row['id']) ?>"
-                                class="btn btn-primary shadow" title="Edit" style="margin-right: 10px">
+                            <button data-id="<?php echo $row['id'] ?>" data-med-name="<?php echo $row['med_name'] ?>"
+                                data-quantity="<?php echo $row['quantity'] ?>" title="Edit"
+                                class="btn btn-primary shadow edit-medicine" style="margin-right: 10px">
                                 <i class="fas fa-edit"></i>
-                            </a>
-                            <button data-id="<?php echo $row['id'] ?>" title="Delete" class="btn btn-outline-primary shadow delete-medicine">
+                            </button>
+                            <button data-id="<?php echo $row['id'] ?>" title="Delete"
+                                class="btn btn-outline-primary shadow delete-medicine">
                                 <i class="fas fa-trash"></i>
                             </button>
                         </span>
@@ -64,14 +67,14 @@ $city_health_title = Misc::displayPageTitle("Available Medicine","fa-pills me-2"
             <?php endforeach; ?>
         <?php else: ?>
             <tr>
-                <td colspan="5" class="text-center">No records found</td>
+                <td colspan="4" class="text-center"><i class="user-select-none text-secondary">No records found</i></td>
             </tr>
         <?php endif; ?>
     </tbody>
 </table>
 
 <!-- Pagination Controls -->
-<div class="pagination-container mt-3 d-flex justify-content-end">
+<div class="pagination-container mt-3 d-flex justify-content-end <?php echo count($records) < 4 ? "d-none" : "" ?>">
     <button id="prevPage" class="btn btn-primary shadow" disabled>Prev</button>
     <span id="pageNumbers" class="mx-2 d-flex justify-content-center align-items-center"></span>
     <button id="nextPage" class="btn btn-primary shadow">Next</button>
@@ -100,9 +103,46 @@ $city_health_title = Misc::displayPageTitle("Available Medicine","fa-pills me-2"
                     </p>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x-circle"></i>
-                    Close</button>
+        </div>
+    </div>
+</div>
+
+<!-- Add Stock -->
+<div class="modal fade" id="addStockModal" tabindex="-1" aria-labelledby="viewLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content custom-modal">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="viewLabel">
+                    <i class="fas fa-capsules"></i> Add Stock
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="add-stock-form">
+                    <input type="hidden" name="id" id="id">
+                    <div class="form-fields">
+                        <div class="form-group row mb-3 d-flex align-items-center">
+                            <label for="stock" class="col-sm-4 col-form-label">Add Stock</label>
+                            <div class="col-sm-8">
+                                <input type="number" class="form-control" min="1" id="stock" name="stock"
+                                    placeholder="Added Stock" value="0" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row mb-3 d-flex align-items-center">
+                        <div class="form-fields col-sm-4 col-form-label">
+                            <label id="total-stocks-label">Total Stocks</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <input type="text" readonly class="form-control-plaintext" name="quantity"
+                                id="total-quantity">
+                        </div>
+                    </div>
+                    <div class="form-fields">
+                        <button type="submit">Add Stock</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

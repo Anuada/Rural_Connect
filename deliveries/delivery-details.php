@@ -58,7 +58,7 @@ if (isset($_GET['med-delivery'])) {
         <div class="col-md-9">
             <p class="mb-1"><strong><?php echo $detail['med_name'] ?></strong></p>
             <p class="mb-1 text-secondary"><?php echo $detail['category'] ?></p>
-            <p class="mb-1 text-secondary"><?php echo $detail['dosage_form'] . " - " . $detail['dosage_strength'] ?></p>
+            <p class="mb-1 text-secondary"><?php echo $detail['unit'] . " - " . $detail['dosage_strength'] ?></p>
             <p class="mb-0 text-secondary">Requested Quantity - <?php echo $detail['requested_quantity'] ?></p>
         </div>
     </div>

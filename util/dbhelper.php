@@ -53,8 +53,6 @@ class DbHelper
     }
 
     #Delete record/s
-
-
     public function deleteRecord($table, $args)
     {
         $key = array_keys($args);
@@ -107,205 +105,6 @@ class DbHelper
         return $cond;
     }
 
-    public function executeQuery($sql, $params)
-    {
-        if ($stmt = $this->conn->prepare($sql)) {
-            $types = str_repeat('s', count($params));
-            $stmt->bind_param($types, ...$params);
-
-            if ($stmt->execute()) {
-                return true;
-            } else {
-
-                echo "Error executing query: " . $stmt->error;
-                return false;
-            }
-        } else {
-            echo "Error preparing query: " . $this->conn->error;
-            return false;
-        }
-    }
-    // This Query for the status
-    public function fetchData($id)
-    {
-        $sql = "
-    SELECT 
-        barangay_inc.accountId,
-        barangay_inc.fname,
-        barangay_inc.lname,
-        barangay_inc.address,
-        barangay_inc.contactNo,
-        barangay_inc.id_verification,
-        med_availability.med_name,
-        med_availability.med_description,
-        med_availability.quantity,
-        med_availability.expiry_date,
-        med_availability.DosageForm,
-        med_availability.DosageStrength,
-        med_availability.category,
-        med_availability.city_health_id,
-        request_med.request_quantity,
-        request_med.request_category,
-        request_med.request_DosageForm,
-        request_med.request_DosageStrength,
-        request_med.id,
-        request_med.requestStatus
-    FROM 
-        request_med
-    LEFT JOIN 
-        med_availability ON request_med.med_avail_Id = med_availability.id
-    LEFT JOIN 
-        barangay_inc ON request_med.barangay_inc_id = barangay_inc.accountId
-    WHERE  
-        request_med.city_health_id = ?
-    ";
-
-        $stmt = $this->conn->prepare($sql);
-        if (!$stmt) {
-            die("SQL Error: " . $this->conn->error);
-        }
-
-        $stmt->bind_param("i", $id);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $records = [];
-
-        while ($row = $result->fetch_assoc()) {
-            $records[] = $row;
-        }
-
-        $stmt->close(); // Close the statement after use
-        return $records;
-    }
-    // Display Dashboard for requested in Barangay inc
-    public function barangayRequested_med($id)
-    {
-        $sql = "
-    SELECT 
-        barangay_inc.accountId,
-        barangay_inc.fname,
-        barangay_inc.lname,
-        barangay_inc.address,
-        barangay_inc.contactNo,
-        barangay_inc.id_verification,
-        med_availability.med_name,
-        med_availability.med_description,
-        med_availability.quantity,
-        med_availability.expiry_date,
-        med_availability.DosageForm,
-        med_availability.DosageStrength,
-        med_availability.category,
-        med_availability.city_health_id,
-        request_med.request_quantity,
-        request_med.request_category,
-        request_med.request_DosageForm,
-        request_med.request_DosageStrength,
-        request_med.id,
-        request_med.requestStatus,
-        request_med.delivery_date
-    FROM 
-        request_med
-    LEFT JOIN 
-        med_availability ON request_med.med_avail_Id = med_availability.id
-    LEFT JOIN 
-        barangay_inc ON request_med.barangay_inc_id = barangay_inc.accountId
-    WHERE  
-        request_med.barangay_inc_id = ?
-    ";
-
-        $stmt = $this->conn->prepare($sql);
-        if (!$stmt) {
-            die("SQL Error: " . $this->conn->error);
-        }
-
-        $stmt->bind_param("i", $id);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $records = [];
-
-        while ($row = $result->fetch_assoc()) {
-            $records[] = $row;
-        }
-
-        $stmt->close(); // Close the statement after use
-        return $records;
-    }
-
-    // count for pending
-
-    public function countPending()
-    {
-        $sql = "
-    SELECT COUNT(*) AS pending_requests
-    FROM request_med
-    WHERE requestStatus = 'pending';
-    ";
-
-        $stmt = $this->conn->prepare($sql);
-        if (!$stmt) {
-            die("SQL Error: " . $this->conn->error);
-        }
-
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        $row = $result->fetch_assoc(); // Fetch the single row result
-
-        $stmt->close(); // Close the statement after use
-
-        return $row ? $row['pending_requests'] : 0; // Return the count directly
-    }
-
-    // count for Accempted 
-
-    public function countAccempted()
-    {
-        $sql = "
-    SELECT COUNT(*) AS Accepted_requests
-    FROM request_med
-    WHERE requestStatus = 'Accepted';
-    ";
-
-        $stmt = $this->conn->prepare($sql);
-        if (!$stmt) {
-            die("SQL Error: " . $this->conn->error);
-        }
-
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        $row = $result->fetch_assoc(); // Fetch the single row result
-
-        $stmt->close(); // Close the statement after use
-
-        return $row ? $row['Accepted_requests'] : 0; // Return the count directly
-    }
-
-    // Count for cancelled
-
-    public function countCancelled()
-    {
-        $sql = "
-    SELECT COUNT(*) AS cancelled_requests
-    FROM request_med
-    WHERE requestStatus = 'Cancelled';
-    ";
-
-        $stmt = $this->conn->prepare($sql);
-        if (!$stmt) {
-            die("SQL Error: " . $this->conn->error);
-        }
-
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        $row = $result->fetch_assoc(); // Fetch the single row result
-
-        $stmt->close(); // Close the statement after use
-
-        return $row ? $row['cancelled_requests'] : 0; // Return the count directly
-    }
-
     public function fetchDeliveries()
     {
         $sql = "
@@ -331,6 +130,16 @@ class DbHelper
         return $records;
     }
 
+    public function isBarangayRegisteredAlready(string $barangay)
+    {
+        $sql = "SELECT barangay_inc.* FROM barangay_inc
+            INNER JOIN account ON account.accountId = barangay_inc.accountId
+            WHERE barangay_inc.barangay = '$barangay' AND account.account_status = 'Approved'";
+        $query = $this->conn->query($sql);
+        $result = $query->fetch_assoc();
+        return !empty($result);
+    }
+
     #region Delivery Related
     public function display_medicine_requests_to_deliver($id, $limit = null, $offset = null, $delivery_id = null, $delivery_status = null, $status_not_equal = false)
     {
@@ -347,8 +156,8 @@ class DbHelper
             med_availability.med_image,
             med_availability.med_name,
             med_availability.category,
-            med_availability.DosageForm AS dosage_form,
-            med_availability.DosageStrength AS dosage_strength
+            med_availability.unit,
+            med_availability.dosage_strength
         FROM med_deliveries
         INNER JOIN request_med ON med_deliveries.request_med_id = request_med.id
         INNER JOIN barangay_inc ON request_med.barangay_inc_id = barangay_inc.accountId
@@ -418,7 +227,7 @@ class DbHelper
             custom_med_request.requested_quantity,
             custom_med_request.requested_medicine AS med_name,
             custom_med_request.category,
-            custom_med_request.dosage_form,
+            custom_med_request.unit,
             custom_med_request.dosage_strength
         FROM custom_med_deliveries
         INNER JOIN custom_med_request ON custom_med_deliveries.custom_med_request_id = custom_med_request.id
@@ -487,8 +296,8 @@ class DbHelper
             med_availability.med_image,
             med_availability.med_name,
             med_availability.category,
-            med_availability.DosageForm AS dosage_form,
-            med_availability.DosageStrength AS dosage_strength
+            med_availability.unit,
+            med_availability.dosage_strength
 
             FROM med_deliveries
 
@@ -518,7 +327,7 @@ class DbHelper
             custom_med_request.requested_quantity,
             custom_med_request.requested_medicine AS med_name,
             custom_med_request.category,
-            custom_med_request.dosage_form,
+            custom_med_request.unit,
             custom_med_request.dosage_strength
 
             FROM custom_med_deliveries
@@ -584,9 +393,10 @@ class DbHelper
         request_med.requestStatus,
         request_med.document,
         med_availability.med_name,
+        med_availability.brand_name,
         med_availability.category,
-        med_availability.DosageForm AS dosage_form,
-        med_availability.DosageStrength AS dosage_strength,
+        med_availability.unit,
+        med_availability.dosage_strength,
         med_availability.med_image,
         med_deliveries.id AS med_delivery_id,
         med_deliveries.date_of_supply,
@@ -630,7 +440,7 @@ class DbHelper
         custom_med_request.request_status AS requestStatus,
         custom_med_request.requested_medicine AS med_name,
         custom_med_request.category,
-        custom_med_request.dosage_form,
+        custom_med_request.unit,
         custom_med_request.dosage_strength,
         custom_med_request.document,
         custom_med_deliveries.id AS med_delivery_id,
@@ -709,10 +519,11 @@ class DbHelper
             request_med.requestStatus AS status,
             request_med.document,
             med_availability.med_name,
+            med_availability.brand_name,
             med_availability.med_image,
             med_availability.category,
-            med_availability.DosageForm AS dosage_form,
-            med_availability.DosageStrength AS dosage_strength,
+            med_availability.unit,
+            med_availability.dosage_strength,
             med_deliveries.date_of_supply,
             med_deliveries.delivery_status,
             barangay_inc.contactNo,
@@ -754,7 +565,7 @@ class DbHelper
             custom_med_request.document,
             custom_med_request.requested_medicine AS med_name,
             custom_med_request.category,
-            custom_med_request.dosage_form,
+            custom_med_request.unit,
             custom_med_request.dosage_strength,
             custom_med_deliveries.date_of_supply,
             custom_med_deliveries.delivery_status,
@@ -842,7 +653,6 @@ class DbHelper
         }
         return $rows;
     }
-
 
     public function display_all_accounts($table, $args, $limit, $offset)
     {

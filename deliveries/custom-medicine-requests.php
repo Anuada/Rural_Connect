@@ -2,7 +2,7 @@
 session_start();
 require_once "../shared/session.delivery.php";
 require_once "../util/Misc.php";
-$deliveries_title = Misc::displayPageTitle("Custom Medicine Requests Queue","fa-clipboard-list");
+$deliveries_title = Misc::displayPageTitle("Customized Requests Queue","fa-clipboard-list");
 ?>
 
 <?php ob_start() ?>

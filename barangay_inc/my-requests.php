@@ -2,7 +2,7 @@
 session_start();
 require_once "../shared/session.barangay_inc.php";
 require_once "../util/Misc.php";
-$barangay_inc_title = Misc::displayPageTitle("My Requests", "fa-clipboard-list");
+$barangay_inc_title = Misc::displayPageTitle("My Requests", "fa-file-medical");
 ?>
 
 <?php ob_start() ?>
@@ -14,11 +14,11 @@ $barangay_inc_title = Misc::displayPageTitle("My Requests", "fa-clipboard-list")
 <ul class="nav nav-tabs pt-3 w-100" id="pendingTabs" role="tablist" style="display: flex;">
     <li class="nav-item flex-fill text-center" role="presentation">
         <button class="nav-link active w-100" id="requested-med-tab" data-bs-toggle="tab"
-            data-bs-target="#requested-med" type="button" role="tab">Requested Medicine</button>
+            data-bs-target="#requested-med" type="button" role="tab">Standard Request</button>
     </li>
     <li class="nav-item flex-fill text-center" role="presentation">
         <button class="nav-link w-100" id="customized-med-request-tab" data-bs-toggle="tab"
-            data-bs-target="#customized-med-request" type="button" role="tab">Customized Request Medicine</button>
+            data-bs-target="#customized-med-request" type="button" role="tab">Customized Request</button>
     </li>
 </ul>
 

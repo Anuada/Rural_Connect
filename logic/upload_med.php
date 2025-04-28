@@ -10,7 +10,7 @@ $db = new DbHelper();
 $dh = new DirHandler();
 $ms = new Misc;
 
-if (isset($_POST['submit'])) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     uploadMedAvailable($db, $dh, $ms);
 }
 
@@ -18,40 +18,42 @@ function uploadMedAvailable(DbHelper $db, DirHandler $dh, Misc $ms)
 {
     $city_health_id = $_POST['city_health_id'];
     $med_name = $_POST['med_name'];
-    $med_description = $_POST['med_description'];
-    $category = $_POST['category'];
-    $DosageForm = $_POST['DosageForm'];
-    $DosageStrength = $_POST['DosageStrength'];
-    $quantity = $_POST['quantity'];
-    $expiry_date = $_POST['expiry_date'];
-    $med_image = $_FILES['med_image'];
 
-    $img_name = str_replace("-", "", $city_health_id) . "_" . strtolower(str_replace(' ', '', $med_name)) . "_" . date('mdYHis');
-    $img_file = $ms->uploadImage($med_image, $img_name, $dh->med_image);
+    $errorCount = 0;
+    foreach ($_POST as $key => $value) {
+        if (empty(trim($value))) {
+            $errorCount++;
+        }
+    }
 
-    $table = "med_availability";
-    $data = array(
-        "city_health_id" => $city_health_id,
-        "med_name" => $med_name,
-        "med_description" => $med_description,
-        "quantity" => $quantity,
-        "category" => $category,
-        "DosageForm" => $DosageForm,
-        "DosageStrength" => $DosageStrength,
-        "expiry_date" => $expiry_date,
-        "med_image" => $img_file,
-    );
+    if ($errorCount > 0) {
+        $_SESSION["m"] = "Fill out the missing fields!";
+        $_SESSION["field_inputs"] = $_POST;
+        header("Location: ../city_health/add-new-medicine.php");
+        exit();
+    }
 
-    $success = $db->addRecord($table, $data);
+    if (!isset($_FILES['med_image']) || $_FILES['med_image']['size'] <= 0) {
+        $_SESSION["m"] = "Image is required!";
+        $_SESSION["field_inputs"] = $_POST;
+        header("Location: ../city_health/add-new-medicine.php");
+        exit();
+    }
+
+    $med_name_with_underscores = preg_replace('/[^a-zA-Z0-9_]/', '_', $med_name); // Replace all non-alphanumeric characters with "_"
+
+    $img_name = str_replace("-", "", $city_health_id) . "_" . strtolower(str_replace(' ', '', $med_name_with_underscores)) . "_" . date('mdYHis');
+    $_POST['med_image'] = $ms->uploadImage($_FILES['med_image'], $img_name, $dh->med_image);
+
+    $success = $db->addRecord("med_availability", $_POST);
 
     if ($success) {
         $_SESSION["m"] = "Submitted Medicine successfully";
-        header("Location: ../city_health/uploadAvailableMed.php");
+        header("Location: ../city_health/add-new-medicine.php");
         exit();
     } else {
         $_SESSION["m"] = "Error uploading!";
-        header("Location: ../city_health/uploadAvailableMed.php");
+        header("Location: ../city_health/add-new-medicine.php");
         exit();
     }
 }
-?>

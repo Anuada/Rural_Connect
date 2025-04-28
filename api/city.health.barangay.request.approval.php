@@ -47,6 +47,8 @@ switch ($data['request_type']) {
             echo $ms->json_response(null, "request id not found!", 422);
             exit();
         }
+        $med_avail = $db->getRecord('med_availability', ['id' => $check['med_avail_Id']]);
+        $new_total_quantity = (int) $med_avail['quantity'] - (int) $check['request_quantity'];
 
         if ($data['status'] == RequestStatus::Accepted->value) {
             $dateOfSupply = (new DateTime($data['date_of_supply']))->setTime(0, 0, 0);
@@ -60,6 +62,8 @@ switch ($data['request_type']) {
             $d = ["id" => $data['barangay_request_id'], "requestStatus" => $data['status']];
 
             $db->updateRecord('request_med', $d);
+
+            $db->updateRecord('med_availability', ['id' => $med_avail['id'], 'quantity' => $new_total_quantity]);
 
             $delivery_id = Uuid::uuid4();
 

@@ -68,3 +68,25 @@ export const confirmAlert = (question, action, darkmode = false, ...actionArgs) 
         }
     });
 };
+
+export const choicesAlert = (title, choice_1, choice_2, action_v1, action_v2, darkmode = false, actionV1Args = [], actionV2Args = []) => {
+    Swal.fire({
+        title: title,
+        showDenyButton: true,
+        confirmButtonText: choice_1,
+        denyButtonText: choice_2,
+        confirmButtonColor: "#007bff",
+        background: darkmode ? "#333" : "#fff",
+        color: darkmode ? "#f1f1f1" : undefined,
+        iconColor: darkmode ? "#fbbf24" : undefined,
+        customClass: {
+            popup: darkmode ? "dark-swal" : "",
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            action_v1(...actionV1Args);
+        } else if (result.isDenied) {
+            action_v2(...actionV2Args);
+        }
+    });
+};

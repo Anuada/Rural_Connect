@@ -15,7 +15,7 @@ const tableDisplay = (data, container) => {
                     <div class="med-details flex-grow-1">
                         <div class="fw-bold">${d.med_name}</div>
                         <div class="text-secondary small">${d.category}</div>
-                        <div class="text-secondary small">${d.dosage_form} - ${d.dosage_strength}</div>
+                        <div class="text-secondary small">${d.unit} - ${d.dosage_strength}</div>
                     </div>
                     <div class="med-info text-nowrap small">Barangay ${d.barangay}</div>
                     <div class="med-info text-nowrap small">${dateFormatter(d.date_of_supply)}</div>

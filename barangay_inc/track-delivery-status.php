@@ -3,7 +3,7 @@ session_start();
 require_once "../shared/session.barangay_inc.php";
 require_once "../util/DbHelper.php";
 require_once "../util/Misc.php";
-$barangay_inc_title = Misc::displayPageTitle("Track Delivery Status", "fa-box");
+$barangay_inc_title = Misc::displayPageTitle("Track Delivery Status", "fa-truck");
 
 $db = new DbHelper();
 $ms = new Misc;
@@ -54,7 +54,7 @@ if (isset($_GET['med-delivery'])) {
         <div class="col-md-6">
             <p class="mb-1"><strong><?php echo $details['med_name'] ?></strong></p>
             <p class="mb-1 text-secondary"><?php echo $details['category'] ?></p>
-            <p class="mb-1 text-secondary"><?php echo $details['dosage_form'] . " - " . $details['dosage_strength'] ?>
+            <p class="mb-1 text-secondary"><?php echo $details['unit'] . " - " . $details['dosage_strength'] ?>
             </p>
             <p class="mb-0 text-secondary">Requested Quantity - <?php echo $details['requested_quantity'] ?></p>
         </div>

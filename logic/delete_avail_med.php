@@ -11,11 +11,11 @@ if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
     $deleteMed = $db->deleteRecord("med_availability", ["id" => $id]);
     if ($deleteMed) {
         $_SESSION["m"] = "Deleted successfully";
-        header("Location: ../city_health/view_med.php");
+        header("Location: ../city_health/medicine-inventory.php");
         exit();
     } else {
         $_SESSION["m"] = "Error uploading!";
-        header("Location: ../city_health/view_med.php");
+        header("Location: ../city_health/medicine-inventory.php");
         exit();
     }
 }

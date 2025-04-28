@@ -1,0 +1,49 @@
+.kpi-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 20px;
+  }
+
+.kpi-card {
+    flex: 1;
+    min-width: 200px;
+    background-color: white;
+    border-radius: 12px;
+    padding: 1rem;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.kpi-card h5 {
+    color: gray;
+    font-weight: normal;
+    margin: 0;
+}
+
+.kpi-card p {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: rgb(108 117 125);
+    margin: 0.5rem 0 0 0;
+}
+
+.chart-box {
+    background: white;
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    flex: 1;
+    min-width: 300px;
+}
+
+.text-warning {
+    color:#ffcd38!important;
+}
+
+.text-success {
+    color:#37e978!important;
+}
+
+.text-danger {
+    color: #ff5162!important;
+}
