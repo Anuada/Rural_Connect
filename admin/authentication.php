@@ -72,6 +72,22 @@ $title = "Admin Authentication";
             }
         }
     }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const inputs = document.querySelectorAll('.otp-input');
+        inputs.forEach((input, index) => {
+            input.addEventListener('paste', function (e) {
+                e.preventDefault();
+                const pasteData = (e.clipboardData || window.clipboardData).getData('text');
+                const pasteValues = pasteData.split('');
+                pasteValues.forEach((char, i) => {
+                    if (index + i < inputs.length) {
+                        inputs[index + i].value = char;
+                    }
+                });
+            });
+        });
+    });
 </script>
 <script type="module" src="../assets/js/form-logout.js"></script>
 <?php $scripts = ob_get_clean() ?>
