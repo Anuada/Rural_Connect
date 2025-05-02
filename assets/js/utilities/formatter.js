@@ -66,6 +66,30 @@ export const capitalizeFirstLetter = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 }
 
+export const ucwords = (str) => {
+    return str
+        .toLowerCase()
+        .replace(/\b\w/g, char => char.toUpperCase());
+}
+
+export const urlEncode = (str) => encodeURIComponent(str).replace(/%20/g, '+');
+
+export const displayFormattedDeliveryCondition = (delivery_condition) => {
+    switch (delivery_condition) {
+        case 'good':
+            return "Received in good condition";
+
+        case 'damaged':
+            return "Received, but items were damaged";
+
+        case 'missing items':
+            return "Received, but some items are missing";
+
+        default:
+            return "Received";
+    }
+}
+
 export const pluralize = async (word) => {
     return await handleFetchPluralForm(word);
 }

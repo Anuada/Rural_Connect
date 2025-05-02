@@ -17,7 +17,7 @@ const totalCancelledLblEl = document.getElementById('total-cancelled-label');
 const requestChartEl = document.getElementById('request-chart').getContext('2d');
 
 const request_data = {
-    labels: ['Pending', 'Approved', 'Cancelled'],
+    labels: ['Pending', 'Accepted', 'Cancelled'],
     datasets: [
         {
             label: 'Standard Request',

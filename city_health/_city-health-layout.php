@@ -19,45 +19,38 @@ $title = "City Health";
     </h3>
     <a href="<?php echo $ms->url('city_health') ?>" name="nav-link" <?php echo $ms->url() === $ms->url('city_health/') ? "class='sidenav-active'" : "" ?>>
         <div class="row align-items-center">
-            <div class="col-sm-2"><i class="fas fa-home"></i></div>
-            <div class="col"><span>Dashboard</span></div>
+            <?php echo Misc::displayPageTitle("Dashboard", "fa-home", "15px") ?>
         </div>
     </a>
     <a href="<?php echo $ms->url('city_health/add-new-medicine.php') ?>" name="nav-link" <?php echo $ms->url() === $ms->url('city_health/add-new-medicine.php') ? "class='sidenav-active'" : "" ?>>
         <div class="row align-items-center">
-            <div class="col-sm-2"><i class="fas fa-plus-circle"></i></div>
-            <div class="col"><span>New Medicine</span></div>
+            <?php echo Misc::displayPageTitle("New Medicine", "fa-plus-circle", "15px") ?>
         </div>
     </a>
     <a href="<?php echo $ms->url('city_health/medicine-inventory.php') ?>" name="nav-link" <?php echo $ms->url() === $ms->url('city_health/medicine-inventory.php') || $ms->url() === $ms->url('city_health/edit-medicine.php') ? "class='sidenav-active'" : "" ?>>
         <div class="row align-items-center">
-            <div class="col-sm-2"><i class="fas fa-pills me-2"></i></div>
-            <div class="col"><span>Medicine Inventory</span></div>
+            <?php echo Misc::displayPageTitle("Medicine Inventory", "fa-pills", "15px") ?>
         </div>
     </a>
     <a href="<?php echo $ms->url('city_health/barangay-med-requests.php') ?>" name="nav-link" <?php echo $ms->url() === $ms->url('city_health/barangay-med-requests.php') ? "class='sidenav-active'" : "" ?>>
         <div class="row align-items-center">
-            <div class="col-sm-2"><i class="fas fa-file-medical"></i></div>
-            <div class="col"><span>Medicine Requests</span></div>
+            <?php echo Misc::displayPageTitle("Medicine Requests", "fa-file-medical", "15px") ?>
         </div>
     </a>
     <a href="<?php echo $ms->url('city_health/updateProfile.php') ?>" name="nav-link" <?php echo $ms->url() === $ms->url('city_health/updateProfile.php') || $ms->url() === $ms->url('city_health/changePassword.php') ? "class='sidenav-active'" : "" ?>>
         <div class="row align-items-center">
-            <div class="col-sm-2"><i class="fas fa-gear"></i></div>
-            <div class="col"><span>Settings</span></div>
+            <?php echo Misc::displayPageTitle("Settings", "fa-gear", "15px") ?>
         </div>
     </a>
     <a href="../page/rate-and-feedback.php" target="_blank" name="nav-link">
         <div class="row align-items-center">
-            <div class="col-sm-2"><i class="fas fa-pen-to-square"></i></div>
-            <div class="col"><span>Rate and Feedback</span></div>
+            <?php echo Misc::displayPageTitle("Rate and Feedback", "fa-pen-to-square", "15px") ?>
         </div>
     </a>
 
     <a href="#" name="nav-link" id="admin_logout">
         <div class="row align-items-center">
-            <div class="col-sm-2"><i class="fas fa-right-from-bracket"></i></div>
-            <div class="col"><span>Logout</span></div>
+            <?php echo Misc::displayPageTitle("Logout", "fa-right-from-bracket", "15px") ?>
         </div>
     </a>
 </div>

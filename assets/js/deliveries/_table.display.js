@@ -7,11 +7,9 @@ const tableDisplay = (data, container) => {
         data.map(d => {
             container.innerHTML += `
                 <div class="med-card card p-3 d-flex flex-md-row flex-column align-items-md-center gap-3 shadow-sm view-request-details" data-id="${d.id}" data-request-type="${d.med_image != undefined ? "med-delivery" : "custom-med-delivery"}">
-                    ${d.med_image != undefined ? `
-                        <div class="med-img text-center">
-                            <img src="${d.med_image}" alt="Medicine Image" class="rounded img-fluid">
-                        </div>
-                        `: ''}
+                    <div class="med-img text-center">
+                        <img src="${d.med_image}" onerror="this.src='../assets/img/misc/default-image.png';" alt="Medicine Image" class="rounded img-fluid">
+                    </div>
                     <div class="med-details flex-grow-1">
                         <div class="fw-bold">${d.med_name}</div>
                         <div class="text-secondary small">${d.category}</div>

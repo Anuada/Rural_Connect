@@ -2,7 +2,10 @@
 session_start();
 require_once "../shared/session.barangay_inc.php";
 require_once "../util/Misc.php";
+require_once "../enums/Unit.php";
 $barangay_inc_title = Misc::displayPageTitle("Customize Medicine Request", "fa-sliders");
+
+$units = Unit::all();
 ?>
 
 <?php ob_start() ?>
@@ -12,21 +15,33 @@ $barangay_inc_title = Misc::displayPageTitle("Customize Medicine Request", "fa-s
         <div class="form-fields">
             <div class="row">
                 <div class="col-md-6 mb-3">
-                    <label for="requested_medicine">Medicine Name</label>
+                    <label for="requested_medicine">Generic Name</label>
                     <input type="text" class="form-control" id="requested_medicine" name="requested_medicine" required>
                     <div style="height: 15px" class="form-text" id="requested_medicineError"></div>
                 </div>
 
                 <div class="col-md-6 mb-3">
-                    <label for="category">Category</label>
-                    <input type="text" class="form-control" id="category" name="category" required>
-                    <div style="height: 15px" class="form-text" id="categoryError"></div>
+                    <label for="brand_name">Brand Name</label>
+                    <input type="text" class="form-control" id="brand_name" name="brand_name" required>
+                    <div style="height: 15px" class="form-text" id="brand_nameError"></div>
                 </div>
+            </div>
 
+            <div class="mb-3">
+                <label for="category">Category</label>
+                <input type="text" class="form-control" id="category" name="category" required>
+                <div style="height: 15px" class="form-text" id="categoryError"></div>
+            </div>
+
+            <div class="row">
                 <div class="col-md-6 mb-3">
                     <label for="unit">Unit</label>
-                    <input type="text" class="form-control" id="unit" name="unit" required>
-                    <div style="height: 15px" class="form-text" id="unitError"></div>
+                    <select class="form-control" id="unit" name="unit" required>
+                        <option hidden selected>SELECT UNIT</option>
+                        <?php foreach ($units as $unit): ?>
+                            <option value="<?php echo $unit ?>"><?php echo $unit ?></option>
+                        <?php endforeach ?>
+                    </select>
                 </div>
 
                 <div class="col-md-6 mb-3">
@@ -61,8 +76,8 @@ $barangay_inc_title = Misc::displayPageTitle("Customize Medicine Request", "fa-s
     <script>
         <?php foreach ($_SESSION['errorMessages'] as $key => $value): ?>
             let <?php echo $key ?>ErrorEl = document.getElementById("<?php echo $key ?>Error");
-                            <?php echo $key ?>ErrorEl.classList.add("text-danger");
-                            <?php echo $key ?>ErrorEl.innerText = "<?php echo $value ?>";
+                    <?php echo $key ?>ErrorEl.classList.add("text-danger");
+                    <?php echo $key ?>ErrorEl.innerText = "<?php echo $value ?>";
         <?php endforeach ?>
     </script>
     <?php unset($_SESSION['errorMessages']) ?>

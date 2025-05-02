@@ -59,6 +59,12 @@ switch ($data['request_type']) {
                 exit();
             }
 
+            $check_delivery = $db->fetchDeliveries($data['delivery_id']);
+            if (empty($check_delivery)) {
+                echo $ms->json_response(null, "Selected courier is currently unavailable!", 422);
+                exit();
+            }
+
             $d = ["id" => $data['barangay_request_id'], "requestStatus" => $data['status']];
 
             $db->updateRecord('request_med', $d);
@@ -95,6 +101,12 @@ switch ($data['request_type']) {
 
             if ($dateOfSupply < $today) {
                 echo $ms->json_response(null, "Looks like you picked a date that's behind us—let's stay current!", 422);
+                exit();
+            }
+
+            $check_delivery = $db->fetchDeliveries($data['delivery_id']);
+            if (empty($check_delivery)) {
+                echo $ms->json_response(null, "Selected courier is currently unavailable!", 422);
                 exit();
             }
 

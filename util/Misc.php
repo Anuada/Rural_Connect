@@ -113,12 +113,12 @@ class Misc
         return "$truncated...";
     }
 
-    public static function displayPageTitle($title, $icon)
+    public static function displayPageTitle($title, $icon, $marginLeft = '30px')
     {
         return "
         <div class='row align-items-center'>
             <div class='col-sm-auto' style='width: 10px'><i class='fas $icon'></i></div>
-            <div class='col' style='margin-left: 30px'><span>$title</span></div>
+            <div class='col' style='margin-left: $marginLeft'><span>$title</span></div>
         </div>
         ";
     }
@@ -152,4 +152,30 @@ class Misc
         $inflector = InflectorFactory::create()->build();
         return $inflector->pluralize($word);
     }
+
+    public function displayDeliveryStatusColor($status) {
+        switch ($status) {
+            case 'To Deliver':
+                return "<span class='text-info user-select-none'>$status</span>";
+            
+            case 'In Transit':
+                return "<span class='text-primary user-select-none'>$status</span>";
+            
+            case 'Failed Delivery':
+                return "<span class='text-danger user-select-none'>$status</span>";
+            
+            case 'Returned':
+                return "<span class='text-warning user-select-none'>$status</span>";
+            
+            case 'Delivered':
+                return "<span class='text-teal user-select-none'>$status</span>";
+            
+            case 'Claimed':
+                return "<span class='text-success user-select-none'>$status</span>";
+
+            default:
+                break;
+        }
+    }
+    
 }

@@ -27,6 +27,13 @@
     margin: 0.5rem 0 0 0;
 }
 
+.charts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 20px;
+}
+
 .chart-box {
     background: white;
     padding: 1rem;
@@ -36,14 +43,11 @@
     min-width: 300px;
 }
 
-.text-warning {
-    color:#ffcd38!important;
+.chart-box h6 {
+    color:gray;
+    text-align: center;
 }
 
-.text-success {
-    color:#37e978!important;
-}
-
-.text-danger {
-    color: #ff5162!important;
+canvas {
+    max-width: 100%;
 }

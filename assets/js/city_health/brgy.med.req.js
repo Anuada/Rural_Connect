@@ -1,9 +1,10 @@
 import { confirmAlert, errorAlert, successAlert } from '../helpers/sweetAlert2.js';
-import { dateFormatter, pluralize, truncateSentence } from "../utilities/formatter.js";
+import { dateFormatter, pluralize, truncateSentence, urlEncode, displayFormattedDeliveryCondition } from "../utilities/formatter.js";
 import fetch from "../utilities/fetchClient.js";
 import renderPagination from "../utilities/table.pagination.js";
 import serializeForm from '../helpers/serializeForm.js';
 import displayDeliveryStatus from '../utilities/displayDeliveryStatusColor.js';
+import { isEmptyTrimmed } from '../utilities/misc.js';
 
 // VARIABLES
 let currentPage = 1;
@@ -35,6 +36,14 @@ const acceptBarangayRequestFormEl = document.getElementById('accept-barangay-req
 const requestTypeEl = document.getElementById('request-type');
 const statusEl = document.getElementById('status');
 const barangayRequestIdEl = document.getElementById('barangay_request_id');
+const deliveryIdEl = document.getElementById('delivery_id');
+
+// View Delivery Feedback Modal Elements
+const deliveryFeedbackModalEl = document.getElementById('deliveryFeedbackModal');
+const deliveryFeedbackModal = new bootstrap.Modal(deliveryFeedbackModalEl);
+const receivedByEl = document.getElementById('receivedBy');
+const deliveryConditionEl = document.getElementById('deliveryCondition');
+const feedbackTextEl = document.getElementById('feedbackText');
 
 // Preview Image Elements
 const previewOverlay = document.getElementById('previewOverlay');
@@ -51,6 +60,12 @@ selectCourierAndDeliveryDateModalEl.addEventListener('hidden.bs.modal', () => {
     barangayRequestIdEl.value = '';
 });
 
+deliveryFeedbackModalEl.addEventListener('hidden.bs.modal', () => {
+    receivedByEl.innerText = '';
+    deliveryConditionEl.innerText = '';
+    feedbackTextEl.innerHTML = '';
+});
+
 clickableImage.addEventListener('click', () => {
     previewImage.src = clickableImage.src;
     previewOverlay.classList.remove('hidden');
@@ -64,11 +79,13 @@ previewOverlay.addEventListener('click', (e) => {
     }
 });
 
-const displayTable = (data, tableBody) => {
+const displayTable = async (data, tableBody) => {
     tableBody.innerHTML = "";
+
     if (data.length > 0) {
-        data.map(d => {
-            tableBody.innerHTML += `
+        const rowHtmlList = await Promise.all(data.map(async d => {
+            const statusHtml = await displayStatus(d);
+            return `
                 <tr>
                     <td>${displayMedicine(d)}</td>
                     <td>${d.barangay}</td>
@@ -80,10 +97,12 @@ const displayTable = (data, tableBody) => {
                     <td>
                         <div class="text-center">${d.date_of_supply != null ? dateFormatter(d.date_of_supply) : "<span class='user-select-none text-secondary'>TBD</span>"}</div>
                     </td>
-                    <td>${displayStatus(d)}</td>
+                    <td>${statusHtml}</td>
                 </tr>
             `;
-        });
+        }));
+
+        tableBody.innerHTML = rowHtmlList.join('');
     } else {
         tableBody.innerHTML = `
         <tr>
@@ -91,6 +110,8 @@ const displayTable = (data, tableBody) => {
         </tr>
         `;
     }
+
+    initTooltips();
 
     const viewDetailsBtnEl = document.querySelectorAll('.view-details');
     viewDetailsBtnEl.forEach(btn => {
@@ -130,6 +151,29 @@ const displayTable = (data, tableBody) => {
             confirmAlert(question, handleBarangayRequestApproval, false, payload);
         });
     });
+
+    const viewFeedbacks = document.querySelectorAll('.view-feedback');
+    viewFeedbacks.forEach(viewFeedback => {
+        viewFeedback.addEventListener('click', () => {
+            const request_type = viewFeedback.getAttribute('data-request-type');
+            const delivery_id = viewFeedback.getAttribute('data-delivery-id');
+
+            fetchAllDeliveryFeedback(request_type, delivery_id);
+        });
+    });
+
+    const isReturnedEl = document.querySelectorAll('.is-returned');
+    isReturnedEl.forEach(isReturned => {
+        isReturned.addEventListener('click', () => {
+            const payload = {
+                request_type: isReturned.getAttribute('data-request-type'),
+                delivery_id: isReturned.getAttribute('data-delivery-id'),
+                delivery_status: 'Returned'
+            };
+            const question = "Are you sure that the medicine has been returned?";
+            confirmAlert(question, handleConfirmReturned, false, payload);
+        });
+    });
 }
 
 const displayMedicine = (data) => {
@@ -164,39 +208,58 @@ const displayMedicine = (data) => {
     `;
 }
 
-const displayStatus = (data) => {
+const displayStatus = async (data) => {
     switch (data.status) {
         case 'Accepted':
-            return displayDeliveryStatus(data.delivery_status);
+            if (data.delivery_status == 'Claimed') {
+                return `<span class="cursor-pointer view-feedback" data-delivery-id="${data.delivery_id}" data-request-type="${data.med_image != undefined ? "Standard Request" : "Customized Request"}" data-bs-toggle="tooltip" data-bs-placement="top" title="View Delivery Feedback">${displayDeliveryStatus(data.delivery_status)}</span>`;
+            } else if (data.delivery_status == 'Failed Delivery') {
+                const delivery_id = data.delivery_id;
+                const request_type = data.med_image != undefined ? "Standard Request" : "Customized Request";
+                const count = await fetchFailedDeliveryCount(request_type, delivery_id);
+                if (count >= 3) {
+                    return `<span class="cursor-pointer is-returned" data-delivery-id="${data.delivery_id}" data-request-type="${data.med_image != undefined ? "Standard Request" : "Customized Request"}" data-bs-toggle="tooltip" data-bs-placement="top" title="Kindly confirm whether the medicine has been returned">${displayDeliveryStatus(data.delivery_status)}</span>`;
+                }
+                return displayDeliveryStatus(data.delivery_status);
+            } else {
+                return displayDeliveryStatus(data.delivery_status);
+            }
 
         case 'Cancelled':
             return `<i class="text-danger user-select-none">${data.status}</i>`;
 
         default:
-            if (data.med_image != undefined) {
-                return `
-                    <span class="d-flex justify-content-start">
-                        <button class="btn btn-primary shadow accept-request" data-request-type="default request" data-status="Accepted" data-id="${data.id}" style="margin-right: 10px;" title="Accept">
-                            <i class="fas fa-check"></i>
-                        </button>
-                        <button class="btn btn-outline-primary shadow cancel-request" data-request-type="default request" data-status="Cancelled" data-id="${data.id}" title="Cancel">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </span>
-                `;
-            } else {
-                return `
-                    <span class="d-flex justify-content-start">
-                        <button class="btn btn-primary shadow accept-request" data-request-type="customized request" data-status="Accepted" data-id="${data.id}" style="margin-right: 10px;" title="Accept">
-                            <i class="fas fa-check"></i>
-                        </button>
-                        <button class="btn btn-outline-primary shadow cancel-request" data-request-type="customized request" data-status="Cancelled" data-id="${data.id}" title="Cancel">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </span>
-                `;
-            }
+            // Your buttons (unchanged)
+            const type = data.med_image !== undefined ? "default request" : "customized request";
+            return `
+                <span class="d-flex justify-content-start">
+                    <button class="btn btn-primary shadow accept-request" data-request-type="${type}" data-status="Accepted" data-id="${data.id}" style="margin-right: 10px;" title="Accept">
+                        <i class="fas fa-check"></i>
+                    </button>
+                    <button class="btn btn-outline-primary shadow cancel-request" data-request-type="${type}" data-status="Cancelled" data-id="${data.id}" title="Cancel">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </span>
+            `;
     }
+};
+
+const handleConfirmReturned = (payload) => {
+    fetch.put('../api/change-delivery-status.php', payload)
+        .then(response => {
+            const { message } = response?.data;
+            successAlert(message);
+            callFetches();
+        })
+        .catch(error => {
+            const { message } = error?.data;
+            const { status } = error?.response;
+            if (status == 422 && message != undefined) {
+                errorAlert(message);
+            }
+            callFetches();
+            console.error(error);
+        });
 }
 
 acceptBarangayRequestFormEl.addEventListener('submit', (e) => {
@@ -230,7 +293,6 @@ const fetchRequestedMedicine = (page = 1) => {
         .then(response => {
             const { data, pagination } = response.data.data;
             displayTable(data, requestedMedTableEl);
-            initTooltips();
             renderPagination(pagination, requestedMedPageEl, fetchRequestedMedicine);
         })
         .catch(error => {
@@ -243,13 +305,58 @@ const fetchCustomizedRequestMedicine = (page = 1) => {
         .then(response => {
             const { data, pagination } = response.data.data;
             displayTable(data, customizedMedRequestEl);
-            initTooltips();
             renderPagination(pagination, customizedMedRequestPageEl, fetchCustomizedRequestMedicine);
         })
         .catch(error => {
             console.error(error);
         })
 }
+
+const fetchAllDeliveryFeedback = (request_type, delivery_id) => {
+    fetch.get(`../api/city.health.view.delivery.feedback.php?request_type=${urlEncode(request_type)}&delivery_id=${delivery_id}`)
+        .then(response => {
+            const { data } = response?.data;
+            receivedByEl.innerText = data?.received_by;
+            deliveryConditionEl.innerText = displayFormattedDeliveryCondition(data?.delivery_condition);
+            feedbackTextEl.innerHTML = isEmptyTrimmed(data?.feedback) ? '<i class="user-select-none text-secondary">No Feedback</i>' : data?.feedback;
+            deliveryFeedbackModal.show();
+        })
+        .catch(error => {
+            console.error(error);
+        })
+}
+
+const fetchFailedDeliveryCount = async (request_type, delivery_id) => {
+    return await fetch.get(`../api/city.health.fetch.failed.delivery.count.php?request_type=${urlEncode(request_type)}&delivery_id=${delivery_id}`)
+        .then(response => {
+            const { data } = response?.data;
+            return data;
+        })
+        .catch(() => {
+            return 0;
+        });
+};
+
+const fetchAllAvailableCouriers = () => {
+    fetch.get('../api/city.health.display.available.couriers.php')
+        .then(response => {
+            const { data } = response?.data;
+            handleDisplayAllAvailableCouriers(data);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+};
+
+const handleDisplayAllAvailableCouriers = (data) => {
+    deliveryIdEl.innerHTML = '';
+    deliveryIdEl.innerHTML = '<option hidden selected>SELECT COURIER</option>';
+    data.map(d => {
+        deliveryIdEl.innerHTML += `
+            <option value="${d.accountId}">${d.courier}</option>
+        `;
+    });
+};
 
 const initTooltips = () => {
     // Dispose any existing tooltips first
@@ -263,6 +370,7 @@ const initTooltips = () => {
 };
 
 const callFetches = () => {
+    fetchAllAvailableCouriers();
     fetchRequestedMedicine(currentPage);
     fetchCustomizedRequestMedicine(currentPage);
 }

@@ -82,7 +82,7 @@ body {
     color: #fff;
 }
 .rc-blue-text {
-    color: #007bff;
+    color: #007bff!important;
 }
 
 table {

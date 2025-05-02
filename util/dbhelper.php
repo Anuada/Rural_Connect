@@ -105,17 +105,20 @@ class DbHelper
         return $cond;
     }
 
-    public function fetchDeliveries()
+    public function fetchDeliveries($delivery_id = '')
     {
         $sql = "
             SELECT 
                 deliveries.accountId,
-                deliveries.fname,
-                deliveries.lname
+                CONCAT_WS(' ', deliveries.fname, deliveries.lname) AS courier
             FROM deliveries
             INNER JOIN account ON account.accountId = deliveries.accountId
-            WHERE account.account_status = 'Approved'
+            WHERE account.account_status = 'Approved' AND deliveries.availability_status = 'Available'
         ";
+
+        if (!empty(trim($delivery_id))) {
+            $sql .= " AND deliveries.accountId = '$delivery_id'";
+        }
 
         $stmt = $this->conn->prepare($sql);
         if (!$stmt) {
@@ -130,6 +133,41 @@ class DbHelper
         return $records;
     }
 
+    #region Delivery Feedback Related
+
+    public function fetchStandardRequestDeliveryFeedback(string $delivery_id)
+    {
+        $sql = "SELECT
+                med_deliveries_feedback.*,
+                CONCAT_WS(' ', barangay_inc.fname, barangay_inc.lname) AS received_by
+                FROM med_deliveries_feedback
+                INNER JOIN med_deliveries ON med_deliveries_feedback.med_delivery_id = med_deliveries.id
+                INNER JOIN request_med ON med_deliveries.request_med_id = request_med.id
+                INNER JOIN barangay_inc ON request_med.barangay_inc_id = barangay_inc.accountId
+                WHERE med_deliveries_feedback.med_delivery_id = '$delivery_id'";
+        $query = $this->conn->query($sql);
+        return $query->fetch_assoc();
+    }
+
+    public function fetchCustomizedRequestDeliveryFeedback(string $delivery_id)
+    {
+        $sql = "SELECT
+                custom_med_deliveries_feedback.*,
+                CONCAT_WS(' ', barangay_inc.fname, barangay_inc.lname) AS received_by
+
+                FROM custom_med_deliveries_feedback
+
+                INNER JOIN custom_med_deliveries ON custom_med_deliveries_feedback.med_delivery_id = custom_med_deliveries.id
+                INNER JOIN custom_med_request ON custom_med_deliveries.custom_med_request_id = custom_med_request.id
+                INNER JOIN barangay_inc ON custom_med_request.barangay_inc_id = barangay_inc.accountId
+
+                WHERE custom_med_deliveries_feedback.med_delivery_id = '$delivery_id'";
+        $query = $this->conn->query($sql);
+        return $query->fetch_assoc();
+    }
+
+    #endregion
+
     public function isBarangayRegisteredAlready(string $barangay)
     {
         $sql = "SELECT barangay_inc.* FROM barangay_inc
@@ -141,7 +179,7 @@ class DbHelper
     }
 
     #region Delivery Related
-    public function display_medicine_requests_to_deliver($id, $limit = null, $offset = null, $delivery_id = null, $delivery_status = null, $status_not_equal = false)
+    public function display_medicine_requests_to_deliver($id, $delivery_id)
     {
         $sql = "SELECT 
             med_deliveries.id,
@@ -162,58 +200,27 @@ class DbHelper
         INNER JOIN request_med ON med_deliveries.request_med_id = request_med.id
         INNER JOIN barangay_inc ON request_med.barangay_inc_id = barangay_inc.accountId
         INNER JOIN med_availability ON request_med.med_avail_Id = med_availability.id
-        WHERE med_deliveries.deliveries_accountId = ?";
-
-        $params = [$id];
-        $types = "s";
-
-        // Add delivery_id filter if provided
-        if ($delivery_id !== null) {
-            $sql .= " AND med_deliveries.id = ?";
-            $params[] = $delivery_id;
-            $types .= "s";
-        }
-
-        // Add delivery_status filter if provided
-        if ($delivery_status !== null) {
-            if ($status_not_equal) {
-                $sql .= " AND med_deliveries.delivery_status != ?";
-            } else {
-                $sql .= " AND med_deliveries.delivery_status = ?";
-            }
-            $params[] = $delivery_status;
-            $types .= "s";
-        }
-
-        $sql .= " ORDER BY med_deliveries.date_of_supply";
-
-        if ($delivery_id === null) {
-            $sql .= " LIMIT ? OFFSET ?";
-            $params[] = $limit;
-            $params[] = $offset;
-            $types .= "ii";
-        }
+        WHERE med_deliveries.deliveries_accountId = ?
+          AND med_deliveries.id = ?
+        ORDER BY med_deliveries.date_of_supply";
 
         $stmt = $this->conn->prepare($sql);
         if (!$stmt) {
             die("SQL Error: " . $this->conn->error);
         }
 
-        $stmt->bind_param($types, ...$params);
+        $stmt->bind_param("ss", $id, $delivery_id);
         $stmt->execute();
         $result = $stmt->get_result();
-        $records = [];
 
-        while ($row = $result->fetch_assoc()) {
-            $records[] = $row;
-        }
+        $record = $result->fetch_assoc();
 
         $stmt->close();
 
-        return $delivery_id !== null ? ($records[0] ?? null) : $records;
+        return $record;
     }
 
-    public function display_customized_medicine_requests_to_deliver($id, $limit = null, $offset = null, $delivery_id = null, $delivery_status = null, $status_not_equal = false)
+    public function display_customized_medicine_requests_to_deliver($id, $delivery_id)
     {
         $sql = "SELECT 
             custom_med_deliveries.id,
@@ -232,51 +239,84 @@ class DbHelper
         FROM custom_med_deliveries
         INNER JOIN custom_med_request ON custom_med_deliveries.custom_med_request_id = custom_med_request.id
         INNER JOIN barangay_inc ON custom_med_request.barangay_inc_id = barangay_inc.accountId
-        WHERE custom_med_deliveries.delivery_account_id = ?";
-
-        $params = [$id];
-        $types = "s";
-
-        if ($delivery_id !== null) {
-            $sql .= " AND custom_med_deliveries.id = ?";
-            $params[] = $delivery_id;
-            $types .= "s";
-        }
-
-        if ($delivery_status !== null) {
-            $sql .= $status_not_equal
-                ? " AND custom_med_deliveries.delivery_status != ?"
-                : " AND custom_med_deliveries.delivery_status = ?";
-            $params[] = $delivery_status;
-            $types .= "s";
-        }
-
-        $sql .= " ORDER BY custom_med_deliveries.date_of_supply";
-
-        if ($delivery_id === null) {
-            $sql .= " LIMIT ? OFFSET ?";
-            $params[] = $limit;
-            $params[] = $offset;
-            $types .= "ii";
-        }
+        WHERE custom_med_deliveries.delivery_account_id = ?
+          AND custom_med_deliveries.id = ?
+        ORDER BY custom_med_deliveries.date_of_supply";
 
         $stmt = $this->conn->prepare($sql);
         if (!$stmt) {
             die("SQL Error: " . $this->conn->error);
         }
 
-        $stmt->bind_param($types, ...$params);
+        $stmt->bind_param("ss", $id, $delivery_id);
         $stmt->execute();
         $result = $stmt->get_result();
-        $records = [];
 
-        while ($row = $result->fetch_assoc()) {
-            $records[] = $row;
-        }
+        $record = $result->fetch_assoc();
 
         $stmt->close();
 
-        return $delivery_id !== null ? ($records[0] ?? null) : $records;
+        return $record;
+    }
+
+    public function display_all_medicine_requests_to_deliver($id, $limit, $offset, $isExluded = true)
+    {
+        $isNot = $isExluded ? "NOT" : "";
+        $sql = "SELECT * FROM (
+                    SELECT 
+                        med_deliveries.id,
+                        med_deliveries.request_med_id,
+                        med_deliveries.delivery_status,
+                        med_deliveries.date_of_supply,
+                        med_deliveries.deliveries_accountId AS delivery_id,
+                        request_med.request_quantity AS requested_quantity,
+                        barangay_inc.barangay,
+                        CONCAT(barangay_inc.fname, ' ', barangay_inc.lname) AS barangay_incharge,
+                        barangay_inc.address,
+                        barangay_inc.contactNo,
+                        med_availability.med_image,
+                        med_availability.med_name,
+                        med_availability.category,
+                        med_availability.unit,
+                        med_availability.dosage_strength
+                    FROM med_deliveries
+                    INNER JOIN request_med ON med_deliveries.request_med_id = request_med.id
+                    INNER JOIN barangay_inc ON request_med.barangay_inc_id = barangay_inc.accountId
+                    INNER JOIN med_availability ON request_med.med_avail_Id = med_availability.id
+
+                    UNION ALL
+
+                    SELECT 
+                        custom_med_deliveries.id,
+                        custom_med_deliveries.custom_med_request_id AS request_med_id,
+                        custom_med_deliveries.delivery_status,
+                        custom_med_deliveries.date_of_supply,
+                        custom_med_deliveries.delivery_account_id AS delivery_id,
+                        custom_med_request.requested_quantity,
+                        barangay_inc.barangay,
+                        CONCAT(barangay_inc.fname, ' ', barangay_inc.lname) AS barangay_incharge,
+                        barangay_inc.address,
+                        barangay_inc.contactNo,
+                        NULL AS med_image,
+                        custom_med_request.requested_medicine AS med_name,
+                        custom_med_request.category,
+                        custom_med_request.unit,
+                        custom_med_request.dosage_strength
+                    FROM custom_med_deliveries
+                    INNER JOIN custom_med_request ON custom_med_deliveries.custom_med_request_id = custom_med_request.id
+                    INNER JOIN barangay_inc ON custom_med_request.barangay_inc_id = barangay_inc.accountId
+                ) AS combined_results
+                WHERE 
+                    delivery_id = '$id' AND
+                    delivery_status $isNot IN ('Returned', 'Claimed')
+                LIMIT $limit OFFSET $offset
+                ";
+        $query = $this->conn->query($sql);
+        $rows = [];
+        while ($row = $query->fetch_assoc()) {
+            $rows[] = $row;
+        }
+        return $rows;
     }
 
     #endregion
@@ -524,6 +564,7 @@ class DbHelper
             med_availability.category,
             med_availability.unit,
             med_availability.dosage_strength,
+            med_deliveries.id AS delivery_id,
             med_deliveries.date_of_supply,
             med_deliveries.delivery_status,
             barangay_inc.contactNo,
@@ -567,6 +608,7 @@ class DbHelper
             custom_med_request.category,
             custom_med_request.unit,
             custom_med_request.dosage_strength,
+            custom_med_deliveries.id AS delivery_id,
             custom_med_deliveries.date_of_supply,
             custom_med_deliveries.delivery_status,
             barangay_inc.contactNo,

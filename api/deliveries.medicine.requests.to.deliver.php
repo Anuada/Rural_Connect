@@ -18,10 +18,7 @@ $offset = ($page - 1) * $limit;
 $total = $db->count_all_records('med_deliveries', ['deliveries_accountId' => $account_id]);
 $totalPages = ceil($total / $limit);
 
-$delivery_status = $_GET['delivery_status'] ?? DeliveryStatus::Claimed->value;
-$status_not_equal = isset($_GET['not_equal']) ? (bool) $_GET['not_equal'] : true;
-
-$data = $db->display_medicine_requests_to_deliver($account_id, $limit, $offset, null, $delivery_status, $status_not_equal);
+$data = $db->display_all_medicine_requests_to_deliver($account_id, $limit, $offset);
 
 $response = [
     'data' => $data,

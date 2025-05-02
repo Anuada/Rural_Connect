@@ -13,10 +13,10 @@ const displayDeliveryStatus = (status) => {
             return `<span class="text-warning user-select-none">${status}</span>`;
     
         case "Delivered":
-            return `<span class="text-success user-select-none">${status}</span>`;
+            return `<span class="text-teal user-select-none">${status}</span>`;
 
         case "Claimed":
-            return `<span class="text-teal user-select-none">${status}</span>`;
+            return `<span class="text-success user-select-none">${status}</span>`;
     
         default:
             break;

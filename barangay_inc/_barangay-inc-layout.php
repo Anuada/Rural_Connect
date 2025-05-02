@@ -19,45 +19,38 @@ $title = "Barangay Incharge";
     </h3>
     <a href="<?php echo $ms->url('barangay_inc') ?>" name="nav-link" <?php echo $ms->url() === $ms->url('barangay_inc/') ? "class='sidenav-active'" : "" ?>>
         <div class="row align-items-center">
-            <div class="col-sm-2"><i class="fas fa-home"></i></div>
-            <div class="col"><span>Dashboard</span></div>
+            <?php echo Misc::displayPageTitle("Dashboard", "fa-home", "15px") ?>
         </div>
     </a>
     <a href="<?php echo $ms->url('barangay_inc/view_med.php') ?>" name="nav-link" <?php echo $ms->url() === $ms->url('barangay_inc/view_med.php') || $ms->url() === $ms->url('barangay_inc/request_med.php') ? "class='sidenav-active'" : "" ?>>
         <div class="row align-items-center">
-            <div class="col-sm-2"><i class="fas fa-notes-medical"></i></div>
-            <div class="col"><span>Request Medicine</span></div>
+            <?php echo Misc::displayPageTitle("Request Medicine", "fa-notes-medical", "15px") ?>
         </div>
     </a>
     <a href="<?php echo $ms->url('barangay_inc/custom-med-request.php') ?>" name="nav-link" <?php echo $ms->url() === $ms->url('barangay_inc/custom-med-request.php') ? "class='sidenav-active'" : "" ?>>
         <div class="row align-items-center">
-            <div class="col-sm-2"><i class="fas fa-sliders"></i></div>
-            <div class="col"><span>Customize Request</span></div>
+            <?php echo Misc::displayPageTitle("Customize Request", "fa-sliders", "15px") ?>
         </div>
     </a>
     <a href="<?php echo $ms->url('barangay_inc/my-requests.php') ?>" name="nav-link" <?php echo $ms->url() === $ms->url('barangay_inc/my-requests.php') || $ms->url() === $ms->url('barangay_inc/track-delivery-status.php') ? "class='sidenav-active'" : "" ?>>
         <div class="row align-items-center">
-            <div class="col-sm-2"><i class="fas fa-file-medical"></i></div>
-            <div class="col"><span>My Requests</span></div>
+            <?php echo Misc::displayPageTitle("My Requests", "fa-file-medical", "15px") ?>
         </div>
     </a>
     <a href="<?php echo $ms->url('barangay_inc/updateProfile.php') ?>" name="nav-link" <?php echo $ms->url() === $ms->url('barangay_inc/updateProfile.php') || $ms->url() === $ms->url('barangay_inc/changePassword.php') ? "class='sidenav-active'" : "" ?>>
         <div class="row align-items-center">
-            <div class="col-sm-2"><i class="fas fa-gear"></i></div>
-            <div class="col"><span>Settings</span></div>
+            <?php echo Misc::displayPageTitle("Settings", "fa-gear", "15px") ?>
         </div>
     </a>
     <a href="../page/rate-and-feedback.php" target="_blank" name="nav-link">
         <div class="row align-items-center">
-            <div class="col-sm-2"><i class="fas fa-pen-to-square"></i></div>
-            <div class="col"><span>Rate and Feedback</span></div>
+            <?php echo Misc::displayPageTitle("Rate and Feedback", "fa-pen-to-square", "15px") ?>
         </div>
     </a>
 
     <a href="#" name="nav-link" id="admin_logout">
         <div class="row align-items-center">
-            <div class="col-sm-2"><i class="fas fa-right-from-bracket"></i></div>
-            <div class="col"><span>Logout</span></div>
+            <?php echo Misc::displayPageTitle("Logout", "fa-right-from-bracket", "15px") ?>
         </div>
     </a>
 </div>

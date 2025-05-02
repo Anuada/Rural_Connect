@@ -17,46 +17,40 @@ $title = "Delivery";
             <h4>Delivery</h4>
         </a>
     </h3>
-    
+
     <a href="<?php echo $ms->url('deliveries') ?>" name="nav-link" <?php echo $ms->url() === $ms->url('deliveries/') ? "class='sidenav-active'" : "" ?>>
         <div class="nav-link-inner">
-            <i class="fas fa-home me-2"></i>
-            <span>Dashboard</span>
+            <?php echo Misc::displayPageTitle("Dashboard", "fa-home","15px"); ?>
         </div>
     </a>
 
-    <a href="<?php echo $ms->url('deliveries/medicine-requests.php') ?>" name="nav-link" <?php echo $ms->url() === $ms->url('deliveries/medicine-requests.php') ? "class='sidenav-active'" : "" ?>>
+    <a href="<?php echo $ms->url('deliveries/request-queues.php') ?>" name="nav-link" <?php echo $ms->url() === $ms->url('deliveries/request-queues.php') ? "class='sidenav-active'" : "" ?>>
         <div class="nav-link-inner">
-            <i class="fas fa-clipboard me-2"></i>
-            <span>Standard Requests</span>
+            <?php echo Misc::displayPageTitle("Request Queues", "fa-stream","15px") ?>
         </div>
     </a>
 
-    <a href="<?php echo $ms->url('deliveries/custom-medicine-requests.php') ?>" name="nav-link" <?php echo $ms->url() === $ms->url('deliveries/custom-medicine-requests.php') ? "class='sidenav-active'" : "" ?>>
+    <a href="<?php echo $ms->url('deliveries/request-history.php') ?>" name="nav-link" <?php echo $ms->url() === $ms->url('deliveries/request-history.php') ? "class='sidenav-active'" : "" ?>>
         <div class="nav-link-inner">
-            <i class="fas fa-clipboard-list me-2"></i>
-            <span>Customized Requests</span>
+            <?php echo Misc::displayPageTitle("Request History","fa-history","15px") ?>
         </div>
     </a>
 
     <a href="<?php echo $ms->url('deliveries/updateProfile.php') ?>" name="nav-link" <?php echo $ms->url() === $ms->url('deliveries/updateProfile.php') || $ms->url() === $ms->url('deliveries/changePassword.php') ? "class='sidenav-active'" : "" ?>>
         <div class="nav-link-inner">
-            <i class="fas fa-gear me-2"></i>
-            <span>Settings</span>
+            <?php echo Misc::displayPageTitle("Settings", "fa-gear","15px") ?>
         </div>
     </a>
 
     <a href="../page/rate-and-feedback.php" name="nav-link">
         <div class="nav-link-inner">
-            <i class="fas fa-pen-to-square me-2"></i>
-            <span>Rate and Feedback</span>
+            <?php echo Misc::displayPageTitle("Rate and Feedback", "fa-pen-to-square","15px") ?>
         </div>
     </a>
 
     <a href="#" name="nav-link" id="admin_logout">
         <div class="nav-link-inner">
-            <i class="fas fa-right-from-bracket me-2"></i>
-            <span>Logout</span>
+            <?php echo Misc::displayPageTitle("Logout", "fa-right-from-bracket","15px") ?>
         </div>
     </a>
 </div>

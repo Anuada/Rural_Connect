@@ -7,7 +7,9 @@ require_once "../util/Misc.php";
 
 $deliveries_title = Misc::displayPageTitle("Delivery Details", "fa-truck");
 
-$delivery_status = DeliveryStatus::all();
+$delivery_status = array_filter(DeliveryStatus::all(), function ($status) {
+    return $status != 'Claimed' && $status != 'Returned';
+});
 $db = new DbHelper();
 $ms = new Misc;
 $account_id = $_SESSION["accountId"];
@@ -25,7 +27,7 @@ $detail = [];
 if (isset($_GET['med-delivery'])) {
     $id = $_GET['med-delivery'];
     $requestType = 'med-delivery';
-    $check = $db->display_medicine_requests_to_deliver($account_id, null, null, $id);
+    $check = $db->display_medicine_requests_to_deliver($account_id, $id);
     if (empty($check)) {
         $_SESSION['m'] = "delivery info not found!";
         header("Location: " . $ms->url('deliveries/medicine-requests.php'));
@@ -35,7 +37,7 @@ if (isset($_GET['med-delivery'])) {
 } else {
     $id = $_GET['custom-med-delivery'];
     $requestType = 'custom-med-delivery';
-    $check = $db->display_customized_medicine_requests_to_deliver($account_id, null, null, $id);
+    $check = $db->display_customized_medicine_requests_to_deliver($account_id, $id);
     if (empty($check)) {
         $_SESSION['m'] = "delivery info not found!";
         header("Location: " . $ms->url('deliveries/custom-medicine-requests.php'));
@@ -122,18 +124,22 @@ if (isset($_GET['med-delivery'])) {
                 <tr>
                     <td>Delivery Status</td>
                     <td>
-                        <form action="<?php echo $ms->url('logic/delivery-change-status.php') ?>" method="post">
-                            <div class="form-fields">
-                                <input type="hidden" name="id" id="id" value="<?php echo $detail['id'] ?>">
-                                <input type="hidden" name="request-type" id="request-type"
-                                    value="<?php echo $requestType ?>">
-                                <select name="delivery_status" id="delivery_status" title="Select delivery status">
-                                    <?php foreach ($delivery_status as $status): ?>
-                                        <option value="<?php echo $status ?>" <?php echo $detail['delivery_status'] == $status ? "selected" : "" ?>><?php echo $status ?></option>
-                                    <?php endforeach ?>
-                                </select>
-                            </div>
-                        </form>
+                        <?php if ($detail['delivery_status'] != DeliveryStatus::Claimed->value && $detail['delivery_status'] != DeliveryStatus::Returned->value): ?>
+                            <form action="<?php echo $ms->url('logic/delivery-change-status.php') ?>" method="post">
+                                <div class="form-fields">
+                                    <input type="hidden" name="id" id="id" value="<?php echo $detail['id'] ?>">
+                                    <input type="hidden" name="request-type" id="request-type"
+                                        value="<?php echo $requestType ?>">
+                                    <select name="delivery_status" id="delivery_status" title="Select delivery status">
+                                        <?php foreach ($delivery_status as $status): ?>
+                                            <option value="<?php echo $status ?>" <?php echo $detail['delivery_status'] == $status ? "selected" : "" ?>><?php echo $status ?></option>
+                                        <?php endforeach ?>
+                                    </select>
+                                </div>
+                            </form>
+                        <?php else: ?>
+                            <?php echo $ms->displayDeliveryStatusColor($detail['delivery_status']) ?>
+                        <?php endif ?>
                     </td>
                 </tr>
             </tbody>

@@ -1,13 +1,10 @@
 <?php
 session_start();
 require_once "../shared/session.city_health.php";
-require_once "../util/DbHelper.php";
 require_once "../util/Misc.php";
 
 $ms = new Misc;
-$db = new DbHelper();
 
-$couriers = $db->fetchDeliveries();
 $city_health_title = Misc::displayPageTitle("Manage Medicine Requests", "fa-file-medical");
 ?>
 
@@ -133,14 +130,7 @@ $city_health_title = Misc::displayPageTitle("Manage Medicine Requests", "fa-file
                     <div class="form-fields">
                         <div class="mb-3">
                             <label for="delivery_id">Select Courier</label>
-                            <select class="form-control" name="delivery_id" id="delivery_id" required>
-                                <option hidden selected>SELECT COURIER</option>
-                                <?php foreach ($couriers as $courier): ?>
-                                    <option value="<?php echo htmlspecialchars($courier['accountId']); ?>">
-                                        <?php echo htmlspecialchars($courier['fname'] . ' ' . $courier['lname']); ?>
-                                    </option>
-                                <?php endforeach; ?>
-                            </select>
+                            <select class="form-control" name="delivery_id" id="delivery_id" required></select>
                         </div>
 
                         <div class="mb-3">
@@ -150,6 +140,37 @@ $city_health_title = Misc::displayPageTitle("Manage Medicine Requests", "fa-file
                         <button type="submit">Assign</button>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delivery Feedback Modal -->
+<div class="modal fade" id="deliveryFeedbackModal" tabindex="-1" aria-labelledby="viewLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content custom-modal">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="viewLabel">
+                    <i class="fas fa-capsules"></i> Delivery Feedback
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="medicine-card">
+                    <div class="mb-3">
+                        <strong>Received By:</strong>
+                        <span id="receivedBy"></span>
+                    </div>
+                    <div class="mb-3">
+                        <strong>Delivery Condition:</strong>
+                        <span id="deliveryCondition"></span>
+                    </div>
+                    <div class="mb-3">
+                        <strong>Feedback:</strong>
+                        <span id="feedbackText"></span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

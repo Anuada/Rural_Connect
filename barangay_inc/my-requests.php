@@ -63,6 +63,39 @@ $barangay_inc_title = Misc::displayPageTitle("My Requests", "fa-file-medical");
         <img id="previewImage" src="" alt="Image Preview" class="image-fluid" />
     </div>
 </div>
+
+<!-- Confirm Medicine Claimed and Delivery Feedback -->
+<div class="modal fade" id="claimConfirmAndDeliveryFeedbackModal" tabindex="-1" aria-labelledby="viewLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content custom-modal">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="viewLabel">
+                    <i class="fas fa-capsules"></i> Delivery Feedback
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="confirm-claim">
+                    <input type="hidden" name="delivery_id" id="delivery_id">
+                    <input type="hidden" name="request_type" id="request_type">
+                    <div class="form-fields">
+                        <div class="mb-3">
+                            <label for="delivery_condition">Delivery Condition</label>
+                            <select class="form-control" name="delivery_condition" id="delivery_condition"></select>
+                        </div>
+                        <div class="mb-3">
+                           <label for="feedback">Feedback</label>
+                           <textarea class="form-control" name="feedback" id="feedback" placeholder="(Optional) Give feedback to the delivery"></textarea>
+                        </div>
+                        <button type="submit">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 <?php $barangay_inc_content = ob_get_clean() ?>
 
 <?php ob_start() ?>

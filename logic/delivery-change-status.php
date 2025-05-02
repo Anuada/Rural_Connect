@@ -13,6 +13,9 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 $errorCount = 0;
 $delivery_table = '';
 $delivery_history_table = '';
+$delivery_statuses = array_values(array_filter(DeliveryStatus::all(), function ($status) {
+    return $status != DeliveryStatus::Claimed->value && $status != DeliveryStatus::Returned->value;
+}));
 
 foreach ($_POST as $key => $value) {
     if (empty(trim($value))) {
@@ -51,6 +54,7 @@ if (empty($check)) {
     header("Location: " . $ms->url('deliveries/delivery-details.php?' . $requestType . '=' . $_POST['id']));
     exit();
 }
+
 
 $updateStatus = $db->updateRecord($delivery_table, $_POST);
 
