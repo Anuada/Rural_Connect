@@ -746,7 +746,7 @@ class DbHelper
 
     public function total_earnings_this_month()
     {
-        $sql = "SELECT DATE_FORMAT(CURRENT_DATE(), '%b %Y') AS month_year, SUM(amount) AS total_earnings
+        $sql = "SELECT DATE_FORMAT(CURRENT_DATE(), '%b %Y') AS month_year, COALESCE(SUM(amount),0) AS total_earnings
                 FROM subscription 
                 WHERE DATE_FORMAT(created_at,'%Y-%m') = DATE_FORMAT(CURRENT_DATE(), '%Y-%m')
                 AND approve_status = 'Approved'";
