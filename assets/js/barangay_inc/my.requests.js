@@ -228,7 +228,7 @@ const fetchDeliveryConditions = () => {
 
 const handleDisplaySelectionOfDeliveryConditions = (data) => {
     delivery_condition.innerHTML = '';
-    delivery_condition.innerHTML = '<option hidden selected>SELECT DELIVERY CONDITION</option>';
+    delivery_condition.innerHTML = '<option value="" hidden selected>SELECT DELIVERY CONDITION</option>';
     data.map(d => {
         delivery_condition.innerHTML += `<option value="${d}">${ucwords(d)}</option>`;
     });

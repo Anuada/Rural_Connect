@@ -50,7 +50,7 @@ $units = Unit::all();
                 <div class="col-md-6 mb-3">
                     <label for="unit">Unit</label>
                     <select class="form-control" id="unit" name="unit" required>
-                        <option hidden selected>SELECT UNIT</option>
+                        <option value="" hidden selected>SELECT UNIT</option>
                         <?php foreach ($units as $unit): ?>
                             <option value="<?php echo $unit ?>"><?php echo $unit ?></option>
                         <?php endforeach ?>

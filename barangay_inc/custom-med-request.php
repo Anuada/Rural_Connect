@@ -37,11 +37,12 @@ $units = Unit::all();
                 <div class="col-md-6 mb-3">
                     <label for="unit">Unit</label>
                     <select class="form-control" id="unit" name="unit" required>
-                        <option hidden selected>SELECT UNIT</option>
+                        <option value="" hidden selected>SELECT UNIT</option>
                         <?php foreach ($units as $unit): ?>
                             <option value="<?php echo $unit ?>"><?php echo $unit ?></option>
                         <?php endforeach ?>
                     </select>
+                    <div style="height: 15px" class="form-text" id="unitError"></div>
                 </div>
 
                 <div class="col-md-6 mb-3">
@@ -76,8 +77,8 @@ $units = Unit::all();
     <script>
         <?php foreach ($_SESSION['errorMessages'] as $key => $value): ?>
             let <?php echo $key ?>ErrorEl = document.getElementById("<?php echo $key ?>Error");
-                    <?php echo $key ?>ErrorEl.classList.add("text-danger");
-                    <?php echo $key ?>ErrorEl.innerText = "<?php echo $value ?>";
+                            <?php echo $key ?>ErrorEl.classList.add("text-danger");
+                            <?php echo $key ?>ErrorEl.innerText = "<?php echo $value ?>";
         <?php endforeach ?>
     </script>
     <?php unset($_SESSION['errorMessages']) ?>

@@ -577,7 +577,6 @@ class DbHelper
 
             INNER JOIN barangay_inc ON request_med.barangay_inc_id = barangay_inc.accountId
             INNER JOIN med_availability ON request_med.med_avail_Id = med_availability.id
-            INNER JOIN city_health ON med_availability.city_health_id = city_health.accountId
             LEFT JOIN med_deliveries ON med_deliveries.request_med_id = request_med.id
 
             ORDER BY 

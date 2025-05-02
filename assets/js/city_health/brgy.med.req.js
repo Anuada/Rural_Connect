@@ -350,7 +350,7 @@ const fetchAllAvailableCouriers = () => {
 
 const handleDisplayAllAvailableCouriers = (data) => {
     deliveryIdEl.innerHTML = '';
-    deliveryIdEl.innerHTML = '<option hidden selected>SELECT COURIER</option>';
+    deliveryIdEl.innerHTML = '<option value="" hidden selected>SELECT COURIER</option>';
     data.map(d => {
         deliveryIdEl.innerHTML += `
             <option value="${d.accountId}">${d.courier}</option>
