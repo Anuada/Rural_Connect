@@ -112,7 +112,7 @@ switch ($data['delivery_status']) {
 
                 $failed_delivery_count = $db->count_all_records('delivery_status_history', ['delivery_id' => $data['delivery_id'], 'status' => DeliveryStatus::Failed_Delivery->value]);
                 if ($failed_delivery_count < 3) {
-                    echo $ms->json_response(null, "There have only been $failed_delivery_count failed delivery attempts so far; it has not yet reached three.", 422);
+                    echo $ms->json_response(null, "There have only been $failed_delivery_count failed delivery attempts so far; it has not yet reached three or more.", 422);
                     exit();
                 }
 
@@ -133,7 +133,7 @@ switch ($data['delivery_status']) {
 
                 $failed_delivery_count = $db->count_all_records('custom_med_delivery_status_history', ['delivery_id' => $data['delivery_id'], 'status' => DeliveryStatus::Failed_Delivery->value]);
                 if ($failed_delivery_count < 3) {
-                    echo $ms->json_response(null, "There have only been $failed_delivery_count failed delivery attempts so far; it has not yet reached three.", 422);
+                    echo $ms->json_response(null, "There have only been $failed_delivery_count failed delivery attempts so far; it has not yet reached three or more.", 422);
                     exit();
                 }
 
