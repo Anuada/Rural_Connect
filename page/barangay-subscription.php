@@ -1,19 +1,15 @@
 <?php
 session_start();
-require_once "../shared/session.subscription.php";
+$load = false;
 require_once "../enums/SubscriptionPlan.php";
 ?>
 <?php ob_start() ?>
-<link rel="stylesheet" href="../assets/css/subscription.all.css">
-<?php $styles = ob_get_clean() ?>
-<?php ob_start() ?>
-<?php require_once "../shared/navbar.subscription.php" ?>
-<?php $navbar = ob_get_clean() ?>
-
+<link rel="stylesheet" href="../assets/css/landing.page.subscription.css">
+<?php $landing_page_styles = ob_get_clean() ?>
 
 <?php ob_start() ?>
-<div class="container" style="padding-top:130px">
-    <h2 class="text-center mb-4">Choose Your Plan</h2>
+<div class="container">
+    <h2 class="text-center mb-3">Choose Your Plan</h2>
     <div class="row justify-content-center g-4">
 
         <!-- Monthly Plan -->
@@ -53,6 +49,14 @@ require_once "../enums/SubscriptionPlan.php";
     </div>
 </div>
 
-<?php $content = ob_get_clean() ?>
+<?php $land_page_content = ob_get_clean() ?>
 
-<?php require_once "../shared/layout.php" ?>
+<?php ob_start() ?>
+
+<?php if (isset($_SESSION['accountId'])): ?>
+    <script type="module" src=""></script>
+<?php endif ?>
+
+<?php $landing_page_scripts = ob_get_clean() ?>
+
+<?php require_once "../shared/landing_page_layout.php" ?>

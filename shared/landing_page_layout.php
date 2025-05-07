@@ -5,6 +5,7 @@ $ms = new Misc;
 
 <?php ob_start() ?>
 <link rel="stylesheet" href="../assets/css/landing_page.css">
+<?php echo $landing_page_styles ?? "" ?>
 <?php $styles = ob_get_clean() ?>
 
 <?php ob_start() ?>
@@ -28,6 +29,10 @@ $ms = new Misc;
             <li><a href="<?php echo $ms->url("page/contact.php") ?>"
                     style="color: <?php echo strtolower($ms->url()) == strtolower($ms->url("page/contact.php")) ? '#ffdd57' : ''; ?>">Contact</a>
             </li>
+            <li><a href="<?php echo $ms->url("page/barangay-subscription.php") ?>"
+                    style="color: <?php echo strtolower($ms->url()) == strtolower($ms->url("page/barangay-subscription.php")) ? '#ffdd57' : ''; ?>">Barangay
+                    Subscription</a>
+            </li>
         </ul>
         <?php if (isset($_SESSION["accountId"])): ?>
             <a class="get-started" href="#" style="margin-right: 20px" aria-label="Open" id="openRuralConnect">Open</a>
@@ -48,6 +53,7 @@ $ms = new Misc;
         location.href = "../shared/session.redirect.php";
     });
 </script>
+<?php echo $landing_page_scripts ?? "" ?>
 <?php $scripts = ob_get_clean() ?>
 
 <?php require_once "../shared/layout.php" ?>

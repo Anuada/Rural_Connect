@@ -3,9 +3,11 @@ session_start();
 require_once "../shared/session.city_health.php";
 require_once "../util/Misc.php";
 require_once "../enums/Unit.php";
-$city_health_title = Misc::displayPageTitle("Add New Medicine", "fa-plus-circle");
+require_once "../enums/ItemCategory.php";
+$city_health_title = Misc::displayPageTitle("Add New Item", "fa-plus-circle");
 
 $units = Unit::all();
+$item_categories = ItemCategory::all();
 ?>
 
 <?php ob_start() ?>
@@ -21,13 +23,13 @@ $units = Unit::all();
 
             <div class="row">
                 <div class="col-md-6 mb-3">
-                    <label for="med_name">
+                    <label for="generic_name">
                         Generic Name
                         <i class="fa fa-info-circle text-primary" data-bs-toggle="tooltip" data-bs-placement="right"
                             data-bs-custom-class="wider-tooltip"
-                            title="If the medicine is a combination of two or more medicines, separate each with a forward slash '/' without space, for example: Paracetamol/Ibuprofen, so that a description will appear in the description field if the description for that particular medicine exists."></i>
+                            title="For Medicine Product/Item, if a medicine is a combination of two or more medicines, separate each with a forward slash '/' without space, for example: Paracetamol/Ibuprofen, so that a description will appear in the description field if the description for that particular medicine exists."></i>
                     </label>
-                    <input class="form-control" type="text" id="med_name" name="med_name" required>
+                    <input class="form-control" type="text" id="generic_name" name="generic_name" required>
                 </div>
 
                 <div class="col-md-6 mb-3">
@@ -43,7 +45,12 @@ $units = Unit::all();
 
             <div class="mb-3">
                 <label for="category">Category</label>
-                <input class="form-control" type="text" id="category" name="category" required>
+                <select class="form-control" id="category" name="category" required>
+                    <option value="" hidden selected>SELECT CATEGORY</option>
+                    <?php foreach ($item_categories as $category): ?>
+                        <option value="<?php echo $category ?>"><?php echo ucwords($category) ?></option>
+                    <?php endforeach ?>
+                </select>
             </div>
 
             <div class="row">
@@ -58,21 +65,18 @@ $units = Unit::all();
                 </div>
 
                 <div class="col-md-6 mb-3">
-                    <label for="dosage_strength">Dosage Strength</label>
-                    <input class="form-control" type="text" id="dosage_strength" name="dosage_strength" required>
-                </div>
-
-                <div class="col-md-6 mb-3">
                     <label for="quantity">Quantity</label>
                     <input class="form-control" type="number" id="quantity" name="quantity" required>
                 </div>
 
-                <div class="col-md-6 mb-3">
-                    <label for="med_image">Upload Image</label>
-                    <input type="file" accept="image/*" class="form-control" name="med_image" id="med_image" required>
-                </div>
+                <div id="medicinal_product_other_details"></div>
+
             </div>
 
+            <div class="mb-3">
+                <label for="item_image">Upload Image</label>
+                <input type="file" accept="image/*" class="form-control" name="item_image" id="item_image" required>
+            </div>
             <button type="submit">Submit Now</button>
         </div>
     </form>

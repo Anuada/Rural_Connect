@@ -99,9 +99,13 @@ class DbHelper
     {
         $condition = [];
         for ($i = $index; $i < count($key); $i++) {
-            $condition[] = "`" . $key[$i] . "` = '" . $value[$i] . "'";
-            $cond = implode($implode, $condition);
+            if (is_null($value[$i])) {
+                $condition[] = "`" . $key[$i] . "` = NULL";
+            } else {
+                $condition[] = "`" . $key[$i] . "` = '" . $value[$i] . "'";
+            }
         }
+        $cond = implode($implode, $condition);
         return $cond;
     }
 
@@ -191,8 +195,8 @@ class DbHelper
             CONCAT(barangay_inc.fname, ' ', barangay_inc.lname) AS barangay_incharge,
             barangay_inc.address,
             barangay_inc.contactNo,
-            med_availability.med_image,
-            med_availability.med_name,
+            med_availability.item_image,
+            med_availability.generic_name,
             med_availability.category,
             med_availability.unit,
             med_availability.dosage_strength
@@ -232,7 +236,7 @@ class DbHelper
             barangay_inc.address,
             barangay_inc.contactNo,
             custom_med_request.requested_quantity,
-            custom_med_request.requested_medicine AS med_name,
+            custom_med_request.requested_medicine AS generic_name,
             custom_med_request.category,
             custom_med_request.unit,
             custom_med_request.dosage_strength
@@ -274,8 +278,8 @@ class DbHelper
                         CONCAT(barangay_inc.fname, ' ', barangay_inc.lname) AS barangay_incharge,
                         barangay_inc.address,
                         barangay_inc.contactNo,
-                        med_availability.med_image,
-                        med_availability.med_name,
+                        med_availability.item_image,
+                        med_availability.generic_name,
                         med_availability.category,
                         med_availability.unit,
                         med_availability.dosage_strength
@@ -297,8 +301,8 @@ class DbHelper
                         CONCAT(barangay_inc.fname, ' ', barangay_inc.lname) AS barangay_incharge,
                         barangay_inc.address,
                         barangay_inc.contactNo,
-                        NULL AS med_image,
-                        custom_med_request.requested_medicine AS med_name,
+                        NULL AS item_image,
+                        custom_med_request.requested_medicine AS generic_name,
                         custom_med_request.category,
                         custom_med_request.unit,
                         custom_med_request.dosage_strength
@@ -333,8 +337,8 @@ class DbHelper
             med_deliveries.date_of_supply,
             request_med.request_quantity AS requested_quantity,
             CONCAT(deliveries.fname, ' ', deliveries.lname) AS delivery,
-            med_availability.med_image,
-            med_availability.med_name,
+            med_availability.item_image,
+            med_availability.generic_name,
             med_availability.category,
             med_availability.unit,
             med_availability.dosage_strength
@@ -365,7 +369,7 @@ class DbHelper
             custom_med_deliveries.date_of_supply,
             CONCAT(deliveries.fname, ' ', deliveries.lname) AS delivery,
             custom_med_request.requested_quantity,
-            custom_med_request.requested_medicine AS med_name,
+            custom_med_request.requested_medicine AS generic_name,
             custom_med_request.category,
             custom_med_request.unit,
             custom_med_request.dosage_strength
@@ -432,12 +436,12 @@ class DbHelper
         request_med.request_quantity,
         request_med.requestStatus,
         request_med.document,
-        med_availability.med_name,
+        med_availability.generic_name,
         med_availability.brand_name,
         med_availability.category,
         med_availability.unit,
         med_availability.dosage_strength,
-        med_availability.med_image,
+        med_availability.item_image,
         med_deliveries.id AS med_delivery_id,
         med_deliveries.date_of_supply,
         med_deliveries.delivery_status
@@ -478,7 +482,8 @@ class DbHelper
         custom_med_request.id,
         custom_med_request.requested_quantity AS request_quantity,
         custom_med_request.request_status AS requestStatus,
-        custom_med_request.requested_medicine AS med_name,
+        custom_med_request.requested_medicine AS generic_name,
+        custom_med_request.brand_name,
         custom_med_request.category,
         custom_med_request.unit,
         custom_med_request.dosage_strength,
@@ -516,6 +521,18 @@ class DbHelper
 
     }
 
+    public function display_newly_added_items_this_month()
+    {
+        $rows = [];
+        $sql = "SELECT * FROM med_availability
+            WHERE DATE_FORMAT(med_availability.date,'%Y-%m') = DATE_FORMAT(CURRENT_DATE(),'%Y-%m')";
+        $query = $this->conn->query($sql);
+        while ($row = $query->fetch_assoc()) {
+            $rows[] = $row;
+        }
+        return $rows;
+    }
+
     public function countRatings($num)
     {
         $sql = "SELECT COUNT(*) AS total_ratings FROM rate_and_feedback WHERE `rating` = $num";
@@ -549,6 +566,21 @@ class DbHelper
         return $rows;
     }
 
+    // Display Total Amount of Partially Claimed
+    public function display_total_partially_claimed($table, $args)
+    {
+        $conditions = [];
+        foreach ($args as $key => $value) {
+            $conditions[] = "`$key` = '$value'";
+        }
+        $condition = implode(" AND ", $conditions);
+        $sql = "SELECT * FROM $table
+                WHERE $condition
+                ORDER BY created_at DESC
+                LIMIT 1";
+        $query = $this->conn->query($sql);
+        return $query->fetch_assoc();
+    }
 
     // Display for Data Barangay Requested
     public function display_barangay_inc_requested($limit, $offset)
@@ -558,9 +590,9 @@ class DbHelper
             request_med.request_quantity,
             request_med.requestStatus AS status,
             request_med.document,
-            med_availability.med_name,
+            med_availability.generic_name,
             med_availability.brand_name,
-            med_availability.med_image,
+            med_availability.item_image,
             med_availability.category,
             med_availability.unit,
             med_availability.dosage_strength,
@@ -603,7 +635,8 @@ class DbHelper
             custom_med_request.requested_quantity AS request_quantity,
             custom_med_request.request_status AS status,
             custom_med_request.document,
-            custom_med_request.requested_medicine AS med_name,
+            custom_med_request.requested_medicine AS generic_name,
+            custom_med_request.brand_name,
             custom_med_request.category,
             custom_med_request.unit,
             custom_med_request.dosage_strength,

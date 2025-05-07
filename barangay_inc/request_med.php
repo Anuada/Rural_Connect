@@ -3,6 +3,7 @@ session_start();
 require_once "../shared/session.barangay_inc.php";
 require_once "../util/DbHelper.php";
 require_once "../util/Misc.php";
+require_once "../enums/ItemCategory.php";
 $barangay_inc_title = Misc::displayPageTitle("Request Medicine", "fa-notes-medical");
 
 $db = new DbHelper();
@@ -37,7 +38,7 @@ $limit = (int) ($med_avail['quantity'] * 0.20);
         <div class="col-lg-4">
             <!-- Medicine Image -->
             <div class="text-center mb-4">
-                <img src="<?php echo $med_avail['med_image'] ?>" alt="<?php echo $med_avail['med_name'] ?>"
+                <img src="<?php echo $med_avail['item_image'] ?>" alt="<?php echo $med_avail['generic_name'] ?>"
                     class="shadow medicine-image" />
             </div>
 
@@ -66,7 +67,7 @@ $limit = (int) ($med_avail['quantity'] * 0.20);
 
         <!-- Right column: Details -->
         <div class="col-lg-8">
-            <h2 class="mb-3 rc-blue-text fw-bold"><i class="fas fa-pills me-2"></i><?php echo $med_avail['med_name'] ?>
+            <h2 class="mb-3 rc-blue-text fw-bold"><i class="fas fa-pills me-2"></i><?php echo $med_avail['generic_name'] ?>
             </h2>
 
             <p class="mb-4 text-secondary">
@@ -93,10 +94,16 @@ $limit = (int) ($med_avail['quantity'] * 0.20);
                         <th>Unit</th>
                         <td><?php echo $med_avail['unit'] ?></td>
                     </tr>
-                    <tr>
-                        <th>Dosage Strength</th>
-                        <td><?php echo $med_avail['dosage_strength'] ?></td>
-                    </tr>
+                    <?php if($med_avail['category'] == ItemCategory::Medicinal_Product->value): ?>
+                        <tr>
+                            <th>Dosage Strength</th>
+                            <td><?php echo $med_avail['dosage_strength'] ?></td>
+                        </tr>
+                        <tr>
+                            <th>Expiration Date</th>
+                            <td><?php echo date("F d, Y", strtotime($med_avail['expiration_date'])) ?></td>
+                        </tr>
+                    <?php endif ?>
                     <tr>
                         <th>Total Available</th>
                         <td>

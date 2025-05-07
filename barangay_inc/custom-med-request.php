@@ -3,9 +3,11 @@ session_start();
 require_once "../shared/session.barangay_inc.php";
 require_once "../util/Misc.php";
 require_once "../enums/Unit.php";
+require_once "../enums/ItemCategory.php";
 $barangay_inc_title = Misc::displayPageTitle("Customize Medicine Request", "fa-sliders");
 
 $units = Unit::all();
+$item_categories = ItemCategory::all();
 ?>
 
 <?php ob_start() ?>
@@ -29,8 +31,12 @@ $units = Unit::all();
 
             <div class="mb-3">
                 <label for="category">Category</label>
-                <input type="text" class="form-control" id="category" name="category" required>
-                <div style="height: 15px" class="form-text" id="categoryError"></div>
+                <select class="form-control" id="category" name="category" required>
+                    <option value="" hidden selected>SELECT CATEGORY</option>
+                    <?php foreach ($item_categories as $category): ?>
+                        <option value="<?php echo $category ?>"><?php echo ucwords($category) ?></option>
+                    <?php endforeach ?>
+                </select>
             </div>
 
             <div class="row">
@@ -46,17 +52,13 @@ $units = Unit::all();
                 </div>
 
                 <div class="col-md-6 mb-3">
-                    <label for="dosage_strength">Dosage Strength</label>
-                    <input type="text" class="form-control" id="dosage_strength" name="dosage_strength" required>
-                    <div style="height: 15px" class="form-text" id="dosage_strengthError"></div>
-                </div>
-
-                <div class="col-md-6 mb-3">
                     <label for="requested_quantity">Quantity</label>
                     <input type="number" class="form-control" id="requested_quantity" name="requested_quantity" min="1"
                         required>
                     <div style="height: 15px" class="form-text" id="requested_quantityError"></div>
                 </div>
+
+                <div class="col-md-6 mb-3 d-none" id="dosage-strength-el"></div>
 
                 <div class="col-md-6 mb-3">
                     <label for="document">Upload Document</label>
@@ -76,9 +78,11 @@ $units = Unit::all();
 <?php if (isset($_SESSION['errorMessages'])): ?>
     <script>
         <?php foreach ($_SESSION['errorMessages'] as $key => $value): ?>
-            let <?php echo $key ?>ErrorEl = document.getElementById("<?php echo $key ?>Error");
+            <?php if ($key != 'dosage_strength'): ?>
+                let <?php echo $key ?>ErrorEl = document.getElementById("<?php echo $key ?>Error");
                             <?php echo $key ?>ErrorEl.classList.add("text-danger");
                             <?php echo $key ?>ErrorEl.innerText = "<?php echo $value ?>";
+            <?php endif ?>
         <?php endforeach ?>
     </script>
     <?php unset($_SESSION['errorMessages']) ?>
@@ -87,7 +91,9 @@ $units = Unit::all();
 <?php if (isset($_SESSION['formFields'])): ?>
     <script>
         <?php foreach ($_SESSION['formFields'] as $key => $value): ?>
-            document.getElementById('<?php echo $key ?>').value = "<?php echo $value ?>";
+            <?php if ($key != 'dosage_strength'): ?>
+                document.getElementById('<?php echo $key ?>').value = "<?php echo $value ?>";
+            <?php endif ?>
         <?php endforeach ?>
     </script>
     <?php unset($_SESSION['formFields']) ?>

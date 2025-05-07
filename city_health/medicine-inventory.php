@@ -7,7 +7,7 @@ require_once "../util/Misc.php";
 $db = new DbHelper();
 $ms = new Misc;
 $records = $db->fetchRecords('med_availability');
-$city_health_title = Misc::displayPageTitle("Manage Medicine Inventory", "fa-pills me-2");
+$city_health_title = Misc::displayPageTitle("Manage Inventory", "fa-pills me-2");
 ?>
 
 <?php ob_start() ?>
@@ -32,18 +32,16 @@ $city_health_title = Misc::displayPageTitle("Manage Medicine Inventory", "fa-pil
                     <td>
                         <span class="row">
                             <span class="col-auto">
-                                <img src="<?php echo $row['med_image'] ?>" alt="Medicine Image" class="img-fluid rounded shadow"
-                                    style="width: 100px; height: 100px; object-fit: cover;">
+                                <img src="<?php echo $row['item_image'] ?>" alt="Medicine Image"
+                                    class="img-fluid rounded shadow" style="width: 100px; height: 100px; object-fit: cover;">
                             </span>
                             <span class="col">
-                                <span class="row"><?php echo $row['med_name'] ?></span>
+                                <span class="row"><?php echo $row['generic_name'] ?></span>
                                 <span class="row text-secondary"><?php echo $row['brand_name'] ?></span>
-                                <span class="row text-secondary" data-fulltext="<?php echo $row['category'] ?>" data-bs-toggle="tooltip"
-                                    data-bs-placement="top" title="<?php echo $row['category'] ?>">
+                                <span class="row text-secondary">
                                     <?php echo $ms->truncateSentence($row['category'], 35) ?>
                                 </span>
-                                <span
-                                    class="row text-secondary"><?php echo $row['dosage_strength'] ?></span>
+                                <span class="row text-secondary"><?php echo $row['dosage_strength'] ?></span>
                             </span>
                         </span>
                     </td>
@@ -52,7 +50,7 @@ $city_health_title = Misc::displayPageTitle("Manage Medicine Inventory", "fa-pil
                     <td><?php echo date('F d, Y', strtotime($row['date'])) ?></td>
                     <td>
                         <span class="d-flex justify-content-start">
-                            <button data-id="<?php echo $row['id'] ?>" data-med-name="<?php echo $row['med_name'] ?>"
+                            <button data-id="<?php echo $row['id'] ?>" data-med-name="<?php echo $row['generic_name'] ?>"
                                 data-quantity="<?php echo $row['quantity'] ?>" title="Edit"
                                 class="btn btn-primary shadow edit-medicine" style="margin-right: 10px">
                                 <i class="fas fa-edit"></i>
@@ -93,11 +91,12 @@ $city_health_title = Misc::displayPageTitle("Manage Medicine Inventory", "fa-pil
             </div>
             <div class="modal-body">
                 <div class="medicine-card">
-                    <h4 class="text-primary"><i class="fas fa-pills me-2"></i> <span id="med_name"></span>
+                    <h4 class="text-primary"><i class="fas fa-pills me-2"></i> <span id="generic_name"></span>
                     </h4>
                     <p><i class="fas fa-file-alt"></i> <strong>Quantity:</strong>
                         <span id="quantity"></span>
                     </p>
+                    <p id="expiration_date_el"></p>
                     <p><i class="fas fa-file-alt"></i> <strong>Description:</strong>
                         <span id="med_description"></span>
                     </p>

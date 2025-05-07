@@ -5,7 +5,7 @@ require_once "../util/Misc.php";
 
 $ms = new Misc;
 
-$city_health_title = Misc::displayPageTitle("Manage Medicine Requests", "fa-file-medical");
+$city_health_title = Misc::displayPageTitle("Manage Requests", "fa-file-medical");
 ?>
 
 <?php ob_start() ?>
@@ -171,6 +171,35 @@ $city_health_title = Misc::displayPageTitle("Manage Medicine Requests", "fa-file
                         <span id="feedbackText"></span>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Reschedule Delivery -->
+<div class="modal fade" id="rescheduleDeliveryModal" tabindex="-1" aria-labelledby="viewLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content custom-modal">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="viewLabel">
+                    <i class="fas fa-capsules"></i> Reschedule Delivery
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="reschedule-delivery-form">
+                    <input type="hidden" name="data-request-type" id="data-request-type">
+                    <input type="hidden" name="data-delivery-id" id="data-delivery-id">
+                    <div class="form-fields">
+                        <div class="mb-3">
+                            <label for="reschedule-delivery">Reschedule Delivery</label>
+                            <input type="date" name="reschedule-delivery" id="reschedule-delivery" required>
+                        </div>
+                        <button type="submit">Assign</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

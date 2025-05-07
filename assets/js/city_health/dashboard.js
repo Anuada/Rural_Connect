@@ -1,5 +1,6 @@
 import { Chart, registerables } from 'https://cdn.skypack.dev/chart.js@3.7.0';
 import fetch from '../utilities/fetchClient.js';
+import { dateFormatter } from '../utilities/formatter.js';
 
 Chart.register(...registerables);
 
@@ -15,6 +16,9 @@ const totalCancelledLblEl = document.getElementById('total-cancelled-label');
 
 // Chart Element
 const requestChartEl = document.getElementById('request-chart').getContext('2d');
+
+// Other Elemen
+const newlyAddedItemThisMonthEl = document.getElementById('new-added-items-this-month');
 
 const request_data = {
     labels: ['Pending', 'Accepted', 'Cancelled'],
@@ -53,7 +57,7 @@ const config = {
     },
 };
 
-document.addEventListener('DOMContentLoaded', () => {
+const fetchDataForKPIandChart = () => {
     fetch.get('../api/city.health.dashboard.php')
         .then(response => {
             const { data } = response?.data;
@@ -74,4 +78,47 @@ document.addEventListener('DOMContentLoaded', () => {
         .catch(error => {
             console.error(error);
         });
+}
+
+const fetchNewlyAddedItemsThisMonth = () => {
+    fetch.get('../api/city.health.display.newly.added.items.this.month.php')
+        .then(response => {
+            handleDisplayDataTable(response?.data?.data);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+}
+
+const handleDisplayDataTable = (data = []) => {
+    newlyAddedItemThisMonthEl.innerHTML = '';
+    if (data.length > 0) {
+        data.map(d => {
+            newlyAddedItemThisMonthEl.innerHTML += `
+                <tr>
+                    <td>
+                        <span class="row">
+                            <span class="col-auto">
+                                <img src="${d.item_image}" alt="Item Image" class="img-fluid rounded shadow"
+                                    style="width: 100px; height: 100px; object-fit: cover;">
+                            </span>
+                            <span class="col">
+                                <span class="row">${d.generic_name}</span>
+                                <span class="row text-secondary">${d.brand_name}</span>
+                                <span class="row text-secondary">${d.category}</span>
+                            </span>
+                        </span>
+                    </td>
+                    <td>${dateFormatter(d.date)}</td>
+                </tr>
+        `;
+        })
+    } else {
+        newlyAddedItemThisMonthEl.innerHTML = '<td colspan="2">No Added Item This Month</td>';
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    fetchDataForKPIandChart();
+    fetchNewlyAddedItemsThisMonth();
 });

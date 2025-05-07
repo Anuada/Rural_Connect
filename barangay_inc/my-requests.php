@@ -86,8 +86,9 @@ $barangay_inc_title = Misc::displayPageTitle("My Requests", "fa-file-medical");
                             <select class="form-control" name="delivery_condition" id="delivery_condition"></select>
                         </div>
                         <div class="mb-3">
-                           <label for="feedback">Feedback</label>
-                           <textarea class="form-control" name="feedback" id="feedback" placeholder="(Optional) Give feedback to the delivery"></textarea>
+                            <label for="feedback">Feedback</label>
+                            <textarea class="form-control" name="feedback" id="feedback"
+                                placeholder="(Optional) Give feedback to the delivery"></textarea>
                         </div>
                         <button type="submit">Submit</button>
                     </div>
@@ -96,6 +97,36 @@ $barangay_inc_title = Misc::displayPageTitle("My Requests", "fa-file-medical");
         </div>
     </div>
 </div>
+
+<!-- Pending Claim  -->
+<div class="modal fade" id="pendingClaimModal" tabindex="-1" aria-labelledby="pendingClaimModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content custom-modal">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="pendingClaimModalLabel">
+                    <i class="fas fa-capsules"></i> Partially Claimed
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="partially-claimed-form">
+                    <input type="hidden" name="delivery_id_pc" id="delivery_id_pc">
+                    <input type="hidden" name="request_type_pc" id="request_type_pc">
+                    <div class="form-fields">
+                        <div class="mb-3">
+                            <input type="number" name="total_partially_claimed" id="total_partially_claimed"
+                                class="form-control" min="1" placeholder="Input the total amount of partially claimed items" required>
+                        </div>
+                        <button type="submit">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 <?php $barangay_inc_content = ob_get_clean() ?>
 
 <?php ob_start() ?>

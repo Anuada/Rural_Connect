@@ -5,6 +5,10 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
+.text-light-green {
+    color: #35e85e;
+}
+
 .text-teal {
     color: #20c997;
 }

@@ -3,7 +3,7 @@ import fetch from "../utilities/fetchClient.js";
 import renderPagination from "../utilities/table.pagination.js";
 import displayDeliveryStatus from "../utilities/displayDeliveryStatusColor.js";
 import serializeForm from '../helpers/serializeForm.js';
-import { confirmAlert, errorAlert, successAlert } from '../helpers/sweetAlert2.js';
+import { choicesAlert, confirmAlert, errorAlert, successAlert } from '../helpers/sweetAlert2.js';
 
 // VARIABLES
 let currentPage = 1;
@@ -21,13 +21,20 @@ const customizedMedRequestPageEl = document.getElementById('customized-med-reque
 const previewOverlay = document.getElementById('previewOverlay');
 const previewImage = document.getElementById('previewImage');
 
-// Modal Elements
+// Confirm Claimed Modal Elements
 const claimConfirmAndDeliveryFeedbackModalEl = document.getElementById('claimConfirmAndDeliveryFeedbackModal');
 const claimConfirmAndDeliveryFeedbackModal = new bootstrap.Modal(claimConfirmAndDeliveryFeedbackModalEl);
 const confirmClaimFormEl = document.getElementById('confirm-claim');
 const delivery_id = document.getElementById('delivery_id');
 const request_type = document.getElementById('request_type');
 const delivery_condition = document.getElementById('delivery_condition');
+
+// Partially Claimed Modal Elements 
+const pendingClaimModalEl = document.getElementById('pendingClaimModal');
+const pendingClaimModal = new bootstrap.Modal(pendingClaimModalEl);
+const partiallyClaimedFormEl = document.getElementById('partially-claimed-form');
+const delivery_id_pc = document.getElementById('delivery_id_pc');
+const request_type_pc = document.getElementById('request_type_pc');
 
 // Other Elements
 const tabElements = document.querySelectorAll('button[data-bs-toggle="tab"]');
@@ -43,7 +50,7 @@ const displayTable = (data, tableBody) => {
                     <td><button class="btn btn-primary view-med-document" data-med-document="${d.document}"><i class="fas fa-eye"></i> <span style="margin-left: 10px">View</span></button></td>
                     <td class="text-center">
                         ${d.date_of_supply !== null ?
-                    `<span class="cursor-pointer track-delivery-status" data-request-type="${d.med_image != undefined ? "med-delivery" : "custom-med-delivery"}" data-request-id="${d.med_delivery_id}" data-bs-toggle="tooltip" data-bs-placement="top" title="Track Delivery Status">${dateFormatter(d.date_of_supply)}</span>`
+                    `<span class="cursor-pointer track-delivery-status" data-request-type="${d.item_image != undefined ? "med-delivery" : "custom-med-delivery"}" data-request-id="${d.med_delivery_id}" data-bs-toggle="tooltip" data-bs-placement="top" title="Track Delivery Status">${dateFormatter(d.date_of_supply)}</span>`
                     : "<span class='user-select-none text-secondary'>TBD</span>"}
                     </td>
                     <td>${displayStatus(d)}</td>
@@ -88,11 +95,66 @@ const displayTable = (data, tableBody) => {
     const isClaimed = document.querySelectorAll('.is-claimed');
     isClaimed.forEach(claimed => {
         claimed.addEventListener('click', () => {
-            delivery_id.value = claimed.getAttribute('data-med-delivery-id');
-            request_type.value = claimed.getAttribute('data-request-type');
-            claimConfirmAndDeliveryFeedbackModal.show();
+            const data = [
+                claimed.getAttribute('data-med-delivery-id'),
+                claimed.getAttribute('data-request-type')
+            ];
+            const question = "Have you received the items in full or only partially?";
+            choicesAlert(question, "Full", "Partially", handleFullyClaimed, handlePartiallyClaimed, false, data, data);
         });
     });
+}
+
+// Handle Partially Claimed
+const handlePartiallyClaimed = (data_delivery_id, data_request_type) => {
+    delivery_id_pc.value = data_delivery_id;
+    request_type_pc.value = data_request_type;
+    pendingClaimModal.show();
+}
+
+partiallyClaimedFormEl.addEventListener('submit', (e) => {
+    e.preventDefault();
+    let payload = {
+        delivery_status: 'Partially Claimed'
+    };
+    payload = { ...payload, ...serializeForm(partiallyClaimedFormEl) };
+    const question = "Kindly confirm whether the item is partially claimed.";
+    confirmAlert(question, handleConfirmPartialConfirm, false, payload);
+});
+
+const handleConfirmPartialConfirm = (payload) => {
+    fetch.put('../api/barangay.inc.partially.claimed.items.php', payload)
+        .then(response => {
+            const { message } = response?.data;
+            pendingClaimModal.hide();
+            successAlert(message);
+            callFetches();
+        })
+        .catch(error => {
+            const { message } = error?.data;
+            const { status } = error?.response;
+            if (status == 422 && message != undefined) {
+                errorAlert(message);
+            }
+            callFetches();
+            console.error(error);
+        })
+};
+
+pendingClaimModalEl.addEventListener('hidden.bs.modal', () => {
+    partiallyClaimedFormEl.reset();
+    delivery_id_pc.value = '';
+    request_type_pc.value = '';
+});
+
+// End of Partially Claimed
+
+
+// Handle Fully Claimed
+const handleFullyClaimed = (data_delivery_id, data_request_type) => {
+    delivery_id.value = data_delivery_id;
+    request_type.value = data_request_type;
+    claimConfirmAndDeliveryFeedbackModal.show();
 }
 
 confirmClaimFormEl.addEventListener('submit', (e) => {
@@ -101,7 +163,7 @@ confirmClaimFormEl.addEventListener('submit', (e) => {
         delivery_status: 'Claimed'
     };
     payload = { ...payload, ...serializeForm(confirmClaimFormEl) }
-    const question = "Kindly confirm whether the medicine has been claimed.";
+    const question = "Kindly confirm whether the item has been fully claimed.";
     confirmAlert(question, handleConfirmClaim, false, payload);
 });
 
@@ -130,16 +192,18 @@ claimConfirmAndDeliveryFeedbackModalEl.addEventListener('hidden.bs.modal', () =>
     request_type.value = '';
 });
 
+// End of Handle Fully Claimed
+
 const displayMedicine = (data) => {
-    if (data.med_image != undefined) {
+    if (data.item_image != undefined) {
         return `
             <span class="row">
                 <span class="col-auto">
-                    <img src="${data.med_image}" alt="Medicine Image" class="img-fluid rounded shadow"
+                    <img src="${data.item_image}" alt="Medicine Image" class="img-fluid rounded shadow"
                         style="width: 100px; height: 100px; object-fit: cover;">
                 </span>
                 <span class="col">
-                    <span class="row">${data.med_name}</span>
+                    <span class="row">${data.generic_name}</span>
                     <span class="row text-secondary">${data.brand_name}</span>
                     <span class="row text-secondary cursor-default"
                         data-fulltext="${data.category}"
@@ -148,16 +212,17 @@ const displayMedicine = (data) => {
                         title="${data.category}">
                         ${truncateSentence(data.category, 35)}
                     </span>
-                    <span class="row text-secondary">${data.unit} - ${data.dosage_strength}</span>
+                    <span class="row text-secondary">${data.dosage_strength != null ? `${data.unit} - ${data.dosage_strength}` : data.unit}</span>
                 </span>
             </span>
         `;
     }
     return `
         <div style="margin-left: 20px">
-            <span class="row">${data.med_name}</span>
+            <span class="row">${data.generic_name}</span>
+            <span class="row text-secondary">${data.brand_name}</span>
             <span class="row text-secondary">${data.category}</span>
-            <span class="row text-secondary">${data.unit} - ${data.dosage_strength}</span>
+            <span class="row text-secondary">${data.dosage_strength != null ? `${data.unit} - ${data.dosage_strength}` : data.unit}</span>
         </div>
     `;
 }
@@ -166,7 +231,7 @@ const displayStatus = (data) => {
     switch (data.requestStatus) {
         case 'Accepted':
             if (data.delivery_status == 'Delivered') {
-                return `<span class="cursor-pointer is-claimed" data-med-delivery-id="${data.med_delivery_id}" data-request-type="${data.med_image != undefined ? "Standard Request" : "Customized Request"}" data-bs-toggle="tooltip" data-bs-placement="top" title="Kindly confirm whether the medicine has been claimed">${displayDeliveryStatus(data.delivery_status)}</span>`;
+                return `<span class="cursor-pointer is-claimed" data-med-delivery-id="${data.med_delivery_id}" data-request-type="${data.item_image != undefined ? "Standard Request" : "Customized Request"}" data-bs-toggle="tooltip" data-bs-placement="top" title="Kindly confirm whether the medicine has been claimed">${displayDeliveryStatus(data.delivery_status)}</span>`;
             }
             return displayDeliveryStatus(data.delivery_status);
 

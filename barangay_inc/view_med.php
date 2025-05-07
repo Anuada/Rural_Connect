@@ -22,11 +22,11 @@ $records = $db->fetchRecords($tableName);
             <div class="col-md-4 mb-4">
                 <div class="card product-card shadow-sm cursor-pointer"
                     data-redirect="<?php echo $ms->url("barangay_inc/request_med.php?id=" . htmlspecialchars($row['id'])) ?>">
-                    <img src="<?php echo !empty($row['med_image']) ? "../uploads/" . htmlspecialchars($row['med_image']) : "../assets/img/no-image.png"; ?>"
+                    <img src="<?php echo !empty($row['item_image']) ? "../uploads/" . htmlspecialchars($row['item_image']) : "../assets/img/no-image.png"; ?>"
                         alt="Medicine Image" class="product-img">
                     <div class="product-info">
                         <h5 class="product-title rc-blue-text"><i
-                                class="fas fa-pills me-2"></i><?php echo htmlspecialchars($row['med_name']); ?></h5>
+                                class="fas fa-pills me-2"></i><?php echo htmlspecialchars($row['generic_name']); ?></h5>
                         <h6 class="text-secondary"><?php echo htmlspecialchars($row['brand_name']); ?></h6>
                     </div>
                 </div>

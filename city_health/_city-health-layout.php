@@ -24,17 +24,17 @@ $title = "City Health";
     </a>
     <a href="<?php echo $ms->url('city_health/add-new-medicine.php') ?>" name="nav-link" <?php echo $ms->url() === $ms->url('city_health/add-new-medicine.php') ? "class='sidenav-active'" : "" ?>>
         <div class="row align-items-center">
-            <?php echo Misc::displayPageTitle("New Medicine", "fa-plus-circle", "15px") ?>
+            <?php echo Misc::displayPageTitle("New Item", "fa-plus-circle", "15px") ?>
         </div>
     </a>
     <a href="<?php echo $ms->url('city_health/medicine-inventory.php') ?>" name="nav-link" <?php echo $ms->url() === $ms->url('city_health/medicine-inventory.php') || $ms->url() === $ms->url('city_health/edit-medicine.php') ? "class='sidenav-active'" : "" ?>>
         <div class="row align-items-center">
-            <?php echo Misc::displayPageTitle("Medicine Inventory", "fa-pills", "15px") ?>
+            <?php echo Misc::displayPageTitle("Manage Inventory", "fa-pills", "15px") ?>
         </div>
     </a>
     <a href="<?php echo $ms->url('city_health/barangay-med-requests.php') ?>" name="nav-link" <?php echo $ms->url() === $ms->url('city_health/barangay-med-requests.php') ? "class='sidenav-active'" : "" ?>>
         <div class="row align-items-center">
-            <?php echo Misc::displayPageTitle("Medicine Requests", "fa-file-medical", "15px") ?>
+            <?php echo Misc::displayPageTitle("Manage Requests", "fa-file-medical", "15px") ?>
         </div>
     </a>
     <a href="<?php echo $ms->url('city_health/updateProfile.php') ?>" name="nav-link" <?php echo $ms->url() === $ms->url('city_health/updateProfile.php') || $ms->url() === $ms->url('city_health/changePassword.php') ? "class='sidenav-active'" : "" ?>>

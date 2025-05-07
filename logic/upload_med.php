@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 function uploadMedAvailable(DbHelper $db, DirHandler $dh, Misc $ms)
 {
     $city_health_id = $_POST['city_health_id'];
-    $med_name = $_POST['med_name'];
+    $generic_name = $_POST['generic_name'];
 
     $errorCount = 0;
     foreach ($_POST as $key => $value) {
@@ -33,17 +33,17 @@ function uploadMedAvailable(DbHelper $db, DirHandler $dh, Misc $ms)
         exit();
     }
 
-    if (!isset($_FILES['med_image']) || $_FILES['med_image']['size'] <= 0) {
+    if (!isset($_FILES['item_image']) || $_FILES['item_image']['size'] <= 0) {
         $_SESSION["m"] = "Image is required!";
         $_SESSION["field_inputs"] = $_POST;
         header("Location: ../city_health/add-new-medicine.php");
         exit();
     }
 
-    $med_name_with_underscores = preg_replace('/[^a-zA-Z0-9_]/', '_', $med_name); // Replace all non-alphanumeric characters with "_"
+    $generic_name_with_underscores = preg_replace('/[^a-zA-Z0-9_]/', '_', $generic_name); // Replace all non-alphanumeric characters with "_"
 
-    $img_name = str_replace("-", "", $city_health_id) . "_" . strtolower(str_replace(' ', '', $med_name_with_underscores)) . "_" . date('mdYHis');
-    $_POST['med_image'] = $ms->uploadImage($_FILES['med_image'], $img_name, $dh->med_image);
+    $img_name = str_replace("-", "", $city_health_id) . "_" . strtolower(str_replace(' ', '', $generic_name_with_underscores)) . "_" . date('mdYHis');
+    $_POST['item_image'] = $ms->uploadImage($_FILES['item_image'], $img_name, $dh->item_image);
 
     $success = $db->addRecord("med_availability", $_POST);
 

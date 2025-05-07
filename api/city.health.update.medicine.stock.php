@@ -56,7 +56,7 @@ if (empty($check)) {
     echo $ms->json_response(null, "Medicine not found!", 404);
     exit();
 }
-$medicine = $check['med_name'];
+$medicine = $check['generic_name'];
 
 $update_stock = $db->updateRecord("med_availability", $data);
 

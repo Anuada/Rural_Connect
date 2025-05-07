@@ -6,7 +6,6 @@ enum DeliveryCondition: string
 {
     case Good = 'good';
     case Damaged = 'damaged';
-    case Missing_Items = 'missing items';
 
     public static function all()
     {

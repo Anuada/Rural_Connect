@@ -170,6 +170,9 @@ class Misc
             case 'Delivered':
                 return "<span class='text-teal user-select-none'>$status</span>";
             
+            case 'Partially Claimed':
+                return "<span class='text-light-green user-select-none'>$status</span>";
+            
             case 'Claimed':
                 return "<span class='text-success user-select-none'>$status</span>";
 

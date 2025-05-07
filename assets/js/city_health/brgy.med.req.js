@@ -45,6 +45,14 @@ const receivedByEl = document.getElementById('receivedBy');
 const deliveryConditionEl = document.getElementById('deliveryCondition');
 const feedbackTextEl = document.getElementById('feedbackText');
 
+// Reschedule Delivery Elements
+const rescheduleDeliveryModalEl = document.getElementById('rescheduleDeliveryModal');
+const rescheduleDeliveryModal = new bootstrap.Modal(rescheduleDeliveryModalEl);
+const rescheduleDeliveryFormEl = document.getElementById('reschedule-delivery-form');
+const dataRequestTypeEl = document.getElementById('data-request-type');
+const dataDeliveryIdEl = document.getElementById('data-delivery-id');
+const rescheduleDeliveryEl = document.getElementById('reschedule-delivery');
+
 // Preview Image Elements
 const previewOverlay = document.getElementById('previewOverlay');
 const previewImage = document.getElementById('previewImage');
@@ -64,6 +72,12 @@ deliveryFeedbackModalEl.addEventListener('hidden.bs.modal', () => {
     receivedByEl.innerText = '';
     deliveryConditionEl.innerText = '';
     feedbackTextEl.innerHTML = '';
+});
+
+rescheduleDeliveryModalEl.addEventListener('hidden.bs.modal', () => {
+    rescheduleDeliveryFormEl.reset();
+    dataRequestTypeEl.value = '';
+    dataDeliveryIdEl.value = '';
 });
 
 clickableImage.addEventListener('click', () => {
@@ -117,7 +131,7 @@ const displayTable = async (data, tableBody) => {
     viewDetailsBtnEl.forEach(btn => {
         btn.addEventListener('click', async () => {
             const data = JSON.parse(btn.getAttribute('data-details'));
-            requested_medicine.textContent = data.med_name;
+            requested_medicine.textContent = data.generic_name;
             requested_quantity.textContent = `${data.request_quantity} ${data.request_quantity > 1 ? await pluralize(data.unit.toLowerCase()) : data.unit.toLowerCase()}`;
             incharge_barangay.textContent = data.barangay;
             incharge_name.textContent = `${data.fname} ${data.lname}`;
@@ -174,36 +188,40 @@ const displayTable = async (data, tableBody) => {
             confirmAlert(question, handleConfirmReturned, false, payload);
         });
     });
+
+    const rescheduleDeliveryEl = document.querySelectorAll('.reschedule-delivery');
+    rescheduleDeliveryEl.forEach(rescheduleDelivery => {
+        rescheduleDelivery.addEventListener('click', () => {
+            dataRequestTypeEl.value = rescheduleDelivery.getAttribute('data-request-type');
+            dataDeliveryIdEl.value = rescheduleDelivery.getAttribute('data-delivery-id');
+            rescheduleDeliveryModal.show();
+        });
+    });
 }
 
 const displayMedicine = (data) => {
-    if (data.med_image != undefined) {
+    if (data.item_image != undefined) {
         return `
             <span class="row">
                 <span class="col-auto">
-                    <img src="${data.med_image}" alt="Medicine Image" class="img-fluid rounded shadow"
+                    <img src="${data.item_image}" alt="Medicine Image" class="img-fluid rounded shadow"
                         style="width: 100px; height: 100px; object-fit: cover;">
                 </span>
                 <span class="col">
-                    <span class="row">${data.med_name}</span>
+                    <span class="row">${data.generic_name}</span>
                     <span class="row text-secondary">${data.brand_name}</span>
-                    <span class="row text-secondary cursor-default"
-                        data-fulltext="${data.category}"
-                        data-bs-toggle="tooltip" 
-                        data-bs-placement="top"
-                        title="${data.category}">
-                        ${truncateSentence(data.category, 35)}
-                    </span>
-                    <span class="row text-secondary">${data.dosage_strength}</span>
+                    <span class="row text-secondary">${data.category}</span>
+                    <span class="row text-secondary">${data.dosage_strength ?? ''}</span>
                 </span>
             </span>
         `;
     }
     return `
         <div style="margin-left: 20px">
-            <span class="row">${data.med_name}</span>
+            <span class="row">${data.generic_name}</span>
+            <span class="row text-secondary">${data.brand_name}</span>
             <span class="row text-secondary">${data.category}</span>
-            <span class="row text-secondary">${data.dosage_strength}</span>
+            <span class="row text-secondary">${data.dosage_strength ?? ''}</span>
         </div>
     `;
 }
@@ -212,13 +230,18 @@ const displayStatus = async (data) => {
     switch (data.status) {
         case 'Accepted':
             if (data.delivery_status == 'Claimed') {
-                return `<span class="cursor-pointer view-feedback" data-delivery-id="${data.delivery_id}" data-request-type="${data.med_image != undefined ? "Standard Request" : "Customized Request"}" data-bs-toggle="tooltip" data-bs-placement="top" title="View Delivery Feedback">${displayDeliveryStatus(data.delivery_status)}</span>`;
+                return `<span class="cursor-pointer view-feedback" data-delivery-id="${data.delivery_id}" data-request-type="${data.item_image != undefined ? "Standard Request" : "Customized Request"}" data-bs-toggle="tooltip" data-bs-placement="top" title="View Delivery Feedback">${displayDeliveryStatus(data.delivery_status)}</span>`;
+            } else if (data.delivery_status == 'Partially Claimed') {
+                const delivery_id = data.delivery_id;
+                const request_type = data.item_image != undefined ? "Standard Request" : "Customized Request";
+                const total_partially_claimed = await fetchTotalAmountOfPartiallyClaimed(request_type, delivery_id);
+                return `<span class="cursor-pointer reschedule-delivery" data-delivery-id="${data.delivery_id}" data-request-type="${data.item_image != undefined ? "Standard Request" : "Customized Request"}" data-bs-toggle="tooltip" data-bs-placement="top" title="Only ${total_partially_claimed} item${total_partially_claimed <= 1 ? '' : 's'} ${total_partially_claimed <= 1 ? 'has' : 'have'} been claimed. Kindly reschedule the delivery.">${displayDeliveryStatus(data.delivery_status)}</span>`;
             } else if (data.delivery_status == 'Failed Delivery') {
                 const delivery_id = data.delivery_id;
-                const request_type = data.med_image != undefined ? "Standard Request" : "Customized Request";
+                const request_type = data.item_image != undefined ? "Standard Request" : "Customized Request";
                 const count = await fetchFailedDeliveryCount(request_type, delivery_id);
                 if (count >= 3) {
-                    return `<span class="cursor-pointer is-returned" data-delivery-id="${data.delivery_id}" data-request-type="${data.med_image != undefined ? "Standard Request" : "Customized Request"}" data-bs-toggle="tooltip" data-bs-placement="top" title="Kindly confirm whether the medicine has been returned">${displayDeliveryStatus(data.delivery_status)}</span>`;
+                    return `<span class="cursor-pointer is-returned" data-delivery-id="${data.delivery_id}" data-request-type="${data.item_image != undefined ? "Standard Request" : "Customized Request"}" data-bs-toggle="tooltip" data-bs-placement="top" title="Kindly confirm whether the medicine has been returned">${displayDeliveryStatus(data.delivery_status)}</span>`;
                 }
                 return displayDeliveryStatus(data.delivery_status);
             } else {
@@ -230,7 +253,7 @@ const displayStatus = async (data) => {
 
         default:
             // Your buttons (unchanged)
-            const type = data.med_image !== undefined ? "default request" : "customized request";
+            const type = data.item_image !== undefined ? "default request" : "customized request";
             return `
                 <span class="d-flex justify-content-start">
                     <button class="btn btn-primary shadow accept-request" data-request-type="${type}" data-status="Accepted" data-id="${data.id}" style="margin-right: 10px;" title="Accept">
@@ -243,6 +266,32 @@ const displayStatus = async (data) => {
             `;
     }
 };
+
+rescheduleDeliveryFormEl.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const payload = serializeForm(rescheduleDeliveryFormEl);
+    const question = "Confirm if all of the details inputted are correct.";
+    confirmAlert(question, handleRescheduleDelivery, false, payload);
+});
+
+const handleRescheduleDelivery = (payload) => {
+    fetch.put('../api/city.health.reschedule.partially.claimed.items.php', payload)
+        .then(response => {
+            const { message } = response?.data;
+            successAlert(message);
+            rescheduleDeliveryModal.hide();
+            callFetches();
+        })
+        .catch(error => {
+            const { message } = error?.data;
+            const { status } = error?.response;
+            if (status == 422 && message != undefined) {
+                errorAlert(message);
+            }
+            callFetches();
+            console.error(error);
+        });
+}
 
 const handleConfirmReturned = (payload) => {
     fetch.put('../api/change-delivery-status.php', payload)
@@ -337,6 +386,17 @@ const fetchFailedDeliveryCount = async (request_type, delivery_id) => {
         });
 };
 
+const fetchTotalAmountOfPartiallyClaimed = async (request_type, delivery_id) => {
+    return await fetch.get(`../api/city.health.display.total.partially.claimed.php?request_type=${urlEncode(request_type)}&delivery_id=${delivery_id}`)
+        .then(response => {
+            const { data } = response?.data;
+            return data;
+        })
+        .catch(() => {
+            return 0;
+        });
+}
+
 const fetchAllAvailableCouriers = () => {
     fetch.get('../api/city.health.display.available.couriers.php')
         .then(response => {
@@ -380,6 +440,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const today = new Date().toISOString().split('T')[0];
     document.getElementById("date_of_supply").setAttribute("min", today);
+    rescheduleDeliveryEl.setAttribute("min", today);
 
     tabElements.forEach(tab => {
         tab.addEventListener('shown.bs.tab', () => {

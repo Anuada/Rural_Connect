@@ -1,7 +1,7 @@
 import serializeForm from '../helpers/serializeForm.js';
 import { confirmAlert, choicesAlert, errorAlert } from '../helpers/sweetAlert2.js';
 import fetch from '../utilities/fetchClient.js';
-import { pluralize } from '../utilities/formatter.js';
+import { dateFormatter, pluralize } from '../utilities/formatter.js';
 
 // Variable
 let defaultStock = 0;
@@ -10,14 +10,22 @@ let medicineName = '';
 // Modal Elements
 const viewModalEl = document.getElementById('viewModal');
 const viewModal = new bootstrap.Modal(viewModalEl);
-const med_name = document.getElementById('med_name');
+const generic_name = document.getElementById('generic_name');
 const quantity = document.getElementById('quantity');
+const expiration_date_el = document.getElementById('expiration_date_el');
 const med_description = document.getElementById('med_description');
 const addStockModalEl = document.getElementById('addStockModal');
 const addStockModal = new bootstrap.Modal(addStockModalEl);
 const medicineId = document.getElementById('id');
 const totalQuantity = document.getElementById('total-quantity');
 const addStock = document.getElementById('stock');
+
+viewModalEl.addEventListener('hidden.bs.modal', () => {
+    generic_name.textContent = '';
+    quantity.textContent = '';
+    expiration_date_el.innerHTML = '';
+    med_description.textContent = '';
+})
 
 // Button Elements
 const otherDetailsBtnEl = document.querySelectorAll('.other-details');
@@ -30,8 +38,14 @@ const addStockFormEl = document.getElementById('add-stock-form');
 otherDetailsBtnEl.forEach(btn => {
     btn.addEventListener('click', async () => {
         const data = JSON.parse(btn.getAttribute('data-details'));
-        med_name.textContent = data.med_name;
+        generic_name.textContent = data.generic_name;
         quantity.textContent = `${data.quantity} ${data.quantity > 1 ? await pluralize(data.unit.toLowerCase()) : data.unit.toLowerCase()}`;
+        if (data.expiration_date != null) {
+            expiration_date_el.innerHTML = `
+            <i class="fas fa-file-alt"></i> <strong>Expiration Date:</strong>
+            <span id="expiration_date_el">${dateFormatter(data.expiration_date)}</span>
+            `;
+        }
         med_description.textContent = data.med_description;
         viewModal.show();
     });
@@ -40,10 +54,10 @@ otherDetailsBtnEl.forEach(btn => {
 editMedicineBtnEl.forEach(btn => {
     btn.addEventListener('click', () => {
         const id = btn.getAttribute('data-id');
-        const med_name = btn.getAttribute('data-med-name');
+        const generic_name = btn.getAttribute('data-med-name');
         const quantity = btn.getAttribute('data-quantity');
 
-        choicesAlert("What would you like to modify?", "Add Stock", "Edit Details", handleAddStock, handleEditMedicine, false, [id, med_name, quantity], [id]);
+        choicesAlert("What would you like to modify?", "Add Stock", "Edit Details", handleAddStock, handleEditMedicine, false, [id, generic_name, quantity], [id]);
     });
 });
 
@@ -55,11 +69,11 @@ deleteMedicineBtnEl.forEach(btn => {
     });
 });
 
-const handleAddStock = (id, med_name, quantity) => {
+const handleAddStock = (id, generic_name, quantity) => {
     medicineId.value = id;
     totalQuantity.value = quantity;
     defaultStock = parseInt(quantity);
-    medicineName = med_name;
+    medicineName = generic_name;
     addStockModal.show();
 }
 

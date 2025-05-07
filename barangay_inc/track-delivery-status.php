@@ -45,14 +45,14 @@ if (isset($_GET['med-delivery'])) {
 <?php ob_start() ?>
 <div class="card" style="margin-bottom: 20px;">
     <div class="row align-items-center">
-        <?php if (isset($details['med_image'])): ?>
+        <?php if (isset($details['item_image'])): ?>
             <div class="col-md-3 text-center med-img mb-1">
-                <img src="<?php echo $details['med_image'] ?>" alt="<?php echo $details['med_name'] ?>"
+                <img src="<?php echo $details['item_image'] ?>" alt="<?php echo $details['generic_name'] ?>"
                     class="img-fluid rounded shadow-sm" style="width: 180px; height: 180px; object-fit: cover;">
             </div>
         <?php endif ?>
         <div class="col-md-6">
-            <p class="mb-1"><strong><?php echo $details['med_name'] ?></strong></p>
+            <p class="mb-1"><strong><?php echo $details['generic_name'] ?></strong></p>
             <p class="mb-1 text-secondary"><?php echo $details['category'] ?></p>
             <p class="mb-1 text-secondary"><?php echo $details['unit'] . " - " . $details['dosage_strength'] ?>
             </p>

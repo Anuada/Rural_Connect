@@ -82,9 +82,6 @@ export const displayFormattedDeliveryCondition = (delivery_condition) => {
         case 'damaged':
             return "Received, but items were damaged";
 
-        case 'missing items':
-            return "Received, but some items are missing";
-
         default:
             return "Received";
     }

@@ -8,7 +8,7 @@ require_once "../util/Misc.php";
 $deliveries_title = Misc::displayPageTitle("Delivery Details", "fa-truck");
 
 $delivery_status = array_filter(DeliveryStatus::all(), function ($status) {
-    return $status != 'Claimed' && $status != 'Returned';
+    return $status != DeliveryStatus::Claimed->value && $status != DeliveryStatus::Returned->value && $status != DeliveryStatus::Partially_Claimed->value;
 });
 $db = new DbHelper();
 $ms = new Misc;
@@ -51,16 +51,15 @@ if (isset($_GET['med-delivery'])) {
 <?php ob_start() ?>
 <div class="card">
     <div class="row align-items-center mb-4">
-        <?php if (isset($detail['med_image'])): ?>
+        <?php if (isset($detail['item_image'])): ?>
             <div class="col-md-3 text-center med-img mb-1">
-                <img src="<?php echo $detail['med_image'] ?>" alt="<?php echo $detail['med_name'] ?>"
+                <img src="<?php echo $detail['item_image'] ?>" alt="<?php echo $detail['generic_name'] ?>"
                     class="img-fluid rounded shadow-sm">
             </div>
         <?php endif ?>
         <div class="col-md-9">
-            <p class="mb-1"><strong><?php echo $detail['med_name'] ?></strong></p>
+            <p class="mb-1"><strong><?php echo $detail['generic_name'] ?></strong></p>
             <p class="mb-1 text-secondary"><?php echo $detail['category'] ?></p>
-            <p class="mb-1 text-secondary"><?php echo $detail['unit'] . " - " . $detail['dosage_strength'] ?></p>
             <p class="mb-0 text-secondary">Requested Quantity - <?php echo $detail['requested_quantity'] ?></p>
         </div>
     </div>
@@ -124,7 +123,7 @@ if (isset($_GET['med-delivery'])) {
                 <tr>
                     <td>Delivery Status</td>
                     <td>
-                        <?php if ($detail['delivery_status'] != DeliveryStatus::Claimed->value && $detail['delivery_status'] != DeliveryStatus::Returned->value): ?>
+                        <?php if ($detail['delivery_status'] != DeliveryStatus::Claimed->value && $detail['delivery_status'] != DeliveryStatus::Returned->value && $detail['delivery_status'] != DeliveryStatus::Partially_Claimed->value): ?>
                             <form action="<?php echo $ms->url('logic/delivery-change-status.php') ?>" method="post">
                                 <div class="form-fields">
                                     <input type="hidden" name="id" id="id" value="<?php echo $detail['id'] ?>">
@@ -147,7 +146,6 @@ if (isset($_GET['med-delivery'])) {
     </div>
 </div>
 <?php $deliveries_content = ob_get_clean() ?>
-
 
 <?php ob_start() ?>
 <script type="module" src="../assets/js/deliveries/delivery.details.js"></script>
