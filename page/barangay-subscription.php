@@ -22,7 +22,7 @@ require_once "../enums/SubscriptionPlan.php";
                         <li>✔ Request Medicine</li>
                         <li>✔ Free Delivery</li>
                     </ul>
-                    <a href="../subscription/details.php?plan=<?php echo SubscriptionPlan::Monthly->name ?>"
+                    <a href="<?php echo isset($_SESSION['accountId']) ? "../subscription/details.php?plan=" . SubscriptionPlan::Monthly->name : "#" ?>"
                         class="btn btn-primary btn-subscribe">Subscribe
                         Monthly</a>
                 </div>
@@ -40,7 +40,7 @@ require_once "../enums/SubscriptionPlan.php";
                         <li>✔ Free Delivery</li>
                         <li>✔ Save 16%</li>
                     </ul>
-                    <a href="../subscription/details.php?plan=<?php echo SubscriptionPlan::Annual->name ?>"
+                    <a href="<?php echo isset($_SESSION['accountId']) ? "../subscription/details.php?plan=" . SubscriptionPlan::Annual->name : "#" ?>"
                         class="btn btn-success btn-subscribe">Subscribe
                         Annually</a>
                 </div>
@@ -53,8 +53,8 @@ require_once "../enums/SubscriptionPlan.php";
 
 <?php ob_start() ?>
 
-<?php if (isset($_SESSION['accountId'])): ?>
-    <script type="module" src=""></script>
+<?php if (!isset($_SESSION['accountId'])): ?>
+    <script type="module" src="../assets/js/landing_page/barangay.subscription.js"></script>
 <?php endif ?>
 
 <?php $landing_page_scripts = ob_get_clean() ?>

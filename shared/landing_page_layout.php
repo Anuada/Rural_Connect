@@ -48,11 +48,13 @@ $ms = new Misc;
 <?php $content = ob_get_clean() ?>
 
 <?php ob_start() ?>
-<script>
-    document.getElementById("openRuralConnect").addEventListener("click", () => {
-        location.href = "../shared/session.redirect.php";
-    });
-</script>
+<?php if (isset($_SESSION["accountId"])): ?>
+    <script>
+        document.getElementById("openRuralConnect").addEventListener("click", () => {
+            location.href = "../shared/session.redirect.php";
+        });
+    </script>
+<?php endif ?>
 <?php echo $landing_page_scripts ?? "" ?>
 <?php $scripts = ob_get_clean() ?>
 
